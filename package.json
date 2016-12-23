@@ -1,0 +1,57 @@
+{
+  "name": "elm",
+  "version": "1.0.0",
+  "description": "vue2-elm",
+  "author": "maguohua <1264889788@qq.com>",
+  "private": true,
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js"
+  },
+  "dependencies": {
+    "vue": "^2.1.0",
+    "vue-router": "^2.1.1",
+    "vuex": "^2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-2": "^6.0.0",
+    "babel-register": "^6.0.0",
+    "chalk": "^1.1.3",
+    "connect-history-api-fallback": "^1.1.0",
+    "css-loader": "^0.25.0",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "function-bind": "^1.0.2",
+    "html-webpack-plugin": "^2.8.1",
+    "http-proxy-middleware": "^0.17.2",
+    "json-loader": "^0.5.4",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "opn": "^4.0.2",
+    "ora": "^0.3.0",
+    "semver": "^5.3.0",
+    "shelljs": "^0.7.4",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "vue-loader": "^10.0.0",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.8.3",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-merge": "^0.14.1"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  }
+}
