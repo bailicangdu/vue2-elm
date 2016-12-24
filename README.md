@@ -13,7 +13,7 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + less + http-proxy-middleware�
 
 ## 目标功能
 
-[ ] 定位功能
+- [] 定位功能
 - [ ] 选择城市
 - [ ] 根据输入地址，搜索附近餐馆
 - [ ] 附近商家列表展示
