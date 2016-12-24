@@ -30,6 +30,8 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + less + http-proxy-middleware�
 - [ ] 下单功能
 - [ ] 付款(几乎不可能实现)
 
+
+- [x] 需求分析
 说明：因为并不是elm官方，而且因为要开代理，必须在pc端打开，所以预计最多只能做到下单这一步，下单成功后可以在手机客户端查看并付款。
 
 ## 项目运行
