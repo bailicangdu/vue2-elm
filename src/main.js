@@ -6,24 +6,21 @@ import ajax from './config/ajax'
 import fetch from './config/fetch'
 import './style/common'
 import './config/rem'
+import './config/env'
 
-// ajax('GET', '/shopping/restaurants',{
-// 	latitude: 31.16407, 
-// 	longitude: 121.38876, 
-// 	offset: 0, 
-// 	limit: 20, 
-// 	'extras[]': 'activities',
-// })
+fetch('GET', '/shopping/restaurants',{
+	latitude: 31.16407, 
+	longitude: 121.38876, 
+	offset: 0, 
+	limit: 20, 
+	'extras[]': 'activities',
+})
 
 
-fetch('get', '/v2/index_entry', {
+ajax('get', '/v2/index_entry', {
 	geohash: 'wtw3630xg5e', 
 	group_type: 1, 
 	'flags[]': 'F',
-}).then(res => {
-	console.log(res)
-}).catch(error => {
-	console.log(error)
 })
 
 
@@ -33,18 +30,16 @@ fetch('get', '/v2/index_entry', {
 // 	type: 'sms',
 // }
 
-// var a = JSON.stringify(obj)
-// ajax('POST', '/v4/mobile/verify_code/send', a)
+// fetch('POST', '/v4/mobile/verify_code/send', obj)
 
 
 // var loginObj = {
-// 	code:212128,
+// 	code:567052,
 // 	mobile: '13681711254',
-// 	validate_token: '0af8df2bfd363e37cba0c616498e049777d7b118f13be41664491a05d8ad9da2'
+// 	validate_token: '6a869f38c6d0a0bb5b023b35c5e35ceef8d710c1502369d56709b1632df830f8'
 // }
-// var b = JSON.stringify(loginObj)
 
-// ajax('POST', '/v1/login/app_mobile', b)
+// fetch('POST', '/v1/login/app_mobile', loginObj)
 
 
 Vue.use(VueRouter)

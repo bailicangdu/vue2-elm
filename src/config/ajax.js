@@ -1,7 +1,10 @@
-export default (type='GET', url='', data={}, async=true) => {
+import {baseUrl} from './env'
+
+export default (type = 'GET', url = '', data = {}, async = true) => {
 	return new Promise((resolve, reject) => { //定义一个promise
 		type = type.toUpperCase();
-
+		url = baseUrl + url;
+		
 		let requestObj;
 		if (window.XMLHttpRequest) {
 			requestObj = new XMLHttpRequest();
@@ -14,8 +17,10 @@ export default (type='GET', url='', data={}, async=true) => {
 			Object.keys(data).forEach(key => {
 				dataStr += key + '=' + data[key] + '&';
 			})
-			dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
-			url = url + '?' + dataStr;
+			if (dataStr !== '') {
+				dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
+				url = url + '?' + dataStr;
+			}
 			requestObj.open(type, url, async);
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			requestObj.send();
