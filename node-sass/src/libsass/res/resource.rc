@@ -1,0 +1,35 @@
+#include <windows.h>
+
+// DLL version information.
+VS_VERSION_INFO    VERSIONINFO
+FILEVERSION        1,0,0,0
+PRODUCTVERSION     1,0,0,0
+FILEFLAGSMASK      VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+  FILEFLAGS        VS_FF_DEBUG | VS_FF_PRERELEASE
+#else
+  FILEFLAGS        0
+#endif
+FILEOS             VOS_NT_WINDOWS32
+FILETYPE           VFT_DLL
+FILESUBTYPE        VFT2_UNKNOWN
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "080904b0"
+    BEGIN
+      VALUE "CompanyName", "Libsass Organization"
+      VALUE "FileDescription", "A C/C++ implementation of a Sass compiler"
+      VALUE "FileVersion", "0.9.0.0"
+      VALUE "InternalName", "libsass"
+      VALUE "LegalCopyright", "©2014 libsass.org"
+      VALUE "OriginalFilename", "libsass.dll"
+      VALUE "ProductName", "Libsass Library"
+      VALUE "ProductVersion", "0.9.0.0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x809, 1200
+  END
+END

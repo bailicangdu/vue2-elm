@@ -1,0 +1,10 @@
+#!/bin/bash
+
+script/branding
+
+if [ ! -d "sass-spec" ]; then
+  git clone https://github.com/sass/sass-spec.git
+fi
+if [ ! -d "sassc" ]; then
+  git clone https://github.com/sass/sassc.git
+fi

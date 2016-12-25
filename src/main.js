@@ -4,24 +4,25 @@ import routes from './router/router'
 import store from './store/'
 import ajax from './config/ajax'
 import fetch from './config/fetch'
-import './style/common'
+import {routerMode} from './config/env'
+import './style/common.scss'
 import './config/rem'
-import './config/env'
-
-fetch('GET', '/shopping/restaurants',{
-	latitude: 31.16407, 
-	longitude: 121.38876, 
-	offset: 0, 
-	limit: 20, 
-	'extras[]': 'activities',
-})
 
 
-ajax('get', '/v2/index_entry', {
-	geohash: 'wtw3630xg5e', 
-	group_type: 1, 
-	'flags[]': 'F',
-})
+// fetch('GET', '/shopping/restaurants',{
+// 	latitude: 31.16407, 
+// 	longitude: 121.38876, 
+// 	offset: 0, 
+// 	limit: 20, 
+// 	'extras[]': 'activities',
+// })
+
+
+// ajax('get', '/v2/index_entry', {
+// 	geohash: 'wtw3630xg5e', 
+// 	group_type: 1, 
+// 	'flags[]': 'F',
+// })
 
 
 // var obj = {
@@ -44,6 +45,7 @@ ajax('get', '/v2/index_entry', {
 
 Vue.use(VueRouter)
 const router = new VueRouter({
+	mode: routerMode,
 	routes
 })
 

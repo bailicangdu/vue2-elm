@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [ "x$COVERAGE" = "xyes" ]; then
+
+  # exclude some directories from profiling (.libs is from autotools)
+  export EXCLUDE_COVERAGE="--exclude src/sassc
+                           --exclude src/sass-spec
+                           --exclude src/.libs
+                           --exclude src/debug.hpp
+                           --exclude src/json.cpp
+                           --exclude src/json.hpp
+                           --exclude src/cencode.c
+                           --exclude src/b64
+                           --exclude src/utf8
+                           --exclude src/utf8_string.hpp
+                           --exclude src/utf8.h
+                           --exclude src/utf8_string.cpp
+                           --exclude src/sass2scss.h
+                           --exclude src/sass2scss.cpp
+                           --exclude src/test
+                           --exclude src/posix
+                           --exclude src/debugger.hpp"
+  # debug via gcovr
+  gcov -v
+  gcovr -r .
+  # generate and submit report to coveralls.io
+  coveralls $EXCLUDE_COVERAGE --gcov-options '\-lp'
+
+else
+  echo "skip coverage reporting"
+fi
