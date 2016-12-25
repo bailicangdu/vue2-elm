@@ -27,6 +27,7 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + http-proxy-middleware�
 - [ ] 个人中心
 - [ ] 帐户信息
 - [ ] 服务中心
+- [ ] 新增、修改收货地址
 - [ ] 订单列表
 - [ ] 下单功能
 - [ ] 付款(很难实现)
