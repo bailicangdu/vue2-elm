@@ -7,7 +7,13 @@ import fetch from './config/fetch'
 import {routerMode} from './config/env'
 import './style/common.scss'
 import './config/rem'
+import {cityGuess} from './service/getData'
 
+cityGuess().then(res => {
+	console.log(res)
+}).catch(err => {
+	console.log(err)
+})
 
 // fetch('GET', '/shopping/restaurants',{
 // 	latitude: 31.16407, 
