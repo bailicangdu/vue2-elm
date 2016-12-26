@@ -37,7 +37,7 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + flex + http-proxy-midd
 
 ## 项目布局
 ```
-.
+
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
 |-- elm                           	 // 上线项目文件，放在服务器即可正常访问
@@ -96,7 +96,7 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + flex + http-proxy-midd
 |-- index.html                       // 入口html文件
 |-- package.json                     // 项目及工具的依赖配置文件
 |-- README.md                        // 说明
-.
+
 ```
 
 
