@@ -1,6 +1,6 @@
 ## 前言
 
-vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以react为主，没有机会好好利用vue2去做一个完整的项目。虽然写了几个demo，但和写一个完整的项目还是有很大差别的。于是自己想着用空余的时间写一个项目，选择了饿了么web端也只是因为经常用，熟悉它的布局。之前的饿了么官网是用angular1写的，最近才发现原来这段时间改成vue1，看来饿了么也入了vue的坑。
+vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以react为主，没有机会好好利用vue2去做一个完整的项目。虽然写了几个demo，但和写一个完整的项目还是有很大差别的。于是自己想着用空余的时间写一个项目，选择了饿了么web端也只是因为经常用，熟悉它的布局。之前的饿了么官网是用angular1写的，最近才发现原来这段时间改成了vue1，看来饿了么也入了vue的坑。
 
 
 首先遇到的问题当然是跨域，我们启动本地服务器是获取不到官网数据的，这是跨域的。当然解决的方法很多，jsonp，nginx反向代理，webpack-dev-server的proxy。这里我用的是 http-proxy-middleware 其实它们的原理是一样的。
@@ -10,7 +10,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 ## 技术栈
-vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + flex + http-proxy-middleware反向代理 
+vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + scss + flex + http-proxy-middleware反向代理 
 
 ## 目标功能
 
@@ -37,7 +37,6 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + flex + http-proxy-midd
 
 ## 项目布局
 ```
-.
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
 |-- elm                           	 // 上线项目文件，放在服务器即可正常访问
@@ -96,7 +95,6 @@ vue2 + vue-rotuer + vuex + webpack + ES6 + fetch + scss + flex + http-proxy-midd
 |-- index.html                       // 入口html文件
 |-- package.json                     // 项目及工具的依赖配置文件
 |-- README.md                        // 说明
-.
 ```
 
 
