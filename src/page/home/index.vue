@@ -2,7 +2,10 @@
   	<ul>
     	<router-link tag='li' to='home'>首页</router-link>
     	<router-link tag='li' to='city'>城市页面</router-link>
-    	<router-link tag='li' to='msite'>商店列表</router-link>
+    	<router-link tag='li' to='msite'>
+            商店列表
+            <router-link tag='span' to='msite/food'>food</router-link>
+        </router-link>
     	<router-link tag='li' to='shop'>商铺详情</router-link>
     	<router-link tag='li' to='search'>搜索</router-link>
     	<router-link tag='li' to='login'>登陆</router-link>
