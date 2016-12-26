@@ -1,7 +1,7 @@
 import {baseUrl} from './env'
 
 export default (type = 'GET', url = '', data = {}) => {
-	return new Promise((resolve, reject) => { //定义一个promise
+	return new Promise((resolve, reject) => { //返回一个promise
 		type = type.toUpperCase();
 		url = baseUrl + url
 		let requestObj = {

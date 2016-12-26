@@ -15,9 +15,18 @@
 </template>
 
 <script>
+import {cityGuess} from '../../service/getData'
 
 export default {
-	
+	created(){
+        // cityGuess().then(res => {
+        //     console.log(res)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+        this.$store.dispatch('getData')
+
+    }
 }
 
 </script>

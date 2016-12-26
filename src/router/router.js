@@ -1,4 +1,5 @@
 import App from '../App'
+
 const home = r => require.ensure([], () => r(require('../page/home')), 'home')
 const city = r => require.ensure([], () => r(require('../page/city')), 'city')
 const msite = r => require.ensure([], () => r(require('../page/msite')), 'msite')

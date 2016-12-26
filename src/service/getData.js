@@ -1,10 +1,9 @@
-import setPromise from './setPromise'
+import fetch from '../config/fetch'
 
 /**
  * 获取首页默认地址
  */
-const cityGuess = (type = 'GET', url = '/v1/cities', data = {type: 'guess'}) => {
-	return setPromise(type, url, data)
-}
+const cityGuess = () => fetch('GET', '/v1/cities', {type: 'guess'})
+
 
 export {cityGuess}
