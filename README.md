@@ -61,6 +61,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + scss + flex + http-proxy-mi
 |       |-- home                     // 首页
 |       |-- login                    // 登陆注册页
 |       |-- msite                    // 商铺列表页
+|           |-- food                 // 特色餐馆列表页
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
 |       |-- search                   // 搜索页
