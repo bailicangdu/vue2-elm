@@ -84,6 +84,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 |
 |   |-- style                        // 各种样式文件
 |       |-- common.scss              // 公共样式文件
+|       |-- mixin.scss               // 样式配置文件
 |
 |   |-- App.vue                      // 页面入口文件
 |
