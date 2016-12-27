@@ -1,27 +1,46 @@
 <template>
-  	<ul>
-    	<router-link tag='li' to='home'>首页</router-link>
-    	<router-link tag='li' to='city'>城市页面</router-link>
-    	<router-link tag='li' to='msite'>商店列表</router-link>
-    	<router-link tag='li' to='shop'>商铺详情</router-link>
-    	<router-link tag='li' to='search'>搜索</router-link>
-    	<router-link tag='li' to='login'>登陆</router-link>
-    	<router-link tag='li' to='checkout'>确认订单</router-link>
-    	<router-link tag='li' to='forget'>忘记密码</router-link>
-    	<router-link tag='li' to='profile'>个人信息</router-link>
-    	<router-link tag='li' to='order'>订单列表</router-link>
-    	<router-link tag='li' to='vipcard'>会员卡</router-link>
-  	</ul>
+  	<div>
+        <head-top head-title="上海" go-back='true'>
+            <router-link to="/home" slot="changecity" class="change_city">切换城市</router-link>
+        </head-top>
+    </div>
 </template>
 
 <script>
+    import headTop from '../../components/header/head'
 
-export default {
-	
-}
+    export default {
+    	data(){
+            return{
+
+            }
+        },
+
+        created(){
+
+        },
+
+        components:{
+            headTop
+        },
+
+        computed:{
+
+        },
+
+        methods:{
+
+        }
+    }
 
 </script>
 
 <style lang="scss" scoped>
+    @import '../../style/mixin';
     
+    .change_city{
+        right: 0.4rem;
+        @include sizecolor(0.6rem, #fff);
+        @include center-top;
+    }
 </style>

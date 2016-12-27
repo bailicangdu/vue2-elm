@@ -1,7 +1,41 @@
 $blue: #3190e8;  
 $bordercolor: #e4e4e4;
-@mixin backimg($url) {
+
+// 背景图片设置
+@mixin backimg($url) { 
 	background-image: url($url);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
+}
+
+//定位上下左右居中
+@mixin center {  
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin center-top {  
+	position: absolute;
+	top: 50%;
+    transform: translateY(-50%);
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
+	font: #{$size}/#{$line-height} $family;
+}
+
+//宽高
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
+
+//字体大小，颜色
+@mixin sizecolor($size, $color){
+	font-size: $size;
+	color: $color;
 }

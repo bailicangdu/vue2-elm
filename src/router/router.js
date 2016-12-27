@@ -20,7 +20,7 @@ export default [{
     children: [      //二级路由。对应App.vue
         { path: '', redirect: '/home' },               //地址为空时跳转home页面 
         { path: '/home', component: home },            //首页城市列表页
-        { path: '/city', component: city },            //当前选择城市页
+        { path: '/city/:ciytid', component: city },            //当前选择城市页
         { path: '/msite', component: msite,            //所有商铺列表页
             children:[ 
                 { path: 'food', component: food },     //特色商铺列表页

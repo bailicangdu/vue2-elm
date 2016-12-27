@@ -5,7 +5,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     font-style: normal;
     text-decoration: none;
     border: none;
-    color: #333;
+    color: #666;
     box-sizing: border-box;
     font-weight: lighter;
     font-family: 'Microsoft YaHei';
@@ -56,4 +56,10 @@ html,body{
 
 .show{
     display: block;
+}
+
+.ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
