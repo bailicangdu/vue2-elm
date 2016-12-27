@@ -5,6 +5,7 @@ export default (type = 'GET', url = '', data = {}) => {
 		type = type.toUpperCase();
 		url = baseUrl + url
 		let requestObj = {
+			credentials: 'include',
 		  	method: type,
 		  	headers: {
 		      	'Accept': 'application/json',

@@ -5,7 +5,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     font-style: normal;
     text-decoration: none;
     border: none;
-    color: #313131;
+    color: #333;
     box-sizing: border-box;
     font-weight: lighter;
     font-family: 'Microsoft YaHei';
@@ -16,10 +16,12 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
 }
 
 
-html{
+html,body{
     height: 100%;
     width: 100%;
+    background-color: #f2f2f2;
 }
+
 
 .clear:after{
     content: '';
