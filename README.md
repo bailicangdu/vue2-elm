@@ -10,7 +10,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 ## 技术栈
-vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + scss + flex + http-proxy-middleware反向代理 
+vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-middleware反向代理 
 
 ## 目标功能
 
