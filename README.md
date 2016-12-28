@@ -113,6 +113,8 @@ npm install
 ### 编译环境
 ```
 npm run dev
+
+访问localhost:8088/
 ```
 
 
