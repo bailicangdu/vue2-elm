@@ -15,7 +15,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 ## 目标功能
 - [x] 定位功能
 - [x] 选择城市
-- [ ] 搜索地址
+- [x] 搜索地址
 - [ ] 展示所选地址附近商家列表
 - [ ] 搜索美食，餐馆
 - [ ] 根据距离、销量、评分、特色菜等进行排序和筛选
