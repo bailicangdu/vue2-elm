@@ -106,6 +106,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 克隆，或者直接下载
 git clone https://github.com/bailicangdu/vue2-elm.git  
 
+进入文件夹
 cd vue2-elm
 
 安装依赖
@@ -114,6 +115,8 @@ npm install
 
 ### 编译环境
 ```
+
+开启本地服务器
 npm run dev
 
 访问 localhost:8088
@@ -122,6 +125,7 @@ npm run dev
 
 ### 线上版本
 ```
+生成的elm文件夹放在服务器即可正常访问
 npm run build
 ```
 
