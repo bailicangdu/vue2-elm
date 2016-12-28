@@ -125,8 +125,8 @@ npm run dev
 
 ### 线上版本
 ```
-
 npm run build
+
 生成的elm文件夹放在服务器即可正常访问
 ```
 
