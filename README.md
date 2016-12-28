@@ -103,10 +103,12 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 
 ## 项目运行
 ```
-git clone https://github.com/bailicangdu/elm.git
+克隆，或者直接下载
+git clone https://github.com/bailicangdu/vue2-elm.git  
 
-cd elm
+cd vue2-elm
 
+安装依赖
 npm install
 ```
 
