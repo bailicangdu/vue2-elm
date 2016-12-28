@@ -8,13 +8,18 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     color: #666;
     box-sizing: border-box;
     font-weight: lighter;
-    font-family: 'Microsoft YaHei';
+    font-family: "Microsoft Yahei",sans-serif;
     -webkit-tap-highlight-color:transparent;
     &:focus {
         outline: none;
     }
 }
 
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
+}
+
+textarea {  -webkit-appearance: none;}   
 
 html,body{
     height: 100%;

@@ -14,7 +14,7 @@
             </router-link>  
         </nav>
         <div id="hot_city_container">
-            <h4 class="ciyt_title">热门城市</h4>
+            <h4 class="city_title">热门城市</h4>
             <ul class="citylistul clear">
                 <router-link  tag="li" v-for="item in hotcity" :to="'/city/' + item.id" :key="item.id">
                     {{item.name}}
@@ -23,8 +23,8 @@
         </div>
         <div class="group_city_container">
             <ul class="letter_classify">
-                <li v-for="(value, key, index) in sortgroupciyt" :key="key"  class="letter_classify_li">
-                    <h4 class="ciyt_title">{{key}}
+                <li v-for="(value, key, index) in sortgroupcity" :key="key"  class="letter_classify_li">
+                    <h4 class="city_title">{{key}}
                         <span v-if="index == 0">（按字母排序）</span>
                     </h4>
                     <ul class="groupcity_name_container citylistul clear">
@@ -73,7 +73,7 @@ export default {
     },
 
     computed:{
-        sortgroupciyt(){
+        sortgroupcity(){
             let sortobj = {};
             for (let i = 65; i <= 90; i++) {
                 if (this.groupcity[String.fromCharCode(i)]) {
@@ -152,7 +152,7 @@ export default {
             border-right: none;
         }
     }
-    .ciyt_title{
+    .city_title{
         color: #666;
         font-weight: 400;
         text-indent: 0.45rem;
