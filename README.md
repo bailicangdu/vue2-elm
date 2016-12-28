@@ -114,7 +114,7 @@ npm install
 ```
 npm run dev
 
-访问localhost:8088/
+访问 localhost:8088
 ```
 
 
