@@ -27,7 +27,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 - [ ] 个人中心
 - [ ] 帐户信息
 - [ ] 服务中心
-- [ ] 新增、修改收货地址
+- [ ] 添加、删除、修改收货地址
 - [ ] 订单列表
 - [ ] 下单功能
 - [ ] 付款(很难实现)
