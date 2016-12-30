@@ -119,7 +119,7 @@ npm install
 开启本地服务器
 npm run dev
 
-访问 localhost:8088
+访问 http://localhost:8088/
 ```
 
 
