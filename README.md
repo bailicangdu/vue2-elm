@@ -27,7 +27,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 - [ ] 个人中心
 - [ ] 帐户信息
 - [ ] 服务中心
-- [ ] 新增、修改收货地址
+- [ ] 添加、删除、修改收货地址
 - [ ] 订单列表
 - [ ] 下单功能
 - [ ] 付款(很难实现)
@@ -103,24 +103,31 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-mi
 
 ## 项目运行
 ```
-git clone https://github.com/bailicangdu/elm.git
+克隆，或者直接下载
+git clone https://github.com/bailicangdu/vue2-elm.git  
 
-cd elm
+进入文件夹
+cd vue2-elm
 
+安装依赖
 npm install
 ```
 
 ### 编译环境
 ```
+
+开启本地服务器
 npm run dev
 
-访问 localhost:8088
+访问 http://localhost:8088/
 ```
 
 
 ### 线上版本
 ```
 npm run build
+
+生成的elm文件夹放在服务器即可正常访问
 ```
 
 
