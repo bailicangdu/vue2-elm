@@ -13,7 +13,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 vue2 + vue-rotuer2 + vuex2 + webpack + ES6 + fetch + sass + flex + http-proxy-middleware反向代理 
 
 ## 目标功能
-~~- [x] 定位功能  完成~~
+- [x] ~~定位功能  完成~~
 - [x] 选择城市 -- 完成
 - [x] 搜索地址 -- 完成
 - [ ] 展示所选地址附近商家列表
