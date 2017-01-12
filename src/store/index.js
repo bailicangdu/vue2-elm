@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import mutations from './mutations'
 import actions from './action'
 import getters from './getters'
-import checkout from './modules/checkout'
+import checkout from './modules/checkout/checkout'
 
 Vue.use(Vuex)
 

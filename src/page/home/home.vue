@@ -1,7 +1,7 @@
 <template>
   	<div>
         <head-top signin-up='home'>
-            <router-link to='/home' slot='logo' class="head_logo">ele.me</router-link>
+            <span slot='logo' class="head_logo"  @click="reload">ele.me</span>
         </head-top>
         <nav class="city_nav">
             <div class="city_tip">
@@ -85,8 +85,13 @@ export default {
     },
 
     methods:{
-
-    }
+        reload(){
+            this.$router.push('/')
+        }
+    },
+    // beforeRouteLeave(to, from, next){
+    //     console.log(111)
+    // }
 }
 
 </script>

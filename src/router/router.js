@@ -1,17 +1,17 @@
 import App from '../App'
 
-const home = r => require.ensure([], () => r(require('../page/home')), 'home')
-const city = r => require.ensure([], () => r(require('../page/city')), 'city')
-const msite = r => require.ensure([], () => r(require('../page/msite')), 'msite')
-const search = r => require.ensure([], () => r(require('../page/search')), 'search')
-const shop = r => require.ensure([], () => r(require('../page/shop')), 'shop')
-const login = r => require.ensure([], () => r(require('../page/login')), 'login')
-const profile = r => require.ensure([], () => r(require('../page/profile')), 'profile')
-const forget = r => require.ensure([], () => r(require('../page/forget')), 'forget')
-const checkout = r => require.ensure([], () => r(require('../page/checkout')), 'checkout')
-const order = r => require.ensure([], () => r(require('../page/order')), 'order')
-const vipcard = r => require.ensure([], () => r(require('../page/vipcard')), 'vipcard')
-const food = r => require.ensure([], () => r(require('../page/msite/food')), 'food')
+const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
+const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
+const msite = r => require.ensure([], () => r(require('../page/msite/msite')), 'msite')
+const search = r => require.ensure([], () => r(require('../page/search/search')), 'search')
+const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'shop')
+const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
+const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
+const forget = r => require.ensure([], () => r(require('../page/forget/forget')), 'forget')
+const checkout = r => require.ensure([], () => r(require('../page/checkout/checkout')), 'checkout')
+const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
+const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
+const food = r => require.ensure([], () => r(require('../page/msite/food/food')), 'food')
 
 
 export default [{
