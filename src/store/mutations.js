@@ -1,8 +1,9 @@
-import { GET_DATA } from './mutation-types.js'
+import { RECORD_ADDRESS } from './mutation-types.js'
 
 export default {
-	[GET_DATA] (state, { data }) {
-		console.log(data)
-		state.test1 = data
+	// 记录当前经度纬度
+	[RECORD_ADDRESS] (state, {latitude, longitude}) {
+		state.latitude = latitude;
+		state.longitude = longitude;
 	},
 }

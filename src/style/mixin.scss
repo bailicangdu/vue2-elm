@@ -1,8 +1,8 @@
 $blue: #3190e8;  
-$bordercolor: #e4e4e4;
+$bc: #e4e4e4;
 
-// 背景图片设置
-@mixin backimg($url) { 
+// 背景图片地址和大小
+@mixin bis($url) { 
 	background-image: url($url);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
@@ -17,7 +17,7 @@ $bordercolor: #e4e4e4;
 }
 
 //定位上下居中
-@mixin center-top {  
+@mixin ct {  
 	position: absolute;
 	top: 50%;
     transform: translateY(-50%);
@@ -35,7 +35,14 @@ $bordercolor: #e4e4e4;
 }
 
 //字体大小，颜色
-@mixin sizecolor($size, $color){
+@mixin sc($size, $color){
 	font-size: $size;
 	color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+@mixin fj($type: space-between){
+	display: flex;
+	justify-content: $type;
+
 }

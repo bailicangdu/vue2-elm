@@ -1,4 +1,4 @@
-body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, i, b, textarea, button, input, select  {
+body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -10,6 +10,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     font-weight: lighter;
     font-family: "Microsoft Yahei",sans-serif;
     -webkit-tap-highlight-color:transparent;
+    -webkit-font-smoothing: antialiased;
     &:focus {
         outline: none;
     }
@@ -19,7 +20,7 @@ input[type="button"], input[type="submit"], input[type="search"], input[type="re
     -webkit-appearance: none;
 }
 
-textarea {  -webkit-appearance: none;}   
+textarea { -webkit-appearance: none;}   
 
 html,body{
     height: 100%;
