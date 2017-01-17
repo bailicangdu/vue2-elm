@@ -1,7 +1,6 @@
 <template>
 	<div>
-		<a id="top"></a>
-		<ul v-load-more="loaderMore"  >
+		<ul v-load-more="loaderMore" v-if="false">
 			<router-link :to="{path: 'food', query:{}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
 					<img :src="imgBaseUrl + subImgUrl(item.image_path)" class="shop_img">
@@ -57,12 +56,13 @@
 				</hgroup>
 			</router-link>
 		</ul>
-		<a class="return_top" @click="backTop" v-if="showBack">
+		<aside class="return_top" @click="backTop" v-if="showBackStatus">
 			<svg class="back_top_svg">
 				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
 			</svg>
-		</a>
+		</aside>
 		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
+		<div ref="abc" style="background-color: red;height:300px;width:0;"></div>
 	</div>
 </template>
 
@@ -71,7 +71,8 @@
 import {mapState} from 'vuex'
 import {imgBaseUrl} from '../../config/env'
 import {msiteShopList} from '../../service/getData'
-import * as Tool from '../../config/mUtils'
+import {showBack, animate} from '../../config/mUtils'
+import {loadMore} from '../../components/common/mixin'
 
 export default {
 	data(){
@@ -80,17 +81,21 @@ export default {
 			shopListArr:[], // 店铺列表数据
 			imgBaseUrl, //图片域名地址
 			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
-			showBack: false, //显示返回顶部按钮
+			showBackStatus: false, //显示返回顶部按钮
 		}
 	},
 	async mounted(){
 		//获取数据
 		this.shopListArr = await msiteShopList(this.latitude, this.longitude, this.offset);
-		Tool.showBack(status => {
-			this.showBack = status;
-		})
+		showBack(status => {
+			this.showBackStatus = status;
+		});
+		animate(this.$refs.abc, {width: '3rem'}, 800,'ease-in', () => {
+			console.log(111)
+		});
 	},
 	props: [],
+	mixins: [loadMore],
 	components: {
 
 	},
@@ -117,11 +122,11 @@ export default {
 			if (this.preventRepeatReuqest) {
 				return 
 			}
+
 			this.preventRepeatReuqest = true;
 			this.offset += 20;
 			let res = await msiteShopList(this.latitude, this.longitude, this.offset);
 			this.shopListArr = this.shopListArr.concat(res);
-
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
@@ -130,7 +135,7 @@ export default {
 		},
 		//返回顶部
 		backTop(){
-			window.scrollTo(0,0);
+			animate(document.body, {scrollTop: '0'}, 400,'ease-out');
 		}
 	}
 }
