@@ -75,7 +75,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |   |-- service                      // 数据交互统一调配
 |
 |   |-- store                        // vuex的状态管理
-|       |-- modules                  // 加载各种store模块
+|       |-- modules                  // store模块
 |       |-- action.js                // 配置根actions
 |       |-- getters.js               // 配置根getters
 |       |-- index.js                 // 引用vuex，创建store
@@ -135,4 +135,4 @@ npm run build
 
 ps:每次做完一个完整的项目总会试着去总结问题和心得，有些知识点似乎懂了，但是写出来的时候发现好多地方仍然没有理解，写出来能够加深印象，万一哪天忘了某些知识也可以回来看看，希望自己可以坚持写下去。
 
-## 对vue的理解
+
