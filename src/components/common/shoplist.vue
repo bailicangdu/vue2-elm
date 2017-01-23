@@ -62,7 +62,7 @@
 			</svg>
 		</aside>
 		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
-		<div ref="abc" style="background-color: red;height:300px;width:0;"></div>
+		<div ref="abc" style="background-color: red;"></div>
 	</div>
 </template>
 
@@ -89,9 +89,6 @@ export default {
 		this.shopListArr = await msiteShopList(this.latitude, this.longitude, this.offset);
 		showBack(status => {
 			this.showBackStatus = status;
-		});
-		animate(this.$refs.abc, {width: '3rem'}, 800,'ease-in', () => {
-			console.log(111)
 		});
 	},
 	props: [],

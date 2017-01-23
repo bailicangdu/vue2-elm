@@ -199,7 +199,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
 
 
     let flag = true; //假设所有运动到达终点
-    
+    const remberSpeed = {};//记录上一个速度值,在ease-in模式下需要用到
     element.timer = setInterval(() => {
         Object.keys(target).forEach(attr => {
             let iSpeed = 0;  //步长
@@ -217,16 +217,18 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
                     intervalTime = duration*20/400;
                     break;
                 case 'ease-in':
-                    speedBase = target[attr] - iCurrent - 10*(target[attr] - iCurrent)/Math.abs(target[attr] - iCurrent);
-                    intervalTime = duration*6/400;
+                    let oldspeed = remberSpeed[attr] || 0;
+                    iSpeed = oldspeed + (target[attr] - initState[attr])/duration;
+                    remberSpeed[attr] = iSpeed
                     break;
                 default:
                     speedBase = iCurrent;
                     intervalTime = duration*5/400; 
             }
-
-            iSpeed = (target[attr] - speedBase) / intervalTime;
-            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+            if (mode !== 'ease-in') {
+                iSpeed = (target[attr] - speedBase) / intervalTime;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+            }
             //判断是否达步长之内的误差距离，如果到达说明到达目标点
             switch(mode){
                 case 'ease-out': 
@@ -241,7 +243,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
                 default:
                     status = iCurrent != target[attr]; 
             }
-            console.log(iSpeed)
+
             if (status) {
                 flag = false; 
                 if (attr === "opacity") {
