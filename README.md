@@ -16,7 +16,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 - [x] 定位功能 -- 完成
 - [x] 选择城市 -- 完成
 - [x] 搜索地址 -- 完成
-- [x] 展示所选地址附近商家列表
+- [x] 展示所选地址附近商家列表 -- 完成
 - [ ] 搜索美食，餐馆
 - [ ] 根据距离、销量、评分、特色菜等进行排序和筛选
 - [ ] 单个餐馆的详细信息展示，商品列表，优惠活动
@@ -44,6 +44,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |-- src                              // 源码目录
 |   |-- components                   // 组件
 |       |-- common                   // 公共组件
+|			|-- mixin.js             // 组件混合(包括：指令-下拉加载更多。。。)
+|			|-- shoplist.js          // msite和shop页面的餐馆列表公共组件
 |       |-- footer                   // 底部公共组件
 |       |-- header                 	 // 头部公共组件
 |
@@ -57,11 +59,11 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |   |-- pages                        // 页面组件
 |       |-- checkout                 // 确认订单页
 |       |-- city                     // 当前城市页
+|		|-- food                 	 // 特色餐馆列表页
 |       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
 |       |-- login                    // 登陆注册页
 |       |-- msite                    // 商铺列表页
-|           |-- food                 // 特色餐馆列表页
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
 |       |-- search                   // 搜索页
@@ -73,6 +75,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |   |-- router                       // 路由配置
 |
 |   |-- service                      // 数据交互统一调配
+|		|-- template                 // 存放临时数据
+|		|-- getData.js               // 获取数据的统一调配文件，方便管理接口
 |
 |   |-- store                        // vuex的状态管理
 |       |-- modules                  // store模块

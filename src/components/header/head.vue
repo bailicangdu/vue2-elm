@@ -48,7 +48,7 @@
     #head_top{
         background-color: $blue;
         position: fixed;
-        z-index: 999999999999;
+        z-index: 9999;
         left: 0;
         top: 0;
         @include wh(100%, 1.95rem);
