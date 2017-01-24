@@ -30,7 +30,6 @@ export default {
     computed:{
 
     },
-
 }
 
 </script>
@@ -44,7 +43,7 @@ export default {
 
         }
         .search_submit{
-            
+
         }
     }
 
