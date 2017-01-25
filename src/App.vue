@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div>
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;visibility:hidden">
 			<defs>
 				<symbol viewBox="0 0 60 60" id="eleme">
@@ -55,6 +55,6 @@
 
 </script>
 
-<style lang="less" scoped>
-  	
+<style lang="scss">
+  @import './style/common.scss';
 </style>

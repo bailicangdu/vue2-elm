@@ -23,15 +23,15 @@ $bc: #e4e4e4;
     transform: translateY(-50%);
 }
 
-//字体大小、行高、字体
-@mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
-	font: #{$size}/#{$line-height} $family;
-}
-
 //宽高
 @mixin wh($width, $height){
 	width: $width;
 	height: $height;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {  
+	font: #{$size}/#{$line-height} $family;
 }
 
 //字体大小，颜色

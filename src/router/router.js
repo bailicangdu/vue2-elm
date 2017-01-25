@@ -23,7 +23,7 @@ export default [{
         { path: '/city/:cityid', component: city },    //当前选择城市页
         { path: '/msite', component: msite, },         //所有商铺列表页
         { path: '/food', component: food },            //特色商铺列表页
-        { path: '/search', component: search },        //搜索页
+        { path: '/search/:geohash', component: search },        //搜索页
         { path: '/shop', component: shop },            //商铺详情页
         { path: '/login', component: login },          //登陆注册页
         { path: '/profile', component: profile },      //个人信息页
