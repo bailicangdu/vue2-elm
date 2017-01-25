@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<ul v-load-more="loaderMore" v-if="false">
+	<div class="shoplist_container">
+		<ul v-load-more="loaderMore">
 			<router-link :to="{path: 'food', query:{}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
 					<img :src="imgBaseUrl + subImgUrl(item.image_path)" class="shop_img">
@@ -70,7 +70,7 @@
 
 import {mapState} from 'vuex'
 import {imgBaseUrl} from '../../config/env'
-import {msiteShopList} from '../../service/getData'
+import {shopList} from '../../service/getData'
 import {showBack, animate} from '../../config/mUtils'
 import {loadMore} from '../../components/common/mixin'
 
@@ -86,12 +86,13 @@ export default {
 	},
 	async mounted(){
 		//获取数据
-		this.shopListArr = await msiteShopList(this.latitude, this.longitude, this.offset);
+		this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
+		//开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
 		showBack(status => {
 			this.showBackStatus = status;
 		});
 	},
-	props: [],
+	props: ['restaurantCategoryId'],
 	mixins: [loadMore],
 	components: {
 
@@ -122,7 +123,7 @@ export default {
 
 			this.preventRepeatReuqest = true;
 			this.offset += 20;
-			let res = await msiteShopList(this.latitude, this.longitude, this.offset);
+			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = this.shopListArr.concat(res);
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
@@ -140,6 +141,9 @@ export default {
 
 <style lang="scss" scoped>
 	@import '../../style/mixin.scss';
+	.shoplist_container{
+		background-color: #fff;
+	}
 	.shop_li{
 		display: flex;
 		border-bottom: 0.025rem solid #f1f1f1;
@@ -245,12 +249,15 @@ export default {
 			@include fj;
 			@include sc(0.5rem, #666);
 			.distance_time{
+				span{
+					color: #888;
+				}
 				.order_time{
 					color: $blue;
 				}
-			}
-			.segmentation{
-				color: #ccc;
+				.segmentation{
+					color: #ccc;
+				}
 			}
 		}
 	}

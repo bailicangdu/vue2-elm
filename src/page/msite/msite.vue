@@ -15,7 +15,7 @@
     		<div class="swiper-container">
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide food_types_container" v-for="(item, index) in foodTypes" :key="index">
-	            		<router-link :to="{path: '/food', query: {geohash}}" v-for="foodItem in item" :key="foodItem.id" class="link_to_food">
+	            		<router-link :to="{path: '/food', query: {geohash, title: foodItem.title, restaurant_category_id: getCategoryId(foodItem.link)}}" v-for="foodItem in item" :key="foodItem.id" class="link_to_food">
 	            			<figure>
 	            				<img :src="imgBaseUrl + foodItem.image_url">
 	            				<figcaption>{{foodItem.title}}</figcaption>
@@ -53,7 +53,7 @@ export default {
         	geohash: '', // city页面传递过来的地址geohash
             msietTitle: '获取地址中...', // msiet页面头部标题
             foodTypes: [], // 食品分类列表
-            hasGetData: false, //是否已经获取数据
+            hasGetData: false, //是否已经获取地理位置数据，成功之后再获取商铺列表信息
             imgBaseUrl, //图片域名地址
         }
     },
@@ -95,7 +95,16 @@ export default {
     methods: {
     	...mapMutations([
     		'RECORD_ADDRESS'
-    	])
+    	]),
+    	// 解码url地址，求去restaurant_category_id值
+    	getCategoryId(url){
+    		let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
+    		if (/restaurant_category_id/gi.test(urlData)) {
+    			return JSON.parse(urlData).restaurant_category_id.id
+    		}else{
+    			return ''
+    		}
+    	}
     },
     watch: {
 

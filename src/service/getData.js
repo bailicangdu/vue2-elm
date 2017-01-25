@@ -34,11 +34,11 @@ import * as search from './tempdata/search'
 /**
  * 获取msite商铺列表
  */
-//export const msiteShopList = (latitude, longitude, offset) => fetch('GET', '/shopping/restaurants', {latitude, longitude, offset, limit: '20', 'extras[]':'activities'})
+//export const shopList = (latitude, longitude, offset, restaurant_category_id = '') => fetch('GET', '/shopping/restaurants', {latitude, longitude, offset, limit: '20', 'extras[]':'activities', keyword: '', restaurant_category_id})
 /**
- * 获取msite商铺列表
+ * 获取search页面搜索结果
  */
-//export const searchRestaurant = (geohash, keyword) => fetch('GET', '/v4/restaurants', {'extras[]':'restaurant_activity', geohash, keyword, type: 'search'})
+export const searchRestaurant = (geohash, keyword) => fetch('GET', '/v4/restaurants', {'extras[]':'restaurant_activity', geohash, keyword, type: 'search'})
 
 
 
@@ -56,6 +56,6 @@ export const currentcity = number => setpromise(city.currentcity);
 export const searchplace = (cityid, value) => setpromise(city.searchdata);
 export const msiteAdress = geohash => setpromise(msite.msiteAdress);
 export const msiteFoodTypes = geohash => setpromise(msite.foodTypes);
-export const msiteShopList = (latitude, longitude, offset) => setpromise(msite.shopList);
-export const searchRestaurant = (geohash, keyword) => setpromise(search.searchData);
+export const shopList = (latitude, longitude, offset) => setpromise(msite.shopList);
+//export const searchRestaurant = (geohash, keyword) => setpromise(search.searchData);
 

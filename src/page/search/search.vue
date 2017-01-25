@@ -39,9 +39,17 @@
         <section class="search_history" v-if="searchHistory.length&&showHistory">
             <h4 class="title_restaurant">搜索历史</h4>
             <ul>
-                <li v-for="item in searchHistory">{{item}}</li>
+                <li v-for="(item, index) in searchHistory" :key="index" class="history_list">
+                    <span class="history_text ellipsis">{{item}}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="delete_icon" @click="deleteHistory(index)">
+                        <line x1="8" y1="8" x2="18" y2="18" style="stroke:#999;stroke-width:3" />
+                        <line x1="18" y1="8" x2="8" y2="18" style="stroke:#999;stroke-width:3" />
+                    </svg>
+                </li>
             </ul>
+            <footer class="clear_history" @click="clearAllHistory">清空搜索历史</footer>
         </section>
+        <div class="search_none" v-if="emptyResult">很抱歉！无搜索结果</div>
     </div>
 </template>
 
@@ -54,12 +62,13 @@ import {getStore, setStore} from '../../config/mUtils'
 export default {
 	data(){
         return {
-            geohash: '', //
-            searchValue: '', //
-            restaurantList: [], //
-            imgBaseUrl, //
-            searchHistory: [], //
-            showHistory: true, //
+            geohash: '', // msite页面传递过来的地址信息
+            searchValue: '', // 搜索内容
+            restaurantList: [], // 搜索返回的结果
+            imgBaseUrl, // 图片域名地址
+            searchHistory: [], // 搜索历史记录
+            showHistory: true, // 是否显示历史记录，只有在返回搜索结果后隐藏
+            emptyResult: false, // 搜索结果为空时显示
         }
     },
     created(){
@@ -76,12 +85,16 @@ export default {
         headTop
     },
     methods:{
+        //点击提交按钮，搜索结果并显示，同时将搜索内容存入历史记录
         async searchTarget(){
             if (!this.searchValue) {
                 return 
             }
+            //隐藏历史记录
             this.showHistory = false;
+            //获取搜索结果
             this.restaurantList = await searchRestaurant(this.geohash, this.searchValue);
+            this.emptyResult = !this.restaurantList.length;
             /**
              * 点击搜索结果进入下一页面时进行判断是否已经有一样的历史记录
              * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
@@ -103,16 +116,25 @@ export default {
             }
             setStore('searchHistory',this.searchHistory)
         },
+        //搜索结束后，删除搜索内容直到为空时清空搜索结果，并显示历史记录
         checkInput(){
             if (this.searchValue === '') {
-                this.showHistory = true;
-                this.restaurantList = [];
+                this.showHistory = true; //显示历史记录
+                this.restaurantList = []; //清空搜索结果
+                this.emptyResult = false; //隐藏搜索为空提示
             } 
+        },
+        //点击删除按钮，删除当前历史记录
+        deleteHistory(index){
+            this.searchHistory.splice(index, 1);
+            setStore('searchHistory',this.searchHistory);
+        },
+        //清除所有历史记录
+        clearAllHistory(){
+            this.searchHistory = [];
+            setStore('searchHistory',this.searchHistory);
         }
-    },
-    computed:{
-
-    },
+    }
 }
 
 </script>
@@ -199,5 +221,38 @@ export default {
                 }
             }
         }
+    }
+    .search_history{
+        .history_list{
+            background-color: #fff;
+            border-bottom: 0.025rem solid $bc;
+            @include font(0.7rem, 2rem);
+            padding: 0 0.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .history_text{
+                display: inline-block;
+                width: 80%;
+            }
+            .delete_icon{
+                @include wh(1rem, 1rem);
+            }
+        }
+        .clear_history{
+            background-color: #fff;
+            color: $blue;
+            @include font(.7rem, 2rem);
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+    .search_none{
+        margin: 0 auto;
+        @include font(0.65rem, 1.75rem);
+        color: #333;
+        background-color: #fff;
+        text-align: center;
+        margin-top: 0.125rem;
     }
 </style>
