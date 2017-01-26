@@ -75,8 +75,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |   |-- router                       // 路由配置
 |
 |   |-- service                      // 数据交互统一调配
-|		|-- template                 // 存放临时数据
-|		|-- getData.js               // 获取数据的统一调配文件，方便管理接口
+|		|-- template                 // 存放临时数据，方便编码环境测试
+|		|-- getData.js               // 获取数据的统一调配文件，对接口进行统一管理
 |
 |   |-- store                        // vuex的状态管理
 |       |-- modules                  // store模块

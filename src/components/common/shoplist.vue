@@ -1,6 +1,6 @@
 <template>
 	<div class="shoplist_container">
-		<ul v-load-more="loaderMore">
+		<ul v-load-more="loaderMore" v-if="shopListArr.length">
 			<router-link :to="{path: 'food', query:{}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
 					<img :src="imgBaseUrl + subImgUrl(item.image_path)" class="shop_img">
@@ -9,7 +9,7 @@
 					<header class="shop_detail_header">
 						<h4 :class="item.is_premium? 'premium': ''" class="" class="shop_title ellipsis">{{item.name}}</h4>
 						<ul class="shop_detail_ul">
-							<li v-for="item in item.supports" key="item.id" class="supports">{{item.icon_name}}</li>
+							<li v-for="item in item.supports" :key="item.id" class="supports">{{item.icon_name}}</li>
 						</ul>
 					</header>
 					<h5 class="rating_order_num">
@@ -17,13 +17,13 @@
 							<section class="rating_section">
 								<div class="rating_container">
 									<span class="star_container">
-										<svg class="grey_fill" v-for="num in 5" key="num">
+										<svg class="grey_fill" v-for="num in 5" :key="num">
 											<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#star"></use>
 										</svg>
 									</span>
 									<div :style="'width:' + item.rating*2/5 + 'rem'" class="star_overflow">
 										<span class="star_container" >
-											<svg  class="orange_fill" v-for="num in 5" key="num">
+											<svg  class="orange_fill" v-for="num in 5" :key="num">
 												<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#star"></use>
 											</svg>
 										</span>
@@ -56,6 +56,7 @@
 				</hgroup>
 			</router-link>
 		</ul>
+		<p v-else class="empty_data">没有更多了</p>
 		<aside class="return_top" @click="backTop" v-if="showBackStatus">
 			<svg class="back_top_svg">
 				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
@@ -92,7 +93,7 @@ export default {
 			this.showBackStatus = status;
 		});
 	},
-	props: ['restaurantCategoryId'],
+	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType'],
 	mixins: [loadMore],
 	components: {
 
@@ -134,6 +135,17 @@ export default {
 		//返回顶部
 		backTop(){
 			animate(document.body, {scrollTop: '0'}, 400,'ease-out');
+		}
+	},
+	watch:{
+		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
+		restaurantCategoryIds: async function (value){
+			this.offset = 0;
+			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', value);
+		},
+		sortByType: async function (value){
+			this.offset = 0;
+			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, value);
 		}
 	}
 }
@@ -265,6 +277,11 @@ export default {
 		@include font(0.6rem, 3);
 		text-align: center;
 	    color: #999;
+	}
+	.empty_data{
+		@include sc(0.5rem, #666);
+		text-align: center;
+		line-height: 2rem;
 	}
 	.return_top{
 		position: fixed;
