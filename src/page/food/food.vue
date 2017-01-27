@@ -11,8 +11,8 @@
 			    		</svg>
     				</div>
     			</div>
-	    		<transition name="showlist" v-if="category">
-	    			<section v-if="sortBy == 'food'" class="category_container sort_detail_type">
+	    		<transition name="showlist" v-show="category">
+	    			<section v-show="sortBy == 'food'" class="category_container sort_detail_type">
 	    				<section class="category_left">
 	    					<ul>
 	    						<li v-for="(item, index) in category" :key="index" class="category_left_li" :class="{category_active:restaurant_category_id == item.id}" @click="selectCategoryName(item.id, index)">
@@ -50,7 +50,7 @@
     				</div>
     			</div>
 	    		<transition name="showlist">
-	    			<section v-if="sortBy == 'sort'" class="sort_detail_type">
+	    			<section v-show="sortBy == 'sort'" class="sort_detail_type">
 	    				<ul class="sort_list_container" @click="sortList($event)">
 	    					<li class="sort_list_li">
 	    						<svg>
@@ -130,8 +130,31 @@
 		    		</svg>
     			</div>
 	    		<transition name="showlist">
-	    			<section v-if="sortBy == 'activity'" class="sort_detail_type">
-	    				efsfsdf
+	    			<section v-show="sortBy == 'activity'" class="sort_detail_type filter_container">
+	    				<section style="width: 100%;">
+	    					<header class="filter_header_style">配送方式</header>
+	    					<ul class="filter_ul">
+	    						<li v-for="item in Delivery" :key="item.id" class="filter_li" @click="selectDeliveryMode(item.id)">
+	    							<svg :style="{opacity: (item.id == 0)&&(delivery_mode !== 0)? 0: 1}">
+										<use xmlns:xlink="http://www.w3.org/1999/xlink" v-bind:xlink:href="delivery_mode == item.id? '#selected':'#fengniao'"></use>
+									</svg>
+	    							<span>{{item.text}}</span>
+	    						</li>
+	    					</ul>
+	    				</section>
+	    				<section style="width: 100%;">
+	    					<header class="filter_header_style">商家属性（可以多选）</header>
+	    					<ul class="filter_ul" style="paddingBottom: .5rem;">
+	    						<li v-for="item in Activity" :key="item.id" class="filter_li">
+	    							<span class="filter_icon" :style="{color: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
+	    							<span>{{item.name}}</span>
+	    						</li>
+	    					</ul>
+	    				</section>
+	    				<footer class="confirm_filter">
+	    					<div class="clear_all filter_button_style">清空</div>
+	    					<div class="confirm_select filter_button_style">确定<span v-if="filterNum">({{filterNum}})</span></div>
+	    				</footer>
 	    			</section>
 	    		</transition>
     		</div>
@@ -150,7 +173,7 @@ import {mapState, mapMutations} from 'vuex'
 import headTop from '../../components/header/head'
 import shopList from '../../components/common/shoplist'
 import {imgBaseUrl} from '../../config/env'
-import {msiteAdress, foodCategory} from '../../service/getData'
+import {msiteAdress, foodCategory, foodDelivery, foodActivity} from '../../service/getData'
 
 export default {
 	data(){
@@ -165,6 +188,11 @@ export default {
             category: null, // category分类左侧数据
             categoryDetail: null, // category分类右侧的详细数据
             sortByType: null, // 根据何种方式排序
+            Delivery: null, // 配送方式数据
+            Activity: null, // 商家支持活动数据
+            delivery_mode: null, // 选中的配送方式
+            support_ids: [], // 选中的商铺活动列表
+            filterNum: 0, // 所选中的所有样式的集合
         }
     },
     async beforeMount(){
@@ -212,6 +240,12 @@ export default {
     			}else{
     				this.foodTitle = this.headTitle;
     			}
+
+    			if (type == 'activity' && !this.Delivery && ! this.Activity) {
+    				this.Delivery = await foodDelivery(this.latitude, this.longitude);
+    				this.Activity = await foodActivity(this.latitude, this.longitude)
+    			}
+
     		}else{
     			this.sortBy = '';
     			if (type == 'food') {
@@ -250,6 +284,12 @@ export default {
 			this.sortByType = event.target.getAttribute('data');
 			this.sortBy = '';
 		},
+		selectDeliveryMode(id){
+			if (this.delivery_mode == null) {
+				this.filterNum++;
+			}
+			this.delivery_mode = id;
+		}
     },
     watch: {
 
@@ -409,6 +449,77 @@ export default {
 				.sort_select{
 					span{
 						color: $blue;
+					}
+				}
+			}
+		}
+		.filter_container{
+			flex-direction: column;
+			align-items: flex-start;
+			min-height: 10.6rem;
+			background-color: #f1f1f1;
+			.filter_header_style{
+				@include sc(0.4rem, #333);
+				line-height: 1.5rem;
+				height: 1.5rem;
+				text-align: left;
+				padding-left: .5rem;
+				background-color: #fff;
+			}
+			.filter_ul{
+				display: flex;
+				flex-wrap: wrap;
+				padding: 0 0.5rem;
+				background-color: #fff;
+				.filter_li{
+					display: flex;
+					align-items: center;
+					border: 0.025rem solid #eee;
+					@include wh(4.7rem, 1.4rem);
+					margin-right: 0.25rem;
+					border-radius: 0.125rem;
+					padding: 0 0.25rem;
+					margin-bottom: 0.25rem;
+					svg{
+						@include wh(.8rem, .8rem);
+						margin-right: 0.125rem;
+					}
+					span{
+						@include sc(0.4rem, #333);
+					}
+					.filter_icon{
+						@include wh(.8rem, .8rem);
+						font-size: 0.5rem;
+						border: 0.025rem solid $bc;
+						border-radius: 0.15rem;
+						margin-right: 0.25rem;
+						line-height: .8rem;
+						text-align: center;
+					}
+				}
+			}
+			.confirm_filter{
+				display: flex;
+				background-color: #f1f1f1;
+				width: 100%;
+				padding: .3rem .2rem;
+				.filter_button_style{
+					@include wh(50%, 1.8rem);
+					font-size: 0.8rem;
+					line-height: 1.8rem;
+					border-radius: 0.2rem;
+				}
+				.clear_all{
+					background-color: #fff;
+					margin-right: .5rem;
+					border: 0.025rem solid #fff;
+				}
+				.confirm_select{
+					background-color: #56d176;
+					color: #fff;
+					border: 0.025rem solid #56d176;
+					span{
+						color: #fff;
 					}
 				}
 			}
