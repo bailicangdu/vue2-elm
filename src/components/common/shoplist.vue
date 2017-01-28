@@ -93,7 +93,7 @@ export default {
 			this.showBackStatus = status;
 		});
 	},
-	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType'],
+	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect'],
 	mixins: [loadMore],
 	components: {
 
@@ -146,6 +146,10 @@ export default {
 		sortByType: async function (value){
 			this.offset = 0;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, value);
+		},
+		confirmSelect: async function (){
+			this.offset = 0;
+			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, value, this.deliveryMode);
 		}
 	}
 }

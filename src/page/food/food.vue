@@ -136,24 +136,27 @@
 	    					<ul class="filter_ul">
 	    						<li v-for="item in Delivery" :key="item.id" class="filter_li" @click="selectDeliveryMode(item.id)">
 	    							<svg :style="{opacity: (item.id == 0)&&(delivery_mode !== 0)? 0: 1}">
-										<use xmlns:xlink="http://www.w3.org/1999/xlink" v-bind:xlink:href="delivery_mode == item.id? '#selected':'#fengniao'"></use>
+										<use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="delivery_mode == item.id? '#selected':'#fengniao'"></use>
 									</svg>
-	    							<span>{{item.text}}</span>
+	    							<span :class="{selected_filter: delivery_mode == item.id}">{{item.text}}</span>
 	    						</li>
 	    					</ul>
 	    				</section>
 	    				<section style="width: 100%;">
 	    					<header class="filter_header_style">商家属性（可以多选）</header>
 	    					<ul class="filter_ul" style="paddingBottom: .5rem;">
-	    						<li v-for="item in Activity" :key="item.id" class="filter_li">
-	    							<span class="filter_icon" :style="{color: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
-	    							<span>{{item.name}}</span>
+	    						<li v-for="(item,index) in Activity" :key="item.id" class="filter_li" @click="selectSupportIds(index, item.id)">
+	    							<svg v-show="support_ids[index].status" class="activity_svg">
+										<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
+									</svg>
+	    							<span class="filter_icon" :style="{color: '#' + item.icon_color, borderColor: '#' + item.icon_color}" v-show="!support_ids[index].status">{{item.icon_name}}</span>
+	    							<span :class="{selected_filter: support_ids[index].status}">{{item.name}}</span>
 	    						</li>
 	    					</ul>
 	    				</section>
 	    				<footer class="confirm_filter">
-	    					<div class="clear_all filter_button_style">清空</div>
-	    					<div class="confirm_select filter_button_style">确定<span v-if="filterNum">({{filterNum}})</span></div>
+	    					<div class="clear_all filter_button_style" @click="clearAll">清空</div>
+	    					<div class="confirm_select filter_button_style" @click="confirmSelectFun">确定<span v-show="filterNum">({{filterNum}})</span></div>
 	    				</footer>
 	    			</section>
 	    		</transition>
@@ -163,7 +166,7 @@
     		<div class="back_cover" v-show="sortBy"></div>
     	</transition>
     	<section class="shop_list_container">
-	    	<shop-list :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' v-if="latitude"></shop-list>
+	    	<shop-list :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"></shop-list>
     	</section>
     </div>    
 </template>
@@ -193,19 +196,31 @@ export default {
             delivery_mode: null, // 选中的配送方式
             support_ids: [], // 选中的商铺活动列表
             filterNum: 0, // 所选中的所有样式的集合
+            confirmStatus: false, // 确认选择
         }
     },
-    async beforeMount(){
+    async created(){
 		this.geohash = this.$route.query.geohash;
 		this.headTitle = this.$route.query.title;
-		this.foodTitle = this.headTitle
+		this.foodTitle = this.headTitle;
 		this.restaurant_category_id = this.$route.query.restaurant_category_id;
 		//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex	
 		if (!this.latitude) {
 	    	//获取位置信息
 	    	let res = await msiteAdress(this.geohash);
 	    	// 记录当前经度纬度
-	    	this.RECORD_ADDRESS(res);
+		    this.RECORD_ADDRESS(res);
+	    	this.category = await foodCategory(this.latitude, this.longitude);
+			this.category.forEach(item => {
+			if (this.restaurant_category_id == item.id) {
+				this.categoryDetail = item.sub_categories;
+			}
+			});
+			this.Delivery = await foodDelivery(this.latitude, this.longitude);
+	    	this.Activity = await foodActivity(this.latitude, this.longitude)
+	    	this.Activity.forEach((item, index) => {
+	    		this.support_ids[index] = {status: false, id: item.id};
+	    	})
 		}
     },
     mounted(){
@@ -229,23 +244,9 @@ export default {
     			this.sortBy = type;
     			if (type == 'food') {
 					this.foodTitle = '分类';
-					if (!this.category) {
-						this.category = await foodCategory(this.latitude, this.longitude);
-						this.category.forEach(item => {
-							if (this.restaurant_category_id == item.id) {
-								this.categoryDetail = item.sub_categories;
-							}
-						})
-					}
     			}else{
     				this.foodTitle = this.headTitle;
     			}
-
-    			if (type == 'activity' && !this.Delivery && ! this.Activity) {
-    				this.Delivery = await foodDelivery(this.latitude, this.longitude);
-    				this.Activity = await foodActivity(this.latitude, this.longitude)
-    			}
-
     		}else{
     			this.sortBy = '';
     			if (type == 'food') {
@@ -287,8 +288,30 @@ export default {
 		selectDeliveryMode(id){
 			if (this.delivery_mode == null) {
 				this.filterNum++;
+				this.delivery_mode = id;
+			}else if(this.delivery_mode == id){
+				this.filterNum--;
+				this.delivery_mode = null;
+			}else{
+				this.delivery_mode = id;
 			}
-			this.delivery_mode = id;
+		},
+		selectSupportIds(index,id){
+			this.support_ids.splice(index, 1, {status: !this.support_ids[index].status, id: id})
+			this.filterNum = this.delivery_mode == null? 0 : 1;
+			this.support_ids.forEach(item => {
+				if (item.status) {
+					this.filterNum ++ ;
+				}
+			})
+		},
+		clearAll(){
+			this.delivery_mode = null;
+            this.support_ids.map(item => item.status = false);
+            this.filterNum = 0;
+		},
+		confirmSelectFun(){
+			this.confirmStatus = !this.confirmStatus;
 		}
     },
     watch: {
@@ -495,6 +518,12 @@ export default {
 						margin-right: 0.25rem;
 						line-height: .8rem;
 						text-align: center;
+					}
+					.activity_svg{
+						margin-right: .25rem;
+					}
+					.selected_filter{
+						color: $blue;
 					}
 				}
 			}

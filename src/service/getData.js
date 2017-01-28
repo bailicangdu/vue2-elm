@@ -35,7 +35,7 @@ import * as food from './tempdata/food'
 /**
  * 获取msite商铺列表
  */
-export const shopList = (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '', order_by = '') => fetch('GET', '/shopping/restaurants', {latitude, longitude, offset, limit: '20', 'extras[]':'activities', keyword: '', restaurant_category_id, 'restaurant_category_ids[]': restaurant_category_ids, order_by});
+export const shopList = (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '', order_by = '', delivery_mode = '') => fetch('GET', '/shopping/restaurants', {latitude, longitude, offset, limit: '20', 'extras[]':'activities', keyword: '', restaurant_category_id, 'restaurant_category_ids[]': restaurant_category_ids, order_by, 'delivery_mode[]':delivery_mode});
 /**
  * 获取search页面搜索结果
  */
