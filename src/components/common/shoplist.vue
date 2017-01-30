@@ -1,9 +1,9 @@
 <template>
 	<div class="shoplist_container">
 		<ul v-load-more="loaderMore" v-if="shopListArr.length">
-			<router-link :to="{path: 'food', query:{}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
+			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
-					<img :src="imgBaseUrl + subImgUrl(item.image_path)" class="shop_img">
+					<img :src="getImgPath(item.image_path)" class="shop_img">
 				</section>
 				<hgroup class="shop_right">
 					<header class="shop_detail_header">
@@ -64,54 +64,50 @@
 		</aside>
 		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
 		<div ref="abc" style="background-color: red;"></div>
+		<transition name="loading">
+			<loading v-show="showLoading"></loading>
+		</transition>
 	</div>
 </template>
 
 <script>
 
 import {mapState} from 'vuex'
-import {imgBaseUrl} from '../../config/env'
 import {shopList} from '../../service/getData'
 import {showBack, animate} from '../../config/mUtils'
-import {loadMore} from '../../components/common/mixin'
+import {loadMore, getImgPath} from './mixin'
+import loading from './loading'
 
 export default {
 	data(){
 		return {
 			offset: 0, // 批次加载店铺列表，每次加载20个 limit = 20
 			shopListArr:[], // 店铺列表数据
-			imgBaseUrl, //图片域名地址
 			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
 			showBackStatus: false, //显示返回顶部按钮
+			showLoading: true, //显示加载动画
 		}
 	},
 	async mounted(){
 		//获取数据
 		this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
+		this.showLoading = false;
 		//开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
 		showBack(status => {
 			this.showBackStatus = status;
 		});
 	},
-	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect'],
-	mixins: [loadMore],
+	components: {
+		loading,
+	},
+	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect', 'geohash'],
+	mixins: [loadMore, getImgPath],
 	computed: {
 		...mapState([
 			'latitude','longitude'
 		])
 	},
 	methods: {
-		//传递过来的图片地址需要处理后才能正常使用
-		subImgUrl(path){
-			let suffix;
-			if (path.indexOf('jpeg') !== -1) {
-				suffix = '.jpeg'
-			}else{
-				suffix = '.png'
-			}
-			let url = '/' + path.substr(0,1) + '/' + path.substr(1,2) + '/' + path.substr(3) + suffix;
-			return url
-		},
 		//到达底部加载更多数据
 		async loaderMore(){
 			//防止重复请求
@@ -122,8 +118,10 @@ export default {
 			this.preventRepeatReuqest = true;
 			//数据的定位加20位
 			this.offset += 20;
+			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = this.shopListArr.concat(res);
+			this.showLoading = false;
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
@@ -137,7 +135,9 @@ export default {
 		//监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
 		async listenPropChange(){
 			this.offset = 0;
+			this.showLoading = true;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
+			this.showLoading = false;
 		}
 	},
 	watch:{
@@ -298,5 +298,10 @@ export default {
 			@include wh(2rem, 2rem);
 		}
 	}
-
+	.loading-enter-active, .loading-leave-active {
+		transition: opacity 1s
+	}
+	.loading-enter, .loading-leave-active {
+		opacity: 0
+	}
 </style>

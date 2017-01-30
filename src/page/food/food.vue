@@ -17,7 +17,7 @@
 	    					<ul>
 	    						<li v-for="(item, index) in category" :key="index" class="category_left_li" :class="{category_active:restaurant_category_id == item.id}" @click="selectCategoryName(item.id, index)">
 									<section>
-										<img :src="imgBaseUrl + subImgUrl(item.image_url)" v-if="index" class="category_icon">
+										<img :src="getImgPath(item.image_url)" v-if="index" class="category_icon">
 										<span>{{item.name}}</span>
 									</section>
 									<section>
@@ -166,7 +166,7 @@
     		<div class="back_cover" v-show="sortBy"></div>
     	</transition>
     	<section class="shop_list_container">
-	    	<shop-list :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude" @DidConfrim="clearAll"></shop-list>
+	    	<shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude" @DidConfrim="clearAll"></shop-list>
     	</section>
     </div>    
 </template>
@@ -175,7 +175,7 @@
 import {mapState, mapMutations} from 'vuex'
 import headTop from '../../components/header/head'
 import shopList from '../../components/common/shoplist'
-import {imgBaseUrl} from '../../config/env'
+import {getImgPath} from '../../components/common/mixin'
 import {msiteAdress, foodCategory, foodDelivery, foodActivity} from '../../service/getData'
 
 export default {
@@ -184,7 +184,6 @@ export default {
         	geohash: '', // city页面传递过来的地址geohash
             headTitle: '', // msiet页面头部标题
             foodTitle: '', // 排序左侧头部标题
-            imgBaseUrl, //图片域名地址
             restaurant_category_id: '', // 食品类型id值
             restaurant_category_ids: '', //筛选类型的id
             sortBy: '', // 筛选的条件
@@ -211,24 +210,25 @@ export default {
 	    	let res = await msiteAdress(this.geohash);
 	    	// 记录当前经度纬度进入vuex
 		    this.RECORD_ADDRESS(res);
-		    //获取category分类左侧数据
-	    	this.category = await foodCategory(this.latitude, this.longitude);
-	    	//初始化时定位当前category分类左侧默认选择项，在右侧展示出其sub_categories列表
-			this.category.forEach(item => {
-				if (this.restaurant_category_id == item.id) {
-					this.categoryDetail = item.sub_categories;
-				}
-			});
-			//获取筛选列表的配送方式
-			this.Delivery = await foodDelivery(this.latitude, this.longitude);
-			//获取筛选列表的商铺活动
-	    	this.Activity = await foodActivity(this.latitude, this.longitude);
-	    	//记录support_ids的状态，默认不选中，点击状态取反，status为true时为选中状态
-	    	this.Activity.forEach((item, index) => {
-	    		this.support_ids[index] = {status: false, id: item.id};
-	    	})
 		}
+	    //获取category分类左侧数据
+    	this.category = await foodCategory(this.latitude, this.longitude);
+    	//初始化时定位当前category分类左侧默认选择项，在右侧展示出其sub_categories列表
+		this.category.forEach(item => {
+			if (this.restaurant_category_id == item.id) {
+				this.categoryDetail = item.sub_categories;
+			}
+		});
+		//获取筛选列表的配送方式
+		this.Delivery = await foodDelivery(this.latitude, this.longitude);
+		//获取筛选列表的商铺活动
+    	this.Activity = await foodActivity(this.latitude, this.longitude);
+    	//记录support_ids的状态，默认不选中，点击状态取反，status为true时为选中状态
+    	this.Activity.forEach((item, index) => {
+    		this.support_ids[index] = {status: false, id: item.id};
+    	})
     },
+    mixins: [getImgPath],
     components: {
     	headTop,
     	shopList
@@ -262,17 +262,6 @@ export default {
     			}
     		}
     	},
-    	//传递过来的图片地址需要处理后才能正常使用
-		subImgUrl(path){
-			let suffix;
-			if (path.indexOf('jpeg') !== -1) {
-				suffix = '.jpeg'
-			}else{
-				suffix = '.png'
-			}
-			let url = '/' + path.substr(0,1) + '/' + path.substr(1,2) + '/' + path.substr(3) + suffix;
-			return url
-		},
 		//选中Category左侧列表的某个选项时，右侧渲染相应的sub_categories列表
 		selectCategoryName(id, index){
 			//第一个选项 -- 全部商家 因为没有自己的列表，所以点击则默认获取选所有数据
