@@ -74,7 +74,9 @@
 				</symbol>
 			</defs>
 		</svg>
-    	<router-view></router-view>
+		<transition name="router-fade">
+    		<router-view></router-view>
+    	</transition>
     </div>
 </template>
 
@@ -87,5 +89,11 @@
 </script>
 
 <style lang="scss">
-  @import './style/common.scss';
+  	@import './style/common.scss';
+	.router-fade-enter-active, .router-fade-leave-active {
+	  	transition: opacity .6s;
+	}
+	.router-fade-enter, .router-fade-leave-active {
+	  	opacity: 0;
+	}
 </style>

@@ -23,6 +23,13 @@ $bc: #e4e4e4;
     transform: translateY(-50%);
 }
 
+//定位上下居中
+@mixin cl {  
+	position: absolute;
+	left: 50%;
+    transform: translateX(-50%);
+}
+
 //宽高
 @mixin wh($width, $height){
 	width: $width;

@@ -40,7 +40,7 @@
             <h4 class="title_restaurant">搜索历史</h4>
             <ul>
                 <li v-for="(item, index) in searchHistory" :key="index" class="history_list">
-                    <span class="history_text ellipsis">{{item}}</span>
+                    <span class="history_text ellipsis" @click="searchTarget(item)">{{item}}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="delete_icon" @click="deleteHistory(index)">
                         <line x1="8" y1="8" x2="18" y2="18" style="stroke:#999;stroke-width:3" />
                         <line x1="18" y1="8" x2="8" y2="18" style="stroke:#999;stroke-width:3" />
@@ -86,8 +86,10 @@ export default {
     },
     methods:{
         //点击提交按钮，搜索结果并显示，同时将搜索内容存入历史记录
-        async searchTarget(){
-            if (!this.searchValue) {
+        async searchTarget(historyValue){
+            if (historyValue) {
+                this.searchValue = historyValue;
+            }else if (!this.searchValue) {
                 return 
             }
             //隐藏历史记录

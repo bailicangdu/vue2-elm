@@ -15,20 +15,7 @@
 					<h5 class="rating_order_num">
 						<section class="rating_order_num_left">
 							<section class="rating_section">
-								<div class="rating_container">
-									<span class="star_container">
-										<svg class="grey_fill" v-for="num in 5" :key="num">
-											<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#star"></use>
-										</svg>
-									</span>
-									<div :style="'width:' + item.rating*2/5 + 'rem'" class="star_overflow">
-										<span class="star_container" >
-											<svg  class="orange_fill" v-for="num in 5" :key="num">
-												<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#star"></use>
-											</svg>
-										</span>
-									</div>
-								</div>
+								<rating-star :rating='item.rating'></rating-star>
 								<span class="rating_num">{{item.rating}}</span>
 							</section>
 							<section class="order_section">
@@ -77,6 +64,7 @@ import {shopList} from '../../service/getData'
 import {showBack, animate} from '../../config/mUtils'
 import {loadMore, getImgPath} from './mixin'
 import loading from './loading'
+import ratingStar from './ratingStar'
 
 export default {
 	data(){
@@ -99,6 +87,7 @@ export default {
 	},
 	components: {
 		loading,
+		ratingStar,
 	},
 	props: ['restaurantCategoryId', 'restaurantCategoryIds', 'sortByType', 'deliveryMode', 'supportIds', 'confirmSelect', 'geohash'],
 	mixins: [loadMore, getImgPath],
@@ -213,28 +202,6 @@ export default {
 				@include fj(flex-start);
 				.rating_section{
 					display: flex;
-					.rating_container{
-						position: relative;
-						width: 2rem;
-						.star_overflow{
-							overflow: hidden;
-							position: relative;
-							height: 100%;
-						}
-						.star_container{
-							position: absolute;
-							display: flex;
-							width: 2rem;
-							height: 0.4rem;
-							top: -0.02rem;
-							.grey_fill{
-								fill: #d1d1d1;
-							}
-							.orange_fill{
-								fill: #ff9a0d;
-							}
-						}
-					}
 					.rating_num{
 						@include sc(0.4rem, #ff6000);
 						margin: 0 0.2rem;
