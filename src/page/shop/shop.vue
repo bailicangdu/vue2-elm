@@ -35,7 +35,7 @@
     import {msiteAdress, shopDetails} from '../../service/getData'
     import loading from '../../components/common/loading'
     import {getImgPath} from '../../components/common/mixin'
-
+    
     export default {
         data(){
             return{
