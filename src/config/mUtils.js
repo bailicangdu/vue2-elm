@@ -252,6 +252,7 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
 
             if (status) {
                 flag = false; 
+                //opacity 和 scrollTop 需要特殊处理
                 if (attr === "opacity") {
                     element.style.filter = "alpha(opacity:" + (iCurrent + iSpeed) + ")";
                     element.style.opacity = (iCurrent + iSpeed) / 100;

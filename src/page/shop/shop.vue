@@ -10,7 +10,7 @@
                     <section class="description_right">
                         <h4 class="description_title ellipsis">{{shopDetailData.name}}</h4>
                         <p class="description_text">商家配送／{{shopDetailData.order_lead_time}}分钟送达／配送费¥{{shopDetailData.float_delivery_fee}}</p>
-                        <p class="description_promotion ellipsis">公告：{{shopDetailData.promotion_info}}</p>
+                        <p class="description_promotion ellipsis">公告：{{promotionInfo}}</p>
                     </section>
                     <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
                         <path d="M0 0 L8 7 L0 14"  stroke="#fff" stroke-width="1" fill="none"/>
@@ -40,7 +40,7 @@
                         </section>
                         <section class="activities_shopinfo">
                             <header class="activities_title_style"><span>商家公告</span></header>
-                            <p>{{shopDetailData.promotion_info}}</p>
+                            <p>{{promotionInfo}}</p>
                         </section>
                         <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
                             <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
@@ -56,6 +56,7 @@
                 <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
                     <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
                     <span>{{item.name}}</span>
+                    <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
                 </li>
             </ul>
             <ul class="menu_right" ref="menuFoodList">
@@ -73,7 +74,7 @@
                             </p>
                         </transition>
                     </header>
-                    <section v-for="(foods,index) in item.foods" :key="index" class="menu_detail_list">
+                    <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
                         <router-link to="/shop/rating" tag="div" class="menu_detail_link">
                             <section class="menu_food_img">
                                 <img :src="getImgPath(foods.image_path)">
@@ -82,7 +83,7 @@
                                 <h3 class="food_description_head">
                                     <strong class="description_foodname">{{foods.name}}</strong>
                                     <ul v-if="foods.attributes.length" class="attributes_ul">
-                                        <li v-for="(attribute, index) in foods.attributes" :key="index" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
+                                        <li v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
                                         <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                         </li>
                                     </ul>
@@ -104,20 +105,7 @@
                                 <span>{{foods.specfoods[0].price}}</span>
                                 <span v-if="foods.specifications.length">起</span>
                             </section>
-                            <section class="cart_module">
-                                <section v-if="!foods.specifications.length" class="cart_button">
-                                    <svg class="cart_minus" @click="removeOutCart">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
-                                    </svg>
-                                    <span class="cart_num">1</span>
-                                    <svg class="cart_add" @click="addToCart">
-                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
-                                    </svg>
-                                </section>
-                                <section v-else class="choose_specification">
-                                    选规格
-                                </section>
-                            </section>
+                            <buy-cart :foods='foods' :shopCart='shopCart' :index="index" @add="addToCart" @reduce="removeOutCart"></buy-cart>
                         </footer>
                     </section>
                 </li>
@@ -151,6 +139,7 @@
     import {imgBaseUrl} from '../../config/env'
     import {msiteAdress, shopDetails, foodMenu} from '../../service/getData'
     import loading from '../../components/common/loading'
+    import buyCart from '../../components/common/buyCart'
     import ratingStar from '../../components/common/ratingStar'
     import {getImgPath} from '../../components/common/mixin'
     import {animate} from '../../config/mUtils'
@@ -168,11 +157,13 @@
                 menuIndexChange: true,//解决选中index时，scroll监听事件重复判断设置index的bug
                 shopListTop: [], //商品列表的高度集合
                 TitleDetailIndex: null, //点击展示列表头部详情
+                categoryNum: [], //商品类型右上角已加入购物车的数量
             }
         },
         created(){
             this.geohash = this.$route.query.geohash;
             this.shopId = this.$route.query.id;
+            this.INIT_BUYCART();
         },
         mounted(){
             this.initData();
@@ -181,11 +172,15 @@
         components: {
             loading,
             ratingStar,
+            buyCart,
         },
         computed: {
             ...mapState([
                 'latitude','longitude','cartList'
             ]),
+            promotionInfo: function (){
+                return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
+            },
             deliveryFee: function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
@@ -200,10 +195,13 @@
                     return null;
                 }
             },
+            shopCart: function (){
+                return this.cartList[this.shopId];
+            }
         },
         methods: {
             ...mapMutations([
-                'RECORD_ADDRESS'
+                'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART'
             ]),
             //初始化时获取基本数据
             async initData(){
@@ -280,11 +278,34 @@
                     this.TitleDetailIndex = index;
                 }
             },
-            addToCart(){
-
+            addToCart(category_id, item_id, food_id, index){
+                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id});
+                let num = this.categoryNum[index];
+                num ++;
+                this.categoryNum.splice(index, 1, num);
             },
-            removeOutCart(){
-                
+            removeOutCart(category_id, item_id, food_id, index){
+                this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id});
+                let num = this.categoryNum[index];
+                num --;
+                this.categoryNum.splice(index, 1, num);
+            },
+            initCategoryNum(){
+                let newArr = [];
+                this.menuList.forEach((item, index) => {
+                    if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
+                        let num = 0;
+                        Object.values(this.shopCart[item.foods[0].category_id]).forEach(item => {
+                            Object.values(item).forEach(insetitem => {
+                                num += insetitem;
+                            })
+                        })
+                        newArr[index] = num;
+                    }else{
+                        newArr[index] = 0;
+                    }
+                })
+                this.categoryNum = newArr.concat([]);
             }
         },
         watch: {
@@ -292,6 +313,7 @@
                 if (!value) {
                     this.$nextTick(() => {
                         this.getFoodListHeight();
+                        this.initCategoryNum();
                     })
                 }
             }
@@ -520,17 +542,32 @@
                 border-bottom: 0.025rem solid #ededed;
                 box-sizing: border-box;
                 border-left: 0.15rem solid #f8f8f8;
+                position: relative;
                 img{
                     @include wh(.5rem, .6rem);
                 }
                 span{
                     @include sc(.6rem, #666);
                 }
+                .category_num{
+                    position: absolute;
+                    top: .1rem;
+                    right: .1rem;
+                    background-color: #ff461d;
+                    line-height: .6rem;
+                    text-align: center;
+                    border-radius: 50%;
+                    border: 0.025rem solid #ff461d;
+                    min-width: .6rem;
+                    height: .6rem;
+                    @include sc(.5rem, #fff);
+                    font-family: Helvetica Neue,Tahoma,Arial;
+                }
             }
             .activity_menu{
                 border-left: 0.15rem solid #3190e8;
                 background-color: #fff;
-                span{
+                span:nth-of-type(1){
                     font-weight: bold;
                 }
             }
@@ -698,28 +735,6 @@
                         }
                         span:nth-of-type(3){
                             @include sc(.5rem, #666);
-                        }
-                    }
-                    .cart_module{
-                        .cart_button{
-                            display: flex;
-                            align-items: center;
-                            svg{
-                                @include wh(.8rem, .8rem);
-                                fill: #3190e8;
-                            }
-                            .cart_num{
-                                @include sc(.6rem, #666);
-                                min-width: 1rem;
-                                text-align: center;
-                            }
-                        }
-                        .choose_specification{
-                            @include sc(.55rem, #fff);
-                            padding: .2rem .3rem;
-                            background-color: $blue;
-                            border-radius: 0.5rem;
-                            border: 1px solid $blue;
                         }
                     }
                 }

@@ -1,7 +1,8 @@
 # 前言
 
-vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以react为主，没有机会好好利用vue2去做一个完整的项目。虽然写了几个demo，但和写一个完整的项目还是有很大差别的。于是自己想着用空余的时间写一个项目，选择了饿了么也只是因为经常用，熟悉它的布局。之前的饿了么官网是用angular1写的，最近才发现原来这段时间改成了vue1，看来饿了么也入了vue的坑。
+vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以react为主，没有机会好好利用vue2去做一个完整的项目。虽然写了几个demo，但和写一个完整的项目还是有很大差别的。于是自己想着用空余的时间写一个项目，选择了饿了么也只是因为经常用，熟悉它的布局。之前的饿了么官网是用angular写的，最近才发现原来这段时间改成了vue1，看来饿了么也入了vue的坑。
 
+既然要写一个完整的项目，那么除了付款其他所有功能都尽可能的实现，包括登陆、注册、加入购物车、下单等等，也包括所有我能注意到的细节也都一并做出来，所以这绝对算是一个比较大的项目。
 
 首先遇到的问题当然是跨域，我们启动本地服务器是获取不到官网数据的，这是跨域的。当然解决的方法很多，jsonp，nginx反向代理，webpack-dev-server的proxy。这里我用的是 http-proxy-middleware 其实它们的原理是一样的。
 
@@ -20,8 +21,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 - [x] 搜索美食，餐馆 -- 完成
 - [x] 根据距离、销量、评分、特色菜、配送方式等进行排序和筛选 -- 完成
 - [x] 餐馆详细页面 -- 完成
-- [ ] 商品评价页面
 - [ ] 购物车功能
+- [ ] 商品评价页面
 - [ ] 登陆、注册
 - [ ] 修改密码
 - [ ] 个人中心
@@ -86,11 +87,11 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |
 |   |-- store                        // vuex的状态管理
 |       |-- modules                  // store模块
-|       |-- action.js                // 配置根actions
-|       |-- getters.js               // 配置根getters
+|       |-- action.js                // 配置actions
+|       |-- getters.js               // 配置getters
 |       |-- index.js                 // 引用vuex，创建store
 |       |-- mutation-types.js        // 定义常量muations名
-|       |-- mutations.js             // 配置根mutations
+|       |-- mutations.js             // 配置mutations
 |
 |   |-- style                        // 各种样式文件
 |       |-- common.scss              // 公共样式文件
