@@ -123,6 +123,20 @@
                 </li>
             </ul>
         </section>
+        <section class="buy_cart_container">
+            <section class="cart_icon_container">
+                <svg class="cart_icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
+                </svg>
+            </section>
+            <section class="cart_num">
+                <div>¥ 0</div>
+                <div>配送费¥{{deliveryFee}}</div>
+            </section>
+            <section class="gotopay">
+                <span>还差¥{{minimumOrderAmount}}起送</span>
+            </section>
+        </section>
        <loading v-if="showLoading"></loading>
        <transition name="router-slid">
             <router-view></router-view>
@@ -149,7 +163,7 @@
                 showActivities: false, //是否显示活动详情
                 menuList: [], //食品列表
                 menuIndex: 0, //已选菜单索引值，默认为0
-                menuIndexChange: false,//解决选中index时，scroll监听事件重复判断设置index的bug
+                menuIndexChange: true,//解决选中index时，scroll监听事件重复判断设置index的bug
                 shopListTop: [], //商品列表的高度集合
                 TitleDetailIndex: null, //点击展示列表头部详情
             }
@@ -170,6 +184,20 @@
             ...mapState([
                 'latitude','longitude','cartList'
             ]),
+            deliveryFee: function () {
+                if (this.shopDetailData) {
+                    return this.shopDetailData.float_delivery_fee;
+                }else{
+                    return null;
+                }
+            },
+            minimumOrderAmount: function () {
+                if (this.shopDetailData) {
+                    return this.shopDetailData.float_minimum_order_amount;
+                }else{
+                    return null;
+                }
+            },
         },
         methods: {
             ...mapMutations([
@@ -266,6 +294,60 @@
 <style lang="scss" scoped>
     @import '../../style/mixin.scss';
 
+    .buy_cart_container{
+        position: absolute;
+        background-color: #3d3d3f;
+        bottom: 0;
+        left: 0;
+        @include wh(100%, 2rem);
+        .cart_icon_container{
+            background-color: #3d3d3f;
+            position: absolute;
+            padding: .4rem;
+            border: 0.25rem solid #444;
+            border-radius: 50%;
+            left: .5rem;
+            top: -.7rem;
+            .cart_icon{
+                @include wh(1.2rem, 1.2rem);
+            }
+        }
+        .cart_num{
+            @include ct;
+            left: 3.5rem;
+
+            div{
+                color: #fff;
+            }
+            div:nth-of-type(1){
+                font-size: .8rem;
+                font-weight: bold;
+                margin-bottom: .1rem;
+            }
+            div:nth-of-type(2){
+                font-size: .4rem;   
+            }
+        }
+        .gotopay{
+            position: absolute;
+            right: 0;
+            background-color: #535356;
+            @include wh(5rem, 100%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span{
+                @include sc(.65rem, #fff);
+                font-weight: bold;
+            }
+        }
+    }
+
+
+
+
+
     .shop_container{
         display: flex;
         flex-direction: column;
@@ -276,6 +358,147 @@
         overflow: hidden;
         padding-bottom: 2rem;
     }
+    
+    .shop_detail_header{
+        overflow: hidden;
+        position: relative;
+        .header_cover_img{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 9;
+            filter: blur(10px);
+        }
+        .description_header{
+            position: relative;
+            z-index: 10;
+            background-color: rgba(119,103,137,.43);
+            padding: 0.4rem 0 0.4rem 0.4rem;
+            width: 100%;
+            overflow: hidden;
+            .description_top{
+                display: flex;
+                .description_left{
+                    margin-right: 0.3rem;
+                    img{
+                        @include wh(2.9rem, 2.9rem);
+                        display: block;
+                        border-radius: 0.15rem;
+                    }
+                }
+                .description_right{
+                    flex: 1;
+                    .description_title{
+                        @include sc(.8rem, #fff);
+                        font-weight: bold;
+                        width: 100%;
+                        margin-bottom: 0.3rem;
+                    }
+                    .description_text{
+                        @include sc(.5rem, #fff);
+                        margin-bottom: 0.3rem;
+                    }
+                    .description_promotion{
+                        @include sc(.5rem, #fff);
+                        width: 12.5rem;
+                    }
+                }
+                .description_arrow{
+                    @include ct;
+                    right: 0.3rem;
+                    z-index: 11;
+                }
+            }
+            .description_footer{
+                @include fj;
+                margin-top: 0.5rem;
+                padding-right: .4rem;
+                p{
+                    @include sc(.5rem, #fff);
+                    span{
+                        color: #fff;
+                    }
+                    .tip_icon{
+                        padding: .01rem;
+                        border: 0.025rem solid #fff;
+                        border-radius: 0.1rem;
+                        display: inline-block;
+                    }
+                }
+                .ellipsis{
+                    width: 87%;
+                }
+            }
+            .activities_details{
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #262626;
+                z-index: 12;
+                padding: 1.25rem;
+                .activities_shoptitle{
+                    text-align: center;
+                    @include sc(.8rem, #fff);
+                }
+                .activities_ratingstar{
+                    display: flex;
+                    justify-content: center;
+                    transform: scale(2.2);
+                    margin-top: .7rem;
+                }
+                .activities_list{
+                    margin-top: 1.5rem;
+                    margin-bottom: 1rem;
+                    @include sc(.5rem, #fff);
+                    li{
+                        margin-bottom: .2rem;
+                        .activities_icon{
+                            padding: .01rem;
+                            border: 0.025rem solid #fff;
+                            border-radius: 0.1rem;
+                        }
+                        span{
+                            color: #fff;
+                            line-height: .6rem;
+                        }
+                    }
+                }
+                .activities_shopinfo{
+                    p{
+                        line-height: .7rem;
+                        @include sc(.5rem, #fff);
+                    }
+                }
+                .activities_title_style{
+                    text-align: center;
+                    margin-bottom: 1rem;
+                    span{
+                        @include sc(.5rem, #fff);
+                        border: 0.025rem solid #555;
+                        padding: .2rem .4rem;
+                        border-radius: 0.5rem;
+                    }
+
+                }
+                .close_activities{
+                    position: absolute;
+                    bottom: 1rem;
+                    @include cl;
+                }
+            }
+            
+            .fadeactivities-enter-active, .fadeactivities-leave-active {
+                transition: opacity .5s;
+            }
+            .fadeactivities-enter, .fadeactivities-leave-active {
+                opacity: 0;
+            }
+        }
+    }
+
     .menu_container{
         display: flex;
         flex: 1;
@@ -283,7 +506,7 @@
         .menu_left{
             background-color: #f8f8f8;
             overflow-y: auto;
-            width: 3.4rem;
+            width: 3.8rem;
             .menu_left_li{
                 padding: .7rem .3rem;
                 border-bottom: 0.025rem solid #ededed;
@@ -492,148 +715,6 @@
                         }
                     }
                 }
-            }
-        }
-    }
-
-
-
-    .shop_detail_header{
-        overflow: hidden;
-        position: relative;
-        .header_cover_img{
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 9;
-            filter: blur(10px);
-        }
-        .description_header{
-            position: relative;
-            z-index: 10;
-            background-color: rgba(119,103,137,.43);
-            padding: 0.4rem 0 0.4rem 0.4rem;
-            width: 100%;
-            overflow: hidden;
-            .description_top{
-                display: flex;
-                .description_left{
-                    margin-right: 0.3rem;
-                    img{
-                        @include wh(2.9rem, 2.9rem);
-                        display: block;
-                        border-radius: 0.15rem;
-                    }
-                }
-                .description_right{
-                    flex: 1;
-                    .description_title{
-                        @include sc(.8rem, #fff);
-                        font-weight: bold;
-                        width: 100%;
-                        margin-bottom: 0.3rem;
-                    }
-                    .description_text{
-                        @include sc(.5rem, #fff);
-                        margin-bottom: 0.3rem;
-                    }
-                    .description_promotion{
-                        @include sc(.5rem, #fff);
-                        width: 12.5rem;
-                    }
-                }
-                .description_arrow{
-                    @include ct;
-                    right: 0.3rem;
-                    z-index: 11;
-                }
-            }
-            .description_footer{
-                @include fj;
-                margin-top: 0.5rem;
-                padding-right: .4rem;
-                p{
-                    @include sc(.5rem, #fff);
-                    span{
-                        color: #fff;
-                    }
-                    .tip_icon{
-                        padding: .01rem;
-                        border: 0.025rem solid #fff;
-                        border-radius: 0.1rem;
-                        display: inline-block;
-                    }
-                }
-                .ellipsis{
-                    width: 87%;
-                }
-            }
-            .activities_details{
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #262626;
-                z-index: 12;
-                padding: 1.25rem;
-                .activities_shoptitle{
-                    text-align: center;
-                    @include sc(.8rem, #fff);
-                }
-                .activities_ratingstar{
-                    display: flex;
-                    justify-content: center;
-                    transform: scale(2.2);
-                    margin-top: .7rem;
-                }
-                .activities_list{
-                    margin-top: 1.5rem;
-                    margin-bottom: 1rem;
-                    @include sc(.5rem, #fff);
-                    li{
-                        margin-bottom: .2rem;
-                        .activities_icon{
-                            padding: .01rem;
-                            border: 0.025rem solid #fff;
-                            border-radius: 0.1rem;
-                        }
-                        span{
-                            color: #fff;
-                            line-height: .6rem;
-                        }
-                    }
-                }
-                .activities_shopinfo{
-                    p{
-                        line-height: .7rem;
-                        @include sc(.5rem, #fff);
-                    }
-                }
-                .activities_title_style{
-                    text-align: center;
-                    margin-bottom: 1rem;
-                    span{
-                        @include sc(.5rem, #fff);
-                        border: 0.025rem solid #555;
-                        padding: .2rem .4rem;
-                        border-radius: 0.5rem;
-                    }
-
-                }
-                .close_activities{
-                    position: absolute;
-                    bottom: 1rem;
-                    @include cl;
-                }
-            }
-            
-            .fadeactivities-enter-active, .fadeactivities-leave-active {
-                transition: opacity .5s;
-            }
-            .fadeactivities-enter, .fadeactivities-leave-active {
-                opacity: 0;
             }
         }
     }

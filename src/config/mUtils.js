@@ -241,10 +241,10 @@ export const animate = (element, target, duration = 400, mode = 'ease-out', call
                     status = iCurrent != target[attr]; 
                     break;
                 case 'linear':
-                    status =  Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed)
+                    status = Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed);
                     break;
                 case 'ease-in':
-                    status = Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed)
+                    status = Math.abs(Math.abs(iCurrent) - Math.abs(target[attr])) > Math.abs(iSpeed);
                     break;
                 default:
                     status = iCurrent != target[attr]; 
