@@ -44,7 +44,9 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |-- src                              // 源码目录
 |   |-- components                   // 组件
 |       |-- common                   // 公共组件
-|			|-- mixin.js             // 组件混合(包括：指令-下拉加载更多。。。)
+|			|-- loading.js           // 页面初始化加载数据的动画组件
+|			|-- mixin.js             // 组件混合(包括：指令-下拉加载更多，处理图片地址)
+|			|-- ratingStar.js        // 评论的五颗星组件
 |			|-- shoplist.js          // msite和shop页面的餐馆列表公共组件
 |       |-- footer                   // 底部公共组件
 |       |-- header                 	 // 头部公共组件
@@ -52,6 +54,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |   |-- config                       // 基本配置
 |       |-- env.js                   // 环境切换配置
 |       |-- fetch.js                 // 获取数据
+|       |-- mUtils.js                // 常用的js方法
 |       |-- rem.js                   // px转换rem
 |
 |   |-- images                       // 公共图片
@@ -67,8 +70,11 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
 |       |-- search                   // 搜索页
-|       |-- shop                     // 商铺详情页
-|       |-- vipcard                  // vip卡办理页
+|       |-- shop                     // 商铺食品列表页
+|			|-- children             
+|				|-- rating           // 评论页   
+|				|-- shopDetails      // 商铺信息页           
+|       |-- vipcard                  // vip办理页
 |
 |   |-- plugins                      // 引用的插件
 |
@@ -123,7 +129,7 @@ npm install
 开启本地服务器
 npm run dev
 
-访问 http://localhost:8088/
+访问 http://localhost:8088
 ```
 
 

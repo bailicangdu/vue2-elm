@@ -106,11 +106,11 @@
                             </section>
                             <section class="cart_module">
                                 <section v-if="!foods.specifications.length" class="cart_button">
-                                    <svg class="cart_minus">
+                                    <svg class="cart_minus" @click="removeOutCart">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
                                     </svg>
                                     <span class="cart_num">1</span>
-                                    <svg class="cart_add">
+                                    <svg class="cart_add" @click="addToCart">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
                                     </svg>
                                 </section>
@@ -124,14 +124,16 @@
             </ul>
         </section>
         <section class="buy_cart_container">
-            <section class="cart_icon_container">
-                <svg class="cart_icon">
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
-                </svg>
-            </section>
-            <section class="cart_num">
-                <div>¥ 0</div>
-                <div>配送费¥{{deliveryFee}}</div>
+            <section>
+                <div class="cart_icon_container">
+                    <svg class="cart_icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
+                    </svg>
+                </div>
+                <div class="cart_num">
+                    <div>¥ 0</div>
+                    <div>配送费¥{{deliveryFee}}</div>
+                </div>
             </section>
             <section class="gotopay">
                 <span>还差¥{{minimumOrderAmount}}起送</span>
@@ -277,6 +279,12 @@
                 }else{
                     this.TitleDetailIndex = index;
                 }
+            },
+            addToCart(){
+
+            },
+            removeOutCart(){
+                
             }
         },
         watch: {
