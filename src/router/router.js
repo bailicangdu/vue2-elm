@@ -12,6 +12,7 @@ const checkout = r => require.ensure([], () => r(require('../page/checkout/check
 const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
 const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
+const rating = r => require.ensure([], () => r(require('../page/shop/children/rating')), 'rating')
 
 
 export default [{
@@ -23,8 +24,15 @@ export default [{
         { path: '/city/:cityid', component: city },    //当前选择城市页
         { path: '/msite', component: msite, },         //所有商铺列表页
         { path: '/food', component: food },            //特色商铺列表页
-        { path: '/search/:geohash', component: search },        //搜索页
-        { path: '/shop', component: shop },            //商铺详情页
+        { path: '/search/:geohash', component: search },   //搜索页
+        { path: '/shop', component: shop ,
+            children: [
+                {
+                    path: 'rating',
+                    component: rating,
+                }
+            ]
+        },            //商铺详情页
         { path: '/login', component: login },          //登陆注册页
         { path: '/profile', component: profile },      //个人信息页
         { path: '/forget', component: forget },        //修改密码页

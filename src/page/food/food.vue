@@ -198,35 +198,8 @@ export default {
             confirmStatus: false, // 确认选择
         }
     },
-    async created(){
-    	//获取从msite页面传递过来的参数
-		this.geohash = this.$route.query.geohash;
-		this.headTitle = this.$route.query.title;
-		this.foodTitle = this.headTitle;
-		this.restaurant_category_id = this.$route.query.restaurant_category_id;
-		//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex	
-		if (!this.latitude) {
-	    	//获取位置信息
-	    	let res = await msiteAdress(this.geohash);
-	    	// 记录当前经度纬度进入vuex
-		    this.RECORD_ADDRESS(res);
-		}
-	    //获取category分类左侧数据
-    	this.category = await foodCategory(this.latitude, this.longitude);
-    	//初始化时定位当前category分类左侧默认选择项，在右侧展示出其sub_categories列表
-		this.category.forEach(item => {
-			if (this.restaurant_category_id == item.id) {
-				this.categoryDetail = item.sub_categories;
-			}
-		});
-		//获取筛选列表的配送方式
-		this.Delivery = await foodDelivery(this.latitude, this.longitude);
-		//获取筛选列表的商铺活动
-    	this.Activity = await foodActivity(this.latitude, this.longitude);
-    	//记录support_ids的状态，默认不选中，点击状态取反，status为true时为选中状态
-    	this.Activity.forEach((item, index) => {
-    		this.support_ids[index] = {status: false, id: item.id};
-    	})
+    created(){
+    	this.initData();
     },
     mixins: [getImgPath],
     components: {
@@ -242,6 +215,37 @@ export default {
     	...mapMutations([
     		'RECORD_ADDRESS'
     	]),
+    	//初始化获取数据
+        async initData(){
+        	//获取从msite页面传递过来的参数
+			this.geohash = this.$route.query.geohash;
+			this.headTitle = this.$route.query.title;
+			this.foodTitle = this.headTitle;
+			this.restaurant_category_id = this.$route.query.restaurant_category_id;
+			//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex	
+			if (!this.latitude) {
+		    	//获取位置信息
+		    	let res = await msiteAdress(this.geohash);
+		    	// 记录当前经度纬度进入vuex
+			    this.RECORD_ADDRESS(res);
+			}
+		    //获取category分类左侧数据
+	    	this.category = await foodCategory(this.latitude, this.longitude);
+	    	//初始化时定位当前category分类左侧默认选择项，在右侧展示出其sub_categories列表
+			this.category.forEach(item => {
+				if (this.restaurant_category_id == item.id) {
+					this.categoryDetail = item.sub_categories;
+				}
+			});
+			//获取筛选列表的配送方式
+			this.Delivery = await foodDelivery(this.latitude, this.longitude);
+			//获取筛选列表的商铺活动
+	    	this.Activity = await foodActivity(this.latitude, this.longitude);
+	    	//记录support_ids的状态，默认不选中，点击状态取反，status为true时为选中状态
+	    	this.Activity.forEach((item, index) => {
+	    		this.support_ids[index] = {status: false, id: item.id};
+	    	})
+        },
     	// 点击顶部三个选项，展示不同的列表，选中当前选项进行展示，同时收回其他选项
     	async chooseType(type){
     		if (this.sortBy !== type) {

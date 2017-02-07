@@ -129,7 +129,7 @@ export default {
 			this.showLoading = false;
 		}
 	},
-	watch:{
+	watch: {
 		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
 		restaurantCategoryIds: function (value){
 			this.listenPropChange();

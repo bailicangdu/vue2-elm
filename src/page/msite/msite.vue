@@ -79,6 +79,7 @@ export default {
     		}
     		this.foodTypes = foodArr;
         }).then(() => {
+        	//初始化swiper
         	new Swiper('.swiper-container', {
 		        pagination: '.swiper-pagination',
 		        loop: true

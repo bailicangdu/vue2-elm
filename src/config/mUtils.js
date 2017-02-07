@@ -54,6 +54,9 @@ export const loadMore = (element, callback) => {
     let requestFram;
     let oldScrollTop;
 
+    element.addEventListener('scroll',() => {
+       loadMore();
+    }, false)
     //运动开始时获取元素 高度 和 offseTop, pading, margin
 	element.addEventListener('touchstart',() => {
         height = element.offsetHeight;
@@ -62,7 +65,7 @@ export const loadMore = (element, callback) => {
         marginBottom = getStyle(element,'marginBottom');
     },{passive: true})
 
-    //运动过程中保持坚挺 scrollTop 的值判断是否到达底部
+    //运动过程中保持监听 scrollTop 的值判断是否到达底部
     element.addEventListener('touchmove',() => {
        loadMore();
     },{passive: true})
@@ -102,6 +105,9 @@ export const showBack = callback => {
     let requestFram;
     let oldScrollTop;
 
+    document.addEventListener('scroll',() => {
+       showBackFun();
+    }, false)
     document.addEventListener('touchstart',() => {
        showBackFun();
     },{passive: true})
