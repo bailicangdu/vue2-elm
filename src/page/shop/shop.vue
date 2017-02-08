@@ -1,6 +1,6 @@
  <template>
     <div class="shop_container">
-        <header class="shop_detail_header" v-if="!showLoading" ref="shopheader">
+        <header class="shop_detail_header" v-if="!showLoading" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
             <img :src="getImgPath(shopDetailData.image_path)" class="header_cover_img">
             <section class="description_header">
                 <section class="description_top" @click="showActivitiesFun">
@@ -23,7 +23,7 @@
                     </p>
                     <p>{{shopDetailData.activities.length}}个活动</p>
                 </footer>
-                <transition name="fadeactivities">
+                <transition name="fade">
                     <section class="activities_details" v-if="showActivities">
                         <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>
                         <h3 class="activities_ratingstar">
@@ -56,7 +56,7 @@
                 <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
                     <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
                     <span>{{item.name}}</span>
-                    <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
+                    <span class="category_num" v-if="categoryNum[index]&&item.type==1">{{categoryNum[index]}}</span>
                 </li>
             </ul>
             <ul class="menu_right" ref="menuFoodList">
@@ -67,7 +67,7 @@
                             <span class="menu_item_description">{{item.description}}</span>
                         </section>
                         <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span>
-                        <transition name="fade_title">
+                        <transition name="fade">
                             <p class="description_tip" v-show="index == TitleDetailIndex">
                                 <span>{{item.name}}</span>
                                 {{item.description}}
@@ -105,28 +105,68 @@
                                 <span>{{foods.specfoods[0].price}}</span>
                                 <span v-if="foods.specifications.length">起</span>
                             </section>
-                            <buy-cart :foods='foods' :shopCart='shopCart' :index="index" @add="addToCart" @reduce="removeOutCart"></buy-cart>
+                            <buy-cart :foods='foods' :shopCart='shopCart' @add="addToCart" @reduce="removeOutCart"></buy-cart>
                         </footer>
                     </section>
                 </li>
             </ul>
         </section>
         <section class="buy_cart_container">
-            <section>
-                <div class="cart_icon_container">
+            <section @click="toggleCartList" class="cart_icon_num">
+                <div class="cart_icon_container" :class="{cart_icon_activity: totalPrice > 0}">
                     <svg class="cart_icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
                     </svg>
                 </div>
                 <div class="cart_num">
-                    <div>¥ 0</div>
+                    <div>¥ {{totalPrice}}</div>
                     <div>配送费¥{{deliveryFee}}</div>
                 </div>
             </section>
-            <section class="gotopay">
-                <span>还差¥{{minimumOrderAmount}}起送</span>
+            <section class="gotopay" :class="{gotopay_acitvity: minimumOrderAmount < 0}">
+                <span class="gotopay_button_style" v-if="minimumOrderAmount > 0">还差¥{{minimumOrderAmount}}起送</span>
+                <span class="gotopay_button_style" v-else >去结算</span>
             </section>
         </section>
+        <transition name="toggle-cart">
+            <section class="cart_food_list" v-show="showCartList&&cartFoodList.length">
+                <header>
+                    <h4>购物车</h4>
+                    <div @click="clearCart">
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-remove"></use>
+                        </svg>
+                        <span class="clear_cart">清空</span>
+                    </div>
+                </header>
+                <section class="cart_food_details">
+                    <ul>
+                        <li v-for="(item, index) in cartFoodList" :key="index" class="cart_food_li">
+                            <div class="cart_list_num">
+                                <p class="ellipsis">{{item.name}}</p>
+                                <p class="ellipsis">{{item.specs}}</p>
+                            </div>
+                            <div class="cart_list_price">
+                                <span>¥</span>
+                                <span>{{item.price}}</span>
+                            </div>
+                            <section class="cart_list_control">
+                                <svg @click="removeOutCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
+                                </svg>
+                                <span class="cart_num">{{item.num}}</span>
+                                <svg class="cart_add" @click="addToCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
+                                </svg>
+                            </section>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </transition>
+        <transition name="fade">
+            <div class="screen_cover" v-show="showCartList&&cartFoodList.length" @click="toggleCartList"></div>
+        </transition>
        <loading v-if="showLoading"></loading>
        <transition name="router-slid">
             <router-view></router-view>
@@ -158,6 +198,9 @@
                 shopListTop: [], //商品列表的高度集合
                 TitleDetailIndex: null, //点击展示列表头部详情
                 categoryNum: [], //商品类型右上角已加入购物车的数量
+                totalPrice: 0, //总共价格
+                cartFoodList: [], //购物车商品列表
+                showCartList: false,//显示购物车列表
             }
         },
         created(){
@@ -190,18 +233,18 @@
             },
             minimumOrderAmount: function () {
                 if (this.shopDetailData) {
-                    return this.shopDetailData.float_minimum_order_amount;
+                    return this.shopDetailData.float_minimum_order_amount - this.totalPrice;
                 }else{
                     return null;
                 }
             },
             shopCart: function (){
-                return this.cartList[this.shopId];
+                return Object.assign({},this.cartList[this.shopId]);
             }
         },
         methods: {
             ...mapMutations([
-                'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART'
+                'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART','CLEAR_CART'
             ]),
             //初始化时获取基本数据
             async initData(){
@@ -278,26 +321,38 @@
                     this.TitleDetailIndex = index;
                 }
             },
-            addToCart(category_id, item_id, food_id, index, name, price, specs){
+            addToCart(category_id, item_id, food_id, name, price, specs){
                 this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
-                let num = this.categoryNum[index];
-                num ++;
-                this.categoryNum.splice(index, 1, num);
             },
-            removeOutCart(category_id, item_id, food_id, index, name, price, specs){
+            removeOutCart(category_id, item_id, food_id, name, price, specs){
                 this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
-                let num = this.categoryNum[index];
-                num --;
-                this.categoryNum.splice(index, 1, num);
             },
             initCategoryNum(){
                 let newArr = [];
+                let cartFoodNum = 0;
+                this.totalPrice = 0;
+                this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
                     if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
                         let num = 0;
-                        Object.values(this.shopCart[item.foods[0].category_id]).forEach(item => {
-                            Object.values(item).forEach(insetitem => {
-                                num += insetitem.num;
+                        Object.keys(this.shopCart[item.foods[0].category_id]).forEach(itemid => {
+                            Object.keys(this.shopCart[item.foods[0].category_id][itemid]).forEach(foodid => {
+                                let foodItem = this.shopCart[item.foods[0].category_id][itemid][foodid];
+                                num += foodItem.num;
+                                if (item.type == 1) {
+                                    this.totalPrice += foodItem.num*foodItem.price;
+                                    if (foodItem.num > 0) {
+                                        this.cartFoodList[cartFoodNum] = {};
+                                        this.cartFoodList[cartFoodNum].category_id = item.foods[0].category_id;
+                                        this.cartFoodList[cartFoodNum].item_id = itemid;
+                                        this.cartFoodList[cartFoodNum].food_id = foodid;
+                                        this.cartFoodList[cartFoodNum].num = foodItem.num;
+                                        this.cartFoodList[cartFoodNum].price = foodItem.price;
+                                        this.cartFoodList[cartFoodNum].name = foodItem.name;
+                                        this.cartFoodList[cartFoodNum].specs = foodItem.specs;
+                                        cartFoodNum ++;
+                                    }
+                                }
                             })
                         })
                         newArr[index] = num;
@@ -306,6 +361,13 @@
                     }
                 })
                 this.categoryNum = newArr.concat([]);
+            },
+            toggleCartList(){
+                this.showCartList = !this.showCartList;
+            },
+            clearCart(){
+                this.toggleCartList();
+                this.CLEAR_CART(this.shopId);
             }
         },
         watch: {
@@ -315,6 +377,14 @@
                         this.getFoodListHeight();
                         this.initCategoryNum();
                     })
+                }
+            },
+            shopCart: function (value){
+                this.initCategoryNum();
+            },
+            cartFoodList: function (value){
+                if(value.length == 0){
+                    this.showCartList = false;
                 }
             }
         }
@@ -329,33 +399,41 @@
         background-color: #3d3d3f;
         bottom: 0;
         left: 0;
+        z-index: 13;
+        display: flex;
         @include wh(100%, 2rem);
-        .cart_icon_container{
-            background-color: #3d3d3f;
-            position: absolute;
-            padding: .4rem;
-            border: 0.25rem solid #444;
-            border-radius: 50%;
-            left: .5rem;
-            top: -.7rem;
-            .cart_icon{
-                @include wh(1.2rem, 1.2rem);
+        .cart_icon_num{
+            flex: 1;
+            .cart_icon_container{
+                background-color: #3d3d3f;
+                position: absolute;
+                padding: .4rem;
+                border: 0.25rem solid #444;
+                border-radius: 50%;
+                left: .5rem;
+                top: -.7rem;
+                .cart_icon{
+                    @include wh(1.2rem, 1.2rem);
+                }
             }
-        }
-        .cart_num{
-            @include ct;
-            left: 3.5rem;
+            .cart_icon_activity{
+                 background-color: #3190e8;
+            }
+            .cart_num{
+                @include ct;
+                left: 3.5rem;
 
-            div{
-                color: #fff;
-            }
-            div:nth-of-type(1){
-                font-size: .8rem;
-                font-weight: bold;
-                margin-bottom: .1rem;
-            }
-            div:nth-of-type(2){
-                font-size: .4rem;   
+                div{
+                    color: #fff;
+                }
+                div:nth-of-type(1){
+                    font-size: .8rem;
+                    font-weight: bold;
+                    margin-bottom: .1rem;
+                }
+                div:nth-of-type(2){
+                    font-size: .4rem;   
+                }
             }
         }
         .gotopay{
@@ -367,13 +445,96 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            span{
-                @include sc(.65rem, #fff);
+            .gotopay_button_style{
+                @include sc(.7rem, #fff);
                 font-weight: bold;
             }
         }
+        .gotopay_acitvity{
+            background-color: #4cd964;
+        }
     }
+    .cart_food_list{
+        position: fixed;
+        width: 100%;
+        padding-bottom: 2rem;
+        z-index: 12;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        header{
+            @include fj;
+            align-items: center;
+            padding: .3rem .6rem;
+            background-color: #eceff1;
+            svg{
+                @include wh(.6rem,.6rem);
+                vertical-align: middle;
+            }
+            h4{
+                @include sc(.7rem, #666);
+            }
+            .clear_cart{
+                @include sc(.6rem, #666);
+            }
+        }
+        .cart_food_details{
+            background-color: #fff;
+            .cart_food_li{
+                @include fj;
+                padding: .6rem .5rem;
+                .cart_list_num{
+                    width: 55%;
+                    p:nth-of-type(1){
+                        @include sc(.7rem, #666);
+                        font-weight: bold;
+                    }
+                    p:nth-of-type(2){
+                        @include sc(.4rem, #666);
+                    }
+                }
+                .cart_list_price{
+                    font-size: 0;
+                    span:nth-of-type(1){
+                        @include sc(.6rem, #f60);
+                        font-family: Helvetica Neue,Tahoma;
 
+                    }
+                    span:nth-of-type(2){
+                        @include sc(.7rem, #f60);
+                        font-family: Helvetica Neue,Tahoma;
+                        font-weight: bold;
+                    }
+                }
+                .cart_list_control{
+                    display: flex;
+                    align-items: center;
+                    svg{
+                        @include wh(.8rem, .8rem);
+                        fill: #3190e8;
+                    }
+                    .specs_reduce_icon{
+                        fill: #999;
+                    }
+                    .cart_num{
+                        @include sc(.6rem, #666);
+                        min-width: 1rem;
+                        text-align: center;
+                        font-family: Helvetica Neue,Tahoma;
+                    }
+                }
+            }
+        }
+    }
+    .screen_cover{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,.3);
+        z-index: 11;
+    }
 
 
 
@@ -467,7 +628,7 @@
                 right: 0;
                 bottom: 0;
                 background-color: #262626;
-                z-index: 12;
+                z-index: 21;
                 padding: 1.25rem;
                 .activities_shoptitle{
                     text-align: center;
@@ -520,12 +681,7 @@
                 }
             }
             
-            .fadeactivities-enter-active, .fadeactivities-leave-active {
-                transition: opacity .5s;
-            }
-            .fadeactivities-enter, .fadeactivities-leave-active {
-                opacity: 0;
-            }
+            
         }
     }
 
@@ -628,12 +784,6 @@
                     top: -.5rem;
                     right: .7rem;
                     transform: rotate(-45deg) translateY(.41rem);
-                }
-                .fade_title-enter-active, .fade_title-leave-active {
-                    transition: opacity .5s
-                }
-                .fade_title-enter, .fade_title-leave-active {
-                    opacity: 0
                 }
             }
             .menu_detail_list{
@@ -741,10 +891,22 @@
             }
         }
     }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0;
+    }
     .router-slid-enter-active, .router-slid-leave-active {
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
         transform: translateX(100%);
+    }
+    .toggle-cart-enter-active, .toggle-cart-leave-active {
+        transition: all .3s ease-out;
+    }
+    .toggle-cart-enter, .toggle-cart-leave-active {
+        transform: translateY(100%);
     }
 </style>
