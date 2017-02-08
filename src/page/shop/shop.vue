@@ -278,14 +278,14 @@
                     this.TitleDetailIndex = index;
                 }
             },
-            addToCart(category_id, item_id, food_id, index){
-                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id});
+            addToCart(category_id, item_id, food_id, index, name, price, specs){
+                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
                 let num = this.categoryNum[index];
                 num ++;
                 this.categoryNum.splice(index, 1, num);
             },
-            removeOutCart(category_id, item_id, food_id, index){
-                this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id});
+            removeOutCart(category_id, item_id, food_id, index, name, price, specs){
+                this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
                 let num = this.categoryNum[index];
                 num --;
                 this.categoryNum.splice(index, 1, num);
@@ -297,7 +297,7 @@
                         let num = 0;
                         Object.values(this.shopCart[item.foods[0].category_id]).forEach(item => {
                             Object.values(item).forEach(insetitem => {
-                                num += insetitem;
+                                num += insetitem.num;
                             })
                         })
                         newArr[index] = num;
