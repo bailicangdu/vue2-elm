@@ -112,6 +112,9 @@
         <section class="buy_cart_container">
             <section @click="toggleCartList" class="cart_icon_num">
                 <div class="cart_icon_container" :class="{cart_icon_activity: totalPrice > 0, move_in_cart:receiveInCart}" ref="cartContainer">
+                    <span v-if="totalNum" class="cart_list_length">
+                        {{totalNum}}
+                    </span>
                     <svg class="cart_icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
                     </svg>
@@ -249,6 +252,14 @@
              */
             shopCart: function (){
                 return Object.assign({},this.cartList[this.shopId]);
+            },
+            //购物车中总共商品的数量
+            totalNum: function (){
+                let num = 0;
+                this.cartFoodList.forEach(item => {
+                    num += item.num
+                })
+                return num
             }
         },
         methods: {
@@ -460,6 +471,20 @@
                 top: -.7rem;
                 .cart_icon{
                     @include wh(1.2rem, 1.2rem);
+                }
+                .cart_list_length{
+                    position: absolute;
+                    top: -.25rem;
+                    right: -.25rem;
+                    background-color: #ff461d;
+                    line-height: .7rem;
+                    text-align: center;
+                    border-radius: 50%;
+                    border: 0.025rem solid #ff461d;
+                    min-width: .7rem;
+                    height: .7rem;
+                    @include sc(.5rem, #fff);
+                    font-family: Helvetica Neue,Tahoma,Arial;
                 }
             }
             .move_in_cart{
