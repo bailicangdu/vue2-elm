@@ -142,7 +142,9 @@ npm run build
 生成的elm文件夹放在服务器即可正常访问
 ```
 
+# 示例
 
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="350" height="750"/>
 
 
 如果对你有帮助，请star一下吧 😊
