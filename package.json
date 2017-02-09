@@ -9,6 +9,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "fastclick": "^1.0.6",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
     "vuex": "^2.0.0"

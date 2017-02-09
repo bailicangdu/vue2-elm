@@ -9,9 +9,21 @@
             <transition name="fade">
                 <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
             </transition>
-            <svg class="cart_add" @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '')">
+            <svg @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', $event)">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
             </svg>
+            <transition 
+            appear
+            @after-appear = 'afterEnter'
+            @before-appear="beforeEnter"
+            v-for="(item,index) in showMoveDot"
+            >
+                <span class="move_dot" v-if="item">
+                    <svg class="move_liner">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
+                    </svg>
+                </span>
+            </transition>
         </section>
         <section v-else class="choose_specification">
             <section class="choose_icon_container">
@@ -67,15 +79,20 @@
     export default {
     	data(){
             return{
-               showSpecs: false,
-               specsIndex: 0,
-               showDeleteTip: false,
+               showSpecs: false,//控制显示食品规格
+               specsIndex: 0, //当前选中的规格索引值
+               showDeleteTip: false, //多规格商品点击减按钮，弹出提示框
+               showMoveDot: [], //控制下落的小圆点显示隐藏
+               elLeft: 0, //当前点击加按钮在网页中的绝对top值
+               elBottom: 0, //当前点击加按钮在网页中的绝对left值
+               windowHeight: null, //屏幕的高度
             }
         },
-        created(){
-        
+        mounted(){
+            this.windowHeight = window.innerHeight;
         },
         computed: {
+            //shopCart变化的时候重新计算当前商品的数量
             foodNum: function (){
                 let category_id = this.foods.category_id;
                 let item_id = this.foods.item_id;
@@ -92,32 +109,58 @@
         },
         props:['foods', 'shopCart'],
         methods: {
+            //移出购物车
             removeOutCart(category_id, item_id, food_id, name, price, specs){
                 if (this.foodNum > 0) {
                     this.$emit('reduce', category_id, item_id, food_id, name, price, specs);
                 }
             },
-            addToCart(category_id, item_id, food_id, name, price, specs){
+            //加入购物车，计算按钮位置。
+            addToCart(category_id, item_id, food_id, name, price, specs, event){
                 this.$emit('add', category_id, item_id, food_id, name, price, specs);
+                this.elLeft = event.target.getBoundingClientRect().left;
+                this.elBottom = event.target.getBoundingClientRect().bottom;
+                this.showMoveDot.push(true);
+
             },
-            chooseSpecs(index){
-                this.specsIndex = index;
-            },
+            //显示规格列表
             showChooseList(){
                 this.showSpecs = !this.showSpecs;
                 this.specsIndex = 0;
             },
+            //记录当前所选规格的索引值
+            chooseSpecs(index){
+                this.specsIndex = index;
+            },
+            //多规格商品加入购物车
             addSpecs(category_id, item_id, food_id, name, price, specs){
                 this.$emit('add', category_id, item_id, food_id, name, price, specs);
                 this.showChooseList();
             },
+            //点击多规格商品的减按钮，弹出提示
             showReduceTip(){
                 this.showDeleteTip = true;
                 clearTimeout(this.timer);
                 this.timer = setTimeout(() => {
                     clearTimeout(this.timer);
                     this.showDeleteTip = false;
-                }, 3000)
+                }, 3000);
+            },
+            beforeEnter(el){
+                el.style.transform = `translate3d(0,${39 + this.elBottom - this.windowHeight}px,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 40}px,0,0)`;
+            },
+            afterEnter(el){
+                el.style.transform = `translate3d(0,0,0)`;
+                el.children[0].style.transform = `translate3d(0,0,0)`;
+                el.style.transition = 'all .55s cubic-bezier(0.3, -0.19, 0.65, -0.15)';
+                el.children[0].style.transition = 'all .55s linear';
+                //圆点到达目标点后移出
+                this.showMoveDot = this.showMoveDot.map(item => false);
+                //监听运动结束，通知父级进行后续操作
+                el.children[0].addEventListener('transitionend', () => {
+                    this.$emit('moveInCart')
+                })
             }
         },
     }
@@ -129,6 +172,12 @@
         .cart_button{
             display: flex;
             align-items: center;
+            .move_dot{
+                position: fixed;
+                bottom: 40px;
+                left: 40px;
+                z-index: 11;
+            }
         }
         svg{
             @include wh(.8rem, .8rem);
@@ -277,4 +326,6 @@
         opacity: 0;
         transform: scale(.7);
     }
+    
 </style>
+

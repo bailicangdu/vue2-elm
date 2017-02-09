@@ -67,12 +67,10 @@
                             <span class="menu_item_description">{{item.description}}</span>
                         </section>
                         <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span>
-                        <transition name="fade">
-                            <p class="description_tip" v-show="index == TitleDetailIndex">
-                                <span>{{item.name}}</span>
-                                {{item.description}}
-                            </p>
-                        </transition>
+                        <p class="description_tip" v-if="index == TitleDetailIndex">
+                            <span>{{item.name}}</span>
+                            {{item.description}}
+                        </p>
                     </header>
                     <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
                         <router-link to="/shop/rating" tag="div" class="menu_detail_link">
@@ -105,7 +103,7 @@
                                 <span>{{foods.specfoods[0].price}}</span>
                                 <span v-if="foods.specifications.length">起</span>
                             </section>
-                            <buy-cart :foods='foods' :shopCart='shopCart' @add="addToCart" @reduce="removeOutCart"></buy-cart>
+                            <buy-cart :foods='foods' :shopCart='shopCart' @add="addToCart" @reduce="removeOutCart" @moveInCart="listenInCart"></buy-cart>
                         </footer>
                     </section>
                 </li>
@@ -113,7 +111,7 @@
         </section>
         <section class="buy_cart_container">
             <section @click="toggleCartList" class="cart_icon_num">
-                <div class="cart_icon_container" :class="{cart_icon_activity: totalPrice > 0}">
+                <div class="cart_icon_container" :class="{cart_icon_activity: totalPrice > 0, move_in_cart:receiveInCart}" ref="cartContainer">
                     <svg class="cart_icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-icon"></use>
                     </svg>
@@ -201,14 +199,19 @@
                 totalPrice: 0, //总共价格
                 cartFoodList: [], //购物车商品列表
                 showCartList: false,//显示购物车列表
+                receiveInCart: false, //购物车组件下落的圆点是否到达目标位置
             }
         },
         created(){
+            //获取上个页面传递过来的geohash值
             this.geohash = this.$route.query.geohash;
+            //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.id;
+            //初始化购物车，获取存储在localStorage中的购物车商品信息
             this.INIT_BUYCART();
         },
         mounted(){
+            //初始化数据
             this.initData();
         },
         mixins: [getImgPath],
@@ -221,23 +224,29 @@
             ...mapState([
                 'latitude','longitude','cartList'
             ]),
-            promotionInfo: function (){
+            //商铺公告
+            promotionInfo: function (){ 
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
-            deliveryFee: function () {
+            //配送费
+            deliveryFee: function () { 
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
                 }else{
                     return null;
                 }
             },
-            minimumOrderAmount: function () {
+            //还差多少元起送，为负数时显示去结算按钮
+            minimumOrderAmount: function () { 
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_minimum_order_amount - this.totalPrice;
                 }else{
                     return null;
                 }
             },
+            /**
+             * 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象，因为组件buyCart需要监听shopCart的变化
+             */
             shopCart: function (){
                 return Object.assign({},this.cartList[this.shopId]);
             }
@@ -254,10 +263,14 @@
                     // 记录当前经度纬度进入vuex
                     this.RECORD_ADDRESS(res);
                 }
+                //获取商铺信息
                 this.shopDetailData = await shopDetails(this.shopId, this.latitude, this.longitude);
+                //获取商铺食品列表
                 this.menuList = await foodMenu(this.shopId);
+                //隐藏加载动画
                 this.showLoading = false;
             },
+            //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
                 const baseHeight = this.$refs.shopheader.clientHeight;
                 const listContainer = this.$refs.menuFoodList;
@@ -267,13 +280,14 @@
                 });
                 this.listenScroll(listContainer)
             },
+            //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
                 let oldScrollTop;
                 let requestFram;
                 element.addEventListener('scroll',() => {
                    currenIndex();
                 }, false)
-                //运动过程中保持坚挺 scrollTop 的值
+                //运动过程中保持监听 scrollTop 的值
                 element.addEventListener('touchmove',() => {
                    currenIndex();
                 })
@@ -282,7 +296,7 @@
                     oldScrollTop = element.scrollTop;
                     bounceMove();
                 })
-                
+                //惯性运动进行和结束时判断是否有满足条件情况
                 const bounceMove = () => {
                     requestFram = requestAnimationFrame(() => {
                         if (element.scrollTop != oldScrollTop) {
@@ -295,7 +309,7 @@
                         }
                     })
                 }
-
+                //判断scrollTop的值，当前其值在shopListTop两个值中间位置，则满足条件，改变对应列表标题样式
                 const currenIndex = () => {
                     this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && element.scrollTop  >= item && element.scrollTop < this.shopListTop[index + 1]) {
@@ -304,16 +318,20 @@
                     })
                 }
             },
+            //控制活动详情页的显示隐藏
             showActivitiesFun(){
                 this.showActivities = !this.showActivities;
             },
+            //点击左侧食品列表标题，相应列表移动到最顶层
             chooseMenu(index){
                 this.menuIndex = index;
+                //menuIndexChange解决运动时listenScroll依然监听的bug
                 this.menuIndexChange = false;
                 animate(this.$refs.menuFoodList, {scrollTop: this.shopListTop[index]}, () => {
                     this.menuIndexChange = true;
                 });
             },
+            //控制显示列表标题详情提示
             showTitleDetail(index){
                 if (this.TitleDetailIndex == index) {
                     this.TitleDetailIndex = null;
@@ -321,16 +339,24 @@
                     this.TitleDetailIndex = index;
                 }
             },
+            //加入购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
             addToCart(category_id, item_id, food_id, name, price, specs){
                 this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
             },
+            //移出购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
             removeOutCart(category_id, item_id, food_id, name, price, specs){
                 this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
             },
+            /**
+             * 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值 categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，所有的购物车数据都交给vuex统一管理，包括购物车组件中自身的商品数量，使整个数据流更加清晰
+             */
             initCategoryNum(){
+                //左侧食品列表当前分类中已加入购物车的商品数量
                 let newArr = [];
                 let cartFoodNum = 0;
-                this.totalPrice = 0;
+                //购物车总共的价格
+                this.totalPrice = 0; 
+                //购物车中所有商品的详细信息列表
                 this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
                     if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
@@ -362,15 +388,27 @@
                 })
                 this.categoryNum = newArr.concat([]);
             },
+            //控制显示购物车中已选商品列表
             toggleCartList(){
                 this.showCartList = !this.showCartList;
             },
+            //清空当前商铺的购物车信息
             clearCart(){
                 this.toggleCartList();
                 this.CLEAR_CART(this.shopId);
+            },
+            //监听购物车组件下落的圆点，控制购物车图标进行运动效果
+            listenInCart(){
+                if (!this.receiveInCart) {
+                    this.receiveInCart = true;
+                    this.$refs.cartContainer.addEventListener('animationend', () => {
+                        this.receiveInCart = false;
+                    })
+                }
             }
         },
         watch: {
+            //showLoading变化时说明组件已经获取初始化数据，在下一帧nextTick进行后续操作
             showLoading: function (value){
                 if (!value) {
                     this.$nextTick(() => {
@@ -379,11 +417,13 @@
                     })
                 }
             },
+            //监听shopCart的变化
             shopCart: function (value){
                 this.initCategoryNum();
             },
+            //监听购物车中商铺列表的变化，当length为0时将列表隐藏
             cartFoodList: function (value){
-                if(value.length == 0){
+                if(!value.length){
                     this.showCartList = false;
                 }
             }
@@ -393,7 +433,13 @@
 
 <style lang="scss" scoped>
     @import '../../style/mixin.scss';
-
+    @keyframes mymove{
+       0%   { transform: scale(1) }
+       25%  { transform: scale(.8) }
+       50%  { transform: scale(1.1) }
+       75%  { transform: scale(.9) }
+       100% { transform: scale(1) }
+    }
     .buy_cart_container{
         position: absolute;
         background-color: #3d3d3f;
@@ -415,6 +461,9 @@
                 .cart_icon{
                     @include wh(1.2rem, 1.2rem);
                 }
+            }
+            .move_in_cart{
+                animation: mymove .5s ease-in-out;
             }
             .cart_icon_activity{
                  background-color: #3190e8;
