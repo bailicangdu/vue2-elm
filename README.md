@@ -143,7 +143,7 @@ npm run build
 ```
 
 示例：
-![](https://github.com/bailicangdu/vue2-elm/src/images/home.png)
+![](https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png)
 
 
 如果对你有帮助，请star一下吧 😊
