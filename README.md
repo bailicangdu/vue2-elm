@@ -144,7 +144,7 @@ npm run build
 
 # 示例
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="350" height="750"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="365" height="619"/>
 
 
 如果对你有帮助，请star一下吧 😊
