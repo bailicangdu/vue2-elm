@@ -142,7 +142,8 @@ npm run build
 生成的elm文件夹放在服务器即可正常访问
 ```
 
-
+示例：
+![](https://github.com/bailicangdu/pxq/blob/master/src/images/simple_redux.jpg)
 
 
 如果对你有帮助，请star一下吧 😊
