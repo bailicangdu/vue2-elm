@@ -72,7 +72,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
 |       |-- search                   // 搜索页
-|       |-- shop                     // 商铺食品列表页
+|       |-- shop                     // 商铺筛选页
 |			|-- children             
 |				|-- rating           // 评论页   
 |				|-- shopDetails      // 商铺信息页           
@@ -144,14 +144,25 @@ npm run build
 
 # 示例
 
+### 城市列表页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="365" height="619"/>
+
+### 搜索地址页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/city.png" width="365" height="619"/>
+
+### 商铺列表页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/msite.png" width="365" height="619"/>
+
+### 商铺筛选页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food2.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food3.png" width="365" height="619"/>
+
+### 搜索页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/search.png" width="365" height="619"/>
+
+### 餐馆详情页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.png" width="365" height="619"/>
 
 
