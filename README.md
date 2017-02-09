@@ -145,6 +145,15 @@ npm run build
 # 示例
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/city.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/msite.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food2.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food3.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/search.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.png" width="365" height="619"/>
+
 
 
 如果对你有帮助，请star一下吧 😊
