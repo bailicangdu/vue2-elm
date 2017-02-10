@@ -150,21 +150,23 @@ npm run build
 
 ## 搜索地址页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/city.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/city.gif" width="365" height="619"/>
 
 ## 商铺列表页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/msite.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/msite.gif" width="365" height="619"/>
 
 ## 商铺筛选页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food2.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food3.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/food.gif" width="365" height="619"/>
 
 ## 搜索页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/search.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/search.gif" width="365" height="619"/>
 
 ## 餐馆详情页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.gif" width="365" height="619"/>
 
 
 
