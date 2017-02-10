@@ -146,6 +146,7 @@ npm run build
 
 ## 城市列表页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/home.gif" width="365" height="619"/>
 
 ## 搜索地址页
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/city.png" width="365" height="619"/>
