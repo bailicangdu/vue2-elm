@@ -23,6 +23,7 @@ module.exports = {
         assetsPublicPath: '/',
         context: [ //代理路径
             '/shopping',
+            '/ugc',
             '/v1',
             '/v2',
             '/v3',
