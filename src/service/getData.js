@@ -78,11 +78,11 @@ export const foodActivity = (latitude, longitude) => fetch('GET', '/shopping/v1/
 /**
  * 获取shop页面商铺详情
  */
-export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {latitude, longitude:longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'});
+//export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {latitude, longitude:longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'});
 /**
  * 获取food页面的商家属性活动列表
  */
-export const foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {restaurant_id});
+//export const foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {restaurant_id});
 /**
  * 获取商铺评价列表
  */
@@ -118,8 +118,8 @@ const setpromise = data => {
 // export const foodCategory = (latitude, longitude) => setpromise(food.category);
 // export const foodDelivery = (latitude, longitude) => setpromise(food.delivery);
 // export const foodActivity = (latitude, longitude) => setpromise(food.activity);
-// export const shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
-// export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
+export const shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
+export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
 // export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);

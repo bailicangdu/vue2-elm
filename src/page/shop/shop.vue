@@ -84,7 +84,7 @@
                                     </p>
                                 </header>
                                 <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
-                                    <router-link to="/shop/rating" tag="div" class="menu_detail_link">
+                                    <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
                                         <section class="menu_food_img">
                                             <img :src="getImgPath(foods.image_path)">
                                         </section>
@@ -114,7 +114,7 @@
                                             <span>{{foods.specfoods[0].price}}</span>
                                             <span v-if="foods.specifications.length">起</span>
                                         </section>
-                                        <buy-cart :foods='foods' :shopCart='shopCart' @add="addToCart" @reduce="removeOutCart" @moveInCart="listenInCart"></buy-cart>
+                                        <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart"></buy-cart>
                                     </footer>
                                 </section>
                             </li>
@@ -560,165 +560,6 @@
        75%  { transform: scale(.9) }
        100% { transform: scale(1) }
     }
-    
-    .change_show_type{
-        display: flex;
-        background-color: #fff;
-        padding: .3rem 0 .6rem;
-        border-bottom: 1px solid #ebebeb;
-        div{
-            flex: 1;
-            text-align: center;
-            span{
-                @include sc(.65rem, #666);
-                padding: .2rem .1rem;
-                border-bottom: 0.12rem solid #fff;
-            }
-            .activity_show{
-                color: #3190e8;
-                border-color: #3190e8;
-            }
-        }
-    }
-    .rating_container{
-        flex: 1;
-        overflow-y: auto;
-        flex-direction: column;
-        p, span, li, time{
-            font-family: Helvetica Neue,Tahoma,Arial;
-        }
-        .rating_header{
-            display: flex;
-            background-color: #fff;
-            padding: .8rem .5rem;
-            margin-bottom: 0.5rem;
-            .rating_header_left{
-                flex: 3;
-                text-align: center;
-                p:nth-of-type(1){
-                    @include sc(1.2rem, #f60);
-                }
-                p:nth-of-type(2){
-                    @include sc(.65rem, #666);
-                    margin-bottom: .1rem;
-                }
-                p:nth-of-type(3){
-                    @include sc(.4rem, #999);
-                }
-            }
-            .rating_header_right{
-                flex: 4;
-                p{
-                    font-size: .65rem;
-                    line-height: 1rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    span:nth-of-type(1){
-                        color: #666;
-                        margin-right: .5rem;
-                    }
-                    .rating_num{
-                        width: 3rem;
-                        @include sc(.55rem, #f60);
-                    }
-                    .delivery_time{
-                        @include sc(.4rem, #999);
-                    }
-                }
-            }
-        }
-        .tag_list_ul{
-            display: flex;
-            flex-wrap: wrap;
-            background-color: #fff;
-            padding: .5rem;
-            li{
-                @include sc(.6rem, #6d7885);
-                padding: .3rem .3rem;
-                background-color: #ebf5ff;
-                border-radius: 0.2rem;
-                border: 1px;
-                margin: 0 .4rem .2rem 0;
-            }
-            .unsatisfied{
-                background-color: #f5f5f5;
-                color: #aaa;
-            }
-            .tagActivity{
-                background-color: #3190e8;
-                color: #fff;
-            }
-        }
-        .rating_list_ul{
-            background-color: #fff;
-            padding: 0 .5rem;
-            .rating_list_li{
-                border-top: 1px solid #f1f1f1;
-                display: flex;
-                padding: .6rem 0;
-                .user_avatar{
-                    @include wh(1.5rem, 1.5rem);
-                    border: 0.025rem;
-                    border-radius: 50%;
-                    margin-right: .8rem;
-                }
-                .rating_list_details{
-                    flex: 1;
-                    header{
-                        display: flex;
-                        flex: 1;
-                        justify-content: space-between;
-                        margin-bottom: .3rem;
-                        .username_star{
-                            @include sc(.55rem, #666);
-                            .username{
-                                color: #666;
-                                margin-bottom: .2rem;
-                            }
-                            .star_desc{
-                                display: flex;
-                                align-items: center;
-                                .time_spent_desc{
-                                    @include sc(.55rem, #666)
-                                    margin-left: .15rem;
-                                }
-                            }
-                        }
-                        .rated_at{
-                            @include sc(.4rem, #999);
-                        }
-                    }
-                    .food_img_ul{
-                        display: flex;
-                        flex-wrap: wrap;
-                        margin-bottom: .4rem;
-                        li{
-                            img{
-                                @include wh(3rem, 3rem);
-                                margin-right: .4rem;
-                                display: block;
-                            }
-                        }
-                    }
-                    .food_name_ul{
-                        display: flex;
-                        flex-wrap: wrap;
-                        li{
-                            @include sc(.55rem, #999);
-                            width: 2.2rem;
-                            padding: .2rem;
-                            border: 0.025rem solid #ebebeb;
-                            border-radius: 0.15rem;
-                            margin-right: .3rem;
-                            margin-bottom: 4px;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
 
     .shop_container{
         display: flex;
@@ -1232,6 +1073,163 @@
         right: 0;
         background-color: rgba(0,0,0,.3);
         z-index: 11;
+    }
+    .change_show_type{
+        display: flex;
+        background-color: #fff;
+        padding: .3rem 0 .6rem;
+        border-bottom: 1px solid #ebebeb;
+        div{
+            flex: 1;
+            text-align: center;
+            span{
+                @include sc(.65rem, #666);
+                padding: .2rem .1rem;
+                border-bottom: 0.12rem solid #fff;
+            }
+            .activity_show{
+                color: #3190e8;
+                border-color: #3190e8;
+            }
+        }
+    }
+    .rating_container{
+        flex: 1;
+        overflow-y: auto;
+        flex-direction: column;
+        p, span, li, time{
+            font-family: Helvetica Neue,Tahoma,Arial;
+        }
+        .rating_header{
+            display: flex;
+            background-color: #fff;
+            padding: .8rem .5rem;
+            margin-bottom: 0.5rem;
+            .rating_header_left{
+                flex: 3;
+                text-align: center;
+                p:nth-of-type(1){
+                    @include sc(1.2rem, #f60);
+                }
+                p:nth-of-type(2){
+                    @include sc(.65rem, #666);
+                    margin-bottom: .1rem;
+                }
+                p:nth-of-type(3){
+                    @include sc(.4rem, #999);
+                }
+            }
+            .rating_header_right{
+                flex: 4;
+                p{
+                    font-size: .65rem;
+                    line-height: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    span:nth-of-type(1){
+                        color: #666;
+                        margin-right: .5rem;
+                    }
+                    .rating_num{
+                        width: 3rem;
+                        @include sc(.55rem, #f60);
+                    }
+                    .delivery_time{
+                        @include sc(.4rem, #999);
+                    }
+                }
+            }
+        }
+        .tag_list_ul{
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #fff;
+            padding: .5rem;
+            li{
+                @include sc(.6rem, #6d7885);
+                padding: .3rem .3rem;
+                background-color: #ebf5ff;
+                border-radius: 0.2rem;
+                border: 1px;
+                margin: 0 .4rem .2rem 0;
+            }
+            .unsatisfied{
+                background-color: #f5f5f5;
+                color: #aaa;
+            }
+            .tagActivity{
+                background-color: #3190e8;
+                color: #fff;
+            }
+        }
+        .rating_list_ul{
+            background-color: #fff;
+            padding: 0 .5rem;
+            .rating_list_li{
+                border-top: 1px solid #f1f1f1;
+                display: flex;
+                padding: .6rem 0;
+                .user_avatar{
+                    @include wh(1.5rem, 1.5rem);
+                    border: 0.025rem;
+                    border-radius: 50%;
+                    margin-right: .8rem;
+                }
+                .rating_list_details{
+                    flex: 1;
+                    header{
+                        display: flex;
+                        flex: 1;
+                        justify-content: space-between;
+                        margin-bottom: .3rem;
+                        .username_star{
+                            @include sc(.55rem, #666);
+                            .username{
+                                color: #666;
+                                margin-bottom: .2rem;
+                            }
+                            .star_desc{
+                                display: flex;
+                                align-items: center;
+                                .time_spent_desc{
+                                    @include sc(.55rem, #666)
+                                    margin-left: .15rem;
+                                }
+                            }
+                        }
+                        .rated_at{
+                            @include sc(.4rem, #999);
+                        }
+                    }
+                    .food_img_ul{
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-bottom: .4rem;
+                        li{
+                            img{
+                                @include wh(3rem, 3rem);
+                                margin-right: .4rem;
+                                display: block;
+                            }
+                        }
+                    }
+                    .food_name_ul{
+                        display: flex;
+                        flex-wrap: wrap;
+                        li{
+                            @include sc(.55rem, #999);
+                            width: 2.2rem;
+                            padding: .2rem;
+                            border: 0.025rem solid #ebebeb;
+                            border-radius: 0.15rem;
+                            margin-right: .3rem;
+                            margin-bottom: 4px;
+                        }
+                    }
+                }
+            }
+        }
     }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
