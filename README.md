@@ -22,7 +22,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 - [x] 根据距离、销量、评分、特色菜、配送方式等进行排序和筛选 -- 完成
 - [x] 餐馆详细页面 -- 完成
 - [x] 购物车功能 -- 完成
-- [ ] 商品评价页面  
+- [x] 店铺评价页面 -- 完成
 - [ ] 登陆、注册
 - [ ] 修改密码
 - [ ] 个人中心
@@ -179,6 +179,11 @@ npm run build
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.gif" width="365" height="619"/>
+
+## 餐馆评论页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/rating.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/rating.gif" width="365" height="619"/>
 
 
 ### 其他页面正在开发中...
