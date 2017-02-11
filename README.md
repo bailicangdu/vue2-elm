@@ -181,6 +181,7 @@ npm run build
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.gif" width="365" height="619"/>
 
 
+### 其他页面正在开发中...
 
 
 如果觉得不错，请star一下吧 😊
