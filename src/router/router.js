@@ -12,7 +12,8 @@ const checkout = r => require.ensure([], () => r(require('../page/checkout/check
 const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
 const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
-const rating = r => require.ensure([], () => r(require('../page/shop/children/rating')), 'rating')
+const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
+const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 
 
 export default [{
@@ -28,8 +29,12 @@ export default [{
         { path: '/shop', component: shop ,
             children: [
                 {
-                    path: 'rating',
-                    component: rating,
+                    path: 'foodDetail',
+                    component: foodDetail,
+                },
+                {
+                    path: 'shopDetail',
+                    component: shopDetail,
                 }
             ]
         },            //商铺详情页
