@@ -77,7 +77,8 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
 |				|-- foodDetail       // 单个商铺信息页   
-|				|-- shopDetail       // 商铺信息页           
+|				|-- shopDetail       // 商铺信息页
+|				|-- shopSafe         // 商铺认证信息页          
 |       |-- vipcard                  // vip办理页
 |
 |   |-- plugins                      // 引用的插件
