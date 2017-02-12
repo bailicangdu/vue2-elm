@@ -24,7 +24,7 @@ vue2 + vue-rotuer2 + vuex2 + webpack + ES6/7 + fetch + sass + flex + svg + http-
 - [x] 购物车功能 -- 完成
 - [x] 店铺评价页面 -- 完成
 - [x] 单个食品详情页面 -- 完成
-- [ ] 商家详情页
+- [x] 商家详情页
 - [ ] 登陆、注册
 - [ ] 修改密码
 - [ ] 个人中心

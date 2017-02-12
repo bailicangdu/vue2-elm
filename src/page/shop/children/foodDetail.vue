@@ -74,12 +74,13 @@
 	
 	.rating_page{
 		position: absolute;
-		top: 1.95rem;
+		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		background-color: #fff;
 		z-index: 10;
+        padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }

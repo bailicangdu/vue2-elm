@@ -4,7 +4,7 @@
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
                 <img :src="getImgPath(shopDetailData.image_path)" class="header_cover_img">
                 <section class="description_header">
-                    <section class="description_top" @click="showActivitiesFun">
+                    <router-link to="/shop/shopDetail" class="description_top">
                         <section class="description_left">
                             <img :src="getImgPath(shopDetailData.image_path)">
                         </section>
@@ -16,13 +16,16 @@
                         <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg" version="1.1" class="description_arrow" >
                             <path d="M0 0 L8 7 L0 14"  stroke="#fff" stroke-width="1" fill="none"/>
                         </svg>
-                    </section>
+                    </router-link>
                     <footer class="description_footer" v-if="shopDetailData.activities.length" @click="showActivitiesFun">
                         <p class="ellipsis">
                             <span class="tip_icon" :style="{backgroundColor: '#' + shopDetailData.activities[0].icon_color, borderColor: '#' + shopDetailData.activities[0].icon_color}">{{shopDetailData.activities[0].icon_name}}</span>
                             <span>{{shopDetailData.activities[0].description}}（APP专享）</span>
                         </p>
                         <p>{{shopDetailData.activities.length}}个活动</p>
+                        <svg class="footer_arrow">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use>
+                        </svg>
                     </footer>
                     <transition name="fade">
                         <section class="activities_details" v-if="showActivities">
@@ -346,7 +349,7 @@
         },
         methods: {
             ...mapMutations([
-                'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART','CLEAR_CART'
+                'RECORD_ADDRESS','ADD_CART','REDUCE_CART','INIT_BUYCART','CLEAR_CART','RECORD_SHOPDETAIL'
             ]),
             //初始化时获取基本数据
             async initData(){
@@ -363,6 +366,7 @@
                 this.ratingList = await getRatingList(this.ratingOffset);
                 this.ratingScoresData = await ratingScores(this.shopId);
                 this.ratingTagsList = await ratingTags(this.shopId);
+                this.RECORD_SHOPDETAIL(this.shopDetailData)
                 //隐藏加载动画
                 this.showLoading = false;
             },
@@ -624,7 +628,7 @@
             .description_footer{
                 @include fj;
                 margin-top: 0.5rem;
-                padding-right: .4rem;
+                padding-right: 1rem;
                 p{
                     @include sc(.5rem, #fff);
                     span{
@@ -639,6 +643,11 @@
                 }
                 .ellipsis{
                     width: 87%;
+                }
+                .footer_arrow{
+                    @include wh(.45rem, .45rem);
+                    position: absolute;
+                    right: .3rem;
                 }
             }
             .activities_details{

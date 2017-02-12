@@ -14,6 +14,7 @@ const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
+const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/shopSafe')), 'shopSafe')
 
 
 export default [{
@@ -35,6 +36,12 @@ export default [{
                 {
                     path: 'shopDetail',
                     component: shopDetail,
+                    children: [
+                        {
+                            path: 'shopSafe',
+                            component: shopSafe,
+                        },
+                    ]
                 }
             ]
         },            //商铺详情页
