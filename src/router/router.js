@@ -8,10 +8,10 @@ const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'sho
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const forget = r => require.ensure([], () => r(require('../page/forget/forget')), 'forget')
-const checkout = r => require.ensure([], () => r(require('../page/checkout/checkout')), 'checkout')
 const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
 const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
+const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/shopSafe')), 'shopSafe')
@@ -45,10 +45,10 @@ export default [{
                 }
             ]
         },            //商铺详情页
+        { path: '/confirmOrder', component: confirmOrder },       //确认订单页
         { path: '/login', component: login },          //登陆注册页
         { path: '/profile', component: profile },      //个人信息页
         { path: '/forget', component: forget },        //修改密码页
-        { path: '/checkout', component: checkout },    //确认订单页
         { path: '/order', component: order },          //订单列表页
         { path: '/vipcard', component: vipcard },      //vip卡页  
     ]
