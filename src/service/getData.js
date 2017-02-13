@@ -95,6 +95,15 @@ export const ratingScores = shopid => fetch('GET', '/ugc/v2/restaurants/' + shop
  * 获取商铺评价分类
  */
 export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid + '/ratings/tags', {});
+/**
+ * 获取短信验证码
+ */
+export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {mobile:phone, scene: 'login', type: 'sms'});
+/**
+ * 点击登陆
+ */
+export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {code, mobile, validate_token});
+
 
 
 /**
