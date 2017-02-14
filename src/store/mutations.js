@@ -1,4 +1,4 @@
-import { RECORD_ADDRESS, ADD_CART, REDUCE_CART, INIT_BUYCART, CLEAR_CART, RECORD_SHOPDETAIL} from './mutation-types.js'
+import { RECORD_ADDRESS, ADD_CART, REDUCE_CART, INIT_BUYCART, CLEAR_CART, RECORD_SHOPDETAIL, RECORD_USERINFO, GET_USERINFO} from './mutation-types.js'
 import {setStore, getStore} from '../config/mUtils'
 
 export default {
@@ -79,5 +79,15 @@ export default {
 		state.cartList[shopid] = null;
 		state.cartList = Object.assign({}, state.cartList);
 		setStore('buyCart', state.cartList);
-	}
+	},
+	[RECORD_USERINFO](state, info){
+		state.userInfo = info;
+		setStore('useInfo', info);
+	},
+	[GET_USERINFO](state){
+		let info = getStore('useInfo');
+		if (info) {
+			state.userInfo = JSON.parse(info);
+		}
+	},
 }

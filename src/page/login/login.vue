@@ -4,27 +4,38 @@
             <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登陆":"短信登陆"}}</div>
         </head-top>
         <form class="loginForm" v-if="loginWay">
-            <div class="input_container phone_number">
+            <section class="input_container phone_number">
                 <input type="text" placeholder="手机号" name="phone" maxlength="11" v-model="phoneNumber" @input="inputPhone">
                 <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
                 <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button>
-            </div>
-            <div class="input_container">
+            </section>
+            <section class="input_container">
                 <input type="text" placeholder="验证码" name="mobileCode" maxlength="6" v-model="mobileCode">
-            </div>
+            </section>
         </form>
         <form class="loginForm" v-else>
-            <div class="input_container">
-                <input type="text" placeholder="手机号/邮箱/用户名">
-            </div>
-            <div class="input_container">
-                <input :type="showPassword? 'text':'password'" placeholder="密码">
+            <section class="input_container">
+                <input type="text" placeholder="手机号/邮箱/用户名" v-model.lazy="userAccount">
+            </section>
+            <section class="input_container">
+                <input v-if="!showPassword" type="password" placeholder="密码"  v-model="passWord">
+                <input v-else type="text" placeholder="密码"  v-model="passWord">
                 <div class="button_switch" :class="{change_to_text: showPassword}">
                     <div class="circel_button" :class="{trans_to_right: showPassword}" @click="changePassWordType"></div>
                     <span>abc</span>
                     <span>...</span>
                 </div>
-            </div>
+            </section>
+            <section class="input_container captcha_code_container">
+                <input type="text" placeholder="验证码" maxlength="4" v-model="codeNumber">
+                <div class="img_change_img">
+                    <img v-show="captchaCodeImg" :src="captchaCodeImg">
+                    <div class="change_img" @click="getCaptchaCode">
+                        <p>看不清</p>
+                        <p>换一张</p>
+                    </div>
+                </div>
+            </section>
         </form>
         <p class="login_tips">
             温馨提示：未注册饿了么账号的手机号，登陆时将自动注册，且代表您已同意
@@ -32,30 +43,46 @@
         </p>
         <div class="login_container" @click="mobileLogin">登陆</div>
         <router-link to="/forget" class="to_forget" v-if="!loginWay">忘记密码？</router-link>
+        <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
     </div>
 </template>
 
 <script>
     import headTop from '../../components/header/head'
-    import {mobileCode, sendLogin} from '../../service/getData'
+    import alertTip from '../../components/common/alertTip'
+    import {mapState, mapMutations} from 'vuex'
+    import {mobileCode, sendLogin, getcaptchas, accountLogin} from '../../service/getData'
 
     export default {
         data(){
             return {
-                loginWay: true,
-                showPassword: false,
-                phoneNumber: null,
-                mobileCode: null,
-                rightPhoneNumber: false,
-                validate_token: null,
-                computedTime: 0,
-                uerInfo: null,
+                loginWay: true, //登陆方式，默认短信登陆
+                showPassword: false, // 是否显示密码
+                phoneNumber: null, //电话号码
+                mobileCode: null, //短信验证码
+                rightPhoneNumber: false, //输入的手机号码是否符合要求
+                validate_token: null, //获取短信时返回的验证值，登陆时需要
+                computedTime: 0, //倒数记时
+                uerInfo: null, //获取到的用户信息
+                userAccount: null, //用户名
+                passWord: null, //密码
+                captchaCodeImg: null, //验证码地址
+                codeNumber: null, //验证码
+                showAlert: false, //显示提示组件
+                alertText: null, //提示的内容
             }
+        },
+        created(){
+            this.getCaptchaCode();
         },
         components: {
             headTop,
+            alertTip,
         },
         methods: {
+            ...mapMutations([
+                'RECORD_USERINFO',
+            ]),
             changeLoginWay(){
                 this.loginWay = !this.loginWay;
             },
@@ -69,6 +96,10 @@
                     this.rightPhoneNumber = false;
                 }
             },
+            async getCaptchaCode(){
+                let res = await getcaptchas();
+                this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+            },
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
                     this.computedTime = 30;
@@ -78,19 +109,57 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
-                    this.validate_token = await mobileCode(this.phoneNumber);
+                    let res = await mobileCode(this.phoneNumber);
+                    this.validate_token = res.validate_token;
                 }
             },
+            changeuserAccount(event){
+                console.log(4444)
+                console.log(event.target.value)
+            },
             async mobileLogin(){
-                if (!this.rightPhoneNumber) {
-                    alert(1)
-                    return
-                }else if(!(/^\d{6}$/gi.test(this.mobileCode))){
-                    alert(2)
-                    return
+                if (this.loginWay) {
+                    if (!this.rightPhoneNumber) {
+                        this.showAlert = true;
+                        this.alertText = '手机号码不正确';
+                        return
+                    }else if(!(/^\d{6}$/gi.test(this.mobileCode))){
+                        this.showAlert = true;
+                        this.alertText = '短信验证码不正确';
+                        return
+                    }
+                    this.userInfo = await sendLogin(this.mobileCode, this.phoneNumber, this.validate_token);
+                }else{
+                    if (!this.userAccount) {
+                        this.showAlert = true;
+                        this.alertText = '请输入手机号/邮箱/用户名';
+                        return
+                    }else if(!this.passWord){
+                        this.showAlert = true;
+                        this.alertText = '请输入密码';
+                        return
+                    }else if(!this.codeNumber){
+                        this.showAlert = true;
+                        this.alertText = '请输入验证码';
+                        return
+                    }
+
+                    this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }
-                this.uerInfo = await sendLogin(this.mobileCode, this.phoneNumber, this.validate_token);
-            }
+
+                if (this.userInfo.message) {
+                    this.showAlert = true;
+                    this.alertText = this.userInfo.message;
+                    if (!this.loginWay) this.getCaptchaCode();
+                }else{
+                    this.RECORD_USERINFO(this.uerInfo);
+                    this.$router.go(-1);
+                    
+                }
+            },
+            closeTip(){
+                this.showAlert = false;
+            }   
         }
     }
 
@@ -133,6 +202,31 @@
         }
         .phone_number{
             padding: .3rem .8rem;
+        }
+        .captcha_code_container{
+            height: 2.2rem;
+            .img_change_img{
+                display: flex;
+                align-items: center;
+                img{
+                    @include wh(3.5rem, 1.5rem);
+                    margin-right: .2rem;
+                }
+                .change_img{
+                    display: flex;
+                    flex-direction: 'column';
+                    flex-wrap: wrap;
+                    width: 2rem;
+                    justify-content: center;
+                    p{
+                        @include sc(.55rem, #666);
+                    }
+                    p:nth-of-type(2){
+                        color: #3b95e9;
+                        margin-top: .2rem;
+                    }
+                }
+            }
         }
     }
     .login_tips{

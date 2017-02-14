@@ -5,6 +5,7 @@ import * as msite from './tempdata/msite'
 import * as search from './tempdata/search'
 import * as food from './tempdata/food'
 import * as shop from './tempdata/shop'
+import * as login from './tempdata/login'
 
 /**
  * 获取首页默认地址
@@ -98,11 +99,19 @@ export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid
 /**
  * 获取短信验证码
  */
-export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {mobile:phone, scene: 'login', type: 'sms'});
+//export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {mobile:phone, scene: 'login', type: 'sms'});
 /**
- * 点击登陆
+ * 手机号登陆
  */
-export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {code, mobile, validate_token});
+//export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {code, mobile, validate_token});
+/**
+ * 获取图片验证码
+ */
+export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
+/**
+ * 账号密码登陆
+ */
+export const accountLogin = (username, password, captcha_code) => fetch('POST', '/v2/login', {username, password, captcha_code});
 
 
 
@@ -132,3 +141,5 @@ const setpromise = data => {
 // export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);
+export const mobileCode = phone => setpromise(login.validate_token);
+export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);

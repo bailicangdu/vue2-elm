@@ -51,20 +51,20 @@ export default {
 	data(){
         return {
         	geohash: '', // city页面传递过来的地址geohash
-            msietTitle: '获取地址中...', // msiet页面头部标题
+            msietTitle: '请选择地址...', // msiet页面头部标题
             foodTypes: [], // 食品分类列表
             hasGetData: false, //是否已经获取地理位置数据，成功之后再获取商铺列表信息
             imgBaseUrl, //图片域名地址
         }
     },
     async beforeMount(){
-		this.geohash = this.$route.query.geohash;
+		this.geohash = this.$route.query.geohash || 'wtw3sm0q087';
     	//获取位置信息
     	let res = await msiteAdress(this.geohash);
     	this.msietTitle = res.name;
 
     	// 记录当前经度纬度
-    	this.RECORD_ADDRESS(res)
+    	this.RECORD_ADDRESS(res);
 
     	this.hasGetData = true;
     },
