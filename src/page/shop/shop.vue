@@ -854,6 +854,10 @@
                                     border-radius: 0.3rem;
                                     margin-right: .1rem;
                                     transform: scale(.8);
+                                    p{
+                                        white-space: nowrap;
+                                        line-height: .4rem;
+                                    }
                                 }
                                 .attribute_new{
                                     position: absolute;

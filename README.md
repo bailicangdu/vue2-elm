@@ -178,15 +178,36 @@ npm run build
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/search.gif" width="365" height="619"/>
 
 
-## 餐馆详情页
+## 餐馆食品列表与购物车
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shop_cart.gif" width="365" height="619"/>
+
 
 ## 餐馆评论页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/rating.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/rating.gif" width="365" height="619"/>
+
+
+## 食品详情页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/fooddetail.png" width="365" height="619"/>
+
+
+## 餐馆信息页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shopdetail1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/shopdetail2.png" width="365" height="619"/>
+
+
+## 登陆页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/login1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/login2.png" width="365" height="619"/>
+
+
+
 
 
 
