@@ -113,10 +113,6 @@
                     this.validate_token = res.validate_token;
                 }
             },
-            changeuserAccount(event){
-                console.log(4444)
-                console.log(event.target.value)
-            },
             async mobileLogin(){
                 if (this.loginWay) {
                     if (!this.rightPhoneNumber) {
@@ -146,13 +142,12 @@
 
                     this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }
-
-                if (this.userInfo.message) {
+                if (!this.userInfo.user_id) {
                     this.showAlert = true;
                     this.alertText = this.userInfo.message;
                     if (!this.loginWay) this.getCaptchaCode();
                 }else{
-                    this.RECORD_USERINFO(this.uerInfo);
+                    this.RECORD_USERINFO(this.userInfo);
                     this.$router.go(-1);
                     
                 }

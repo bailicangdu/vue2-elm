@@ -60,7 +60,6 @@
             this.satisfy_rate = this.$route.query.satisfy_rate;
             this.foods = this.$route.query.foods;
             this.shopId = this.$route.query.shopId;
-            console.log(this.foods)
         },
         mixins: [getImgPath],
         components: {

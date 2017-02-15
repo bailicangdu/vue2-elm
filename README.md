@@ -27,7 +27,7 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 - [x] 商家详情页 -- 完成
 - [x] 登陆、注册 -- 完成
 - [ ] 修改密码
-- [ ] 个人中心
+- [x] 个人中心 -- 完成
 - [ ] 帐户信息
 - [ ] 服务中心
 - [ ] 添加、删除、修改收货地址
@@ -73,6 +73,13 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- msite                    // 商铺列表页
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
+|			|--children
+|				|--balance			 //我的余额
+|				|--benefit			 //我的优惠
+|				|--info				 //帐户信息
+|				|--points			 //我的积分
+|				|--service			 //服务中心
+|
 |       |-- search                   // 搜索页
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
@@ -205,6 +212,9 @@ npm run build
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/login1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/src/images/login2.png" width="365" height="619"/>
+
+
+
 
 
 
