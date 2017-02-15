@@ -163,6 +163,25 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
  * 账号密码登陆
  */
 //export const accountLogin = (username, password, captcha_code) => fetch('POST', '/v2/login', {username, password, captcha_code});
+/**
+ * 检测帐号是否存在
+ */
+export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists', {
+	[type]: checkNumber,
+	type
+});
+
+
+/**
+ * 发送帐号
+ */
+export const sendMobile = (sendData, captcha_code, type) => fetch('POST', '/v1/mobile/verify_code/send', {
+	action: "send",
+	captcha_code,
+	[type]: sendData,
+	type: "sms",
+	way: type,
+});
 
 
 
