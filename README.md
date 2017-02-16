@@ -213,8 +213,12 @@ npm run build
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
 
+## 个人中心
 
-#### 其他页面陆续开发中。。。
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
+
+
+#### 其他页面正在开发中。。。
 
 
 # 总结
@@ -232,4 +236,4 @@ npm run build
 
 
 
-如果觉得不错，请star一下吧 😊
+##### 如果觉得不错，请star一下吧 😊
