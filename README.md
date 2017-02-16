@@ -214,7 +214,7 @@ npm run build
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
 
 
-### 其他页面陆续开发中。。。
+#### 其他页面陆续开发中。。。
 
 
 ## 总结
