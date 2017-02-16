@@ -150,7 +150,11 @@ export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid
 /**
  * 获取短信验证码
  */
-//export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {mobile:phone, scene: 'login', type: 'sms'});
+export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
+	mobile: phone,
+	scene: 'login',
+	type: 'sms'
+});
 /**
  * 手机号登陆
  */
@@ -170,17 +174,16 @@ export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists'
 	[type]: checkNumber,
 	type
 });
-
-
 /**
  * 发送帐号
  */
-export const sendMobile = (sendData, captcha_code, type) => fetch('POST', '/v1/mobile/verify_code/send', {
+export const sendMobile = (sendData, captcha_code, type, password) => fetch('POST', '/v1/mobile/verify_code/send', {
 	action: "send",
 	captcha_code,
 	[type]: sendData,
 	type: "sms",
 	way: type,
+	password,
 });
 
 
@@ -211,6 +214,6 @@ const setpromise = data => {
 // export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);
-export const mobileCode = phone => setpromise(login.validate_token);
+//export const mobileCode = phone => setpromise(login.validate_token);
 export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 export const accountLogin = (username, password, captcha_code) => setpromise(login.userInfo);

@@ -51,7 +51,7 @@
     import headTop from '../../components/header/head'
     import alertTip from '../../components/common/alertTip'
     import {mapState, mapMutations} from 'vuex'
-    import {mobileCode, sendLogin, getcaptchas, accountLogin} from '../../service/getData'
+    import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../service/getData'
 
     export default {
         data(){
@@ -109,7 +109,22 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
+                    let exsis = await checkExsis(this.phoneNumber, this.accountType);
+                    if (exsis.message) {
+                        this.showAlert = true;
+                        this.alertText = exsis.message;
+                        return
+                    }else if(!exsis.is_exists) {
+                        this.showAlert = true;
+                        this.alertText = '您输入的手机号尚未绑定';
+                        return
+                    }
                     let res = await mobileCode(this.phoneNumber);
+                    if (res.message) {
+                        this.showAlert = true;
+                        this.alertText = res.message;
+                        return
+                    }
                     this.validate_token = res.validate_token;
                 }
             },
