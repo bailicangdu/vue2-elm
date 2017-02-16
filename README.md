@@ -43,7 +43,7 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
 |-- elm                           	 // 上线项目文件，放在服务器即可正常访问
-|
+|-- screenshots                      // 项目截图
 |-- src                              // 源码目录
 |   |-- components                   // 组件
 |       |-- common                   // 公共组件
@@ -54,15 +54,12 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |			|-- shoplist.js          // msite和shop页面的餐馆列表公共组件
 |       |-- footer                   // 底部公共组件
 |       |-- header                 	 // 头部公共组件
-|
 |   |-- config                       // 基本配置
 |       |-- env.js                   // 环境切换配置
 |       |-- fetch.js                 // 获取数据
 |       |-- mUtils.js                // 常用的js方法
 |       |-- rem.js                   // px转换rem
-|
 |   |-- images                       // 公共图片
-|
 |   |-- pages                        // 页面组件
 |       |-- city                     // 当前城市页
 |		|-- food                 	 // 食品筛选排序页
@@ -79,7 +76,6 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |				|--info				 //帐户信息
 |				|--points			 //我的积分
 |				|--service			 //服务中心
-|
 |       |-- search                   // 搜索页
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
