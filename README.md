@@ -153,69 +153,79 @@ npm run build
 
 ## 城市列表页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/home.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/home.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
 
 
 ## 搜索地址页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/city.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/city.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
 
 
 ## 商铺列表页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/msite.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/msite.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
 
 
 ## 商铺筛选页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/food.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/food.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
 
 
 ## 搜索页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/search.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/search.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
 
 
 ## 餐馆食品列表与购物车
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/shop_cart.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/shop_cart.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
 
 
 ## 餐馆评论页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/rating.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/rating.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.gif" width="365" height="619"/>
 
 
 ## 食品详情页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/fooddetail.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/fooddetail.png" width="365" height="619"/>
 
 
 ## 餐馆信息页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/shopdetail1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/shopdetail2.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail2.png" width="365" height="619"/>
 
 
 ## 登陆页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/login1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/login2.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login2.png" width="365" height="619"/>
 
 ## 重置密码页
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/images/reset.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
 
 
+### 其他页面陆续开发中。。。
 
 
+## 总结
+
+>  本项目主要用于熟悉如何用 vue2 构建一个中大型项目
+
+>  vue在开发的过程中的体验很不错，上手快、运行效率高，饿了么从angular转向vue不是没有道理的，看来vue会越来越火
+
+>  开发环境 macOS 10.12.3  Chrome 55
+
+>  推荐另一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 
 
