@@ -148,7 +148,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	@import '../../style/mixin.scss';
+	@import '../../style/mixin';
 	.shoplist_container{
 		background-color: #fff;
 	}

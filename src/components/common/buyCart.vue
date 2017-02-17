@@ -2,14 +2,14 @@
     <section class="cart_module">
         <section v-if="!foods.specifications.length" class="cart_button">
             <transition name="showReduce">
-                <svg @click="removeOutCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '')" v-if="foodNum">
+                <svg @click="removeOutCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock)" v-if="foodNum">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
                 </svg>
             </transition>
             <transition name="fade">
                 <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
             </transition>
-            <svg @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', $event)">
+            <svg @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
             </svg>
             <transition 
@@ -66,7 +66,7 @@
                                 <span>¥ </span>
                                 <span>{{foods.specfoods[specsIndex].price}}</span>
                             </div>
-                            <div class="specs_addto_cart" @click="addSpecs(foods.category_id, foods.item_id, foods.specfoods[specsIndex].food_id, foods.specfoods[specsIndex].name, foods.specfoods[specsIndex].price, foods.specifications[0].values[specsIndex])">加入购物车</div>
+                            <div class="specs_addto_cart" @click="addSpecs(foods.category_id, foods.item_id, foods.specfoods[specsIndex].food_id, foods.specfoods[specsIndex].name, foods.specfoods[specsIndex].price, foods.specifications[0].values[specsIndex], foods.specfoods[specsIndex].packing_fee, foods.specfoods[specsIndex].sku_id, foods.specfoods[specsIndex].stock)">加入购物车</div>
                         </footer>
                     </div>
                 </transition>
@@ -123,14 +123,14 @@
                 'ADD_CART','REDUCE_CART',
             ]),
             //移出购物车
-            removeOutCart(category_id, item_id, food_id, name, price, specs){
+            removeOutCart(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock){
                 if (this.foodNum > 0) {
-                    this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
+                    this.REDUCE_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
                 }
             },
             //加入购物车，计算按钮位置。
-            addToCart(category_id, item_id, food_id, name, price, specs, event){
-                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
+            addToCart(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock, event){
+                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
                 this.elLeft = event.target.getBoundingClientRect().left;
                 this.elBottom = event.target.getBoundingClientRect().bottom;
                 this.showMoveDot.push(true);
@@ -146,8 +146,8 @@
                 this.specsIndex = index;
             },
             //多规格商品加入购物车
-            addSpecs(category_id, item_id, food_id, name, price, specs){
-                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs});
+            addSpecs(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock){
+                this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
                 this.showChooseList();
             },
             //点击多规格商品的减按钮，弹出提示
@@ -180,7 +180,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin.scss';
+    @import '../../style/mixin';
 	.cart_module{
         .cart_button{
             display: flex;

@@ -9,13 +9,13 @@
 <script>
 
   	export default {
-    
+    	
   	}
 
 </script>
 
 <style lang="scss">
-  	@import './style/common.scss';
+  	@import './style/common';
 	.router-fade-enter-active, .router-fade-leave-active {
 	  	transition: opacity .4s;
 	}

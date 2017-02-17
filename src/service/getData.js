@@ -6,6 +6,7 @@ import * as search from './tempdata/search'
 import * as food from './tempdata/food'
 import * as shop from './tempdata/shop'
 import * as login from './tempdata/login'
+import * as confirm from './tempdata/confirm'
 
 /**
  * 获取首页默认地址
@@ -120,16 +121,16 @@ export const foodActivity = (latitude, longitude) => fetch('GET', '/shopping/v1/
 /**
  * 获取shop页面商铺详情
  */
-export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
-	latitude,
-	longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
-});
+// export const shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
+// 	latitude,
+// 	longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
+// });
 /**
  * 获取food页面的商家属性活动列表
  */
-export const foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {
-	restaurant_id
-});
+// export const foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {
+// 	restaurant_id
+// });
 /**
  * 获取商铺评价列表
  */
@@ -150,11 +151,11 @@ export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid
 /**
  * 获取短信验证码
  */
-export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
-	mobile: phone,
-	scene: 'login',
-	type: 'sms'
-});
+// export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
+// 	mobile: phone,
+// 	scene: 'login',
+// 	type: 'sms'
+// });
 /**
  * 手机号登陆
  */
@@ -170,21 +171,30 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 /**
  * 检测帐号是否存在
  */
-export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists', {
-	[type]: checkNumber,
-	type
-});
+// export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists', {
+// 	[type]: checkNumber,
+// 	type
+// });
 /**
  * 发送帐号
  */
-export const sendMobile = (sendData, captcha_code, type, password) => fetch('POST', '/v1/mobile/verify_code/send', {
-	action: "send",
-	captcha_code,
-	[type]: sendData,
-	type: "sms",
-	way: type,
-	password,
-});
+// export const sendMobile = (sendData, captcha_code, type, password) => fetch('POST', '/v1/mobile/verify_code/send', {
+// 	action: "send",
+// 	captcha_code,
+// 	[type]: sendData,
+// 	type: "sms",
+// 	way: type,
+// 	password,
+// });
+
+/**
+ * 确认订单
+ */
+// export const checkout = (geohash, entities) => fetch('POST', '/v1/carts/checkout', {
+// 	come_from: "web",
+// 	geohash,
+// 	entities,
+// });
 
 
 
@@ -209,11 +219,14 @@ const setpromise = data => {
 // export const foodCategory = (latitude, longitude) => setpromise(food.category);
 // export const foodDelivery = (latitude, longitude) => setpromise(food.delivery);
 // export const foodActivity = (latitude, longitude) => setpromise(food.activity);
-// export const shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
-// export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
+export const shopDetails = (shopid, latitude, longitude) => setpromise(shop.shopDetails);
+export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
 // export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);
-//export const mobileCode = phone => setpromise(login.validate_token);
+export const mobileCode = phone => setpromise(login.validate_token);
 export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 export const accountLogin = (username, password, captcha_code) => setpromise(login.userInfo);
+export const checkExsis = (checkNumber, type) => setpromise(login.checkExsis);
+export const sendMobile = (sendData, captcha_code, type, password) => setpromise(login.send);
+export const checkout = (geohash, entities) => setpromise(confirm.checkout);

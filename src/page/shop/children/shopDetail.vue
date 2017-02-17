@@ -110,7 +110,7 @@
 </script>
 	
 <style lang="scss" scoped>
-    @import '../../../style/mixin.scss';
+    @import '../../../style/mixin';
 	
 	.rating_page{
 		position: absolute;

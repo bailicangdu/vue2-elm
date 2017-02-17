@@ -140,7 +140,7 @@
                         </section>
                         <section class="gotopay" :class="{gotopay_acitvity: minimumOrderAmount < 0}">
                             <span class="gotopay_button_style" v-if="minimumOrderAmount > 0">还差¥{{minimumOrderAmount}}起送</span>
-                            <router-link to="/confirmOrder" class="gotopay_button_style" v-else >去结算</router-link>
+                            <router-link :to="{path:'/confirmOrder', query:{geohash, shopId}}" class="gotopay_button_style" v-else >去结算</router-link>
                         </section>
                     </section>
                     <transition name="toggle-cart">
@@ -253,7 +253,6 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {imgBaseUrl} from '../../config/env'
     import {msiteAdress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from '../../service/getData'
     import loading from '../../components/common/loading'
     import buyCart from '../../components/common/buyCart'
@@ -556,7 +555,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin.scss';
+    @import '../../style/mixin';
     @keyframes mymove{
        0%   { transform: scale(1) }
        25%  { transform: scale(.8) }

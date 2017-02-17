@@ -28,7 +28,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin.scss';
+    @import '../../style/mixin';
 	@keyframes load{
 		0%   {transform: translateY(0px);}
 		50%  {transform: translateY(-50px);}

@@ -27,3 +27,13 @@ export const userInfo = {
 	"user_id": 109065163,
 	"username": "cangdu"
 };
+
+export const checkExsis = {
+	"message": "\u8bf7\u68c0\u67e5\u624b\u673a\u53f7\u7801\u683c\u5f0f\u662f\u5426\u6709\u8bef",
+	"name": "VALIDATION_FAILED"
+};
+
+export const send = {
+	"message": "\u9a8c\u8bc1\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u586b\u5199",
+	"name": "CAPTCHA_CODE_ERROR"
+};
