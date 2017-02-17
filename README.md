@@ -231,7 +231,9 @@ npm run build
 
 >  开发环境 macOS 10.12.3  Chrome 55
 
->  推荐另一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
+>  如有问题请直接在 Issues 中提问，或者可以加我的QQ 1264889788
+
+>  另外推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 
 
