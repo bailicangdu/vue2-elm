@@ -12,6 +12,7 @@ const order = r => require.ensure([], () => r(require('../page/order/order')), '
 const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
 const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
+const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/shopSafe')), 'shopSafe')
@@ -68,7 +69,11 @@ export default [{
         }, //商铺详情页
         {
             path: '/confirmOrder',
-            component: confirmOrder
+            component: confirmOrder,
+            children: [{
+                path: 'remark',
+                component: remark,
+            }, ]
         }, //确认订单页
         {
             path: '/login',

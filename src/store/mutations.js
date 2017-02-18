@@ -7,6 +7,7 @@ import {
 	RECORD_SHOPDETAIL,
 	RECORD_USERINFO,
 	GET_USERINFO,
+	CONFIRM_REMARK,
 } from './mutation-types.js'
 import {
 	setStore,
@@ -102,7 +103,7 @@ export default {
 		food_id,
 		name,
 		price,
-		specs
+		specs,
 	}) {
 		let cart = state.cartList;
 		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
@@ -131,16 +132,24 @@ export default {
 		state.cartList = Object.assign({}, state.cartList);
 		setStore('buyCart', state.cartList);
 	},
-
+	// 记录用户信息
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
 		setStore('useInfo', info);
 	},
-
+	//从本地获取用户信息
 	[GET_USERINFO](state) {
 		let info = getStore('useInfo');
 		if (info) {
 			state.userInfo = JSON.parse(info);
 		}
 	},
+	//记录订单页面用户选择的备注, 传递给订单确认页面
+	[CONFIRM_REMARK](state, {
+		remarkText,
+		inputText
+	}) {
+		state.remarkText = remarkText;
+		state.inputText = inputText;
+	}
 }

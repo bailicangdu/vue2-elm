@@ -66,6 +66,8 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- city                     // 当前城市页
 |		|-- food                 	 // 食品筛选排序页
 |		|-- confirmOrder             // 确认订单页
+|			|--children
+|				|--remark			 //	订单备注页
 |       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
 |       |-- login                    // 登陆注册页
@@ -73,11 +75,11 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- order                    // 订单列表页
 |       |-- profile                  // 个人中心
 |			|--children
-|				|--balance			 //我的余额
-|				|--benefit			 //我的优惠
-|				|--info				 //帐户信息
-|				|--points			 //我的积分
-|				|--service			 //服务中心
+|				|--balance			 // 我的余额
+|				|--benefit			 // 我的优惠
+|				|--info				 // 帐户信息
+|				|--points			 // 我的积分
+|				|--service			 // 服务中心
 |       |-- search                   // 搜索页
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
@@ -234,9 +236,6 @@ npm run build
 >  如有问题请直接在 Issues 中提问，或者可以加我的QQ 1264889788
 
 >  另外推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
-
-
-
 
 
 

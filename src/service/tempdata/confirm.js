@@ -1394,3 +1394,13 @@ export const checkout = {
 	},
 	"is_support_ninja": 1
 };
+
+export const remark = {
+	"remarks": [
+		["\u4e0d\u8981\u8fa3", "\u5c11\u70b9\u8fa3", "\u591a\u70b9\u8fa3"],
+		["\u4e0d\u8981\u9999\u83dc"],
+		["\u4e0d\u8981\u6d0b\u8471"],
+		["\u591a\u70b9\u918b"],
+		["\u591a\u70b9\u8471"]
+	]
+}

@@ -65,15 +65,15 @@
                 </div>
             </section>
             <section class="pay_way container_style">
-                <header class="header_style">
+                <router-link :to='{path: "/confirmOrder/remark", query: {id: checkoutData.cart.id, sig: checkoutData.sig}}' class="header_style">
                     <span>订单备注</span>
                     <div class="more_type">
-                        <span>口味偏、好等</span>
+                        <span class="ellipsis">{{remarkText||inputText? remarklist: '口味偏、好等'}}</span>
                         <svg class="address_empty_right">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
                     </div>
-                </header>
+                </router-link>
                 <section class="hongbo">
                     <span>发票抬头</span>
                     <span>商家不支持开发票</span>
@@ -100,7 +100,10 @@
                 </div>
             </transition>
         </section>
-        <loading v-if="showLoading"></loading>    
+        <loading v-if="showLoading"></loading>
+        <transition name="router-slid">
+            <router-view></router-view>
+        </transition>    
     </div>
 </template>
 
@@ -143,8 +146,17 @@
         },
         computed: {
             ...mapState([
-                'cartList'
+                'cartList', 'remarkText', 'inputText'
             ]),
+            remarklist: function (){
+                if (this.remarkText&&this.inputText) {
+                    let str = new String;
+                    Object.values(this.remarkText).forEach(item => {
+                        str += item[1] + '，';
+                    })
+                    return str + this.inputText;
+                }
+            }
         },
         methods: {
             ...mapMutations([
@@ -265,6 +277,10 @@
             .more_type{
                 span:nth-of-type(1){
                     @include sc(.6rem, #aaa);
+                    width: 10rem;
+                    display: inline-block;
+                    text-align: right;
+                    vertical-align: middle;
                 }
                 svg{
                     @include wh(.5rem, .5rem);
@@ -398,5 +414,11 @@
     }
     .slid_up-enter, .slid_up-leave-active {
         transform: translate3d(0,10rem,0)
+    }
+    .router-slid-enter-active, .router-slid-leave-active {
+        transition: all .4s;
+    }
+    .router-slid-enter, .router-slid-leave-active {
+        transform: translateX(100%);
     }
 </style>
