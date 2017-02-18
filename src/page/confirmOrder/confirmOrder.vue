@@ -2,17 +2,28 @@
     <div class="confirmOrderContainer">
         <section v-if="!showLoading">
             <head-top head-title="确认订单" goBack="true" signin-up='confirmOrder'></head-top>
-            <section class="address_container">
+            <router-link :to='{path: "/confirmOrder/chooseAddress", query: {id: checkoutData.cart.id, sig: checkoutData.sig}}' class="address_container">
                 <div class="address_empty_left">
                     <svg class="location_icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location"></use>
                     </svg>
-                    <span class="add_address">请添加一个收获地址</span>
+                    <div class="add_address" v-if="!choosedAddress">请添加一个收获地址</div>
+                    <div v-else class="address_detail_container">
+                        <header>
+                            <span>{{choosedAddress.name}}</span>
+                            <span>{{choosedAddress.sex == 1? '先生':'女士'}}</span>
+                            <span>{{choosedAddress.phone}}</span>
+                        </header>
+                        <div class="address_detail ellipsis">
+                            <span :style="{backgroundColor: iconColor(choosedAddress.tag)}">{{choosedAddress.tag}}</span>
+                            <p>{{choosedAddress.address_detail}}</p>
+                        </div>
+                    </div>
                 </div>
                 <svg class="address_empty_right">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                 </svg>
-            </section>
+            </router-link>
             <section class="delivery_model container_style">
                 <p class="deliver_text">送达时间</p>
                 <section class="deliver_time">
@@ -68,16 +79,21 @@
                 <router-link :to='{path: "/confirmOrder/remark", query: {id: checkoutData.cart.id, sig: checkoutData.sig}}' class="header_style">
                     <span>订单备注</span>
                     <div class="more_type">
-                        <span class="ellipsis">{{remarkText||inputText? remarklist: '口味偏、好等'}}</span>
+                        <span class="ellipsis">{{remarkText||inputText? remarklist: '口味、偏好等'}}</span>
                         <svg class="address_empty_right">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
                     </div>
                 </router-link>
-                <section class="hongbo">
+                <router-link :to="checkoutData.invoice.is_available? '/confirmOrder/invoice': ''" class="hongbo" :class="{support_is_available: checkoutData.invoice.is_available}">
                     <span>发票抬头</span>
-                    <span>商家不支持开发票</span>
-                </section>
+                    <span>
+                        {{checkoutData.invoice.status_text}}
+                        <svg class="address_empty_right">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
+                        </svg>
+                    </span>
+                </router-link>
             </section>
             <section class="confrim_order">
                 <p>待支付 ¥{{checkoutData.cart.total}}</p>
@@ -137,7 +153,10 @@
             this.shopCart = this.cartList[this.shopId];
         },
         mounted(){
-            this.initData();
+            if (this.geohash) {
+                this.initData();
+                this.SAVE_GEOHASH(this.geohash);
+            }
         },
         components: {
             headTop,
@@ -146,21 +165,25 @@
         },
         computed: {
             ...mapState([
-                'cartList', 'remarkText', 'inputText'
+                'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress'
             ]),
             remarklist: function (){
-                if (this.remarkText&&this.inputText) {
-                    let str = new String;
+                let str = new String;
+                if (this.remarkText) {
                     Object.values(this.remarkText).forEach(item => {
                         str += item[1] + '，';
                     })
-                    return str + this.inputText;
                 }
-            }
+                if (this.inputText) {
+                    return str + this.inputText;
+                }else{
+                    return str.substr(0, str.lastIndexOf('，')) ;
+                }
+            },
         },
         methods: {
             ...mapMutations([
-                'INIT_BUYCART'
+                'INIT_BUYCART', 'SAVE_GEOHASH'
             ]),
             async initData(){
                 let newArr = new Array;
@@ -192,6 +215,12 @@
                 if (is_online_payment) {
                     this.showPayWay = !this.showPayWay;
                     this.payWayId = id;
+                }
+            },
+            iconColor(name){
+                switch(name){
+                    case '公司': return '#4cd964';
+                    case '学校': return '#3190e8';
                 }
             },
         }
@@ -233,11 +262,38 @@
             .add_address{
                 @include sc(.7rem, #333);
             }
+            .address_detail_container{
+                margin-left: .2rem;
+                header{
+                    @include sc(.75rem, #333);
+                    span:nth-of-type(1){
+                        font-size: .85rem;
+                        font-weight: bold;
+                    }
+                }
+                .address_detail{
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    span{
+                        @include sc(.5rem, #fff);
+                        border-radius: .15rem;
+                        background-color: #ff5722;
+                        height: .65rem;
+                        line-height: .65rem;
+                        padding: 0 .3rem;
+                        margin-right: .3rem;
+                    }
+                    p{
+                        @include sc(.65rem, #777);
+                    }
+                }
+            }
         }
-        .address_empty_right{
-            @include wh(.6rem, .6rem);
-            fill: #999;
-        }
+    }
+    .address_empty_right{
+        @include wh(.6rem, .6rem);
+        fill: #999;
     }
     .delivery_model{
         border-left: .2rem solid $blue;
@@ -292,8 +348,21 @@
             @include fj;
             border-top: 0.025rem solid #f5f5f5;
             span{
-                @include sc(.6rem, #ccc);
+                @include sc(.6rem, #aaa);
                 line-height: 2rem;
+                svg{
+                    @include wh(.5rem, .5rem);
+                    vertical-align: middle;
+                    fill: #ccc;
+                }
+            }
+            span:nth-of-type(2){
+                color: #aaa;
+            }
+        }
+        .support_is_available{
+            span{
+                color: #666;
             }
         }
     }

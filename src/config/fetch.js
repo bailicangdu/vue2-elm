@@ -1,6 +1,8 @@
-import {baseUrl} from './env'
+import {
+	baseUrl
+} from './env'
 
-export default async (type = 'GET', url = '', data = {}) => {
+export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
 
@@ -16,16 +18,16 @@ export default async (type = 'GET', url = '', data = {}) => {
 		}
 	}
 
-	if (window.fetch) {
+	if (window.fetch && method == 'fetch') {
 		let requestConfig = {
 			credentials: 'include',
-		  	method: type,
-		  	headers: {
-		      	'Accept': 'application/json',
-	  			'Content-Type': 'application/json'
-		  	},
-		  	mode: "cors",
-		  	cache: "only-if-cached"
+			method: type,
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			mode: "cors",
+			cache: "only-if-cached"
 		}
 
 		if (type == 'POST') {
@@ -37,12 +39,11 @@ export default async (type = 'GET', url = '', data = {}) => {
 		try {
 			var response = await fetch(url, requestConfig);
 			var responseJson = await response.json();
-		}catch (error){
+		} catch (error) {
 			throw new Error(error)
 		}
-		
 		return responseJson
-	}else{
+	} else {
 		let requestObj;
 		if (window.XMLHttpRequest) {
 			requestObj = new XMLHttpRequest();
@@ -62,12 +63,13 @@ export default async (type = 'GET', url = '', data = {}) => {
 		requestObj.onreadystatechange = () => {
 			if (requestObj.readyState == 4) {
 				if (requestObj.status == 200) {
+
 					let obj = requestObj.response
 					if (typeof obj !== 'object') {
 						obj = JSON.parse(obj);
 					}
 					return obj
-				}else {
+				} else {
 					throw new Error(requestObj)
 				}
 			}

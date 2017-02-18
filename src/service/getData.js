@@ -151,15 +151,19 @@ export const ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid
 /**
  * 获取短信验证码
  */
-// export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
-// 	mobile: phone,
-// 	scene: 'login',
-// 	type: 'sms'
-// });
+export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', {
+	mobile: phone,
+	scene: 'login',
+	type: 'sms'
+});
 /**
  * 手机号登陆
  */
-//export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {code, mobile, validate_token});
+// export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
+// 	code,
+// 	mobile,
+// 	validate_token
+// });
 /**
  * 获取图片验证码
  */
@@ -171,10 +175,10 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 /**
  * 检测帐号是否存在
  */
-// export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists', {
-// 	[type]: checkNumber,
-// 	type
-// });
+export const checkExsis = (checkNumber, type) => fetch('GET', '/v1/users/exists', {
+	[type]: checkNumber,
+	type
+});
 /**
  * 发送帐号
  */
@@ -201,6 +205,38 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 // export const getRemark = (id, sig) => fetch('GET', '/v1/carts/' + id + '/remarks', {
 // 	sig
 // });
+/**
+ * 获取地址列表
+ */
+// export const getAddress = (id, sig) => fetch('GET', '/v1/carts/' + id + '/addresses', {
+// 	sig
+// });
+/**
+ * 获取用户信息
+ */
+//export const getUser = () => fetch('GET', '/v1/user', {});
+/**
+ * 搜索地址
+ */
+// export const searchNearby = keyword => fetch('GET', '/v1/pois', {
+// 	type: 'nearby',
+// 	keyword
+// });
+/**
+ * 添加地址
+ */
+export const postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => fetch('POST', '/v1/users/' + userId + '/addresses', {
+	address,
+	address_detail,
+	geohash,
+	name,
+	phone,
+	phone_bk,
+	poi_type,
+	sex,
+	tag,
+	tag_type,
+});
 
 
 
@@ -230,10 +266,14 @@ export const foodMenu = restaurant_id => setpromise(shop.shopMenu);
 // export const getRatingList = (offset, tag_name = '') => setpromise(shop.ratingList);
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);
-export const mobileCode = phone => setpromise(login.validate_token);
+//export const mobileCode = phone => setpromise(login.validate_token);
 export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 export const accountLogin = (username, password, captcha_code) => setpromise(login.userInfo);
-export const checkExsis = (checkNumber, type) => setpromise(login.checkExsis);
+//export const checkExsis = (checkNumber, type) => setpromise(login.checkExsis);
 export const sendMobile = (sendData, captcha_code, type, password) => setpromise(login.send);
 export const checkout = (geohash, entities) => setpromise(confirm.checkout);
 export const getRemark = (id, sig) => setpromise(confirm.remark);
+export const getAddress = (id, sig) => setpromise(confirm.addressList);
+export const getUser = () => setpromise(login.userInfo);
+export const searchNearby = keyword => setpromise(confirm.searchAddress);
+// export const postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => setpromise(confirm.addAddress);

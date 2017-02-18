@@ -1,11 +1,17 @@
-import {cityGuess} from '../service/getData'
-import { GET_DATA } from './mutation-types.js'
+import {
+	getUser
+} from '../service/getData'
+import {
+	GET_USERINFO
+} from './mutation-types.js'
 
 export default {
-	getData({ commit, state }) {
-		cityGuess().then(res => {
-			commit(GET_DATA, {data: res})
-		})
-	},
+	async getUserInfo({
+			commit,
+			state
+		}) {
+			let res = await getUser();
+		commit(GET_USERINFO, res)
+		},
 
 }

@@ -13,7 +13,12 @@ const state = {
 	shopDetail: null, //商家详情信息
 	userInfo: null, //用户信息
 	remarkText: null,
-	inputText: null,
+	inputText: '',
+	invoice: false,
+	searchAddress: null,
+	geohash: null,
+	choosedAddress: null,
+	addressIndex: null,
 }
 
 export default new Vuex.Store({

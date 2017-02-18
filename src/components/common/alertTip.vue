@@ -22,7 +22,7 @@
         mounted(){
       
         },
-        props: ['showHide','alertText'],
+        props: ['alertText'],
         methods: {
             closeTip(){
                 this.$emit('closeTip')

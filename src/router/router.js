@@ -13,9 +13,13 @@ const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
 const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
 const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
+const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
+const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
+const addAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/addAddress')), 'addAddress')
+const searchAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/children/searchAddress')), 'searchAddress')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
-const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/shopSafe')), 'shopSafe')
+const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const balance = r => require.ensure([], () => r(require('../page/profile/children/balance')), 'balance')
 const benefit = r => require.ensure([], () => r(require('../page/profile/children/benefit')), 'benefit')
@@ -28,88 +32,115 @@ export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
     children: [ //二级路由。对应App.vue
+        //地址为空时跳转home页面 
         {
             path: '',
             redirect: '/home'
-        }, //地址为空时跳转home页面 
+        },
+        //首页城市列表页
         {
             path: '/home',
             component: home
-        }, //首页城市列表页
+        },
+        //当前选择城市页
         {
             path: '/city/:cityid',
             component: city
-        }, //当前选择城市页
+        },
+        //所有商铺列表页
         {
             path: '/msite',
             component: msite,
-        }, //所有商铺列表页
+        },
+        //特色商铺列表页
         {
             path: '/food',
             component: food
-        }, //特色商铺列表页
+        },
+        //搜索页 
         {
             path: '/search/:geohash',
             component: search
-        }, //搜索页
+        },
+        //商铺详情页 
         {
             path: '/shop',
             component: shop,
             children: [{
-                path: 'foodDetail',
+                path: 'foodDetail', //食品详情页
                 component: foodDetail,
             }, {
-                path: 'shopDetail',
+                path: 'shopDetail', //商铺详情页
                 component: shopDetail,
                 children: [{
-                    path: 'shopSafe',
+                    path: 'shopSafe', //商铺安全认证页
                     component: shopSafe,
                 }, ]
             }]
-        }, //商铺详情页
+        },
+        //确认订单页 
         {
             path: '/confirmOrder',
             component: confirmOrder,
             children: [{
-                path: 'remark',
+                path: 'remark', //订单备注
                 component: remark,
+            }, {
+                path: 'invoice', //发票抬头
+                component: invoice,
+            }, {
+                path: 'chooseAddress', //选择地址
+                component: chooseAddress,
+                children: [{
+                    path: 'addAddress', //添加地址
+                    component: addAddress,
+                    children: [{
+                        path: 'searchAddress', //搜索地址
+                        component: searchAddress,
+                    }]
+                }, ]
             }, ]
-        }, //确认订单页
+        },
+        //登陆注册页 
         {
             path: '/login',
             component: login
-        }, //登陆注册页
+        },
+        //个人信息页 
         {
             path: '/profile',
             component: profile,
             children: [{
-                path: 'info',
+                path: 'info', //个人信息详情页
                 component: info,
             }, {
-                path: 'balance',
+                path: 'balance', //余额
                 component: balance,
             }, {
-                path: 'benefit',
+                path: 'benefit', //我的优惠页
                 component: benefit,
             }, {
-                path: 'points',
+                path: 'points', //我的积分页
                 component: points,
             }, {
-                path: 'service',
+                path: 'service', //服务中心
                 component: service,
             }]
-        }, //个人信息页
+        },
+        //修改密码页 
         {
             path: '/forget',
             component: forget
-        }, //修改密码页
+        },
+        //订单列表页 
         {
             path: '/order',
             component: order
-        }, //订单列表页
+        },
+        //vip卡页   
         {
             path: '/vipcard',
             component: vipcard
-        }, //vip卡页  
+        },
     ]
 }]

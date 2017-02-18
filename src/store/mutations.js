@@ -8,6 +8,10 @@ import {
 	RECORD_USERINFO,
 	GET_USERINFO,
 	CONFIRM_REMARK,
+	CONFIRM_INVOICE,
+	CHOOSE_SEARCH_ADDRESS,
+	SAVE_GEOHASH,
+	CHOOSE_ADDRESS,
 } from './mutation-types.js'
 import {
 	setStore,
@@ -135,13 +139,19 @@ export default {
 	// 记录用户信息
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
-		setStore('useInfo', info);
+		let validity = 30;
+		let now = new Date();
+		now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
+
+		document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
+		document.cookie = "SID=huRyTRd9QLij7NkbpHJoj3PQrx1eRiO6bAiw" + ";expires=" + now.toGMTString();
 	},
-	//从本地获取用户信息
-	[GET_USERINFO](state) {
-		let info = getStore('useInfo');
-		if (info) {
-			state.userInfo = JSON.parse(info);
+	//获取用户信息存入vuex
+	[GET_USERINFO](state, info) {
+		if (!info.message) {
+			state.userInfo = info;
+		} else {
+			state.userInfo = null;
 		}
 	},
 	//记录订单页面用户选择的备注, 传递给订单确认页面
@@ -151,5 +161,25 @@ export default {
 	}) {
 		state.remarkText = remarkText;
 		state.inputText = inputText;
+	},
+	//是否开发票
+	[CONFIRM_INVOICE](state, invoice) {
+		state.invoice = invoice;
+	},
+	//选择搜索的地址
+	[CHOOSE_SEARCH_ADDRESS](state, place) {
+		state.searchAddress = place;
+	},
+	//保存geohash
+	[SAVE_GEOHASH](state, geohash) {
+		state.geohash = geohash;
+	},
+	//选择的地址
+	[CHOOSE_ADDRESS](state, {
+		address,
+		index
+	}) {
+		state.choosedAddress = address;
+		state.addressIndex = index;
 	}
 }

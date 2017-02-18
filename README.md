@@ -66,7 +66,13 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- city                     // 当前城市页
 |		|-- food                 	 // 食品筛选排序页
 |		|-- confirmOrder             // 确认订单页
-|			|--children
+|		  |--children
+|			|--chooseAddress         //	选择地址页
+|		      |--children
+|				|--addAddress        //	添加地址页
+|				  |--children
+|					|--searchAddress // 搜索地址页
+|				|--invoice			 //	选择发票页
 |				|--remark			 //	订单备注页
 |       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
@@ -83,9 +89,10 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- search                   // 搜索页
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
-|				|-- foodDetail       // 单个商铺信息页   
-|				|-- shopDetail       // 商铺信息页
-|				|-- shopSafe         // 商铺认证信息页          
+|			  |-- foodDetail         // 单个商铺信息页
+|				|-- children             
+|				  |-- shopSafe       // 商铺认证信息页     
+|				|-- shopDetail       // 商铺信息页     
 |       |-- vipcard                  // vip办理页
 |
 |   |-- plugins                      // 引用的插件

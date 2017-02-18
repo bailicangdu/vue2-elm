@@ -109,7 +109,7 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
-                    let exsis = await checkExsis(this.phoneNumber, this.accountType);
+                    let exsis = await checkExsis(this.phoneNumber, 'mobile');
                     if (exsis.message) {
                         this.showAlert = true;
                         this.alertText = exsis.message;
