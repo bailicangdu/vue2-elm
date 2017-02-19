@@ -1,4 +1,3 @@
-
 var config = require('../config')
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 var path = require('path')
@@ -46,11 +45,10 @@ if (context.length) {
     server.use(proxyMiddleware(context, options))
 }
 
-// server.use(proxyMiddleware('/*/*', {
-//     target: 'https://mainsite-restapi.ele.me',
-//     changeOrigin: true,
-//     secure: false,
-// }))
+server.use(proxyMiddleware('/payapi', {
+    target: 'https://pay.ele.me',
+    changeOrigin: true,
+}))
 
 
 // handle fallback for HTML5 history API

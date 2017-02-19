@@ -13,6 +13,8 @@ const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
 const confirmOrder = r => require.ensure([], () => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
 const remark = r => require.ensure([], () => r(require('../page/confirmOrder/children/remark')), 'remark')
+const payment = r => require.ensure([], () => r(require('../page/confirmOrder/children/payment')), 'payment')
+const userValidation = r => require.ensure([], () => r(require('../page/confirmOrder/children/userValidation')), 'userValidation')
 const invoice = r => require.ensure([], () => r(require('../page/confirmOrder/children/invoice')), 'invoice')
 const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
 const addAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/children/addAddress')), 'addAddress')
@@ -88,6 +90,12 @@ export default [{
             }, {
                 path: 'invoice', //发票抬头
                 component: invoice,
+            }, {
+                path: 'payment', //付款页面
+                component: payment,
+            }, {
+                path: 'userValidation', //用户验证
+                component: userValidation,
             }, {
                 path: 'chooseAddress', //选择地址
                 component: chooseAddress,

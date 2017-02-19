@@ -12,6 +12,7 @@ const state = {
 	cartList: {}, // 加入购物车的商品列表
 	shopDetail: null, //商家详情信息
 	userInfo: null, //用户信息
+	shopid: null,
 	remarkText: null,
 	inputText: '',
 	invoice: false,
@@ -19,6 +20,11 @@ const state = {
 	geohash: null,
 	choosedAddress: null,
 	addressIndex: null,
+	needValidation: null,
+	cartId: null,
+	sig: null,
+	orderParam: null,
+	orderMessage: null,
 }
 
 export default new Vuex.Store({

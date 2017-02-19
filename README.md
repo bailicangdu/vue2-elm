@@ -28,13 +28,13 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 - [x] 登陆、注册 -- 完成
 - [x] 修改密码 -- 完成
 - [x] 个人中心 -- 完成
+- [x] 下单功能 -- 完成 ✨✨✨
 - [ ] 帐户信息
 - [ ] 上传头像，修改用户名
 - [ ] 积分商城
 - [ ] 服务中心
 - [ ] 添加、删除、修改收货地址
 - [ ] 订单列表
-- [ ] 下单功能
 - [ ] 付款(很难实现)
 
 
@@ -67,13 +67,15 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |		|-- food                 	 // 食品筛选排序页
 |		|-- confirmOrder             // 确认订单页
 |		  |--children
+|			|--invoice			     //	选择发票页
+|			|--remark			     //	订单备注页
+|			|--payment			     //	付款页
+|			|--userValidation		 //	用户验证页
 |			|--chooseAddress         //	选择地址页
 |		      |--children
 |				|--addAddress        //	添加地址页
 |				  |--children
 |					|--searchAddress // 搜索地址页
-|				|--invoice			 //	选择发票页
-|				|--remark			 //	订单备注页
 |       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
 |       |-- login                    // 登陆注册页
@@ -89,10 +91,10 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |       |-- search                   // 搜索页
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
-|			  |-- foodDetail         // 单个商铺信息页
-|				|-- children             
-|				  |-- shopSafe       // 商铺认证信息页     
-|				|-- shopDetail       // 商铺信息页     
+|			  	|-- foodDetail       // 商铺信息页     
+|			  	|-- shopDetail       // 单个商铺信息页
+|					|-- children             
+|				  		|-- shopSafe // 商铺认证信息页     
 |       |-- vipcard                  // vip办理页
 |
 |   |-- plugins                      // 引用的插件
@@ -240,7 +242,7 @@ npm run build
 
 >  开发环境 macOS 10.12.3  Chrome 55
 
->  如有问题请直接在 Issues 中提问，或者可以加我的QQ 1264889788
+>  如有问题请直接在 Issues 中提，或者可以加我的QQ 1264889788
 
 >  另外推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 

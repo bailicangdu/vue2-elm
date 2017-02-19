@@ -17,7 +17,7 @@
                         <span>{{item.phone}}</span>   
                     </header>
                     <div class="address_detail ellipsis">
-                        <span :style="{backgroundColor: iconColor(item.tag)}">{{item.tag}}</span>
+                        <span v-if="item.tag" :style="{backgroundColor: iconColor(item.tag)}">{{item.tag}}</span>
                         <p>{{item.address_detail}}</p>   
                     </div>
                 </div>
@@ -180,9 +180,9 @@
                 opacity: 1;
             }
             header{
-                @include sc(.75rem, #333);
+                @include sc(.7rem, #333);
                 span:nth-of-type(1){
-                    font-size: .85rem;
+                    font-size: .8rem;
                     font-weight: bold;
                 }
             }
@@ -194,13 +194,13 @@
                     @include sc(.5rem, #fff);
                     border-radius: .15rem;
                     background-color: #ff5722;
-                    height: .65rem;
-                    line-height: .65rem;
-                    padding: 0 .3rem;
+                    height: .6rem;
+                    line-height: .6rem;
+                    padding: 0 .2rem;
                     margin-right: .3rem;
                 }
                 p{
-                    @include sc(.65rem, #777);
+                    @include sc(.6rem, #777);
                 }
             }
         }

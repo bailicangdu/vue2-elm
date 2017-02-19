@@ -1589,3 +1589,92 @@ export const addressList = [{
 	"phone_had_bound": true,
 	"is_brand_member": false
 }];
+
+export const palceOrder = {
+	"user_profile": null,
+	"need_validation": true,
+	"validation_type": "mobile_sms_review",
+	"validation_token": "e04ed03206759a0d136742ca80b987bc87b83172cf67960d67c1c9c600575313",
+	"validation_phone": "13681711254",
+	"order_id": 0,
+	"unique_id": "",
+	"is_new_pay": false,
+	"use_base_login_api": false,
+	"need_login": false
+};
+
+export const verfiyCode = {
+	"validate_token": "382d8d089d62c3c34ac51f6ca9035b14b875e77109d343fdee47cdfb55c8814d",
+	"phones": {
+		"display_phone": "12590-9001517",
+		"call_phone": "4001075517"
+	}
+};
+
+export const orderSuccess = {
+	"user_profile": null,
+	"need_validation": false,
+	"validation_type": "",
+	"validation_token": "",
+	"validation_phone": "",
+	"order_id": 1202109132000152749,
+	"unique_id": "1202109132000152749",
+	"is_new_pay": true,
+	"use_base_login_api": false,
+	"need_login": false
+};
+
+export const payDetail = {
+	"resultData": {
+		"orderInfo": {
+			"orderStatus": "PROCESS",
+			"merchantId": "5",
+			"merchantOrderNo": "1202110398310861904",
+			"orderAmount": 28900,
+			"returnUrl": "https://h5.ele.me/ordersuccess/#user_id=186655961&order_id=1202110398310861904&restaurant_id=625738",
+			"backUrl": "https://h5.ele.me/order/#!/1202110398310861904",
+			"userId": "186655961",
+			"buyerId": "186655961",
+			"orderDesc": "饿了么订单:1202110398310861904",
+			"orderName": "",
+			"payTimeout": null,
+			"timeoutMilliseconds": 494240,
+			"mixedPay": false,
+			"recordSource": 1
+		},
+		"paymentTypeList": [{
+			"payMethod": "ALI_PAY",
+			"payMethodTitle": "支付宝",
+			"payMethodDesc": "",
+			"collapsed": false,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "THIRD_PAY"
+		}, {
+			"payMethod": "ZEUS_BALANCE_PAY",
+			"payMethodTitle": "账户余额",
+			"payMethodDesc": "",
+			"balance": 0,
+			"paidBalance": 0,
+			"collapsed": true,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "NATIVE_PAY"
+		}, {
+			"payMethod": "WEIXIN_PAY",
+			"payMethodTitle": "微信支付",
+			"payMethodDesc": "",
+			"collapsed": true,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "THIRD_PAY"
+		}],
+		"token": "2585a4E4pgksRYfqmMw9h1RQ43sXERLu"
+	},
+	"resultCode": "0000",
+	"resultMsg": "操作成功",
+	"success": true
+};

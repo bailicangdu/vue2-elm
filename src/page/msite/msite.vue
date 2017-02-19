@@ -59,6 +59,8 @@ export default {
     },
     async beforeMount(){
 		this.geohash = this.$route.query.geohash || 'wtw3sm0q087';
+		//保存geohash 到vuex
+		this.SAVE_GEOHASH(this.geohash);
     	//获取位置信息
     	let res = await msiteAdress(this.geohash);
     	this.msietTitle = res.name;
@@ -95,7 +97,7 @@ export default {
     },
     methods: {
     	...mapMutations([
-    		'RECORD_ADDRESS'
+    		'RECORD_ADDRESS', 'SAVE_GEOHASH'
     	]),
     	// 解码url地址，求去restaurant_category_id值
     	getCategoryId(url){

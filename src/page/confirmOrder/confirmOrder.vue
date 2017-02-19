@@ -14,8 +14,8 @@
                             <span>{{choosedAddress.sex == 1? '先生':'女士'}}</span>
                             <span>{{choosedAddress.phone}}</span>
                         </header>
-                        <div class="address_detail ellipsis">
-                            <span :style="{backgroundColor: iconColor(choosedAddress.tag)}">{{choosedAddress.tag}}</span>
+                        <div class="address_detail">
+                            <span v-if="choosedAddress.tag" :style="{backgroundColor: iconColor(choosedAddress.tag)}">{{choosedAddress.tag}}</span>
                             <p>{{choosedAddress.address_detail}}</p>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
             </section>
             <section class="confrim_order">
                 <p>待支付 ¥{{checkoutData.cart.total}}</p>
-                <p>确认下单</p>
+                <p @click="confrimOrder">确认下单</p>
             </section>
             <transition name="fade">
                 <div class="cover" v-if="showPayWay" @click="showPayWayFun"></div>
@@ -117,6 +117,7 @@
             </transition>
         </section>
         <loading v-if="showLoading"></loading>
+        <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid">
             <router-view></router-view>
         </transition>    
@@ -128,7 +129,7 @@
     import headTop from '../../components/header/head'
     import alertTip from '../../components/common/alertTip'
     import loading from '../../components/common/loading'
-    import {checkout} from '../../service/getData'
+    import {checkout, getAddress, placeOrders} from '../../service/getData'
     import {imgBaseUrl} from '../../config/env'
 
     export default {
@@ -142,6 +143,8 @@
                 imgBaseUrl, //图片域名
                 showPayWay: false,//显示付款方式
                 payWayId: 1,
+                showAlert: false,
+                alertText: null,
             }
         },
         created(){
@@ -150,6 +153,7 @@
             //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.shopId;
             this.INIT_BUYCART();
+            this.SAVE_SHOPID(this.shopId);
             this.shopCart = this.cartList[this.shopId];
         },
         mounted(){
@@ -165,7 +169,7 @@
         },
         computed: {
             ...mapState([
-                'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress'
+                'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
             ]),
             remarklist: function (){
                 let str = new String;
@@ -183,7 +187,7 @@
         },
         methods: {
             ...mapMutations([
-                'INIT_BUYCART', 'SAVE_GEOHASH'
+                'INIT_BUYCART', 'SAVE_GEOHASH', 'CHOOSE_ADDRESS', 'NEED_VALIDATION', 'SAVE_CART_ID_SIG', 'SAVE_ORDER_PARAM', 'ORDER_SUCCESS', 'SAVE_SHOPID'
             ]),
             async initData(){
                 let newArr = new Array;
@@ -206,6 +210,13 @@
                     })
                 })
                 this.checkoutData = await checkout(this.geohash, [newArr]);
+                this.SAVE_CART_ID_SIG({cart_id: this.checkoutData.cart.id, sig:  this.checkoutData.sig})
+                if (!(this.userInfo && this.userInfo.user_id)) {
+                    let addressRes = await getAddress(this.checkoutData.cart.id, this.checkoutData.sig);
+                    if (addressRes instanceof Array) {
+                        this.CHOOSE_ADDRESS({address: addressRes[0], index: 0});
+                    }
+                }
                 this.showLoading = false;
             },
             showPayWayFun(){
@@ -221,6 +232,34 @@
                 switch(name){
                     case '公司': return '#4cd964';
                     case '学校': return '#3190e8';
+                }
+            },
+            async confrimOrder(){
+                if (!(this.userInfo && this.userInfo.user_id)) {
+                    this.showAlert = true;
+                    this.alertText = '请登陆';
+                    return
+                }else if(!this.choosedAddress){
+                    this.showAlert = true;
+                    this.alertText = '请添加一个收获地址';
+                    return
+                }
+                this.SAVE_ORDER_PARAM({
+                    user_id: this.userInfo.user_id,
+                    cart_id: this.checkoutData.cart.id,
+                    address_id: this.choosedAddress.id,
+                    description: this.remarklist,
+                    entities: this.checkoutData.cart.groups,
+                    geohash: this.geohash,
+                    sig: this.checkoutData.sig,
+                });
+                let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
+                if (orderRes.need_validation) {
+                    this.NEED_VALIDATION(orderRes);
+                    this.$router.push('/confirmOrder/userValidation');
+                }else{
+                    this.ORDER_SUCCESS(orderRes);
+                    this.$router.push('/confirmOrder/payment');
                 }
             },
         }
@@ -265,9 +304,9 @@
             .address_detail_container{
                 margin-left: .2rem;
                 header{
-                    @include sc(.75rem, #333);
+                    @include sc(.65rem, #333);
                     span:nth-of-type(1){
-                        font-size: .85rem;
+                        font-size: .8rem;
                         font-weight: bold;
                     }
                 }
@@ -279,13 +318,13 @@
                         @include sc(.5rem, #fff);
                         border-radius: .15rem;
                         background-color: #ff5722;
-                        height: .65rem;
-                        line-height: .65rem;
-                        padding: 0 .3rem;
+                        height: .6rem;
+                        line-height: .6rem;
+                        padding: 0 .2rem;
                         margin-right: .3rem;
                     }
                     p{
-                        @include sc(.65rem, #777);
+                        @include sc(.55rem, #777);
                     }
                 }
             }
