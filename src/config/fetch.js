@@ -27,7 +27,7 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 				'Content-Type': 'application/json'
 			},
 			mode: "cors",
-			cache: "only-if-cached"
+			cache: "force-cache"
 		}
 
 		if (type == 'POST') {
@@ -63,7 +63,6 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 		requestObj.onreadystatechange = () => {
 			if (requestObj.readyState == 4) {
 				if (requestObj.status == 200) {
-
 					let obj = requestObj.response
 					if (typeof obj !== 'object') {
 						obj = JSON.parse(obj);

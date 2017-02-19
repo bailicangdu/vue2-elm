@@ -72,11 +72,6 @@
         created(){
             this.id = this.$route.query.id;
             this.sig = this.$route.query.sig;
-            
-            // var date=new Date(); 
-            // date.setTime(date.getTime()-10000); 
-            // document.cookie="USERID=186655961; expires=" + date.toGMTString() ;
-            // document.cookie="SID=euYTx4hkmHEa1HdhpbkvaxXLvuR7lb2WjlwQ; expires=" + date.toGMTString(); 
             this.initData();
         },
         components: {

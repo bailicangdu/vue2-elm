@@ -69,6 +69,11 @@ export default {
         groupcity().then(res => {
             this.groupcity = res;
         })
+
+        var date=new Date(); 
+        date.setTime(date.getTime()-10000); 
+        document.cookie="USERID=186655961; expires=" + date.toGMTString() ;
+        document.cookie="SID=euYTx4hkmHEa1HdhpbkvaxXLvuR7lb2WjlwQ; expires=" + date.toGMTString(); 
     },
 
     components:{

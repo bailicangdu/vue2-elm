@@ -3,7 +3,9 @@ var path = require('path')
 
 module.exports = {
     build: {
-        env: {NODE_ENV: '"production"'},
+        env: {
+            NODE_ENV: '"production"'
+        },
         index: path.resolve(__dirname, '../elm/index.html'),
         assetsRoot: path.resolve(__dirname, '../elm'),
         assetsSubDirectory: 'static',
@@ -17,7 +19,9 @@ module.exports = {
         productionGzipExtensions: ['js', 'css']
     },
     dev: {
-        env: {NODE_ENV: '"development"'},
+        env: {
+            NODE_ENV: '"development"'
+        },
         port: 8088,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
@@ -28,6 +32,7 @@ module.exports = {
             '/v2',
             '/v3',
             '/v4',
+            '/bos',
         ],
         proxypath: 'https://mainsite-restapi.ele.me',
         // CSS Sourcemaps off by default because relative paths are "buggy"

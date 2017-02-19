@@ -50,11 +50,13 @@
             <footer class="clear_history" @click="clearAllHistory">清空搜索历史</footer>
         </section>
         <div class="search_none" v-if="emptyResult">很抱歉！无搜索结果</div>
+        <foot-guide></foot-guide>
     </div>
 </template>
 
 <script>
 import headTop from '../../components/header/head'
+import footGuide from '../../components/footer/footGuide'
 import {searchRestaurant} from '../../service/getData'
 import {imgBaseUrl} from '../../config/env'
 import {getStore, setStore} from '../../config/mUtils'
@@ -82,7 +84,8 @@ export default {
         }
     },
     components:{
-        headTop
+        headTop,
+        footGuide,
     },
     methods:{
         //点击提交按钮，搜索结果并显示，同时将搜索内容存入历史记录

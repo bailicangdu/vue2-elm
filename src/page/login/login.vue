@@ -98,6 +98,7 @@
             },
             async getCaptchaCode(){
                 let res = await getcaptchas();
+                
                 this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
             },
             async getVerifyCode(){
