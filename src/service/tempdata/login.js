@@ -22,7 +22,7 @@ export const userInfo = {
 	"is_active": 1,
 	"is_email_valid": false,
 	"is_mobile_valid": false,
-	"mobile": "",
+	"mobile": "13681711268",
 	"point": 0,
 	"user_id": 186655961,
 	"username": "cangdu666"

@@ -76,6 +76,7 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 |				|--addAddress        //	添加地址页
 |				  |--children
 |					|--searchAddress // 搜索地址页
+|       |-- find                     // 发现页
 |       |-- forget                   // 忘记密码，修改密码页
 |       |-- home                     // 首页
 |       |-- login                    // 登陆注册页

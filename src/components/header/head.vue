@@ -33,9 +33,7 @@
         },
         created(){
             //获取用户信息
-            if (this.signinUp) {
-                this.getUserInfo();
-            }
+            this.getUserInfo();
         },
         mounted(){
             

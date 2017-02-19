@@ -1,7 +1,7 @@
  <template>
     <div class="rating_page">
-        <head-top head-title="订单" go-back='true'></head-top>
-        <section>订单</section>
+        <head-top head-title="发现" go-back='true'></head-top>
+        <section>发现</section>
         <foot-guide></foot-guide>
     </div>
 </template>
@@ -10,7 +10,7 @@
     import headTop from '../../components/header/head'
     import {getImgPath} from '../../components/common/mixin'
     import footGuide from '../../components/footer/footGuide'
-    
+
     export default {
       data(){
             return{

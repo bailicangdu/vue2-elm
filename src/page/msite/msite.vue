@@ -35,6 +35,7 @@
 	    	</header>
 	    	<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
     	</div>
+    	<foot-guide></foot-guide>
     </div>    
 </template>
 
@@ -42,6 +43,7 @@
 import {mapMutations} from 'vuex'
 import {imgBaseUrl} from '../../config/env'
 import headTop from '../../components/header/head'
+import footGuide from '../../components/footer/footGuide'
 import shopList from '../../components/common/shoplist'
 import {msiteAdress, msiteFoodTypes, msiteShopList} from '../../service/getData'
 import '../../plugins/swiper.min.js'
@@ -90,7 +92,8 @@ export default {
     },
     components: {
     	headTop,
-    	shopList
+    	shopList,
+    	footGuide,
     },
     computed: {
 

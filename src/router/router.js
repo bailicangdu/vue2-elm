@@ -27,6 +27,7 @@ const balance = r => require.ensure([], () => r(require('../page/profile/childre
 const benefit = r => require.ensure([], () => r(require('../page/profile/children/benefit')), 'benefit')
 const points = r => require.ensure([], () => r(require('../page/profile/children/points')), 'points')
 const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
+const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
 
 
 
@@ -149,6 +150,11 @@ export default [{
         {
             path: '/vipcard',
             component: vipcard
+        },
+        //发现页
+        {
+            path: '/find',
+            component: find
         },
     ]
 }]
