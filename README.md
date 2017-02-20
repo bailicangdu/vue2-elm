@@ -28,6 +28,7 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 - [x] 登陆、注册 -- 完成
 - [x] 修改密码 -- 完成
 - [x] 个人中心 -- 完成
+- [x] 发送短信、语音验证 -- 完成
 - [x] 下单功能 -- 完成 ✨✨✨
 - [ ] 帐户信息
 - [ ] 上传头像，修改用户名
