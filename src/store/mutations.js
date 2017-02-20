@@ -18,6 +18,7 @@ import {
 	CHANGE_ORDER_PARAM,
 	ORDER_SUCCESS,
 	SAVE_SHOPID,
+	SAVE_ORDER,
 } from './mutation-types.js'
 import {
 	setStore,
@@ -216,4 +217,8 @@ export default {
 	[ORDER_SUCCESS](state, order) {
 		state.orderMessage = order;
 	},
-	}
+	//进入订单详情页前保存该订单信息
+	[SAVE_ORDER](state, orderDetail) {
+		state.orderDetail = orderDetail;
+	},
+}

@@ -5,7 +5,7 @@
             <li class="order_list_li" v-for="item in orderList" :key="item.id">
                 <img :src="item.restaurant_image_url" class="restaurant_image">
                 <section class="order_item_right">
-                    <section>
+                    <section @click="showDetail(item)">
                         <header class="order_item_right_header">
                             <section class="order_header">
                                 <h4 >
@@ -35,6 +35,9 @@
         <transition name="loading">
             <loading v-show="showLoading"></loading>
         </transition>
+        <transition name="router-slid">
+            <router-view></router-view>
+        </transition>   
     </div>
 </template>
 
@@ -72,6 +75,9 @@
             ]),
         },
         methods: {
+             ...mapMutations([
+               'SAVE_ORDER'
+            ]),
             async initData(){
                 this.orderList = await getOrderList(111, this.offset);
                 this.showLoading = false;
@@ -87,7 +93,11 @@
                 this.orderList = this.orderList.concat(this.orderList, res);
                 this.preventRepeat = false;
                 this.showLoading = false;
-            }
+            },
+            showDetail(item){
+                this.SAVE_ORDER(item);
+                this.$router.push('/order/orderDetail');
+            },
         }
     }
 </script>
@@ -175,5 +185,11 @@
     }
     .loading-enter, .loading-leave-active {
         opacity: 0
+    }
+    .router-slid-enter-active, .router-slid-leave-active {
+        transition: all .4s;
+    }
+    .router-slid-enter, .router-slid-leave-active {
+        transform: translateX(100%);
     }
 </style>

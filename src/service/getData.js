@@ -173,6 +173,17 @@ export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', 
 // 	mobile,
 // 	validate_token
 // });
+
+
+
+/**
+ * 获取用户信息
+ */
+
+// export const getUser = () => fetch('GET', '/v1/user', {});
+
+
+
 /**
  * 获取图片验证码
  */
@@ -228,13 +239,6 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 // export const getAddress = (id, sig) => fetch('GET', '/v1/carts/' + id + '/addresses', {
 // 	sig
 // });
-
-
-/**
- * 获取用户信息
- */
-
-// export const getUser = () => fetch('GET', '/v1/user', {});
 
 
 /**
@@ -339,6 +343,11 @@ export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 // 	limit: 10,
 // 	offset,
 // });
+/**
+ * 获取订单详情
+ */
+
+// export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
 
 
 
@@ -394,3 +403,4 @@ export const validateOrders = ({
 }) => setpromise(confirm.orderSuccess);
 export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
 export const getOrderList = (user_id, offset) => setpromise(order.orderList);
+export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
