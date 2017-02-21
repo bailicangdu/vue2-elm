@@ -110,7 +110,7 @@ export default {
 			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = this.shopListArr.concat(res);
-			this.hideLoading();
+			this.showLoading = false;
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
@@ -232,6 +232,7 @@ export default {
 					padding: 0.04rem 0.08rem 0;
 					border-radius: 0.08rem;
 					margin-left: 0.08rem;
+					border: 1px;
 				}
 				.delivery_left{
 					color: #fff;
@@ -248,9 +249,12 @@ export default {
 			margin-top: 0.52rem;
 			@include fj;
 			@include sc(0.5rem, #666);
+			.fee{
+				@include sc(0.5rem, #666);
+			}
 			.distance_time{
 				span{
-					color: #888;
+					color: #999;
 				}
 				.order_time{
 					color: $blue;

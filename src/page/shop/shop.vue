@@ -27,34 +27,35 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use>
                         </svg>
                     </footer>
-                    <transition name="fade">
-                        <section class="activities_details" v-if="showActivities">
-                            <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>
-                            <h3 class="activities_ratingstar">
-                                <rating-star :rating='shopDetailData.rating'></rating-star>
-                            </h3>
-                            <section class="activities_list">
-                                <header class="activities_title_style"><span>优惠信息</span></header>
-                                <ul>
-                                    <li v-for="item in shopDetailData.activities" :key="item.id">
-                                        <span class="activities_icon" :style="{backgroundColor: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
-                                        <span>{{item.description}}（APP专享）</span>
-                                    </li>
-                                </ul>
-                            </section>
-                            <section class="activities_shopinfo">
-                                <header class="activities_title_style"><span>商家公告</span></header>
-                                <p>{{promotionInfo}}</p>
-                            </section>
-                            <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
-                                <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
-                                <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2"/>
-                                <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
-                            </svg>
-                        </section>
-                    </transition>  
+                    
                 </section>
             </header>
+            <transition name="fade">
+                <section class="activities_details" v-if="showActivities">
+                    <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>
+                    <h3 class="activities_ratingstar">
+                        <rating-star :rating='shopDetailData.rating'></rating-star>
+                    </h3>
+                    <section class="activities_list">
+                        <header class="activities_title_style"><span>优惠信息</span></header>
+                        <ul>
+                            <li v-for="item in shopDetailData.activities" :key="item.id">
+                                <span class="activities_icon" :style="{backgroundColor: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
+                                <span>{{item.description}}（APP专享）</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="activities_shopinfo">
+                        <header class="activities_title_style"><span>商家公告</span></header>
+                        <p>{{promotionInfo}}</p>
+                    </section>
+                    <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
+                        <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
+                        <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2"/>
+                        <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
+                    </svg>
+                </section>
+            </transition>  
             <section class="change_show_type" ref="chooseType">
                 <div>
                     <span :class='{activity_show: changeShowType =="food"}' @click="changeShowType='food'">商品</span>
@@ -513,6 +514,9 @@
                 this.ratingOffset = 0;
                 this.ratingTagName = name;
                 this.ratingList = await getRatingList(this.ratingOffset, name);
+                if (process.env.NODE_ENV !== 'development') {
+                    this.ratingList = this.ratingList.reverse();
+                }
             },
             //页面下拉至底部，加载更多
             async loaderMoreRating(){
@@ -660,14 +664,18 @@
                     right: .3rem;
                 }
             }
-            .activities_details{
+            
+            
+        }
+    }
+    .activities_details{
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 background-color: #262626;
-                z-index: 21;
+                z-index: 200;
                 padding: 1.25rem;
                 .activities_shoptitle{
                     text-align: center;
@@ -720,10 +728,6 @@
                 }
             }
             
-            
-        }
-    }
-    
     .food_container{
         display: flex;
         flex: 1;

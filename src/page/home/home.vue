@@ -10,7 +10,9 @@
             </div>
             <router-link :to="'/city/' + guessCityid" class="guess_city">
                 <span>{{guessCity}}</span>
-                <span>></span>
+                <svg class="arrow_right">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
+                </svg>
             </router-link>  
         </nav>
         <section id="hot_city_container">
@@ -118,8 +120,7 @@ export default {
         background-color: #fff;
         margin-bottom: 0.4rem;
         .city_tip{
-            display: flex;
-            justify-content: space-between;
+            @include fj;
             line-height: 1.45rem;
             padding: 0 0.45rem;
             span:nth-of-type(1){
@@ -129,11 +130,12 @@ export default {
                 font-weight: 900;
                 @include sc(0.475rem, #9f9f9f);
             }
+
         }
         .guess_city{
-            display: flex;
+            @include fj;
+            align-items: center;
             height: 1.8rem;
-            justify-content: space-between;
             padding: 0 0.45rem;
             border-top: 1px solid $bc;
             border-bottom: 2px solid $bc;
@@ -141,8 +143,9 @@ export default {
             span:nth-of-type(1){
                 color: $blue;
             }
-            span:nth-of-type(2){
-                color: #9f9f9f;
+            .arrow_right{
+                @include wh(.6rem, .6rem);
+                fill: #999;
             }
         }
     }

@@ -264,6 +264,8 @@ npm run build
 ## 订单列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order2.png" width="365" height="619"/>
+
 
 
 
