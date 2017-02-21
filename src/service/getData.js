@@ -205,11 +205,11 @@ export const mobileCode = phone => fetch('POST', '/v4/mobile/verify_code/send', 
  * 手机号登陆
  */
 
-export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
-	code,
-	mobile,
-	validate_token
-});
+// export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
+// 	code,
+// 	mobile,
+// 	validate_token
+// });
 
 
 
@@ -429,7 +429,7 @@ const setpromise = data => {
 // export const ratingScores = shopid => setpromise(shop.scores);
 // export const ratingTags = shopid => setpromise(shop.tage);
 // export const mobileCode = phone => setpromise(login.validate_token);
-// export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
+export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 // export const accountLogin = (username, password, captcha_code) => setpromise(login.userInfo);
 // export const checkExsis = (checkNumber, type) => setpromise(login.checkExsis);
 // export const sendMobile = (sendData, captcha_code, type, password) => setpromise(login.send);

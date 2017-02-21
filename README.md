@@ -302,7 +302,7 @@ npm run build
 
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
->  另外一个 vue + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
+>  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
 
 ##### 个人时间有限，还有其他的项目要做，在此感谢辰妹子，个人中心的所有页面都由她来完成，辛苦了！🙏
 
