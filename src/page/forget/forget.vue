@@ -47,6 +47,7 @@
             alertTip,
         },
         methods: {
+            //判断输入的手机号码是否正确
             inputPhone(){
                 if(/^1\d{10}$/gi.test(this.phoneNumber)){
                     this.rightPhoneNumber = true;
@@ -54,8 +55,10 @@
                     this.rightPhoneNumber = false;
                 }
             },
+            //获取手机验证
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
+                    //30秒倒计时后可以重新获取验证码
                     this.computedTime = 30;
                     this.timer = setInterval(() => {
                         this.computedTime --;
@@ -63,6 +66,7 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
+                    //验证手机号码是否注册
                     let res = await checkExsis(this.phoneNumber, this.accountType);
                     if (res.message) {
                         this.showAlert = true;
@@ -73,6 +77,7 @@
                         this.alertText = '您输入的手机号尚未绑定';
                         return
                     }
+                    //已注册的手机号方可获取验证码
                     let getCode = await mobileCode(this.phoneNumber);
                     if (getCode.message) {
                         this.showAlert = true;
@@ -82,6 +87,7 @@
                     this.validate_token = getCode.validate_token;
                 }
             },
+            //重设密码，进行一写判断
             async resetButton(){
                 if (!this.rightPhoneNumber) {
                     this.showAlert = true;
@@ -104,6 +110,7 @@
                     this.alertText = '请输验证码';
                     return
                 }
+                //发送重新设置密码的信息
                 let res = await sendMobile(this.phoneNumber, this.mobileCode, this.accountType, this.newPassWord);
                 if (res.message) {
                     this.showAlert = true;
@@ -114,6 +121,7 @@
                     this.alertText = '密码修改成功';
                 }
             },
+            //关闭提示框
             closeTip(){
                 this.showAlert = false;
             }   

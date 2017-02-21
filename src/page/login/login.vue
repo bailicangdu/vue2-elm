@@ -80,15 +80,19 @@
             alertTip,
         },
         methods: {
+            //登陆成功后保存用户信息
             ...mapMutations([
                 'RECORD_USERINFO',
             ]),
+            //改变登陆方式，默认手机登陆
             changeLoginWay(){
                 this.loginWay = !this.loginWay;
             },
+            //用户名登陆时是否显示输入的密码
             changePassWordType(){
                 this.showPassword = !this.showPassword;
             },
+            //输入手机号码时判断，输入正确的手机号码后方可点击获取短信验证码
             inputPhone(){
                 if(/^1\d{10}$/gi.test(this.phoneNumber)){
                     this.rightPhoneNumber = true;
@@ -96,20 +100,24 @@
                     this.rightPhoneNumber = false;
                 }
             },
+            //获取验证码图片
             async getCaptchaCode(){
                 let res = await getcaptchas();
                 
                 this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
             },
+            //获取手机验证码
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
                     this.computedTime = 30;
+                    //30秒倒计时，30秒后可以重新获取验证码
                     this.timer = setInterval(() => {
                         this.computedTime --;
                         if (this.computedTime == 0) {
                             clearInterval(this.timer)
                         }
                     }, 1000)
+                    //利用后台接口判断当前手机是否已注册
                     let exsis = await checkExsis(this.phoneNumber, 'mobile');
                     if (exsis.message) {
                         this.showAlert = true;
@@ -120,6 +128,7 @@
                         this.alertText = '您输入的手机号尚未绑定';
                         return
                     }
+                    //返回的数据带message，说明登陆失败
                     let res = await mobileCode(this.phoneNumber);
                     if (res.message) {
                         this.showAlert = true;
@@ -129,7 +138,9 @@
                     this.validate_token = res.validate_token;
                 }
             },
+            //登陆
             async mobileLogin(){
+                //手机登陆时进行简单的判断
                 if (this.loginWay) {
                     if (!this.rightPhoneNumber) {
                         this.showAlert = true;
@@ -142,6 +153,7 @@
                     }
                     this.userInfo = await sendLogin(this.mobileCode, this.phoneNumber, this.validate_token);
                 }else{
+                    //用户名登陆时进行简单的判断
                     if (!this.userAccount) {
                         this.showAlert = true;
                         this.alertText = '请输入手机号/邮箱/用户名';
@@ -158,16 +170,19 @@
 
                     this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }
+                //如果返回的信息没有user_id说明登陆失败，弹出提示
                 if (!this.userInfo.user_id) {
                     this.showAlert = true;
                     this.alertText = this.userInfo.message;
                     if (!this.loginWay) this.getCaptchaCode();
                 }else{
+                    //登陆成功保存用户信息，返回上一路游
                     this.RECORD_USERINFO(this.userInfo);
                     this.$router.go(-1);
                     
                 }
             },
+            //关闭弹出框
             closeTip(){
                 this.showAlert = false;
             }   
