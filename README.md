@@ -262,6 +262,8 @@ npm run build
 ## 个人中心
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile2.png" width="365" height="619"/>
+
 
 
 ## 确认订单页
