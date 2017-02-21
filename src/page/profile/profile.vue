@@ -175,7 +175,7 @@ export default {
 
     computed:{
          ...mapState([
-            'userInfo'
+            'userInfo', 
         ]),
     },
 
@@ -185,14 +185,12 @@ export default {
     watch: {
         userInfo: function (){
             this.getUserinfo = this.userInfo;
-            if (this.userInfo) {
-                this.avatar = this.getUserinfo.avatar;
-                this.username = this.getUserinfo.username;
-                this.mobile = this.getUserinfo.mobile ;
-                this.balance = this.getUserinfo.balance;
-                this.count = this.getUserinfo.gift_amount;
-                this.pointNumber = this.getUserinfo.point;
-            }
+            this.avatar = this.getUserinfo&&this.getUserinfo.avatar || '';
+            this.username = this.getUserinfo&&this.getUserinfo.username ||'登陆/注册';
+            this.mobile = this.getUserinfo&&this.getUserinfo.mobile ||'登陆后享受更多特权';
+            this.balance = this.getUserinfo&&this.getUserinfo.balance || '0';
+            this.count = this.getUserinfo&&this.getUserinfo.gift_amount || '0';
+            this.pointNumber = this.getUserinfo&&this.getUserinfo.point || '0';
         }
     }
 }

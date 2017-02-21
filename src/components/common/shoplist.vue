@@ -79,7 +79,7 @@ export default {
 	async mounted(){
 		//获取数据
 		this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-		this.showLoading = false;
+		this.hideLoading();
 		//开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
 		showBack(status => {
 			this.showBackStatus = status;
@@ -110,7 +110,7 @@ export default {
 			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = this.shopListArr.concat(res);
-			this.showLoading = false;
+			this.hideLoading();
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
@@ -126,8 +126,22 @@ export default {
 			this.offset = 0;
 			this.showLoading = true;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
-			this.showLoading = false;
-		}
+			if (process.env.NODE_ENV !== 'development') {
+				this.shopListArr = this.shopListArr.reverse();
+			}
+			this.hideLoading();
+		},
+		hideLoading(){
+			if (process.env.NODE_ENV !== 'development') {
+				clearTimeout(this.timer);
+				this.timer = setTimeout(() => {
+					clearTimeout(this.timer);
+					this.showLoading = false;
+				}, 1000)
+			}else{
+				this.showLoading = false;
+			}
+		},
 	},
 	watch: {
 		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选

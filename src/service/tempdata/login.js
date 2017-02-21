@@ -37,3 +37,5 @@ export const send = {
 	"message": "\u9a8c\u8bc1\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u586b\u5199",
 	"name": "CAPTCHA_CODE_ERROR"
 };
+
+export const cpatchs = {"code":"5aa23c2c99b89d15ab967e8fcddd17ed3526f7ef"};

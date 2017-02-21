@@ -80,7 +80,7 @@
             ]),
             async initData(){
                 this.orderList = await getOrderList(111, this.offset);
-                this.showLoading = false;
+                this.hideLoading();
             },
             async loaderMore(){
                 if (this.preventRepeat) {
@@ -92,11 +92,22 @@
                 let res = await getOrderList(111, this.offset);
                 this.orderList = this.orderList.concat(this.orderList, res);
                 this.preventRepeat = false;
-                this.showLoading = false;
+                this.hideLoading();
             },
             showDetail(item){
                 this.SAVE_ORDER(item);
                 this.$router.push('/order/orderDetail');
+            },
+            hideLoading(){
+                if (process.env.NODE_ENV !== 'development') {
+                    clearTimeout(this.timer);
+                    this.timer = setTimeout(() => {
+                        clearTimeout(this.timer);
+                        this.showLoading = false;
+                    }, 1000)
+                }else{
+                    this.showLoading = false;
+                }
             },
         }
     }

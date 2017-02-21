@@ -367,7 +367,7 @@
                 this.ratingTagsList = await ratingTags(this.shopId);
                 this.RECORD_SHOPDETAIL(this.shopDetailData)
                 //隐藏加载动画
-                this.showLoading = false;
+                this.hideLoading();
             },
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
@@ -527,6 +527,17 @@
                 this.loadRatings = false;
                 if (ratingDate.length >= 10) {
                     this.preventRepeatRequest = false;
+                }
+            },
+            hideLoading(){
+                if (process.env.NODE_ENV !== 'development') {
+                    clearTimeout(this.timer);
+                    this.timer = setTimeout(() => {
+                        clearTimeout(this.timer);
+                        this.showLoading = false;
+                    }, 1000)
+                }else{
+                    this.showLoading = false;
                 }
             },
         },
