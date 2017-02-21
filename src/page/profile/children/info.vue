@@ -62,7 +62,7 @@
             <section class="bind-phone">
                 安全设置
             </section>
-            <router-link to="" class="info-router">
+            <router-link to="/forget" class="info-router">
                 <section class="headportrait headportraitwo headportraithree">
                         <h2>登录密码</h2>
                         <div class="headportrait-div">

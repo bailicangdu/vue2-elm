@@ -3,7 +3,7 @@
         <head-top go-back='true' :head-title="profiletitle"></head-top>
         <section class="profile-number">
             <router-link :to="getUserinfo? '/profile/info' : '/login'" class="profile-link">
-                <img :src="getImgPath(this.avatar)" class="privateImage" v-if="this.avatar">
+                <img :src="imgBaseUrl + avatar" class="privateImage" v-if="this.avatar">
                 <span class="privateImage" v-else>
                     <svg class="privateImage-svg">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
@@ -138,6 +138,7 @@
 import headTop from '../../components/header/head'
 import footGuide from '../../components/footer/footGuide'
 import {mapState} from 'vuex'
+import {imgBaseUrl} from '../../config/env'
 import {getImgPath} from '../../components/common/mixin'
 
 export default {
@@ -151,6 +152,7 @@ export default {
             count : '0',             //优惠券个数
             pointNumber : '0',       //积分数
             avatar: '',             //头像地址
+            imgBaseUrl,
         }
     },
 

@@ -181,6 +181,9 @@
 
     .loginContainer{
         padding-top: 1.95rem;
+        p, span, input{
+            font-family: Helvetica Neue,Tahoma,Arial;
+        }
     }
     .change_login{
         position: absolute;

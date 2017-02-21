@@ -10,8 +10,54 @@ vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以r
 __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户端。__
 
 
+
+
+# 效果演示
+
+#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
+
+[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+   
+### 移动端扫描下方二维码
+
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
+
+
+
 # 技术栈
 vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+
+
+
+# 项目运行
+```
+克隆，或者直接下载
+git clone https://github.com/bailicangdu/vue2-elm.git  
+
+进入文件夹
+cd vue2-elm
+
+安装依赖
+npm install
+```
+
+## 编译环境
+```
+
+开启本地服务器
+npm run dev
+
+访问 http://localhost:8088
+```
+
+
+## 线上版本
+```
+npm run build
+
+生成的elm文件夹放在服务器即可正常访问
+```
+
 
 # 目标功能
 - [x] 定位功能 -- 完成
@@ -136,35 +182,6 @@ vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 
 
 
-# 项目运行
-```
-克隆，或者直接下载
-git clone https://github.com/bailicangdu/vue2-elm.git  
-
-进入文件夹
-cd vue2-elm
-
-安装依赖
-npm install
-```
-
-## 编译环境
-```
-
-开启本地服务器
-npm run dev
-
-访问 http://localhost:8088
-```
-
-
-## 线上版本
-```
-npm run build
-
-生成的elm文件夹放在服务器即可正常访问
-```
-
 
 # 总结
 
@@ -181,18 +198,6 @@ npm run build
 6、项目写到现在，从 登陆注册到、首页、搜索、商家列表、购物车、下单、订单列表、个人中心 一个流程走完之后、不但对vue的理解更深一层，而且对以后掌控大型项目的时候也有非常多的帮助，做一个实际的项目才能对自己有很大的提升。
 
 7、项目已完成的页面共 22 个，最主要的购物下单功能已经实现，预计全部完成后总页面数在 35 个左右。
-
-
-# 效果演示
-
-#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
-
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
-   
-### 移动端扫描下方二维码
-
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
 
 
 # 项目截图
@@ -282,8 +287,6 @@ npm run build
 
 
 
-
-
 #### 其他页面正在开发中。。。
 
 
@@ -297,8 +300,10 @@ npm run build
 
 >  如有问题请直接在 Issues 中提，或者可以加我的QQ 1264889788
 
->  另外推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
+>  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
+>  另外一个 vue + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
 
+##### 个人时间有限，还有其他的项目要做，在此感谢辰妹子，个人中心的所有页面都由她来完成，辛苦了！🙏
 
 ##### 如果觉得不错，请star一下吧 😊

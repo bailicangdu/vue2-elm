@@ -388,17 +388,17 @@ export const payRequest = (merchantOrderNo, userId) => fetch('GET', '/payapi/pay
  * 获取订单列表
  */
 
-export const getOrderList = (user_id, offset) => fetch('GET', '/bos/v2/users/' + user_id + '/orders', {
-	limit: 10,
-	offset,
-});
+// export const getOrderList = (user_id, offset) => fetch('GET', '/bos/v2/users/' + user_id + '/orders', {
+// 	limit: 10,
+// 	offset,
+// });
 
 
 /**
  * 获取订单详情
  */
 
-export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
+// export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
 
 
 
@@ -454,5 +454,5 @@ const setpromise = data => {
 // 	validation_token
 // }) => setpromise(confirm.orderSuccess);
 // export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
-// export const getOrderList = (user_id, offset) => setpromise(order.orderList);
-// export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
+export const getOrderList = (user_id, offset) => setpromise(order.orderList);
+export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
