@@ -29,12 +29,12 @@
     export default {
       data(){
             return{
-                id: null,
-                sig: null,
-                remarkList: null,
-                showLoading: true,
-                remarkText: {},
-                inputText: null,
+                id: null, //订单id
+                sig: null, //订单sig
+                remarkList: null, //备注列表
+                showLoading: true, //显示加载动画
+                remarkText: {}, //选择的备注
+                inputText: null, //输入的备注
             }
         },
         created(){
@@ -54,15 +54,19 @@
             ...mapMutations([
                 'CONFIRM_REMARK'
             ]),
+            //初始化数据，获取备注列表
             async initData(){
                 this.remarkList = await getRemark(this.id, this.sig);
                 this.showLoading = false;
             },
+            //将选取的备注存入remarkText数组
             chooseRemark(index, remarkIndex, text){
                 this.remarkText[index] = [remarkIndex, text];
+                //返回一个新的对象，显示已选中的备注
                 this.remarkText = Object.assign({}, this.remarkText);
             },
             confirmRemark(){
+                //将选择和输入的备注存入vuex ，订单页面从vuex中获取
                 this.CONFIRM_REMARK({remarkText: this.remarkText, inputText: this.inputText});
                 this.$router.go(-1);
             }

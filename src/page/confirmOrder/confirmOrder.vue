@@ -152,11 +152,15 @@
             this.geohash = this.$route.query.geohash;
             //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.shopId;
+            //获取购物车信息
             this.INIT_BUYCART();
+            //将当前商品id保存
             this.SAVE_SHOPID(this.shopId);
+            //将购物中当前商品的信息提取出来
             this.shopCart = this.cartList[this.shopId];
         },
         mounted(){
+            //初始化获取数据，并将geohash保存起来
             if (this.geohash) {
                 this.initData();
                 this.SAVE_GEOHASH(this.geohash);
@@ -171,6 +175,7 @@
             ...mapState([
                 'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
             ]),
+            //用户备注页面返回的信息进行处理，每个备注用逗号隔开
             remarklist: function (){
                 let str = new String;
                 if (this.remarkText) {
@@ -189,7 +194,9 @@
             ...mapMutations([
                 'INIT_BUYCART', 'SAVE_GEOHASH', 'CHOOSE_ADDRESS', 'NEED_VALIDATION', 'SAVE_CART_ID_SIG', 'SAVE_ORDER_PARAM', 'ORDER_SUCCESS', 'SAVE_SHOPID'
             ]),
+            //初始化获取数据
             async initData(){
+                //先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
                 let newArr = new Array;
                 Object.values(this.shopCart).forEach(categoryItem => {
                     Object.values(categoryItem).forEach(itemValue=> {
@@ -209,41 +216,52 @@
                         })
                     })
                 })
+                //将获取的购物信息传递给后台，后台会返回一个详细的订单信息
                 this.checkoutData = await checkout(this.geohash, [newArr]);
+                //保存订单的id和sig,在其他几个页面都会用到
                 this.SAVE_CART_ID_SIG({cart_id: this.checkoutData.cart.id, sig:  this.checkoutData.sig})
+                //如果用户已经登陆，那么获取用户的收货地址，并将第一个地址作为默认地址
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     let addressRes = await getAddress(this.checkoutData.cart.id, this.checkoutData.sig);
+                    //获取数据返回的信息是数组时为有效数据，此时将第一个地址存入vuex
                     if (addressRes instanceof Array) {
                         this.CHOOSE_ADDRESS({address: addressRes[0], index: 0});
                     }
                 }
                 this.showLoading = false;
             },
+            //显示付款方式
             showPayWayFun(){
                 this.showPayWay = !this.showPayWay;
             },
+            //选择付款方式，is_online_payment是后台返回的值，表示是否支持当前付款方式
             choosePayWay(is_online_payment, id){
                 if (is_online_payment) {
                     this.showPayWay = !this.showPayWay;
                     this.payWayId = id;
                 }
             },
+            //地址标志的背景颜色
             iconColor(name){
                 switch(name){
                     case '公司': return '#4cd964';
                     case '学校': return '#3190e8';
                 }
             },
+            //确认订单
             async confrimOrder(){
+                //当用户未登陆时，弹出地址框
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
                     this.alertText = '请登陆';
                     return
+                //用户未选择收获地址时，弹出提示框
                 }else if(!this.choosedAddress){
                     this.showAlert = true;
                     this.alertText = '请添加一个收获地址';
                     return
                 }
+                //下单前，将订单详细信息进行保存进入vuex，其他页面需要用到
                 this.SAVE_ORDER_PARAM({
                     user_id: this.userInfo.user_id,
                     cart_id: this.checkoutData.cart.id,
@@ -253,10 +271,13 @@
                     geohash: this.geohash,
                     sig: this.checkoutData.sig,
                 });
+                //下单成功后返回的订单信息
                 let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
+                //返回的数据带need_validation，说明该手机号是第一次下单，需要经过验证
                 if (orderRes.need_validation) {
                     this.NEED_VALIDATION(orderRes);
                     this.$router.push('/confirmOrder/userValidation');
+                //否则直接进入付款页面
                 }else{
                     this.ORDER_SUCCESS(orderRes);
                     this.$router.push('/confirmOrder/payment');

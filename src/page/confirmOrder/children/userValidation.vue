@@ -32,12 +32,12 @@
             return{
                	validate: null, //验证码
                 countDown: 30, //倒计时
-                sig: null,
-                reCallVerify: null,
-                showAlert: false,
-                alertText: null,
-                showVoiceTip: false,
-                type: 'sms',
+                sig: null, //订单sig
+                reCallVerify: null, //重新获取验证码
+                showAlert: false, //是否显示提示框
+                alertText: null, //提示框信息
+                showVoiceTip: false,//是否发送语音验证
+                type: 'sms', //发送数据的类型
             }
         },
         components: {
@@ -52,6 +52,7 @@
             this.getData();
         },
         beforeDestroy(){
+            //卸载前清空定时器
             clearInterval(this.timer);
         },
         props:[],
@@ -64,6 +65,7 @@
             ...mapMutations([
                 'CHANGE_ORDER_PARAM', 'ORDER_SUCCESS'
             ]),
+            //30秒到记时，倒计时结束后可以重新获取
             count(){
                 this.countDown = 30;
                 clearInterval(this.timer);
@@ -74,32 +76,40 @@
                     }
                 }, 1000);
             },
+            //重新获取验证码
             recall(){
                 this.count();
                 this.type = 'sms';
                 this.getData();
             },
+            //获取语音验证
             sendVoice(){
                 this.showVoiceTip = true;
                 this.type = 'voice';
                 this.getData();
             },
+            //获取验证码
             async getData(){
                 this.reCallVerify = await rePostVerify(this.cart_id, this.sig, this.type);
+                //返回的信息有message则弹出提示框
                 if (this.reCallVerify.message) {
                     this.showAlert = true;
                     this.alertText = this.reCallVerify.message;
                 }
             },
+            //改变订单参数，向后台多传入两个信息
             async confrimOrder(){
                 this.CHANGE_ORDER_PARAM({validation_code: this.validate, validation_token: this.reCallVerify.validate_token})
                 let orderRes = await validateOrders(this.orderParam);
+                //返回的信息有message则弹出提示框
                 if (orderRes.message) {
                     this.showAlert = true;
                     this.alertText = orderRes.message;
                     return
                 }
+                //订单成功，保存信息
                 this.ORDER_SUCCESS(orderRes);
+                //进入付款页面 
                 this.$router.push('/confirmOrder/payment');
             },
         }

@@ -29,9 +29,11 @@
             ...mapMutations([
                 'CONFIRM_INVOICE'
             ]),
+            //是否需要发票
             chooseInvoice(){
             	this.invoice = !this.invoice;
             },
+            //点击确认时将发票信息存入vuex
             confrimInvoice(){
             	this.CONFIRM_INVOICE(this.invoice);
             	this.$router.go(-1);
