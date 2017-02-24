@@ -25,7 +25,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 # 技术栈
-vue2 + vue-rotuer2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
 
 
 
