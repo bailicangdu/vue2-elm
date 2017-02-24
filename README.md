@@ -29,7 +29,8 @@ vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 
 
 
-# 项目运行
+# 项目运行（nodejs 6.0+）
+
 ```
 克隆，或者直接下载
 git clone https://github.com/bailicangdu/vue2-elm.git  
