@@ -211,7 +211,7 @@ npm run build
 
 >  开发环境 macOS 10.12.3  Chrome 55
 
->  如有问题请直接在 Issues 中提，或者有react, vue相关的问题可以加我的QQ 1264889788，一起讨论，欢迎骚扰。
+>  如有问题请直接在 Issues 中提，或者可以加我的QQ 1264889788
 
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
