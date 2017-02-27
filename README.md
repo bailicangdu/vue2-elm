@@ -69,7 +69,6 @@ npm run build
 - [x] 下载App -- 完成
 - [ ] 帐户信息
 - [ ] 上传头像，修改用户名
-- [ ] 积分商城
 - [ ] 服务中心
 - [ ] 添加、删除、修改收货地址
 - [ ] 付款(很难实现)
@@ -130,6 +129,8 @@ npm run build
 
 |       |-- search                   // 搜索页
 |		|--service			         // 服务中心
+|			|--children
+|				|--questionDetail    // 问题详情
 |       |-- shop                     // 商铺筛选页
 |			|-- children             
 |			  	|-- foodDetail       // 商铺信息页     
@@ -229,83 +230,83 @@ npm run build
 
 
 
-# 项目截图
+# 部分项目截图
 
-## 城市列表页
+### 城市列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
 
 
-## 搜索地址页
+### 搜索地址页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
 
 
-## 商铺列表页
+### 商铺列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
 
 
-## 商铺筛选页
+### 商铺筛选页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
 
 
-## 搜索页
+### 搜索页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
 
 
-## 餐馆食品列表与购物车
+### 餐馆食品列表与购物车
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
 
 
-## 餐馆评论页
+### 餐馆评论页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.gif" width="365" height="619"/>
 
 
-## 食品详情页
+### 食品详情页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/fooddetail.png" width="365" height="619"/>
 
 
-## 餐馆信息页
+### 餐馆信息页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail2.png" width="365" height="619"/>
 
 
-## 登陆页
+### 登陆页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login2.png" width="365" height="619"/>
 
-## 重置密码页
+### 重置密码页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
 
-## 个人中心
+### 个人中心
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile2.png" width="365" height="619"/>
 
 
 
-## 确认订单页
+### 确认订单页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
 
-## 订单列表页
+### 订单列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order2.png" width="365" height="619"/>
