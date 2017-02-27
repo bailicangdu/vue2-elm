@@ -7,7 +7,6 @@
                 <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2">
             </svg>
         </section>
-
         <router-link :to="userInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
             <svg class="user_avatar" v-if="userInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
@@ -17,6 +16,7 @@
         <section class="title_head ellipsis" v-if="headTitle">
             <span class="title_text">{{headTitle}}</span>
         </section>
+        <slot name="edit"></slot>
         <slot name="msite-title"></slot>
         <slot name="changecity"></slot>
         <slot name="changeLogin"></slot>

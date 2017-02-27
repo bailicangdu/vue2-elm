@@ -8,7 +8,7 @@
 	    		</svg>
     		</router-link>
 			<router-link to="/home" slot="msite-title" class="msite_title">
-				<span class="title_text ellipsis">{{msietTitle}}</span>
+				<span class="title_text">{{msietTitle}}</span>
 			</router-link>
     	</head-top>
     	<nav class="msite_nav">

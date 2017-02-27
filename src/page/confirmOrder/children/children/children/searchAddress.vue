@@ -29,8 +29,8 @@
     export default {
       data(){
             return{
-               	searchValue: null,//搜索的信息
-                searchData: null,//搜索返回的地址列表
+               	searchValue: null,
+                searchData: null,
             }
         },
         components: {
@@ -41,16 +41,13 @@
             ...mapMutations([
                 'CHOOSE_SEARCH_ADDRESS'
             ]),
-            //搜索附近地址
             async searchPlace(){
                 if (this.searchValue) {
                     this.searchData = await searchNearby(this.searchValue);
                 }
             },
             choooedAddress(item){
-                //将选择的地址传入vuex
                 this.CHOOSE_SEARCH_ADDRESS(item);
-                //返回上一页，添加地址页
                 this.$router.go(-1);
             },
 

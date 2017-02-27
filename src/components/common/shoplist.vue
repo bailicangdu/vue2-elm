@@ -165,7 +165,6 @@ export default {
 	@import '../../style/mixin';
 	.shoplist_container{
 		background-color: #fff;
-		padding-bottom: 1.95rem;
 	}
 	.shop_li{
 		display: flex;
@@ -230,10 +229,10 @@ export default {
 				display: flex;
 				.delivery_style{
 					font-size: 0.4rem;
-					line-height: .4rem;
 					padding: 0.04rem 0.08rem 0;
 					border-radius: 0.08rem;
 					margin-left: 0.08rem;
+					border: 1px;
 				}
 				.delivery_left{
 					color: #fff;

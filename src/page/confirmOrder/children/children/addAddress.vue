@@ -64,16 +64,17 @@
     export default {
       data(){
             return{
-                name: null,//姓名
-                sex: 1, //性别
-                phone: null,//电话
-                address_detail: null,//详细地址
-                tag: '',//标签
-                tag_type: 1,//标签类别
-                phone_bk: false,//是否显示备注电话
-                anntherPhoneNumber: '',//备注电话号码
-                showAlert: false,//是否显示弹出框
-                alertText: null,//弹出框信息
+                name: null,
+                sex: 1,
+                phone: null,
+                address_detail: null,
+                tag: '',
+                tag_type: 1,
+                phone_bk: false,
+                anntherPhoneNumber: '',
+                showAlert: false,
+                alertText: null,
+                poi_type: 0,
             }
         },
         created(){
@@ -92,11 +93,9 @@
             ...mapMutations([
                 
             ]),
-            //选择性别
             chooseSex(sex){
                 this.sex = sex;
             },
-            //发送地址信息，添加地址，做一下简单的验证
             async addAddress(){
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
@@ -122,7 +121,6 @@
                     this.tag_type = 4;
                 }
                 let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
-                //添加成功返回地址列表页
                 this.$router.go(-1);
             },
         }

@@ -51,11 +51,11 @@
       data(){
             return{
                	payDetail: false, //付款信息详情
-                showAlert: false,//是否显示提示框
-                alertText: null, //提示框的文字
-                payWay: 1,   //付款方式，默认为1，支付宝
-                countNum: 900, //付款倒计时，15分钟
-                gotoOrders: false, //是否跳转到订单列表页面
+                showAlert: false,
+                alertText: null,
+                payWay: 1,
+                countNum: 900,
+                gotoOrders: false,
             }
         },
         components: {
@@ -64,15 +64,12 @@
         },
         created(){
             this.initData();
-            //进入此页面说明下单成功，清空购物车中当前餐馆的购物车信息
             this.CLEAR_CART(this.shopid);
         },
         mounted(){
-            //开始倒计时
             this.remainingTime();
         },
         beforeDestroy(){
-            //组件卸载前清空定时器
             clearInterval(this.timer);
         },
         props:[],
@@ -80,9 +77,7 @@
             ...mapState([
                 'orderMessage', 'userInfo', 'shopid'
             ]),
-            //定时器时间
             remaining: function (){
-                //个位数的时间前面加上0  5:4--05:04
                 let minute = parseInt(this.countNum/60);
                 if (minute < 10) {
                     minute = '0' + minute;
@@ -98,22 +93,18 @@
             ...mapMutations([
                 'CONFIRM_INVOICE', 'CLEAR_CART'
             ]),
-            //初始化获取订单成功信息，返回的值包括付款方式等
             async initData(){
             	this.payDetail = await payRequest(this.orderMessage.order_id, this.userInfo.user_id);
-                //如果返回的值有message,则弹出提示框
                 if (this.payDetail.message) {
                     this.showAlert = true;
                     this.alertText = this.payDetail.message;
                     return
                 }
             },
-            //计算时间
             remainingTime(){
                 clearInterval(this.timer);
                 this.timer = setInterval(() => {
                     this.countNum --;
-                    //倒计时结束时，清空定时器，弹出提示框
                     if (this.countNum == 0) {
                         clearInterval(this.timer);
                         this.showAlert = true;
@@ -121,13 +112,11 @@
                     }
                 }, 1000);
             },
-            //点击确认，弹出提示框
             confrimPay(){
                 this.showAlert = true;
                 this.alertText = '当前环境无法支付，请打开官方APP进行付款';
                 this.gotoOrders = true;
             },
-            //关闭提示框时跳转订单列表页面
             closeTipFun(){
                 this.showAlert = false;
                 if (this.gotoOrders) {

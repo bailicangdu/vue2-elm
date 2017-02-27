@@ -1,12 +1,13 @@
  <template>
-  <div class="rating_page">
+    <div class="rating_page">
         <head-top head-title="账户信息" go-back='true'></head-top>
         <section class="profile-info">
             <section class="headportrait">
                 <input type="file" class="profileinfopanel-upload">
                 <h2>头像</h2>
                 <div class="headportrait-div">
-                    <span class="headportrait-div-top">
+                    <img :src="imgPath" class="headportrait-div-top" v-if="this.avatarinfo">
+                    <span class="headportrait-div-top" v-else>
                         <svg class="">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
                         </svg>
@@ -18,20 +19,20 @@
                     </span>
                 </div>
             </section>
-            <router-link to="" class="info-router">
+            <router-link to="/profile/setusername" class="info-router">
                 <section class="headportrait headportraitwo">
-                        <h2>用户名</h2>
-                        <div class="headportrait-div">
-                            <p>fhsdfhdj</p>
-                            <span class="headportrait-div-bottom">
-                                <svg fill="#d8d8d8">
-                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                                </svg>
-                            </span>
-                        </div>
+                    <h2>用户名</h2>
+                    <div class="headportrait-div">
+                        <p>{{username}}</p>
+                        <span class="headportrait-div-bottom">
+                            <svg fill="#d8d8d8">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
+                            </svg>
+                        </span>
+                    </div>
                 </section>
             </router-link>
-            <router-link to="" class="info-router">
+            <router-link to="/profile/info/address" class="info-router">
                 <section class="headportrait headportraitwo headportraithree">
                         <h2>收货地址</h2>
                         <div class="headportrait-div">
@@ -50,7 +51,7 @@
                 <section class="headportrait headportraitwo headportraithree">
                         <h2><img src="../../../images/bindphone.png" style="display:inline-block;margin-right:.4rem;" alt="">手机</h2>
                         <div class="headportrait-div">
-                            <p>15800319949</p>
+                            <p>{{infotel}}</p>
                             <span class="headportrait-div-bottom">
                                 <svg fill="#d8d8d8">
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
@@ -94,36 +95,60 @@
                 </div>
             </section>
         </section>
+        <transition name="router-slid">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
 <script>
-    import {mapMutations} from 'vuex'
+    import {mapMutations,mapState} from 'vuex'
     import headTop from '../../../components/header/head'
-    import {getImgPath} from '../../../components/common/mixin'
+    import {imgBaseUrl} from '../../../config/env'
+    //import {getImgPath} from '../../../components/common/mixin'
 
     export default {
-      data(){
+        data(){
             return{
-                infoname:'',    //用户名
+                username:'',    //用户名
+                resetname:'',
                 infotel:'',     //用户手机
+                getUsermes:{},  //用户信息
+                avatarinfo:'',      //用户头像
                 show:false,
                 isEnter:true,
                 isLeave:false,
+                imgBaseUrl,
             }
         },
         created(){
-
+            this.getUsermes=this.userInfo;
+            if(this.userInfo){ 
+                this.username=this.getUsermes.username;
+                this.infotel=this.getUsermes.mobile;
+                this.avatarinfo=this.getUsermes.avatar;
+                console.log(this.getUsermes.user_id)
+            }
+        },
+        mounted(){
+            
+            
         },
         beforeDestroy(){
             clearTimeout(this.timer)
         },
-        mixins: [getImgPath],
+        //mixins: [getImgPath],
         components: {
             headTop, 
 
         },
         props:[],
+        computed:{
+             ...mapState([
+                'userInfo', 'imgPath'
+            ]),
+
+        },
         methods: {
             ...mapMutations([
                 'OUT_LOGIN'
@@ -148,6 +173,7 @@
                 this.$router.go(-1);
             },
         }
+
     }
 </script>
   
@@ -201,6 +227,7 @@
                 }
                 .headportrait-div-top{
                     @include wh(2rem,2rem);
+                    @include borderRadius(50%);
                     vertical-align:middle;
                 }
                 .headportrait-div-bottom{
@@ -439,5 +466,11 @@ body .coverpart .cover-animate{
 }
 body .coverpart .cover-animate-leave{
     animation:zoomOut .4s;
+}
+.router-slid-enter-active, .router-slid-leave-active {
+    transition: all .4s;
+}
+.router-slid-enter, .router-slid-leave-active {
+    transform: translateX(100%);
 }
 </style>
