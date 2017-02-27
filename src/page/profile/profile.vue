@@ -95,7 +95,7 @@
         </section>
         <section class="profile-1reTe">
             <!-- 服务中心 -->
-            <router-link to='/profile/service' class="myorder">
+            <router-link to='/service' class="myorder">
                 <aside>
                     <svg fill="#4aa5f0">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#service"></use>
@@ -111,7 +111,7 @@
                 </div>
             </router-link>
             <!-- 下载饿了么APP -->
-            <router-link to='/profile/service' class="myorder">
+            <router-link to='/download' class="myorder">
                 <aside>
                     <svg fill="#3cabff">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#download"></use>
@@ -178,7 +178,7 @@ export default {
     },
 
     computed:{
-         ...mapState([
+        ...mapState([
             'userInfo', 
         ]),
         imgpath:function () {

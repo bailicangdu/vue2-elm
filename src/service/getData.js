@@ -8,6 +8,8 @@ import * as shop from './tempdata/shop'
 import * as login from './tempdata/login'
 import * as confirm from './tempdata/confirm'
 import * as order from './tempdata/order'
+import * as service from './tempdata/service'
+
 
 
 // /**
@@ -384,6 +386,21 @@ import * as order from './tempdata/order'
 // });
 
 
+
+// /**
+//  * 获取服务中心信息
+//  */
+
+// export const getService = () => fetch('GET', '/m.ele.me@json/profile/explain', {});
+
+
+
+
+
+
+
+
+
 // /**
 //  * 获取订单列表
 //  */
@@ -399,6 +416,9 @@ import * as order from './tempdata/order'
 //  */
 
 // // export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
+
+
+
 
 
 
@@ -452,6 +472,9 @@ export const validateOrders = ({
 	validation_token
 }) => setpromise(confirm.orderSuccess);
 export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
+export const getService = () => setpromise(service.serviceData);
+
+
 
 
 

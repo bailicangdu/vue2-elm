@@ -30,8 +30,11 @@ const add = r => require.ensure([], () => r(require('../page/profile/children/ch
 const balance = r => require.ensure([], () => r(require('../page/profile/children/balance')), 'balance')
 const benefit = r => require.ensure([], () => r(require('../page/profile/children/benefit')), 'benefit')
 const points = r => require.ensure([], () => r(require('../page/profile/children/points')), 'points')
-const service = r => require.ensure([], () => r(require('../page/profile/children/service')), 'service')
+const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
+const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
 const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
+const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
+
 
 
 
@@ -176,6 +179,20 @@ export default [{
         {
             path: '/find',
             component: find
+        },
+        //下载页
+        {
+            path: '/download',
+            component: download
+        },
+        //服务中心
+        {
+            path: '/service',
+            component: service,
+             children: [{
+                path: 'questionDetail', //订单详情页
+                component: questionDetail,
+            }, ]
         },
     ]
 }]
