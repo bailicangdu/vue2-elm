@@ -15,6 +15,42 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
 
 
+# 效果演示
+
+#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
+
+[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+   
+### 移动端扫描下方二维码
+
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
+
+
+
+
+# 说明
+
+>  本项目主要用于熟悉如何用 vue2 构建一个中大型项目
+
+>  vue在开发的过程中的体验很不错，上手快、运行效率高，饿了么从angular转向vue不是没有道理的，看来vue会越来越火
+
+>  如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
+
+>  如有问题请直接在 Issues 中提，或者可以加我的QQ 1264889788
+
+>  开发环境 macOS 10.12.3  Chrome 55
+
+>  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
+
+>  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
+
+#### 个人时间有限，还有其他的项目要做，在此感谢辰妹子，个人中心的所有页面都由她来完成，辛苦了！🙏
+
+
+
+
+
+
 
 # 项目运行（nodejs 6.0+）
 
@@ -198,39 +234,6 @@ npm run build
 7、项目已完成的页面共 30 个，最主要的购物下单功能已经实现，预计全部完成后总页面数在 40 个左右。
 
 
-
-
-# 效果演示
-
-#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
-
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
-   
-### 移动端扫描下方二维码
-
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
-
-
-
-# 最后
-
->  本项目主要用于熟悉如何用 vue2 构建一个中大型项目
-
->  vue在开发的过程中的体验很不错，上手快、运行效率高，饿了么从angular转向vue不是没有道理的，看来vue会越来越火
-
->  开发环境 macOS 10.12.3  Chrome 55
-
->  如有问题请直接在 Issues 中提，或者可以加我的QQ 1264889788
-
->  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
-
->  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
-
-#### 个人时间有限，还有其他的项目要做，在此感谢辰妹子，个人中心的所有页面都由她来完成，辛苦了！🙏
-
-
-#### 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
 
 
