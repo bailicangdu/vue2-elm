@@ -1,13 +1,14 @@
  <template>
-  <div class="rating_page">
+  <div class="page_container">
         <head-top head-title="我的优惠" go-back='true'></head-top>
         <section>我的优惠</section>
     </div>
 </template>
 
 <script>
-    import headTop from '../../../components/header/head'
-    import {getImgPath} from '../../../components/common/mixin'
+    import headTop from 'src/components/header/head'
+    import {mapState, mapMutations} from 'vuex'
+    import {getOrderList} from 'src/service/getData'
 
     export default {
       data(){
@@ -15,25 +16,29 @@
     
             }
         },
-        created(){
+        mounted(){
 
         },
-        mixins: [getImgPath],
+        computed: {
+            ...mapState([
+                'userInfo', 
+            ]),
+        },
         components: {
             headTop,
-
         },
-        props:[],
         methods: {
-            
+            ...mapMutations([
+                'SAVE_AVANDER'
+            ]),
         }
     }
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
   
-    .rating_page{
+    .page_container{
         position: absolute;
         top: 0;
         left: 0;

@@ -15,7 +15,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 ## 技术栈
-vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware
 
 
 
@@ -180,7 +180,11 @@ npm run build
 |			  	|-- shopDetail       // 单个商铺信息页
 |					|-- children             
 |				  		|-- shopSafe // 商铺认证信息页     
-|       |-- vipcard                  // vip办理页
+|       |-- vipcard                  // 会员卡办理页
+|			|-- children             
+|			  	|-- invoiceRecord    // 购买记录     
+|			  	|-- useCart          // 使用卡号购买
+|			  	|-- vipDescription   // 会员说明
 |
 |   |-- plugins                      // 引用的插件
 |
