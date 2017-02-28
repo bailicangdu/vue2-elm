@@ -102,7 +102,7 @@
 </template>
 
 <script>
-    import {mapMutations,mapState} from 'vuex'
+    import {mapMutations, mapState} from 'vuex'
     import headTop from '../../../components/header/head'
     import {imgBaseUrl} from '../../../config/env'
     //import {getImgPath} from '../../../components/common/mixin'

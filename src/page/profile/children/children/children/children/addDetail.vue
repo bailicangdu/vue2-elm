@@ -3,7 +3,7 @@
         <head-top head-title="搜索地址" go-back='true'></head-top>
         <section>
         	<div class="add-detail">
-        		<input type="text" placeholder="请输入小区/写字楼/学校等" v-model="addAddress" @input="inputThing">
+        		<input type="text" placeholder="请输入小区/写字楼/学校等" v-model="inputAdress" @input="inputThing">
         		<button @click="inputThing">确认</button>
         	</div>
         	<div class="warnpart">为了满足商家的送餐要求，建议您从列表中选择地址</div>
@@ -38,11 +38,10 @@
             }
         },
         created(){
-
+        	this.inputAdress = this.addAddress ? this.addAddress : this.inputAdress
         	
         },
         mounted(){
-        	
         	getSearchAddress(this.inputAdress).then(res => {
         			this.adressList=res;
         			this.warning=true;
@@ -59,16 +58,14 @@
         mixins: [getImgPath],
         components: {
             headTop,
-
         },
         computed:{
         	...mapState([
-        		'addAddress'
-        	])
+                'addAddress'
+            ])
         },
         props:[],
         methods: {
-        	
         	...mapMutations([
         		'SAVE_ADDDETAIL'
         	]),
@@ -87,7 +84,6 @@
             	});
             },
             listClick(index){
-            	console.log(this.adressList[index].name)
             	this.SAVE_ADDDETAIL(this.adressList[index].name);
             	this.$router.go(-1);
             }

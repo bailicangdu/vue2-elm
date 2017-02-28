@@ -9,8 +9,8 @@ import * as login from './tempdata/login'
 import * as confirm from './tempdata/confirm'
 import * as order from './tempdata/order'
 import * as service from './tempdata/service'
-
-
+import * as addDetail from './tempdata/addDetail'
+import * as addresspart from './tempdata/address'
 
 // /**
 //  * 获取首页默认地址
@@ -423,14 +423,16 @@ import * as service from './tempdata/service'
 /**
 *个人中心里编辑地址
 */
-export const getAddressList = (user_id) => fetch('GET', '/v1/users/'+user_id+'/addresses')
+//export const getAddressList = (user_id) => fetch('GET', '/v1/users/'+user_id+'/addresses')
+
 /**
 *个人中心里搜索地址
 */
-export const getSearchAddress=(keyword) => fetch('GET','v1/pois',{
-	keyword:keyword,
-	type:'nearby'
-})
+// export const getSearchAddress=(keyword) => fetch('GET','v1/pois',{
+// 	keyword:keyword,
+// 	type:'nearby'
+// })
+
 
 
 /**
@@ -494,5 +496,5 @@ export const sendLogin = (code, mobile, validate_token) => setpromise(login.user
 export const getOrderList = (user_id, offset) => setpromise(order.orderList);
 export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
 
-
-
+export const getAddressList = (user_id) => setpromise(addresspart.address)
+export const getSearchAddress=(keyword) => setpromise(addDetail.addData)

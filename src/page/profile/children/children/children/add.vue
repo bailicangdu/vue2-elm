@@ -2,7 +2,7 @@
   <div class="rating_page">
         <head-top head-title="新增地址" go-back='true'></head-top>
         <section class="adddetail">
-        	<form action="" >
+        	<form action="">
         		<section class="ui-padding-block">
         			<div class="input-new">
         				<input type="text" placeholder="请填写你的姓名" :class="{verifies:verify}" v-model="message" @input="inputThing">
@@ -27,7 +27,7 @@
         			</div>
         		</section>
         		<section class="addbutton">
-        			<button :class="{butopacity:butpart}">新增地址</button>
+        			<button :class="{butopacity:butpart}" @click="submitThing">新增地址</button>
         		</section>
         	</form>
         </section>
@@ -38,7 +38,7 @@
 <script>
     import headTop from '../../../../../components/header/head'
     import {getImgPath} from '../../../../../components/common/mixin'
-    import {mapState} from 'vuex'
+    import {mapState, mapMutations} from 'vuex'
     export default {
       data(){
             return{
@@ -56,6 +56,7 @@
     			standbytele:'',
     			standbytelenum:'',
     			addSearch:false,
+    			//newAddress:{},			//增加数组的元素
             }
         },
         created(){
@@ -68,9 +69,11 @@
         },
         computed:{
              ...mapState([
-                'addAddress'
+                'addAddress',
             ]),
-
+            ...mapMutations([
+            	'ADD_ADDRESS'
+            ])
         },
         props:[],
         methods: {
@@ -116,6 +119,11 @@
             		this.butpart=true;
             	}else{
             		this.butpart=false;
+            	}
+            },
+            submitThing(){
+            	if(this.butpart){
+            		//this.ADD_ADDRESS({"name":this.message,"address":this.mesthree,"address_detail":})
             	}
             }
         }
