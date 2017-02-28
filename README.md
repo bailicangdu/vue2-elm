@@ -11,28 +11,10 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 
-# 技术栈
-vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
-
-
-# 效果演示
-
-#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
-
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
-   
-### 移动端扫描下方二维码
-
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
-
-
 
 # 说明
 
->  本项目主要用于熟悉如何用 vue2 构建一个中大型项目
-
->  vue在开发的过程中的体验很不错，上手快、运行效率高，饿了么从angular转向vue不是没有道理的，看来vue会越来越火
+>  本项目主要用于熟悉如何用 vue2 架构一个大型项目
 
 >  如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
@@ -48,6 +30,19 @@ vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-p
 
 
 
+# 技术栈
+vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+
+
+# 效果演示
+
+#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
+
+[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+   
+### 移动端扫描下方二维码
+
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
 
 
 
