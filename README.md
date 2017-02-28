@@ -97,7 +97,7 @@ npm run build
 |       |-- mUtils.js                // 常用的js方法
 |       |-- rem.js                   // px转换rem
 |   |-- images                       // 公共图片
-|   |-- pages                        // 页面组件
+|   |-- pages                       
 |       |-- city                     // 当前城市页
 |		|-- food                 	 // 食品筛选排序页
 |		|-- confirmOrder             // 确认订单页
@@ -125,8 +125,14 @@ npm run build
 |				|--balance			 // 我的余额
 |				|--benefit			 // 我的优惠
 |				|--info				 // 帐户信息
+|		          |--children
+|				    |--address       // 添加地址
+|		              |--children
+|				        |--add       // 新增地址
+|		                  |--children
+|				            |--addDetail// 搜索地址
 |				|--points			 // 我的积分
-
+|				|--setusername	     // 重置用户名
 |       |-- search                   // 搜索页
 |		|--service			         // 服务中心
 |			|--children

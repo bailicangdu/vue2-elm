@@ -21,5 +21,7 @@ export const SAVE_ORDER = 'SAVE_ORDER'
 export const OUT_LOGIN = 'OUT_LOGIN'
 export const RETSET_NAME = 'RETSET_NAME'
 export const SAVE_AVANDER = 'SAVE_AVANDER'
+export const SAVE_ADDDETAIL= 'SAVE_ADDDETAIL'
 export const SAVE_ADDRESS= 'SAVE_ADDRESS'
 export const SAVE_QUESTION= 'SAVE_QUESTION'
+

@@ -23,6 +23,7 @@ import {
 	RETSET_NAME,
 	SAVE_AVANDER,
 	SAVE_ADDRESS,
+	SAVE_ADDDETAIL,
 	SAVE_QUESTION,
 } from './mutation-types.js'
 import {
@@ -249,8 +250,12 @@ export default {
 	[SAVE_ADDRESS](state, newAdress) {
 		state.removeAddress = newAdress
 	},
+	//添加地址name
+	[SAVE_ADDDETAIL](state, addAddress){
+		state.addAddress=addAddress;
+	},
 	//保存所选问题标题和详情
 	[SAVE_QUESTION](state, question) {
 		state.question = {...question};
-	},
+	}
 }

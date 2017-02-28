@@ -51,7 +51,7 @@
             font-family: Helvetica Neue,Tahoma,Arial;
         }
         .detail_dom{
-        	font-size: .7rem;
+        	font-size: .65rem;
         	padding: 0 .7rem;
         	*{
         		width: 100%;

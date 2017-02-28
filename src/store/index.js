@@ -29,7 +29,9 @@ const state = {
 	login: true,//是否登陆
 	imgPath:null,//头像地址
 	removeAddress:[],//移除地址
+	addAddress:'',		//新增地址
 	question: null,//问题详情
+
 }
 
 export default new Vuex.Store({
