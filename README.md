@@ -1,4 +1,4 @@
-# 前言
+## 前言
 
 vue2的发布后自己也研究了一段时间，奈何公司的技术栈是以react为主，没有机会好好利用vue2去做一个完整的项目。虽然写了几个demo，但和写一个完整的项目还是有很大差别的。于是自己想着用空余的时间写一个项目，选择了饿了么也只是因为经常用，熟悉它的布局。之前的饿了么官网是用angular写的，最近才发现原来这段时间改成了vue，看来饿了么也入了vue的坑。
 
@@ -12,7 +12,59 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 
-# 说明
+
+
+## 技术栈
+vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
+
+
+
+## 项目运行（nodejs 6.0+）
+
+```
+克隆，或者直接下载
+git clone https://github.com/bailicangdu/vue2-elm.git  
+
+进入文件夹
+cd vue2-elm
+
+安装依赖
+npm install
+```
+
+### 编译环境
+```
+
+开启本地服务器
+npm run dev
+
+访问 http://localhost:8088
+```
+
+
+### 线上版本
+```
+npm run build
+
+生成的elm文件夹放在服务器即可正常访问
+```
+
+
+## 效果演示
+
+#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
+
+[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+   
+### 移动端扫描下方二维码
+
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
+
+
+
+
+
+## 说明
 
 >  本项目主要用于熟悉如何用 vue2 架构一个大型项目
 
@@ -31,55 +83,8 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 
-# 技术栈
-vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware反向代理 
 
-
-# 效果演示
-
-#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
-
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
-   
-### 移动端扫描下方二维码
-
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
-
-
-
-# 项目运行（nodejs 6.0+）
-
-```
-克隆，或者直接下载
-git clone https://github.com/bailicangdu/vue2-elm.git  
-
-进入文件夹
-cd vue2-elm
-
-安装依赖
-npm install
-```
-
-## 编译环境
-```
-
-开启本地服务器
-npm run dev
-
-访问 http://localhost:8088
-```
-
-
-## 线上版本
-```
-npm run build
-
-生成的elm文件夹放在服务器即可正常访问
-```
-
-
-# 目标功能
+## 目标功能
 - [x] 定位功能 -- 完成
 - [x] 选择城市 -- 完成
 - [x] 搜索地址 -- 完成
@@ -107,7 +112,7 @@ npm run build
 
 
 
-# 项目布局
+## 项目布局
 ```
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
@@ -213,7 +218,7 @@ npm run build
 
 
 
-# 总结
+## 总结
 
 1、因为并不是elm官方，而且因为要开代理，必须在pc端打开，所以预计最多只能做到下单这一步，下单成功后可以在手机客户端查看并付款。
 
@@ -235,7 +240,7 @@ npm run build
 
 
 
-# 部分项目截图
+## 部分项目截图
 
 ### 城市列表页
 
