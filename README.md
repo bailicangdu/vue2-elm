@@ -18,7 +18,7 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 
 
 ## 技术栈
-vue2 + vue-router2 + vuex + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware
+vue2 + vuex2 + vue-router + webpack + ES6/7 + fetch + sass + flex + svg + http-proxy-middleware
 
 
 
@@ -71,7 +71,7 @@ npm run build
 
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
->  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
+>  另外一个 vue2 + vuex2 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
 
 
 
