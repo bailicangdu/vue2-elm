@@ -12,6 +12,7 @@ import * as service from './tempdata/service'
 import * as addDetail from './tempdata/addDetail'
 import * as addresspart from './tempdata/address'
 import * as vip from './tempdata/vip'
+import * as hongbao from './tempdata/hongbao'
 
 // /**
 //  * 获取首页默认地址
@@ -442,6 +443,12 @@ import * as vip from './tempdata/vip'
 // 	password
 // })
 
+/**
+ * 获取红包数量
+*/
+// export const getHongbaoNum= id => fetch('GET','/promotion/v2/users/' + id + '/hongbaos',{});
+
+
 
 
 /**
@@ -496,7 +503,7 @@ export const validateOrders = ({
 export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
 export const getService = () => setpromise(service.serviceData);
 export const vipCart= (id, number, password) => setpromise(vip.vipcart);
-
+export const getHongbaoNum= id => setpromise(hongbao.dataList);
 
 
 
