@@ -53,18 +53,6 @@ npm run build
 ```
 
 
-## 效果演示
-
-#### (演示效果为模拟数据，只做展示用，真实效果请下载项目并运行，方可获取真实的官网数据);
-
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
-   
-### 移动端扫描下方二维码
-
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
-
-
-
 
 
 ## 说明
@@ -82,6 +70,18 @@ npm run build
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
+
+
+
+## 效果演示
+
+#### (演示效果是上个月版本，使用的是模拟数据，且很多已修复的bug未更新，最新效果请clone代码并运行，可以获取真实的官网数据);
+
+[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+   
+### 移动端扫描下方二维码
+
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
 
 
 
