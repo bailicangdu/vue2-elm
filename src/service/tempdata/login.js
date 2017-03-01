@@ -17,7 +17,7 @@ export const userInfo = {
 	"current_invoice_id": 0,
 	"delivery_card_expire_days": 0,
 	"email": "",
-	"gift_amount": 0,
+	"gift_amount": 7,
 	"id": 186335200,
 	"is_active": 1,
 	"is_email_valid": false,

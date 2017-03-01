@@ -95,10 +95,11 @@
         },
         methods: {
             ...mapMutations([
-                'ORDER_SUCCESS'
+                'ORDER_SUCCESS', 'BUY_CART'
             ]),
             buyCart(){
                 this.ORDER_SUCCESS({order_id: '399525134200981325'});
+                this.BUY_CART(20);
                 this.$router.push('/confirmOrder/payment');
             },
         }

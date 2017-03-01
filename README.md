@@ -77,7 +77,7 @@ npm run build
 
 ## 效果演示
 
-#### (演示demo是上个月版本，使用的是模拟数据，ios会出现卡顿的现象，且很多已修复的bug未更新，最新效果请clone代码并运行，可以获取真实的官网数据。我会尽快更新demo);
+#### (演示demo是上个月版本，使用的是模拟数据，ios会出现卡顿的现象，且很多已修复的bug未更新，最新效果请clone代码并运行，我会尽快更新demo);
 
 [demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
    

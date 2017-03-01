@@ -7,7 +7,7 @@
                 <p class="time">{{remaining}}</p>
                 <footer class="order_detail" v-if="payDetail.resultData">
                     <span>详情</span>
-                    <span>¥ {{(payDetail.resultData.orderInfo.orderAmount/100).toFixed(2)}}</span>
+                    <span>¥ {{cartPrice.toFixed(2) || (payDetail.resultData.orderInfo.orderAmount/100).toFixed(2)}}</span>
                 </footer>   
             </section>
         </section>
@@ -77,7 +77,7 @@
         props:[],
         computed: {
             ...mapState([
-                'orderMessage', 'userInfo', 'shopid'
+                'orderMessage', 'userInfo', 'shopid', 'cartPrice'
             ]),
             remaining: function (){
                 let minute = parseInt(this.countNum/60);

@@ -31,9 +31,9 @@ const setusername = r => require.ensure([], () => r(require('../page/profile/chi
 const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
 const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
 const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
-const balance = r => require.ensure([], () => r(require('../page/profile/children/balance')), 'balance')
-const benefit = r => require.ensure([], () => r(require('../page/profile/children/benefit')), 'benefit')
-const points = r => require.ensure([], () => r(require('../page/profile/children/points')), 'points')
+const balance = r => require.ensure([], () => r(require('../page/balance/balance')), 'balance')
+const benefit = r => require.ensure([], () => r(require('../page/benefit/benefit')), 'benefit')
+const points = r => require.ensure([], () => r(require('../page/points/points')), 'points')
 const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
 const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
 const find = r => require.ensure([], () => r(require('../page/find/find')), 'find')
@@ -151,15 +151,6 @@ export default [{
                 component: setusername,
             },
             {
-                path: 'balance', //余额
-                component: balance,
-            }, {
-                path: 'benefit', //我的优惠页
-                component: benefit,
-            }, {
-                path: 'points', //我的积分页
-                component: points,
-            }, {
                 path: 'service', //服务中心
                 component: service,
             },]
@@ -211,6 +202,21 @@ export default [{
                 path: 'questionDetail', //订单详情页
                 component: questionDetail,
             }, ]
+        },
+        //余额
+        {
+            path: 'balance', 
+            component: balance,
+        },
+        //我的优惠页 
+        {
+            path: 'benefit', 
+            component: benefit,
+        },
+        //我的积分页
+        {
+            path: 'points', 
+            component: points,
         },
     ]
 }]
