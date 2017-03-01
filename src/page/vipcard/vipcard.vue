@@ -43,7 +43,7 @@
                         <span>1个月</span>
                         <span> ¥20</span>
                     </div>
-                    <router-link to="/confirmOrder/payment" class="apply_vip_buy_right">购买</router-link>
+                    <div class="apply_vip_buy_right" @click="buyCart">购买</div>
                 </section>
             </section>
             <router-link to="/vipcard/useCart" class="header_style common_style">
@@ -95,8 +95,12 @@
         },
         methods: {
             ...mapMutations([
-                'SAVE_AVANDER'
+                'ORDER_SUCCESS'
             ]),
+            buyCart(){
+                this.ORDER_SUCCESS({order_id: '399525134200981325'});
+                this.$router.push('/confirmOrder/payment');
+            },
         }
     }
 </script>

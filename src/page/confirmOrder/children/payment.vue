@@ -64,7 +64,9 @@
         },
         created(){
             this.initData();
-            this.CLEAR_CART(this.shopid);
+            if (this.shopid) {
+                this.CLEAR_CART(this.shopid);
+            }
         },
         mounted(){
             this.remainingTime();
