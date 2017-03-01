@@ -939,6 +939,7 @@
         .cart_icon_num{
             flex: 1;
             .cart_icon_container{
+                display: flex;
                 background-color: #3d3d3f;
                 position: absolute;
                 padding: .4rem;
