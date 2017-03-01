@@ -291,9 +291,7 @@
             }
         },
         created(){
-            //获取上个页面传递过来的geohash值
             this.geohash = this.$route.query.geohash;
-            //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.id;
             //初始化购物车，获取存储在localStorage中的购物车商品信息
             this.INIT_BUYCART();
@@ -332,11 +330,8 @@
                     return null;
                 }
             },
-            /**
-             * 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象，因为组件buyCart需要监听shopCart的变化
-             */
             shopCart: function (){
-                return Object.assign({},this.cartList[this.shopId]);
+                return {...this.cartList[this.shopId]};
             },
             //购物车中总共商品的数量
             totalNum: function (){
@@ -452,12 +447,9 @@
              * 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值 categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，所有的购物车数据都交给vuex统一管理，包括购物车组件中自身的商品数量，使整个数据流更加清晰
              */
             initCategoryNum(){
-                //左侧食品列表当前分类中已加入购物车的商品数量
                 let newArr = [];
                 let cartFoodNum = 0;
-                //购物车总共的价格
                 this.totalPrice = 0; 
-                //购物车中所有商品的详细信息列表
                 this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
                     if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
@@ -488,18 +480,15 @@
                     }
                 })
                 this.totalPrice = this.totalPrice.toFixed(2);
-                this.categoryNum = newArr.concat([]);
+                this.categoryNum = [...newArr];
             },
-            //控制显示购物车中已选商品列表
             toggleCartList(){
                 this.showCartList = !this.showCartList;
             },
-            //清空当前商铺的购物车信息
             clearCart(){
                 this.toggleCartList();
                 this.CLEAR_CART(this.shopId);
             },
-            //监听购物车组件下落的圆点，控制购物车图标进行运动效果
             listenInCart(){
                 if (!this.receiveInCart) {
                     this.receiveInCart = true;
@@ -508,7 +497,6 @@
                     })
                 }
             },
-            //点击评论分类，获取数据
             async changeTgeIndex(index, name){
                 this.ratingTageIndex = index;
                 this.ratingOffset = 0;
@@ -518,7 +506,6 @@
                     this.ratingList = this.ratingList.reverse();
                 }
             },
-            //页面下拉至底部，加载更多
             async loaderMoreRating(){
                 if (this.preventRepeatRequest) {
                     return
@@ -527,7 +514,7 @@
                 this.preventRepeatRequest = true;
                 this.ratingOffset += 10;
                 let ratingDate = await getRatingList(this.ratingOffset, this.ratingTagName);
-                this.ratingList = this.ratingList.concat(ratingDate);
+                this.ratingList = [...this.ratingList,...ratingDate];
                 this.loadRatings = false;
                 if (ratingDate.length >= 10) {
                     this.preventRepeatRequest = false;
@@ -555,11 +542,9 @@
                     })
                 }
             },
-            //监听shopCart的变化
             shopCart: function (value){
                 this.initCategoryNum();
             },
-            //监听购物车中商铺列表的变化，当length为0时将列表隐藏
             cartFoodList: function (value){
                 if(!value.length){
                     this.showCartList = false;

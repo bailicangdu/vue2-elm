@@ -109,7 +109,7 @@ export default {
 			this.offset += 20;
 			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.shopListArr = this.shopListArr.concat(res);
+			this.shopListArr = [...this.shopListArr, ...res];
 			this.showLoading = false;
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {

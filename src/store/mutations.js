@@ -108,8 +108,7 @@ export default {
 			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
 			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
 		}
-		//返回一个新的对象，否则计算属性无法监听到数据的变化
-		state.cartList = Object.assign({}, cart);
+		state.cartList = {...cart};
 		//存入localStorage
 		setStore('buyCart', state.cartList);
 	},
@@ -127,8 +126,7 @@ export default {
 		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
 			if (cart[shopid][category_id][item_id][food_id]['num'] > 0) {
 				cart[shopid][category_id][item_id][food_id]['num']--;
-				//返回一个新的对象，否则计算属性无法监听到数据的变化
-				state.cartList = Object.assign({}, cart);
+				state.cartList = {...cart};
 				//存入localStorage
 				setStore('buyCart', state.cartList);
 			} else {
@@ -147,7 +145,7 @@ export default {
 	//清空当前商品的购物车信息
 	[CLEAR_CART](state, shopid) {
 		state.cartList[shopid] = null;
-		state.cartList = Object.assign({}, state.cartList);
+		state.cartList = {...state.cartList};
 		setStore('buyCart', state.cartList);
 	},
 	// 记录用户信息
@@ -264,28 +262,6 @@ export default {
 	[SAVE_QUESTION](state, question) {
 		state.question = {...question};
 	},
-	// [ADD_ADDRESS](state, {
-	// 	address,
-	// 	address_detail,
-	// 	geohash,
-	// 	name,
-	// 	phone,
-	// 	phone_bk,
-	// 	poi,
-	// 	poi_type,
-	// }){
-	// 	let addressList = state.newAddress;
-	// 	addressList['address']=address;
-	// 	addressList['address_detail']=address_detail;
-	// 	addressList['geohash']=geohash;
-	// 	addressList['name']=name;
-	// 	addressList['phone']=phone;
-	// 	addressList['phone_bk']=phone_bk;
-	// 	addressList['poi']=poi;
-	// 	addressList['poi_type']=poi_type;
-	// 	state.newAddress = Object.assign({}, addressList);
-	// 	state.removeAddress = state.removeAddress.unshift(state.newAddress)
-	// }
 	[ADD_ADDRESS](state, obj){
 		state.newAddress = {...obj};
 		state.removeAddress = state.removeAddress.unshift(state.newAddress)
