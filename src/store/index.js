@@ -31,8 +31,6 @@ const state = {
 	removeAddress:[],//移除地址
 	addAddress:'',		//新增地址
 	question: null,//问题详情
-	//增加地址的几个key值
-	newAddress:{},
 }
 
 export default new Vuex.Store({

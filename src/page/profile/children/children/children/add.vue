@@ -56,11 +56,11 @@
     			standbytele:'',
     			standbytelenum:'',
     			addSearch:false,
-    			//newAddress:{},			//增加数组的元素
+    			newAddress:{},			//增加数组的元素
             }
         },
         created(){
-        	console.log(this.addAddress)
+
         },
         mixins: [getImgPath],
         components: {
@@ -69,14 +69,15 @@
         },
         computed:{
              ...mapState([
-                'addAddress',
+                'addAddress','removeAddress','newAddress',
             ]),
-            ...mapMutations([
-            	'ADD_ADDRESS'
-            ])
+            
         },
         props:[],
         methods: {
+        	...mapMutations([
+            	'ADD_ADDRESS'
+            ]),
             inputThing(){
             	(!this.message) ? this.verify=true : this.verify=false;
             	this.bindThing()
@@ -122,9 +123,19 @@
             	}
             },
             submitThing(){
-            	if(this.butpart){
-            		//this.ADD_ADDRESS({"name":this.message,"address":this.mesthree,"address_detail":})
-            	}
+            	//if(this.butpart){
+            		this.ADD_ADDRESS({
+                        name: this.message,
+                        address: this.mesthree,
+                        address_detail: this.addAddress,
+                        geohash: 'wtw37r7cxep4',
+                        phone: this.telenum,
+                        phone_bk: this.standbytelenum,
+                        poi: this.addAddress,
+                        poi_type: 0,
+                    });
+            		this.$router.go(-1);
+            	//}
             }
         }
     }
