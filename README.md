@@ -241,12 +241,17 @@ npm run build
 
 6、项目写到现在，从 登陆注册到、首页、搜索、商家列表、购物车、下单、订单列表、个人中心 一个流程走完之后、不但对vue的理解更深一层，而且对以后掌控大型项目的时候也有非常多的帮助，做一个实际的项目才能对自己有很大的提升。
 
-7、项目已完成的页面共 35 个，已经慢慢开始接近尾声。
+7、已完成的页面共 35 个，项目已经慢慢开始接近尾声。
 
 
 
+## 定一个小目标
 
+1、后续我会用node.js构建一个模拟外卖平台的后台系统，满足这个项目所需要的后台接口，不再用饿了么的数据，并进行同构，实现前后端分离。
 
+2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
+
+。。。敬请期待
 
 
 ## 部分项目截图
@@ -325,12 +330,8 @@ npm run build
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
 
+
 ### 订单列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order2.png" width="365" height="619"/>
-
-
-
-#### 其他页面正在开发中。。。
-
