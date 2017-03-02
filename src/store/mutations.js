@@ -267,7 +267,7 @@ export default {
 	},
 	//增加地址
 	[ADD_ADDRESS](state, obj) {
-		state.removeAddress = [...state.removeAddress, obj];
+		state.removeAddress = [obj, ...state.removeAddress];
 	},
 	//会员卡价格纪录
 	[BUY_CART](state, price) {

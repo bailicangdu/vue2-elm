@@ -123,7 +123,7 @@
             	}
             },
             submitThing(){
-            	//if(this.butpart){
+            	if(this.butpart){
             		this.ADD_ADDRESS({
                         name: this.message,
                         address: this.mesthree,
@@ -135,7 +135,7 @@
                         poi_type: 0,
                     });
             		this.$router.go(-1);
-            	//}
+            	}
             }
         }
     }

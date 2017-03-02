@@ -3,8 +3,8 @@
         <head-top head-title="兑换会员" go-back='true'></head-top>
         <p class="buy_for">成功兑换后将关联到当前帐号： <span>{{userInfo.username}}</span></p>
         <form class="form_style">
-        	<input type="text" name="cartNumber" maxlength="10" v-model="cartNumber" placeholder="请输入10位卡号" @input="checkCart">
-        	<input type="text" name="passWord" maxlength="6" v-model="passWord" placeholder="请输入6位卡密" @input="checkPassWord">
+        	<input type="text" name="cartNumber" maxlength="10" v-model="cartNumber" placeholder="请输入10位卡号">
+        	<input type="text" name="passWord" maxlength="6" v-model="passWord" placeholder="请输入6位卡密">
         </form>
         <p class="determine" :class="{could_pay: couldPay}" @click="confrimPay">兑换</p>
         <footer class="Binding">
@@ -30,8 +30,6 @@
             return{
     			cartNumber: null,
     			passWord: null,
-    			rightCart: false,
-    			rightPassWrod: false,
     			showAlert: false,
     			alertText: null,
             }
@@ -44,28 +42,14 @@
                 'userInfo', 
             ]),
             couldPay: function (){
-            	return this.rightCart && this.rightPassWrod;
-            }
+            	return (/^\d{10}$/.test(this.cartNumber))&&(/^\d{6}$/.test(this.passWord)) ;
+            },
         },
         components: {
             headTop,
             alertTip,
         },
         methods: {
-        	checkCart(){
-        		if (/^\d{10}$/.test(this.cartNumber)) {
-        			this.rightCart = true;
-        		}else{
-        			this.rightCart = false;
-        		}
-        	},
-        	checkPassWord(){
-        		if (/^\d{6}$/.test(this.passWord)) {
-        			this.rightPassWrod = true;
-        		}else{
-        			this.rightPassWrod = false;
-        		}
-        	},
             async confrimPay(){
             	if (this.couldPay) {
             		let res = await vipCart(this.userInfo.id, this.cartNumber, this.passWord);

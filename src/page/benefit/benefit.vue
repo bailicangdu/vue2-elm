@@ -6,7 +6,7 @@
                 <span :class="{choosed: categoryType === 1}" @click="categoryType = 1">红包</span>
                 <span :class="{choosed: categoryType === 2}" @click="categoryType = 2">商家代金券</span>
             </section>
-            <transition name="router-fade" mode="out-in">
+            <transition name="router-fade">
                 <section v-if="categoryType === 1">
                     <section class="hongbao_container">
                         <header class="hongbao_title">
@@ -15,7 +15,7 @@
                             </section>
                             <section class="hongbao_description">
                                 <img src="../../images/description.png" height="24" width="24">
-                                <span class="hongbao_detail">红包说明</span>
+                                <router-link to="/benefit/hbDescription" class="hongbao_detail">红包说明</router-link>
                             </section>
                         </header>
                         <ul class="hongbao_list_ul">
@@ -44,30 +44,44 @@
                             </li>
                         </ul>
                     </section>
-                    <router-link to="/home" class="history_hongbao">
-                        <span>查看历史红包</span>
+                    <router-link to="/benefit/hbHistory" class="history_hongbao">
+                        <span class="check_history">查看历史红包</span>
                         <svg class="history_right">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                         </svg>
                     </router-link>
                     <footer class="hongbao_footer">
-                        <router-link to="/home" class="hongbao_style" style="border-right: 1px solid #f5f5f5">
+                        <router-link to="/benefit/exchange" class="hongbao_style" style="border-right: 1px solid #f5f5f5">
                             兑换红包
                         </router-link>
-                        <router-link to="/home" class="hongbao_style">
+                        <router-link to="/benefit/commend" class="hongbao_style">
                             推荐有奖
                         </router-link>
                     </footer>
                 </section>
             </transition>
-            <transition name="router-fade" mode="out-in">
-                <section v-if="categoryType === 2">
-                    
+            <transition name="router-fade">
+                <section v-if="categoryType === 2" class="voucher_container">
+                    <section class="hongbao_description voucher_header">
+                        <img src="../../images/description.png" height="24" width="24">
+                        <router-link to="/benefit/coupon" class="hongbao_detail">商家代金券说明</router-link>
+                    </section>
+                    <section class="unable_use">
+                        <img src="../../images/voucher.png" height="170" width="300">
+                        <p>无法使用代金券</p>
+                        <p>非客户端或客户端版本过低</p>
+                        <router-link to="/download" class="download_app">
+                        下载或升级客户端
+                        </router-link>
+                    </section>
                 </section>
             </transition>
         </section>
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <loading v-show="showLoading"></loading>
+        <transition name="router-slid">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -147,6 +161,17 @@
             color: $blue;
         }
     }
+    .hongbao_description{
+        display: flex;
+        align-items: center;
+        img{
+            @include wh(.6rem, .6rem);
+            margin-right: .2rem;
+        }
+        .hongbao_detail{
+            color: $blue;
+        }
+    }
     .hongbao_container{
         padding: 0 .5rem;
         .hongbao_title{
@@ -157,17 +182,6 @@
                 color: #666;
                 span{
                     color: #ff5340;
-                }
-            }
-            .hongbao_description{
-                display: flex;
-                align-items: center;
-                img{
-                    @include wh(.6rem, .6rem);
-                    margin-right: .2rem;
-                }
-                .hongbao_detail{
-                    color: $blue;
                 }
             }
         }
@@ -232,7 +246,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        span{
+        .check_history{
             @include sc(.5rem, #999);
             margin-right: .2rem;
         }
@@ -254,10 +268,46 @@
             @include sc(.7rem, #555);
         }
     }
+    .voucher_container{
+        .voucher_header{
+            font-size: .5rem;
+            justify-content: flex-end;
+            line-height: 2rem;
+            margin-right: .5rem;
+        }
+        .unable_use{
+            text-align: center;
+            margin-top: 4rem;
+            img{
+                @include wh(6rem, 3.4rem);
+            }
+            p:nth-of-type(1){
+                @include sc(.7rem, #666);
+                margin-top: .4rem;
+            }
+            p:nth-of-type(2){
+                @include sc(.5rem, #999);
+                margin-top: .3rem;
+                margin-bottom: .3rem;
+            }
+            .download_app{
+                background-color: #56d176;
+                @include sc(.65rem, #fff);
+                padding: .3rem;
+                border-radius: .15rem;
+            }
+        }
+    }
     .router-fade-enter-active, .router-fade-leave-active {
         transition: opacity .3s;
     }
     .router-fade-enter, .router-fade-leave-active {
         opacity: 0;
+    }
+    .router-slid-enter-active, .router-slid-leave-active {
+        transition: all .4s;
+    }
+    .router-slid-enter, .router-slid-leave-active {
+        transform: translateX(100%);
     }
 </style>

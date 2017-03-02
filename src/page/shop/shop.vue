@@ -330,6 +330,7 @@
                     return null;
                 }
             },
+            //当前商店购物信息
             shopCart: function (){
                 return {...this.cartList[this.shopId]};
             },

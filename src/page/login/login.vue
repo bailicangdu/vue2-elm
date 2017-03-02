@@ -97,9 +97,13 @@
                 }
             },
             async getCaptchaCode(){
-                let res = await getcaptchas();
-                
-                this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+                if (process.env.NODE_ENV !== 'development'){
+                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
+                }else{
+                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
+                    // let res = await getcaptchas();
+                    // this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+                }
             },
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {

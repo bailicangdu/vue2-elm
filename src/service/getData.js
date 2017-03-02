@@ -435,6 +435,8 @@ import * as hongbao from './tempdata/hongbao'
 // 	type:'nearby'
 // })
 
+
+
 /**
 *兑换会员卡
 */
@@ -443,10 +445,28 @@ import * as hongbao from './tempdata/hongbao'
 // 	password
 // })
 
+
+
 /**
  * 获取红包数量
 */
 // export const getHongbaoNum= id => fetch('GET','/promotion/v2/users/' + id + '/hongbaos',{});
+
+
+
+/**
+ * 获取过期红包
+*/
+// export const getExpired= id => fetch('GET','/promotion/v2/users/' + id + '/expired_hongbaos?limit=10&offset=0',{});
+
+
+/**
+ * 兑换红包
+*/
+// export const exChangeHongbao= (id, exchange_code, captcha_code) => fetch('POST','/v1/users/' + id + '/hongbao/exchange',{
+// 	exchange_code,
+// 	captcha_code,
+// });
 
 
 
@@ -504,7 +524,8 @@ export const payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDet
 export const getService = () => setpromise(service.serviceData);
 export const vipCart= (id, number, password) => setpromise(vip.vipcart);
 export const getHongbaoNum= id => setpromise(hongbao.dataList);
-
+export const getExpired= id => setpromise(hongbao.expired);
+export const exChangeHongbao= (id, exchange_code, captcha_code) => setpromise(hongbao.exchange);
 
 
 

@@ -150,9 +150,13 @@ export default {
     .search_form{
         background-color: #fff;
         padding: 0.5rem;
+        display: flex;
+        input{
+            height: 1.5rem;
+        }
         .search_input{
+            flex: 4;
             border: 0.025rem solid $bc;
-            @include wh(78%, 1.5rem);
             @include sc(0.65rem, #333);
             border-radius: 0.125rem;
             background-color: #f2f2f2;
@@ -160,8 +164,9 @@ export default {
             padding: 0 0.25rem;
         }
         .search_submit{
+            flex: 1;
             border: 0.025rem solid $blue;
-            @include wh(20%, 1.5rem);
+            margin-left: .2rem;
             @include sc(0.65rem, #fff);
             border-radius: 0.125rem;
             background-color: $blue;
@@ -170,7 +175,7 @@ export default {
         }
     }
     .title_restaurant{
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         line-height: 2rem;
         text-indent: 0.5rem;
         font-weight: bold;
