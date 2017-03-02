@@ -3,12 +3,12 @@
         <head-top head-title="账户信息" go-back='true'></head-top>
         <section class="profile-info">
             <section class="headportrait">
-                <input type="file" class="profileinfopanel-upload">
+                <input type="file" class="profileinfopanel-upload" @change="uploadAvatar">
                 <h2>头像</h2>
                 <div class="headportrait-div">
                     <img :src="imgPath" class="headportrait-div-top" v-if="this.avatarinfo">
                     <span class="headportrait-div-top" v-else>
-                        <svg class="">
+                        <svg>
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
                         </svg>
                     </span>
@@ -47,7 +47,7 @@
             <section class="bind-phone">
                 账号绑定
             </section>
-            <router-link to="" class="info-router">
+            <section class="info-router" @click="changePhone">
                 <section class="headportrait headportraitwo headportraithree">
                         <h2><img src="../../../images/bindphone.png" style="display:inline-block;margin-right:.4rem;" alt="">手机</h2>
                         <div class="headportrait-div">
@@ -59,7 +59,7 @@
                             </span>
                         </div>
                 </section>
-            </router-link>
+            </section>
             <section class="bind-phone">
                 安全设置
             </section>
@@ -95,6 +95,7 @@
                 </div>
             </section>
         </section>
+        <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid">
             <router-view></router-view>
         </transition>
@@ -104,8 +105,8 @@
 <script>
     import {mapMutations, mapState} from 'vuex'
     import headTop from '../../../components/header/head'
-    import {imgBaseUrl} from '../../../config/env'
-    //import {getImgPath} from '../../../components/common/mixin'
+    import alertTip from 'src/components/common/alertTip'
+    import {getImgPath} from 'src/components/common/mixin'
 
     export default {
         data(){
@@ -118,7 +119,8 @@
                 show:false,
                 isEnter:true,
                 isLeave:false,
-                imgBaseUrl,
+                showAlert: false,
+                alertText: null,
             }
         },
         created(){
@@ -136,12 +138,11 @@
         beforeDestroy(){
             clearTimeout(this.timer)
         },
-        //mixins: [getImgPath],
         components: {
             headTop, 
-
+            alertTip,
         },
-        props:[],
+        mixins: [getImgPath],
         computed:{
              ...mapState([
                 'userInfo', 'imgPath'
@@ -150,7 +151,7 @@
         },
         methods: {
             ...mapMutations([
-                'OUT_LOGIN'
+                'OUT_LOGIN', 'SAVE_AVANDER'
             ]),
             exitlogin(){
                 this.show=true;
@@ -171,6 +172,31 @@
                 this.waitingThing();
                 this.$router.go(-1);
             },
+            changePhone(){
+                this.showAlert = true;
+                this.alertText = '请在手机APP中设置';
+            },
+            async uploadAvatar(){
+                if (this.userInfo) {
+                    let input = document.querySelector('.profileinfopanel-upload')
+                    let data = new FormData();
+                    data.append('file', input.files[0]);
+                    try{
+                        let response = await fetch('/eus/v1/users/' + this.userInfo.user_id + '/avatar', {
+                              method: 'POST',
+                              credentials: 'include',
+                              body: data
+                            })
+                        let res = await response.json();
+                        this.SAVE_AVANDER(this.getImgPath(res));
+                    }catch (error) {
+                        this.showAlert = true;
+                        this.alertText = '上传失败';
+                        throw new Error(error);
+                    }
+                    
+                }
+            }
         }
 
     }

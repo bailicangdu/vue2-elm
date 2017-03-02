@@ -170,9 +170,7 @@ export default {
             this.pointNumber = this.getUserinfo.point;
         }
     },
-
     mixins: [getImgPath],
-
     components:{
         headTop,
         footGuide,
@@ -180,7 +178,7 @@ export default {
 
     computed:{
         ...mapState([
-            'userInfo', 
+            'userInfo',
         ]),
         imgpath:function () {
             let path;

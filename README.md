@@ -24,10 +24,9 @@ vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
 ## 项目运行（nodejs 6.0+）
 
 ```
-克隆，或者直接下载
+
 git clone https://github.com/bailicangdu/vue2-elm.git  
 
-进入文件夹
 cd vue2-elm
 
 安装依赖
@@ -37,7 +36,6 @@ npm install
 ### 编译环境
 ```
 
-开启本地服务器
 npm run dev
 
 访问 http://localhost:8088
@@ -71,6 +69,7 @@ npm run build
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
+
 
 
 
@@ -111,8 +110,8 @@ npm run build
 - [x] 添加、删除、修改收货地址
 - [x] 帐户信息 -- 完成
 - [x] 服务中心 -- 完成
-- [x] 红包
-- [ ] 上传头像，修改用户名
+- [x] 红包 -- 完成
+- [x] 上传头像，修改用户名 -- 完成
 - [ ] 付款(很难实现)
 
 
@@ -272,6 +271,19 @@ npm run build
 ## 部分项目截图
 
 
+
+### 城市列表页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
+
+
+### 搜索地址页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
+
+
 ### 商铺列表页
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
@@ -284,10 +296,48 @@ npm run build
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
 
 
+### 搜索页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
+
+
 ### 餐馆食品列表与购物车
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
+
+
+### 餐馆评论页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.gif" width="365" height="619"/>
+
+
+### 食品详情页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/fooddetail.png" width="365" height="619"/>
+
+
+### 餐馆信息页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail2.png" width="365" height="619"/>
+
+
+### 登陆页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login2.png" width="365" height="619"/>
+
+### 重置密码页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
+
+### 个人中心
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile2.png" width="365" height="619"/>
 
 
 
@@ -295,4 +345,9 @@ npm run build
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
+
+### 订单列表页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order2.png" width="365" height="619"/>
 
