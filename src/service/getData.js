@@ -514,5 +514,5 @@ export const sendLogin = (code, mobile, validate_token) => setpromise(login.user
 export const getOrderList = (user_id, offset) => setpromise(order.orderList);
 export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
 
-export const getAddressList = (user_id) => setpromise(addresspart.address)
-export const getSearchAddress=(keyword) => setpromise(addDetail.addData)
+export const getAddressList = (user_id) => setpromise(addresspart.address);
+export const getSearchAddress=(keyword) => setpromise(addDetail.addData);
