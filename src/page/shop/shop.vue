@@ -67,62 +67,66 @@
             <transition name="fade-choose">
                 <section v-show="changeShowType =='food'" class="food_container">
                     <section class="menu_container">
-                        <ul class="menu_left">
-                            <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
-                                <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
-                                <span>{{item.name}}</span>
-                                <span class="category_num" v-if="categoryNum[index]&&item.type==1">{{categoryNum[index]}}</span>
-                            </li>
-                        </ul>
-                        <ul class="menu_right" ref="menuFoodList">
-                            <li v-for="(item,index) in menuList" :key="index">
-                                <header class="menu_detail_header">
-                                    <section class="menu_detail_header_left">
-                                        <strong class="menu_item_title">{{item.name}}</strong>
-                                        <span class="menu_item_description">{{item.description}}</span>
+                        <section class="menu_left" id="">
+                            <ul>
+                                <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
+                                    <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
+                                    <span>{{item.name}}</span>
+                                    <span class="category_num" v-if="categoryNum[index]&&item.type==1">{{categoryNum[index]}}</span>
+                                </li>
+                            </ul>
+                        </section>
+                        <section class="menu_right" ref="menuFoodList">
+                            <ul>
+                                <li v-for="(item,index) in menuList" :key="index">
+                                    <header class="menu_detail_header">
+                                        <section class="menu_detail_header_left">
+                                            <strong class="menu_item_title">{{item.name}}</strong>
+                                            <span class="menu_item_description">{{item.description}}</span>
+                                        </section>
+                                        <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span>
+                                        <p class="description_tip" v-if="index == TitleDetailIndex">
+                                            <span>{{item.name}}</span>
+                                            {{item.description}}
+                                        </p>
+                                    </header>
+                                    <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
+                                        <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
+                                            <section class="menu_food_img">
+                                                <img :src="getImgPath(foods.image_path)">
+                                            </section>
+                                            <section class="menu_food_description">
+                                                <h3 class="food_description_head">
+                                                    <strong class="description_foodname">{{foods.name}}</strong>
+                                                    <ul v-if="foods.attributes.length" class="attributes_ul">
+                                                        <li v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
+                                                        <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
+                                                        </li>
+                                                    </ul>
+                                                    
+                                                </h3>
+                                                <p class="food_description_content">{{foods.description}}</p>
+                                                <p class="food_description_sale_rating">
+                                                    <span>月售{{foods.month_sales}}份</span>
+                                                    <span>好评率{{foods.satisfy_rate}}%</span>
+                                                </p>
+                                                <p v-if="foods.activity" class="food_activity">
+                                                <span :style="{color: '#' + foods.activity.image_text_color,borderColor:'#' +foods.activity.icon_color}">{{foods.activity.image_text}}</span>
+                                                </p>
+                                            </section>
+                                        </router-link>
+                                        <footer class="menu_detail_footer">
+                                            <section class="food_price">
+                                                <span>¥</span>
+                                                <span>{{foods.specfoods[0].price}}</span>
+                                                <span v-if="foods.specifications.length">起</span>
+                                            </section>
+                                            <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart"></buy-cart>
+                                        </footer>
                                     </section>
-                                    <span class="menu_detail_header_right" @click="showTitleDetail(index)"></span>
-                                    <p class="description_tip" v-if="index == TitleDetailIndex">
-                                        <span>{{item.name}}</span>
-                                        {{item.description}}
-                                    </p>
-                                </header>
-                                <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
-                                    <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
-                                        <section class="menu_food_img">
-                                            <img :src="getImgPath(foods.image_path)">
-                                        </section>
-                                        <section class="menu_food_description">
-                                            <h3 class="food_description_head">
-                                                <strong class="description_foodname">{{foods.name}}</strong>
-                                                <ul v-if="foods.attributes.length" class="attributes_ul">
-                                                    <li v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
-                                                    <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
-                                                    </li>
-                                                </ul>
-                                                
-                                            </h3>
-                                            <p class="food_description_content">{{foods.description}}</p>
-                                            <p class="food_description_sale_rating">
-                                                <span>月售{{foods.month_sales}}份</span>
-                                                <span>好评率{{foods.satisfy_rate}}%</span>
-                                            </p>
-                                            <p v-if="foods.activity" class="food_activity">
-                                            <span :style="{color: '#' + foods.activity.image_text_color,borderColor:'#' +foods.activity.icon_color}">{{foods.activity.image_text}}</span>
-                                            </p>
-                                        </section>
-                                    </router-link>
-                                    <footer class="menu_detail_footer">
-                                        <section class="food_price">
-                                            <span>¥</span>
-                                            <span>{{foods.specfoods[0].price}}</span>
-                                            <span v-if="foods.specifications.length">起</span>
-                                        </section>
-                                        <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart"></buy-cart>
-                                    </footer>
-                                </section>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </section>
                     </section>
                     <section class="buy_cart_container">
                         <section @click="toggleCartList" class="cart_icon_num">
@@ -372,7 +376,7 @@
                 const baseHeight = this.$refs.shopheader.clientHeight;
                 const chooseTypeHeight = this.$refs.chooseType.clientHeight;
                 const listContainer = this.$refs.menuFoodList;
-                const listArr = Array.from(listContainer.children);
+                const listArr = Array.from(listContainer.children[0].children);
                 listArr.forEach((item, index) => {
                     this.shopListTop[index] = item.offsetTop - baseHeight - chooseTypeHeight;
                 });
@@ -380,33 +384,14 @@
             },
             //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
-                let oldScrollTop;
-                let requestFram;
-                element.addEventListener('scroll',() => {
-                   currenIndex();
-                }, false)
-                //运动过程中保持监听 scrollTop 的值
-                element.addEventListener('touchmove',() => {
-                   currenIndex();
+                var myScroll = new IScroll(element, {  
+                    mouseWheel: true,  
+                    scrollbars: false,
+                    bounce: true,  
+                }); 
+                myScroll.on('scroll', () => {
+                    console.log(111)
                 })
-                //运动结束时判断是否有惯性运动
-                element.addEventListener('touchend',() => {
-                    oldScrollTop = element.scrollTop;
-                    bounceMove();
-                })
-                //惯性运动进行和结束时判断是否有满足条件情况
-                const bounceMove = () => {
-                    requestFram = requestAnimationFrame(() => {
-                        if (element.scrollTop != oldScrollTop) {
-                            oldScrollTop = element.scrollTop;
-                            currenIndex();
-                            bounceMove();
-                        }else{
-                            cancelAnimationFrame(requestFram);
-                            currenIndex();
-                        }
-                    })
-                }
                 //判断scrollTop的值，则满足条件，改变对应列表标题样式
                 const currenIndex = () => {
                     this.shopListTop.forEach((item, index) => {
