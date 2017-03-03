@@ -4,10 +4,9 @@
         <slot name='search'></slot>
         <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2">
+                <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
             </svg>
         </section>
-
         <router-link :to="userInfo? '/profile':'/login'" v-if='signinUp' class="head_login">
             <svg class="user_avatar" v-if="userInfo">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#user"></use>
@@ -17,6 +16,7 @@
         <section class="title_head ellipsis" v-if="headTitle">
             <span class="title_text">{{headTitle}}</span>
         </section>
+        <slot name="edit"></slot>
         <slot name="msite-title"></slot>
         <slot name="changecity"></slot>
         <slot name="changeLogin"></slot>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import {mapState, mapMutations} from 'vuex'
+    import {mapState, mapActions} from 'vuex'
     export default {
     	data(){
             return{
@@ -32,11 +32,12 @@
             }
         },
         created(){
-            //获取本地存储的用户信息
-            this.GET_USERINFO();
+            //获取用户信息
+            this.getUserInfo();
+
         },
         mounted(){
-
+            
         },
         props: ['signinUp', 'headTitle', 'goBack'],
         computed: {
@@ -45,8 +46,8 @@
             ]),
         },
         methods: {
-            ...mapMutations([
-                'GET_USERINFO',
+            ...mapActions([
+                'getUserInfo'
             ]),
         },
 
@@ -68,7 +69,8 @@
     .head_goback{
         left: 0.4rem;
         @include wh(0.6rem, 0.8rem);
-        @include ct;
+        line-height: 2.2rem;
+        margin-left: .4rem;
     }
     .head_login{
         right: 0.55rem;

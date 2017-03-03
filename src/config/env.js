@@ -18,4 +18,8 @@ if (process.env.NODE_ENV == 'development') {
 	routerMode = 'hash'
 }
 
-export {baseUrl, routerMode, imgBaseUrl}
+export {
+	baseUrl,
+	routerMode,
+	imgBaseUrl
+}

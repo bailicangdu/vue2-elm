@@ -15,12 +15,18 @@
     		<div class="swiper-container">
 		        <div class="swiper-wrapper">
 		            <div class="swiper-slide food_types_container" v-for="(item, index) in foodTypes" :key="index">
-	            		<router-link :to="{path: '/food', query: {geohash, title: foodItem.title, restaurant_category_id: getCategoryId(foodItem.link)}}" v-for="foodItem in item" :key="foodItem.id" class="link_to_food">
+	            		<router-link :to="{path: '/food', query: {geohash, title: foodItem.title, restaurant_category_id: getCategoryId(foodItem.link)}}" v-for="foodItem in item" :key="foodItem.id" class="link_to_food" v-if="foodItem.title !== '预订早餐'">
 	            			<figure>
 	            				<img :src="imgBaseUrl + foodItem.image_url">
 	            				<figcaption>{{foodItem.title}}</figcaption>
 	            			</figure>
-	            		</router-link>	
+	            		</router-link>
+	            		<a href="https://zaocan.ele.me/" class="link_to_food" v-else>
+	            			<figure>
+	            				<img :src="imgBaseUrl + foodItem.image_url">
+	            				<figcaption>{{foodItem.title}}</figcaption>
+	            			</figure>
+	            		</a>	
 		            </div>
 		        </div>
 		        <div class="swiper-pagination"></div>
@@ -35,6 +41,7 @@
 	    	</header>
 	    	<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
     	</div>
+    	<foot-guide></foot-guide>
     </div>    
 </template>
 
@@ -42,6 +49,7 @@
 import {mapMutations} from 'vuex'
 import {imgBaseUrl} from '../../config/env'
 import headTop from '../../components/header/head'
+import footGuide from '../../components/footer/footGuide'
 import shopList from '../../components/common/shoplist'
 import {msiteAdress, msiteFoodTypes, msiteShopList} from '../../service/getData'
 import '../../plugins/swiper.min.js'
@@ -59,6 +67,8 @@ export default {
     },
     async beforeMount(){
 		this.geohash = this.$route.query.geohash || 'wtw3sm0q087';
+		//保存geohash 到vuex
+		this.SAVE_GEOHASH(this.geohash);
     	//获取位置信息
     	let res = await msiteAdress(this.geohash);
     	this.msietTitle = res.name;
@@ -88,14 +98,15 @@ export default {
     },
     components: {
     	headTop,
-    	shopList
+    	shopList,
+    	footGuide,
     },
     computed: {
 
     },
     methods: {
     	...mapMutations([
-    		'RECORD_ADDRESS'
+    		'RECORD_ADDRESS', 'SAVE_GEOHASH'
     	]),
     	// 解码url地址，求去restaurant_category_id值
     	getCategoryId(url){

@@ -79,7 +79,7 @@ export default {
 	async mounted(){
 		//获取数据
 		this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-		this.showLoading = false;
+		this.hideLoading();
 		//开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
 		showBack(status => {
 			this.showBackStatus = status;
@@ -109,7 +109,7 @@ export default {
 			this.offset += 20;
 			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.shopListArr = this.shopListArr.concat(res);
+			this.shopListArr = [...this.shopListArr, ...res];
 			this.showLoading = false;
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
@@ -126,8 +126,22 @@ export default {
 			this.offset = 0;
 			this.showLoading = true;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
-			this.showLoading = false;
-		}
+			if (process.env.NODE_ENV !== 'development') {
+				this.shopListArr = this.shopListArr.reverse();
+			}
+			this.hideLoading();
+		},
+		hideLoading(){
+			if (process.env.NODE_ENV !== 'development') {
+				clearTimeout(this.timer);
+				this.timer = setTimeout(() => {
+					clearTimeout(this.timer);
+					this.showLoading = false;
+				}, 1000)
+			}else{
+				this.showLoading = false;
+			}
+		},
 	},
 	watch: {
 		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
@@ -218,6 +232,7 @@ export default {
 					padding: 0.04rem 0.08rem 0;
 					border-radius: 0.08rem;
 					margin-left: 0.08rem;
+					border: 1px;
 				}
 				.delivery_left{
 					color: #fff;
@@ -234,9 +249,12 @@ export default {
 			margin-top: 0.52rem;
 			@include fj;
 			@include sc(0.5rem, #666);
+			.fee{
+				@include sc(0.5rem, #666);
+			}
 			.distance_time{
 				span{
-					color: #888;
+					color: #999;
 				}
 				.order_time{
 					color: $blue;

@@ -17,15 +17,15 @@ export const userInfo = {
 	"current_invoice_id": 0,
 	"delivery_card_expire_days": 0,
 	"email": "",
-	"gift_amount": 1,
-	"id": 108758383,
+	"gift_amount": 7,
+	"id": 186335200,
 	"is_active": 1,
 	"is_email_valid": false,
-	"is_mobile_valid": true,
-	"mobile": "13681711254",
-	"point": 960,
-	"user_id": 109065163,
-	"username": "cangdu"
+	"is_mobile_valid": false,
+	"mobile": "13681711268",
+	"point": 0,
+	"user_id": 186655961,
+	"username": "cangdu666"
 };
 
 export const checkExsis = {
@@ -37,3 +37,5 @@ export const send = {
 	"message": "\u9a8c\u8bc1\u7801\u9519\u8bef\uff0c\u8bf7\u91cd\u65b0\u586b\u5199",
 	"name": "CAPTCHA_CODE_ERROR"
 };
+
+export const cpatchs = {"code":"5aa23c2c99b89d15ab967e8fcddd17ed3526f7ef"};

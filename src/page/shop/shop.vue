@@ -27,34 +27,35 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use>
                         </svg>
                     </footer>
-                    <transition name="fade">
-                        <section class="activities_details" v-if="showActivities">
-                            <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>
-                            <h3 class="activities_ratingstar">
-                                <rating-star :rating='shopDetailData.rating'></rating-star>
-                            </h3>
-                            <section class="activities_list">
-                                <header class="activities_title_style"><span>优惠信息</span></header>
-                                <ul>
-                                    <li v-for="item in shopDetailData.activities" :key="item.id">
-                                        <span class="activities_icon" :style="{backgroundColor: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
-                                        <span>{{item.description}}（APP专享）</span>
-                                    </li>
-                                </ul>
-                            </section>
-                            <section class="activities_shopinfo">
-                                <header class="activities_title_style"><span>商家公告</span></header>
-                                <p>{{promotionInfo}}</p>
-                            </section>
-                            <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
-                                <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
-                                <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2"/>
-                                <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
-                            </svg>
-                        </section>
-                    </transition>  
+                    
                 </section>
             </header>
+            <transition name="fade">
+                <section class="activities_details" v-if="showActivities">
+                    <h2 class="activities_shoptitle">{{shopDetailData.name}}</h2>
+                    <h3 class="activities_ratingstar">
+                        <rating-star :rating='shopDetailData.rating'></rating-star>
+                    </h3>
+                    <section class="activities_list">
+                        <header class="activities_title_style"><span>优惠信息</span></header>
+                        <ul>
+                            <li v-for="item in shopDetailData.activities" :key="item.id">
+                                <span class="activities_icon" :style="{backgroundColor: '#' + item.icon_color, borderColor: '#' + item.icon_color}">{{item.icon_name}}</span>
+                                <span>{{item.description}}（APP专享）</span>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="activities_shopinfo">
+                        <header class="activities_title_style"><span>商家公告</span></header>
+                        <p>{{promotionInfo}}</p>
+                    </section>
+                    <svg width="60" height="60" class="close_activities" @click.stop="showActivitiesFun">
+                        <circle cx="30" cy="30" r="25" stroke="#555" stroke-width="1" fill="none"/>
+                        <line x1="22" y1="38" x2="38" y2="22" style="stroke:#999;stroke-width:2"/>
+                        <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
+                    </svg>
+                </section>
+            </transition>  
             <section class="change_show_type" ref="chooseType">
                 <div>
                     <span :class='{activity_show: changeShowType =="food"}' @click="changeShowType='food'">商品</span>
@@ -290,9 +291,7 @@
             }
         },
         created(){
-            //获取上个页面传递过来的geohash值
             this.geohash = this.$route.query.geohash;
-            //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.id;
             //初始化购物车，获取存储在localStorage中的购物车商品信息
             this.INIT_BUYCART();
@@ -331,11 +330,9 @@
                     return null;
                 }
             },
-            /**
-             * 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象，因为组件buyCart需要监听shopCart的变化
-             */
+            //当前商店购物信息
             shopCart: function (){
-                return Object.assign({},this.cartList[this.shopId]);
+                return {...this.cartList[this.shopId]};
             },
             //购物车中总共商品的数量
             totalNum: function (){
@@ -367,7 +364,7 @@
                 this.ratingTagsList = await ratingTags(this.shopId);
                 this.RECORD_SHOPDETAIL(this.shopDetailData)
                 //隐藏加载动画
-                this.showLoading = false;
+                this.hideLoading();
             },
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
@@ -451,12 +448,9 @@
              * 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值 categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，所有的购物车数据都交给vuex统一管理，包括购物车组件中自身的商品数量，使整个数据流更加清晰
              */
             initCategoryNum(){
-                //左侧食品列表当前分类中已加入购物车的商品数量
                 let newArr = [];
                 let cartFoodNum = 0;
-                //购物车总共的价格
                 this.totalPrice = 0; 
-                //购物车中所有商品的详细信息列表
                 this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
                     if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
@@ -487,18 +481,15 @@
                     }
                 })
                 this.totalPrice = this.totalPrice.toFixed(2);
-                this.categoryNum = newArr.concat([]);
+                this.categoryNum = [...newArr];
             },
-            //控制显示购物车中已选商品列表
             toggleCartList(){
                 this.showCartList = !this.showCartList;
             },
-            //清空当前商铺的购物车信息
             clearCart(){
                 this.toggleCartList();
                 this.CLEAR_CART(this.shopId);
             },
-            //监听购物车组件下落的圆点，控制购物车图标进行运动效果
             listenInCart(){
                 if (!this.receiveInCart) {
                     this.receiveInCart = true;
@@ -507,14 +498,15 @@
                     })
                 }
             },
-            //点击评论分类，获取数据
             async changeTgeIndex(index, name){
                 this.ratingTageIndex = index;
                 this.ratingOffset = 0;
                 this.ratingTagName = name;
                 this.ratingList = await getRatingList(this.ratingOffset, name);
+                if (process.env.NODE_ENV !== 'development') {
+                    this.ratingList = this.ratingList.reverse();
+                }
             },
-            //页面下拉至底部，加载更多
             async loaderMoreRating(){
                 if (this.preventRepeatRequest) {
                     return
@@ -523,10 +515,21 @@
                 this.preventRepeatRequest = true;
                 this.ratingOffset += 10;
                 let ratingDate = await getRatingList(this.ratingOffset, this.ratingTagName);
-                this.ratingList = this.ratingList.concat(ratingDate);
+                this.ratingList = [...this.ratingList,...ratingDate];
                 this.loadRatings = false;
                 if (ratingDate.length >= 10) {
                     this.preventRepeatRequest = false;
+                }
+            },
+            hideLoading(){
+                if (process.env.NODE_ENV !== 'development') {
+                    clearTimeout(this.timer);
+                    this.timer = setTimeout(() => {
+                        clearTimeout(this.timer);
+                        this.showLoading = false;
+                    }, 1000)
+                }else{
+                    this.showLoading = false;
                 }
             },
         },
@@ -540,11 +543,9 @@
                     })
                 }
             },
-            //监听shopCart的变化
             shopCart: function (value){
                 this.initCategoryNum();
             },
-            //监听购物车中商铺列表的变化，当length为0时将列表隐藏
             cartFoodList: function (value){
                 if(!value.length){
                     this.showCartList = false;
@@ -649,14 +650,18 @@
                     right: .3rem;
                 }
             }
-            .activities_details{
+            
+            
+        }
+    }
+    .activities_details{
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
                 background-color: #262626;
-                z-index: 21;
+                z-index: 200;
                 padding: 1.25rem;
                 .activities_shoptitle{
                     text-align: center;
@@ -709,10 +714,6 @@
                 }
             }
             
-            
-        }
-    }
-    
     .food_container{
         display: flex;
         flex: 1;
@@ -939,6 +940,7 @@
         .cart_icon_num{
             flex: 1;
             .cart_icon_container{
+                display: flex;
                 background-color: #3d3d3f;
                 position: absolute;
                 padding: .4rem;

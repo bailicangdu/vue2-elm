@@ -63,7 +63,7 @@
                 rightPhoneNumber: false, //输入的手机号码是否符合要求
                 validate_token: null, //获取短信时返回的验证值，登陆时需要
                 computedTime: 0, //倒数记时
-                uerInfo: null, //获取到的用户信息
+                userInfo: null, //获取到的用户信息
                 userAccount: null, //用户名
                 passWord: null, //密码
                 captchaCodeImg: null, //验证码地址
@@ -97,8 +97,13 @@
                 }
             },
             async getCaptchaCode(){
-                let res = await getcaptchas();
-                this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+                if (process.env.NODE_ENV !== 'development'){
+                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
+                }else{
+                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
+                    // let res = await getcaptchas();
+                    // this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+                }
             },
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
@@ -109,7 +114,7 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
-                    let exsis = await checkExsis(this.phoneNumber, this.accountType);
+                    let exsis = await checkExsis(this.phoneNumber, 'mobile');
                     if (exsis.message) {
                         this.showAlert = true;
                         this.alertText = exsis.message;
@@ -180,6 +185,9 @@
 
     .loginContainer{
         padding-top: 1.95rem;
+        p, span, input{
+            font-family: Helvetica Neue,Tahoma,Arial;
+        }
     }
     .change_login{
         position: absolute;

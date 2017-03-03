@@ -4,12 +4,14 @@
   "description": "vue2-elm",
   "author": "maguohua <1264889788@qq.com>",
   "private": true,
+  "license": "Apache",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
   "dependencies": {
     "fastclick": "^1.0.6",
+    "showdown": "^1.6.4",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
     "vuex": "^2.0.0"
@@ -23,6 +25,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
+    "babel-runtime": "^6.23.0",
     "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.25.0",

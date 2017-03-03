@@ -1404,3 +1404,277 @@ export const remark = {
 		["\u591a\u70b9\u8471"]
 	]
 }
+
+export const searchAddress = [{
+	"name": "\u4eba\u6c11\u5e7f\u573a[\u5730\u94c1\u7ad9] [\u5730\u94c1\u7ad9]",
+	"address": "\u5730\u94c11\u53f7\u7ebf,\u5730\u94c12\u53f7\u7ebf,\u5730\u94c18\u53f7\u7ebf",
+	"latitude": 31.23283,
+	"longitude": 121.472789,
+	"geohash": "wtw3sjvb3js2"
+}, {
+	"name": "\u4e0a\u6d77\u4eba\u6c11\u5e7f\u573a",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4eba\u6c11\u5927\u9053120\u53f7",
+	"latitude": 31.22967,
+	"longitude": 121.4762,
+	"geohash": "wtw3sm0q087"
+}, {
+	"name": "\u4eba\u6c11\u5e7f\u573a[\u516c\u4ea4\u7ad9] [\u516c\u4ea4\u7ad9]",
+	"address": "112\u533a\u95f4,112,123,123(\u533a\u95f4),145,312,46\u533a\u95f4,49,952\u7b4912\u6761\u7ebf\u8def",
+	"latitude": 31.229015,
+	"longitude": 121.476929,
+	"geohash": "wtw3sm0f1w76"
+}, {
+	"name": "\u4eba\u6c11\u516c\u56ed",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u5357\u4eac\u897f\u8def231\u53f7",
+	"latitude": 31.23223,
+	"longitude": 121.47322,
+	"geohash": "wtw3sjwhgjt"
+}, {
+	"name": "\u4eba\u6c11\u5e7f\u573a-\u5317\u5e7f\u573a",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4eba\u6c11\u5e7f\u573a\u5185",
+	"latitude": 31.23407,
+	"longitude": 121.47379,
+	"geohash": "wtw3sjyx8kw"
+}, {
+	"name": "CAFE LUGO\u4eba\u6c11\u5e7f\u573a\u5e97",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u897f\u85cf\u4e2d\u8def336\u53f7\u534e\u65ed\u56fd\u9645\u5927\u53a6",
+	"latitude": 31.23379,
+	"longitude": 121.47602,
+	"geohash": "wtw3smbnh2m"
+}, {
+	"name": "\u4eba\u6c11\u5927\u821e\u53f0",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4e5d\u6c5f\u8def663~669",
+	"latitude": 31.23427,
+	"longitude": 121.47797,
+	"geohash": "wtw3sq18ccg"
+}, {
+	"name": "\u4eba\u6c11\u5e7f\u573a(\u5e7f\u4e1c\u8def)[\u516c\u4ea4\u7ad9] [\u516c\u4ea4\u7ad9]",
+	"address": "454,108(\u533a\u95f4),167,312,318,108,537,\u96a7\u9053\u4e09\u7ebf,930,980,\u96a7\u9053\u591c\u5bb5\u7ebf",
+	"latitude": 31.23075,
+	"longitude": 121.476868,
+	"geohash": "wtw3sm2u21vb"
+}, {
+	"name": "\u4eba\u6c11\u5e7f\u573a(\u798f\u5dde\u8def)[\u516c\u4ea4\u7ad9] [\u516c\u4ea4\u7ad9]",
+	"address": "805,18,312,318,451,49,\u96a7\u9053\u4e09\u7ebf,930,\u96a7\u9053\u591c\u5bb5\u7ebf,\u65b0\u5ddd\u4e13\u7ebf",
+	"latitude": 31.232605,
+	"longitude": 121.475833,
+	"geohash": "wtw3sm8p05d1"
+}, {
+	"name": "YUMMIE HOUSE(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4eba\u6c11\u5927\u90539-99\u53f7\u9999\u6e2f\u540d\u5e97\u885775\u53f7\u5e97\u94fa",
+	"latitude": 31.23011,
+	"longitude": 121.47568,
+	"geohash": "wtw3sjrbsd2"
+}, {
+	"name": "SHOW SHOWS(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4eba\u6c11\u5927\u90539-99\u53f7\u9999\u6e2f\u540d\u5e97\u8857B1\u5c42",
+	"latitude": 31.23038,
+	"longitude": 121.47596,
+	"geohash": "wtw3sm245hb"
+}, {
+	"name": "\u660e\u5802\u4eba\u6c11\u5e7f\u573a\u9752\u5e74\u65c5\u820d",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u6c38\u5bff\u8def35\u53f7(\u5730\u94c11\u53f7\u7ebf\u5927\u4e16\u754c\u7ad9\u5411\u897f350\u7c73)",
+	"latitude": 31.22928,
+	"longitude": 121.48132,
+	"geohash": "wtw3sm5gxzt"
+}, {
+	"name": "\u4e0a\u6d77\u4eba\u6c11\u5e7f\u573a\u4e0b\u6c89\u5f0f\u5e7f\u573a",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u5357\u4eac\u897f\u8def19",
+	"latitude": 31.23404,
+	"longitude": 121.47384,
+	"geohash": "wtw3sjyx3xh"
+}, {
+	"name": "\u7f8e\u8054\u793e(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u5e7f\u897f\u5317\u8def248\u53f73\u697c338",
+	"latitude": 31.23329,
+	"longitude": 121.47863,
+	"geohash": "wtw3smf515r"
+}, {
+	"name": "\u9ebb\u8fa3\u8bf1\u60d1(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u5357\u4eac\u897f\u8def58\u53f7\u65b0\u4e16\u754c\u57ce9\u5c42",
+	"latitude": 31.23468,
+	"longitude": 121.47383,
+	"geohash": "wtw3snne1qk"
+}, {
+	"name": "dermes\u5149\u5b66\u8131\u6bdb(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u897f\u85cf\u4e2d\u8def336\u53f7\u534e\u65ed\u56fd\u9645\u5927\u53a65\u697c(\u8fd1\u4e5d\u6c5f\u8def)",
+	"latitude": 31.2338,
+	"longitude": 121.47616,
+	"geohash": "wtw3smbnpdq"
+}, {
+	"name": "\u9c9c\u5899\u623f(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4e5d\u6c5f\u8def600\u53f7\u6c38\u5b89\u767e\u8d274\/5\u5c42",
+	"latitude": 31.23459,
+	"longitude": 121.47814,
+	"geohash": "wtw3sq1dtvd"
+}, {
+	"name": "\u5609\u5ef7\u9152\u5e97(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u65b0\u95f8\u8def126\u53f7(\u8fd1\u5730\u94c1\u4eba\u6c11\u5e7f\u573a\u7ad9)",
+	"latitude": 31.23875,
+	"longitude": 121.47132,
+	"geohash": "wtw3snudyvj"
+}, {
+	"name": "\u7ea2\u76d4\u7532(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u91d1\u9675\u4e1c\u8def500\u53f7\u4e9a\u9f99\u56fd\u9645\u5e7f\u573a2\u697c(\u8fd18\u53f7\u7ebf\u5927\u4e16\u754c\u7ad92\u53f7\u51fa\u53e3)",
+	"latitude": 31.22695,
+	"longitude": 121.47989,
+	"geohash": "wtw3skdynt7"
+}, {
+	"name": "Moo Moo Cake(\u4eba\u6c11\u5e7f\u573a\u84dd\u5929\u767d\u5496\u5561\u5e97)",
+	"address": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u798f\u5dde\u8def523\u9644\u8fd1",
+	"latitude": 31.23312,
+	"longitude": 121.4807,
+	"geohash": "wtw3smgd17x"
+}];
+
+export const addAddress = {
+	"address_id": 275304983
+};
+
+export const addressList = [{
+	"id": 275730943,
+	"address": "\u4eba\u6c11\u516c\u56ed",
+	"phone": "13681711254",
+	"is_valid": 1,
+	"created_at": "2017-02-20T09:22:37+0800",
+	"phone_bk": "",
+	"name": "\u5f90",
+	"st_geohash": "wtw3sm0q087",
+	"address_detail": "\u5357\u4eac\u897f\u8def231\u53f7",
+	"poi_type": 0,
+	"sex": 2,
+	"city_id": 1,
+	"tag": "\u5bb6",
+	"is_user_default": true,
+	"is_deliverable": true,
+	"agent_fee": 0,
+	"deliver_amount": 0,
+	"phone_had_bound": true
+}, {
+	"id": 275588790,
+	"address": "\u4e0a\u6d77\u4eba\u6c11\u5e7f\u573a",
+	"phone": "13681711254",
+	"is_valid": 1,
+	"created_at": "2017-02-20T09:22:42+0800",
+	"phone_bk": "",
+	"name": "\u7d2b",
+	"st_geohash": "wtw3sm0q087",
+	"address_detail": "\u4e0a\u6d77\u5e02\u9ec4\u6d66\u533a\u4eba\u6c11\u5927\u9053120\u53f7",
+	"poi_type": 0,
+	"sex": 1,
+	"city_id": 1,
+	"tag": "\u516c\u53f8",
+	"is_user_default": false,
+	"is_deliverable": true,
+	"agent_fee": 0,
+	"deliver_amount": 0,
+	"phone_had_bound": true
+}, {
+	"id": 275429077,
+	"address": "\u9ebb\u8fa3\u8bf1\u60d1(\u4eba\u6c11\u5e7f\u573a\u5e97)",
+	"phone": "13681711254",
+	"is_valid": 1,
+	"created_at": "2017-02-20T09:22:47+0800",
+	"phone_bk": "",
+	"name": "\u9752",
+	"st_geohash": "wtw3sm0q087",
+	"address_detail": "\u5c31\u662f\u6211 i \u5f00\u59cb",
+	"poi_type": 0,
+	"sex": 1,
+	"city_id": 1,
+	"tag": "\u5b66\u6821",
+	"is_user_default": false,
+	"is_deliverable": true,
+	"agent_fee": 0,
+	"deliver_amount": 0,
+	"phone_had_bound": true
+}];
+
+export const palceOrder = {
+	"user_profile": null,
+	"need_validation": true,
+	"validation_type": "mobile_sms_review",
+	"validation_token": "e04ed03206759a0d136742ca80b987bc87b83172cf67960d67c1c9c600575313",
+	"validation_phone": "13681711254",
+	"order_id": 0,
+	"unique_id": "",
+	"is_new_pay": false,
+	"use_base_login_api": false,
+	"need_login": false
+};
+
+export const verfiyCode = {
+	"validate_token": "382d8d089d62c3c34ac51f6ca9035b14b875e77109d343fdee47cdfb55c8814d",
+	"phones": {
+		"display_phone": "12590-9001517",
+		"call_phone": "4001075517"
+	}
+};
+
+export const orderSuccess = {
+	"user_profile": null,
+	"need_validation": false,
+	"validation_type": "",
+	"validation_token": "",
+	"validation_phone": "",
+	"order_id": 1202109132000152749,
+	"unique_id": "1202109132000152749",
+	"is_new_pay": true,
+	"use_base_login_api": false,
+	"need_login": false
+};
+
+export const payDetail = {
+	"resultData": {
+		"orderInfo": {
+			"orderStatus": "PROCESS",
+			"merchantId": "5",
+			"merchantOrderNo": "1202110398310861904",
+			"orderAmount": 28900,
+			"returnUrl": "https://h5.ele.me/ordersuccess/#user_id=186655961&order_id=1202110398310861904&restaurant_id=625738",
+			"backUrl": "https://h5.ele.me/order/#!/1202110398310861904",
+			"userId": "186655961",
+			"buyerId": "186655961",
+			"orderDesc": "饿了么订单:1202110398310861904",
+			"orderName": "",
+			"payTimeout": null,
+			"timeoutMilliseconds": 494240,
+			"mixedPay": false,
+			"recordSource": 1
+		},
+		"paymentTypeList": [{
+			"payMethod": "ALI_PAY",
+			"payMethodTitle": "支付宝",
+			"payMethodDesc": "",
+			"collapsed": false,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "THIRD_PAY"
+		}, {
+			"payMethod": "ZEUS_BALANCE_PAY",
+			"payMethodTitle": "账户余额",
+			"payMethodDesc": "",
+			"balance": 0,
+			"paidBalance": 0,
+			"collapsed": true,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "NATIVE_PAY"
+		}, {
+			"payMethod": "WEIXIN_PAY",
+			"payMethodTitle": "微信支付",
+			"payMethodDesc": "",
+			"collapsed": true,
+			"lastUsed": false,
+			"invalid": false,
+			"payTradeType": "WAP",
+			"payCatalog": "THIRD_PAY"
+		}],
+		"token": "2585a4E4pgksRYfqmMw9h1RQ43sXERLu"
+	},
+	"resultCode": "0000",
+	"resultMsg": "操作成功",
+	"success": true
+};
