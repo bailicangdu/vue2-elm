@@ -67,7 +67,7 @@
             <transition name="fade-choose">
                 <section v-show="changeShowType =='food'" class="food_container">
                     <section class="menu_container">
-                        <section class="menu_left" id="">
+                        <section class="menu_left" id="wrapper_menu">
                             <ul>
                                 <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
                                     <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
@@ -389,9 +389,12 @@
                     scrollbars: false,
                     bounce: true,  
                 }); 
-                myScroll.on('scroll', () => {
-                    console.log(111)
-                })
+                var menuScroll = new IScroll('#wrapper_menu', {  
+                    mouseWheel: true,  
+                    scrollbars: false,
+                    bounce: true,  
+                }); 
+                console.log(myScroll)
                 //判断scrollTop的值，则满足条件，改变对应列表标题样式
                 const currenIndex = () => {
                     this.shopListTop.forEach((item, index) => {
@@ -751,6 +754,7 @@
         .menu_right{
             flex: 4;
             overflow-y: auto;
+            overflow-x: hidden;
             .menu_detail_header{
                 width: 100%;
                 padding: .4rem;
