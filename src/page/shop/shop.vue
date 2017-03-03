@@ -190,61 +190,64 @@
                 </section>
             </transition>
             <transition name="fade-choose">
-                <section class="rating_container" v-show="changeShowType =='rating'" v-load-more="loaderMoreRating" type="2">
-                    <section>
-                        <header class="rating_header">
-                            <section class="rating_header_left">
-                                <p>{{shopDetailData.rating}}</p>
-                                <p>综合评价</p>
-                                <p>高于周边商家{{(ratingScoresData.compare_rating*100).toFixed(1)}}%</p>
-                            </section>
-                            <section class="rating_header_right">
-                                <p>
-                                    <span>服务态度</span>
-                                    <rating-star :rating='ratingScoresData.service_score'></rating-star>
-                                    <span class="rating_num">{{ratingScoresData.service_score.toFixed(1)}}</span>
-                                </p>
-                                <p>
-                                    <span>菜品评价</span>
-                                    <rating-star :rating='ratingScoresData.food_score'></rating-star>
-                                    <span class="rating_num">{{ratingScoresData.food_score.toFixed(1)}}</span>
-                                </p>
-                                <p>
-                                    <span>送达时间</span>
-                                    <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>   
-                                </p>
-                            </section>
-                        </header>
-                        <ul class="tag_list_ul">
-                            <li v-for="(item, index) in ratingTagsList" :key="index" :class="{unsatisfied: item.unsatisfied, tagActivity: ratingTageIndex == index}" @click="changeTgeIndex(index, item.name)">{{item.name}}({{item.count}})</li>
-                        </ul>
-                        <ul class="rating_list_ul">
-                            <li v-for="(item, index) in ratingList" :key="index" class="rating_list_li">
-                                <img :src="getImgPath(item.avatar)" class="user_avatar">
-                                <section class="rating_list_details">
-                                    <header>
-                                        <section class="username_star">
-                                            <p class="username">{{item.username}}</p>
-                                            <p class="star_desc">
-                                                <rating-star :rating='item.rating_star'></rating-star>
-                                                <span class="time_spent_desc">{{item.time_spent_desc}}</span>
-                                            </p>
-                                        </section>
-                                        <time class="rated_at">{{item.rated_at}}</time>
-                                    </header>
-                                    <ul class="food_img_ul">
-                                        <li v-for="(item, index) in item.item_ratings" :key="index">
-                                            <img :src="getImgPath(item.image_hash)" v-if="item.image_hash">
-                                        </li>
-                                    </ul>
-                                    <ul class="food_name_ul">
-                                        <li v-for="(item, index) in item.item_ratings" :key="index" class="ellipsis">
-                                            {{item.food_name}}
-                                        </li>
-                                    </ul>
+                <section class="rating_container" id="ratingContainer" v-show="changeShowType =='rating'">
+                    <section v-load-more="loaderMoreRating" type="2">
+                        <section>
+                            
+                            <header class="rating_header">
+                                <section class="rating_header_left">
+                                    <p>{{shopDetailData.rating}}</p>
+                                    <p>综合评价</p>
+                                    <p>高于周边商家{{(ratingScoresData.compare_rating*100).toFixed(1)}}%</p>
                                 </section>
-                            </li>
-                        </ul>            
+                                <section class="rating_header_right">
+                                    <p>
+                                        <span>服务态度</span>
+                                        <rating-star :rating='ratingScoresData.service_score'></rating-star>
+                                        <span class="rating_num">{{ratingScoresData.service_score.toFixed(1)}}</span>
+                                    </p>
+                                    <p>
+                                        <span>菜品评价</span>
+                                        <rating-star :rating='ratingScoresData.food_score'></rating-star>
+                                        <span class="rating_num">{{ratingScoresData.food_score.toFixed(1)}}</span>
+                                    </p>
+                                    <p>
+                                        <span>送达时间</span>
+                                        <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>   
+                                    </p>
+                                </section>
+                            </header>
+                            <ul class="tag_list_ul">
+                                <li v-for="(item, index) in ratingTagsList" :key="index" :class="{unsatisfied: item.unsatisfied, tagActivity: ratingTageIndex == index}" @click="changeTgeIndex(index, item.name)">{{item.name}}({{item.count}})</li>
+                            </ul>
+                            <ul class="rating_list_ul">
+                                <li v-for="(item, index) in ratingList" :key="index" class="rating_list_li">
+                                    <img :src="getImgPath(item.avatar)" class="user_avatar">
+                                    <section class="rating_list_details">
+                                        <header>
+                                            <section class="username_star">
+                                                <p class="username">{{item.username}}</p>
+                                                <p class="star_desc">
+                                                    <rating-star :rating='item.rating_star'></rating-star>
+                                                    <span class="time_spent_desc">{{item.time_spent_desc}}</span>
+                                                </p>
+                                            </section>
+                                            <time class="rated_at">{{item.rated_at}}</time>
+                                        </header>
+                                        <ul class="food_img_ul">
+                                            <li v-for="(item, index) in item.item_ratings" :key="index">
+                                                <img :src="getImgPath(item.image_hash)" v-if="item.image_hash">
+                                            </li>
+                                        </ul>
+                                        <ul class="food_name_ul">
+                                            <li v-for="(item, index) in item.item_ratings" :key="index" class="ellipsis">
+                                                {{item.food_name}}
+                                            </li>
+                                        </ul>
+                                    </section>
+                                </li>
+                            </ul>            
+                        </section>
                     </section>
                 </section>
             </transition>
@@ -263,8 +266,7 @@
     import buyCart from '../../components/common/buyCart'
     import ratingStar from '../../components/common/ratingStar'
     import {loadMore, getImgPath} from '../../components/common/mixin'
-    import {animate} from '../../config/mUtils'
-    import IScroll from 'iscroll'
+    import BScroll from 'better-scroll'
 
     export default {
         data(){
@@ -293,6 +295,7 @@
                 preventRepeatRequest: false,// 防止多次触发数据请求
                 ratingTagName: '',//评论的类型
                 loadRatings: false, //加载更多评论是显示加载组件
+                foodScroll: null,
             }
         },
         created(){
@@ -384,25 +387,26 @@
             },
             //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
-                var myScroll = new IScroll(element, {  
-                    mouseWheel: true,  
-                    scrollbars: false,
-                    bounce: true,  
+                let oldScrollTop;
+                let requestFram;
+                this.foodScroll = new BScroll(element, {  
+                    probeType: 3,
+                    click: true,
+                    deceleration: 0.002,
+                    probeType: 1,
                 }); 
-                var menuScroll = new IScroll('#wrapper_menu', {  
-                    mouseWheel: true,  
-                    scrollbars: false,
-                    bounce: true,  
-                }); 
-                console.log(myScroll)
+           
+                
+                new BScroll('#wrapper_menu');
+
                 //判断scrollTop的值，则满足条件，改变对应列表标题样式
-                const currenIndex = () => {
+                this.foodScroll.on('scroll', (pos) => {
                     this.shopListTop.forEach((item, index) => {
-                        if (this.menuIndexChange && element.scrollTop >= item) {
+                        if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
                             this.menuIndex = index;
                         }
                     })
-                }
+                })
             },
             //控制活动详情页的显示隐藏
             showActivitiesFun(){
@@ -413,9 +417,10 @@
                 this.menuIndex = index;
                 //menuIndexChange解决运动时listenScroll依然监听的bug
                 this.menuIndexChange = false;
-                animate(this.$refs.menuFoodList, {scrollTop: this.shopListTop[index]}, () => {
+                this.foodScroll.scrollTo(0, -this.shopListTop[index], 400);
+                this.foodScroll.on('scrollEnd', () => {
                     this.menuIndexChange = true;
-                });
+                })
             },
             //控制显示列表标题详情提示
             showTitleDetail(index){
@@ -539,6 +544,13 @@
                 if(!value.length){
                     this.showCartList = false;
                 }
+            },
+            changeShowType: function (value){
+                if (value === 'rating') {
+                    this.$nextTick(() => {
+                        new BScroll('#ratingContainer');
+                    })
+                }
             }
         }
     }
@@ -631,7 +643,7 @@
                     }
                 }
                 .ellipsis{
-                    width: 87%;
+                    width: 84%;
                 }
                 .footer_arrow{
                     @include wh(.45rem, .45rem);
@@ -639,69 +651,67 @@
                     right: .3rem;
                 }
             }
-            
-            
         }
     }
     .activities_details{
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #262626;
-                z-index: 200;
-                padding: 1.25rem;
-                .activities_shoptitle{
-                    text-align: center;
-                    @include sc(.8rem, #fff);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #262626;
+        z-index: 200;
+        padding: 1.25rem;
+        .activities_shoptitle{
+            text-align: center;
+            @include sc(.8rem, #fff);
+        }
+        .activities_ratingstar{
+            display: flex;
+            justify-content: center;
+            transform: scale(2.2);
+            margin-top: .7rem;
+        }
+        .activities_list{
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            @include sc(.5rem, #fff);
+            li{
+                margin-bottom: .2rem;
+                .activities_icon{
+                    padding: .01rem;
+                    border: 0.025rem solid #fff;
+                    border-radius: 0.1rem;
                 }
-                .activities_ratingstar{
-                    display: flex;
-                    justify-content: center;
-                    transform: scale(2.2);
-                    margin-top: .7rem;
-                }
-                .activities_list{
-                    margin-top: 1.5rem;
-                    margin-bottom: 1rem;
-                    @include sc(.5rem, #fff);
-                    li{
-                        margin-bottom: .2rem;
-                        .activities_icon{
-                            padding: .01rem;
-                            border: 0.025rem solid #fff;
-                            border-radius: 0.1rem;
-                        }
-                        span{
-                            color: #fff;
-                            line-height: .6rem;
-                        }
-                    }
-                }
-                .activities_shopinfo{
-                    p{
-                        line-height: .7rem;
-                        @include sc(.5rem, #fff);
-                    }
-                }
-                .activities_title_style{
-                    text-align: center;
-                    margin-bottom: 1rem;
-                    span{
-                        @include sc(.5rem, #fff);
-                        border: 0.025rem solid #555;
-                        padding: .2rem .4rem;
-                        border-radius: 0.5rem;
-                    }
-
-                }
-                .close_activities{
-                    position: absolute;
-                    bottom: 1rem;
-                    @include cl;
+                span{
+                    color: #fff;
+                    line-height: .6rem;
                 }
             }
+        }
+        .activities_shopinfo{
+            p{
+                line-height: .7rem;
+                @include sc(.5rem, #fff);
+            }
+        }
+        .activities_title_style{
+            text-align: center;
+            margin-bottom: 1rem;
+            span{
+                @include sc(.5rem, #fff);
+                border: 0.025rem solid #555;
+                padding: .2rem .4rem;
+                border-radius: 0.5rem;
+            }
+
+        }
+        .close_activities{
+            position: absolute;
+            bottom: 1rem;
+            @include cl;
+        }
+    }
             
     .food_container{
         display: flex;
@@ -711,10 +721,9 @@
     .menu_container{
         display: flex;
         flex: 1;
-        overflow-y: auto;
+        overflow-y: hidden;
         .menu_left{
             background-color: #f8f8f8;
-            overflow-y: auto;
             width: 3.8rem;
             .menu_left_li{
                 padding: .7rem .3rem;
@@ -753,8 +762,6 @@
         }
         .menu_right{
             flex: 4;
-            overflow-y: auto;
-            overflow-x: hidden;
             .menu_detail_header{
                 width: 100%;
                 padding: .4rem;
@@ -1099,7 +1106,7 @@
     }
     .rating_container{
         flex: 1;
-        overflow-y: auto;
+        overflow-y: hidden;
         flex-direction: column;
         p, span, li, time{
             font-family: Helvetica Neue,Tahoma,Arial;

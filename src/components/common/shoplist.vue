@@ -227,6 +227,7 @@ export default {
 			}
 			.rating_order_num_right{
 				display: flex;
+				align-items: center;
 				.delivery_style{
 					font-size: 0.4rem;
 					padding: 0.04rem 0.08rem 0;
