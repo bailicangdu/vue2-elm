@@ -260,6 +260,7 @@
     import ratingStar from '../../components/common/ratingStar'
     import {loadMore, getImgPath} from '../../components/common/mixin'
     import {animate} from '../../config/mUtils'
+    import IScroll from 'iscroll'
 
     export default {
         data(){
