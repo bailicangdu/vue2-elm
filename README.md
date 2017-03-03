@@ -1,4 +1,4 @@
-## 前言
+# 前言
 
 初学vue时曾在网上搜索vue的实战项目源码，无奈大部分都是简单的demo，对于深究vue没有太大的帮助，剩下的一些大部分都是像音乐播放器之类的展示型项目，交互没有预期那么复杂。但我们实际在工作中，经常会遇到有购物车的项目，这类项目因为涉及到money，所以对逻辑严谨度要求高，页面之间交互复杂，又会伴随着登陆、注册、用户信息等等，常常会让我们很头疼。既然还没人用vue写过这样的项目，那不如我来写，开源出来对能看到的人也会有帮助。
 
@@ -26,18 +26,16 @@ vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
 ## 项目运行（nodejs 6.0+）
 
 ```
-
 git clone https://github.com/bailicangdu/vue2-elm.git  
 
 cd vue2-elm
 
-安装依赖
 npm install
+
 ```
 
 ### 编译环境
 ```
-
 npm run dev
 
 访问 http://localhost:8088
@@ -54,7 +52,7 @@ npm run build
 
 
 
-## 说明
+# 说明
 
 >  本项目主要用于熟悉如何用 vue2 架构一个大型项目
 
@@ -74,6 +72,12 @@ npm run build
 
 
 
+# 关于 demo 与 数据 的说明⭐😱
+
+1、下载代码运行后，因为利用 http-proxy-middleware 开启了反向代理，可以获取真实的官方数据，最终可以进行下单(真实的下单，而不是模拟，下单后可以在官方App中查看并付款，亲自试过，且成功付款点餐)，但是为了安全起见，登陆的帐号为固定的帐号，以免泄露个人信息，不过照样可以点餐😁。
+
+2、demo的数据为模拟的固定数据，只做为效果演示，因为反向代理必须运行代码才行。
+
 
 ## 效果演示
 
@@ -89,7 +93,7 @@ npm run build
 
 
 
-## 目标功能
+# 目标功能
 - [x] 定位功能 -- 完成
 - [x] 选择城市 -- 完成
 - [x] 搜索地址 -- 完成
@@ -109,16 +113,104 @@ npm run build
 - [x] 订单列表 -- 完成
 - [x] 订单详情 -- 完成
 - [x] 下载App -- 完成
-- [x] 添加、删除、修改收货地址
+- [x] 添加、删除、修改收货地址 -- 完成
 - [x] 帐户信息 -- 完成
 - [x] 服务中心 -- 完成
 - [x] 红包 -- 完成
 - [x] 上传头像，修改用户名 -- 完成
-- [ ] 付款(很难实现)
+~~- [ ] 付款 -- 臣妾做不到啊~~ 
 
 
 
-## 项目布局
+# 总结
+
+1、因为并不是elm官方，而且因为要开代理，必须在pc端打开，最多只能做到下单这一步，下单成功后可以在手机客户端查看并付款。
+
+2、一般涉及到money的网页逻辑都比较复杂，尤其像饿了么这样一个开放的平台，商家和食品种类繁多，页面与页面之间交互复杂，在写到 购物车 和 下单 功能时众多的数据和逻辑一度让人很头疼，又没有设计和接口api文档，只能一步步摸索。
+
+3、vue因其轻量级的框架在中小型项目中表现亮眼，在大型单页面应用中因为vuex的存在，表现依然出色，在处理复杂交互逻辑的时候，vuex的存在是不可或缺的。所以说利用 vue + vuex 完全可以去做大型的单页面项目。
+
+4、项目写到现在，从 登陆注册到、首页、搜索、商家列表、购物车、下单、订单列表、个人中心 一个流程走完之后、不但对vue的理解更深一层，而且对以后掌控大型项目的时候也有非常多的帮助，做一个实际的项目才能对自己有很大的提升。
+
+5、曾一度怀疑，花几个月的时间做这样一个项目到底有没有意义，本来只是想做一个小项目练练手，没想到后来越写越多，不过坚持下来后我相信一切都是值得的。
+
+6、项目已经完成，共45个页面。
+
+
+# 最终目标
+
+1、用node.js构建一个模拟外卖平台的后台系统，满足这个项目所需要的后台接口，不再用饿了么的数据，并进行同构，实现前后端分离。(PS：已经开始制作)
+
+2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
+
+3、如果时间来的及，会出一个pc端的网页版。
+
+。。。敬请期待
+
+
+
+
+# 部分项目截图
+
+### 城市列表页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
+
+
+### 搜索地址页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
+
+
+### 商铺列表页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
+
+
+### 商铺筛选页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
+
+
+
+### 餐馆食品列表与购物车
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
+
+### 确认订单页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
+
+
+### 搜索页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
+
+
+### 登陆页
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login2.png" width="365" height="619"/>
+
+
+### 个人中心
+
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile2.png" width="365" height="619"/>
+
+
+
+
+
+
+# 项目布局
 ```
 |-- build                            // webpack配置文件
 |-- config                           // 项目打包路径
@@ -237,119 +329,4 @@ npm run build
 |-- package.json                     // 项目及工具的依赖配置文件
 |-- README.md                        // 说明
 ```
-
-
-
-
-## 总结
-
-1、因为并不是elm官方，而且因为要开代理，必须在pc端打开，所以预计最多只能做到下单这一步，下单成功后可以在手机客户端查看并付款。
-
-2、目前下单功能已经实现✨✨🎉🎉，下单功能完全采用官网真实数据，可以控制官网发短信或者打电话到指定的手机号码，下单后可以在手机App中查看并且付款。
-
-3、一般涉及到money的网页逻辑都比较复杂，尤其像饿了么这样一个开放的平台，商家和食品种类繁多，页面与页面之间交互复杂，在写到 购物车 和 下单 功能时众多的数据和逻辑一度让人很头疼，又没有设计和接口文档，只能一步步摸索。
-
-4、vue因其轻量级的框架在中小型项目中表现亮眼，在大型单页面应用中因为vuex的存在，表现依然出色，在处理复杂交互逻辑的时候，vuex的存在是不可或缺的。所以说利用 vue + vuex 完全可以去做大型的单页面项目。
-
-5、在项目中并没有使用太多的插件，所有功能尽可能自己实现，对插件依赖太多并不是一件好事。
-
-6、项目写到现在，从 登陆注册到、首页、搜索、商家列表、购物车、下单、订单列表、个人中心 一个流程走完之后、不但对vue的理解更深一层，而且对以后掌控大型项目的时候也有非常多的帮助，做一个实际的项目才能对自己有很大的提升。
-
-7、已完成的页面共 35 个，项目已经慢慢开始接近尾声。
-
-
-
-## 最后定一个小目标
-
-1、后续我会用node.js构建一个模拟外卖平台的后台系统，满足这个项目所需要的后台接口，不再用饿了么的数据，并进行同构，实现前后端分离。
-
-2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
-
-。。。敬请期待
-
-
-
-
-## 部分项目截图
-
-
-
-### 城市列表页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
-
-
-### 搜索地址页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
-
-
-### 商铺列表页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
-
-
-### 商铺筛选页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
-
-
-### 搜索页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
-
-
-### 餐馆食品列表与购物车
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
-
-
-### 餐馆评论页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/rating.gif" width="365" height="619"/>
-
-
-### 食品详情页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/fooddetail.png" width="365" height="619"/>
-
-
-### 餐馆信息页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shopdetail2.png" width="365" height="619"/>
-
-
-### 登陆页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login2.png" width="365" height="619"/>
-
-### 重置密码页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/reset.png" width="365" height="619"/>
-
-### 个人中心
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile2.png" width="365" height="619"/>
-
-
-
-### 确认订单页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
-
-### 订单列表页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/order2.png" width="365" height="619"/>
 
