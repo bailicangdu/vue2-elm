@@ -23,7 +23,7 @@
 									<section>
 	    								<span class="category_count">{{item.count}}</span>
 	    								<svg v-if="index" width="8" height="8" xmlns="http://www.w3.org/2000/svg" version="1.1" class="category_arrow" >
-							    			<path d="M0 0 L6 4 L0 8"  stroke="#666" stroke-width="1.5" fill="none"/>
+							    			<path d="M0 0 L6 4 L0 8"  stroke="#bbb" stroke-width="1" fill="none"/>
 							    		</svg>
 									</section>
 	    						</li>
@@ -424,11 +424,12 @@ export default {
 					.category_count{
 						background-color: #ccc;
 						@include sc(.4rem, #fff);
-						padding: .08rem .1rem 0;
+						padding: 0 .1rem;
 						border: 0.025rem solid #ccc;
-						border-radius: 0.3rem;
+						border-radius: 0.8rem;
 						vertical-align: middle;
 						margin-right: 0.25rem;
+						transform: scale(.8);
 					}
 					.category_arrow{
 						vertical-align: middle;

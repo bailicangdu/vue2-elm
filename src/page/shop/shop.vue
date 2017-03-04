@@ -159,7 +159,7 @@
                                     <span class="clear_cart">清空</span>
                                 </div>
                             </header>
-                            <section class="cart_food_details">
+                            <section class="cart_food_details" id="cartFood">
                                 <ul>
                                     <li v-for="(item, index) in cartFoodList" :key="index" class="cart_food_li">
                                         <div class="cart_list_num">
@@ -351,6 +351,7 @@
                 elLeft: 0, //当前点击加按钮在网页中的绝对top值
                 elBottom: 0, //当前点击加按钮在网页中的绝对left值
                 ratingScroll: null, //评论页Scroll
+                wrapperMenu: null,
             }
         },
         created(){
@@ -453,8 +454,7 @@
                     click: true,
                 }); 
            
-                
-                new BScroll('#wrapper_menu', {
+                this.wrapperMenu = new BScroll('#wrapper_menu', {
                     click: true,
                 });
 
@@ -557,7 +557,9 @@
                 this.ratingTagName = name;
                 let res = await getRatingList(this.ratingOffset, name);
                 this.ratingList = [...res];
-                this.ratingScroll.refresh();
+                this.$nextTick(() => {
+                    this.ratingScroll.refresh();
+                })
             },
             async loaderMoreRating(){
                 if (this.preventRepeatRequest) {
@@ -617,7 +619,7 @@
             },
             beforeEnter(el){
                 el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
-                el.children[0].style.transform = `translate3d(${this.elLeft - 32}px,0,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 31}px,0,0)`;
             },
             afterEnter(el){
                 el.style.transform = `translate3d(0,0,0)`;
@@ -683,7 +685,27 @@
        75%  { transform: scale(.9) }
        100% { transform: scale(1) }
     }
-
+    @-moz-keyframes mymove{
+       0%   { transform: scale(1) }
+       25%  { transform: scale(.8) }
+       50%  { transform: scale(1.1) }
+       75%  { transform: scale(.9) }
+       100% { transform: scale(1) }
+    }
+    @-webkit-keyframes mymove{
+       0%   { transform: scale(1) }
+       25%  { transform: scale(.8) }
+       50%  { transform: scale(1.1) }
+       75%  { transform: scale(.9) }
+       100% { transform: scale(1) }
+    }
+    @-o-keyframes mymove{
+       0%   { transform: scale(1) }
+       25%  { transform: scale(.8) }
+       50%  { transform: scale(1.1) }
+       75%  { transform: scale(.9) }
+       100% { transform: scale(1) }
+    }
     .shop_container{
         display: flex;
         flex-direction: column;
@@ -1148,6 +1170,8 @@
         }
         .cart_food_details{
             background-color: #fff;
+            max-height: 20rem;
+            overflow-y: auto;
             .cart_food_li{
                 @include fj;
                 padding: .6rem .5rem;

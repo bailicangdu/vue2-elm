@@ -1,7 +1,7 @@
  <template>
   <div class="rating_page">
         <head-top head-title="历史红包" go-back='true'></head-top>
-        <section v-if="!showLoading">
+        <section v-if="!showLoading" id="scroll_section" class="scroll_container">
             <ul class="hongbao_list_ul">
                 <li class="hongbao_list_li" v-for="item in expiredList" :key="item.id">
                     <section class="list_item">
@@ -40,7 +40,8 @@
     import {mapState, mapMutations} from 'vuex'
     import {getExpired} from 'src/service/getData'
     import loading from 'src/components/common/loading'
-
+    import BScroll from 'better-scroll'
+    
     export default {
       data(){
             return{
@@ -70,6 +71,14 @@
                 if (this.userInfo) {
                     this.expiredList = await getExpired(this.userInfo.user_id);
                     this.showLoading = false;
+                    this.$nextTick(() => {
+                        new BScroll('#scroll_section', {  
+                            deceleration: 0.001,
+                            bounce: true,
+                            swipeTime: 1800,
+                            click: true,
+                        }); 
+                    })
                 }
             }
         },
@@ -90,13 +99,20 @@
         left: 0;
         right: 0;
         bottom: 0;
-        overflow-y: auto;
         padding-top: 1.95rem;
         z-index: 203;
         background-color: #f1f1f1;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
+    }
+    .scroll_container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-top: 1.95rem;
     }
     .hongbao_list_ul{
         padding: 1rem .5rem;

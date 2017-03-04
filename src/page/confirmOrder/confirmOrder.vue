@@ -70,7 +70,6 @@
                 <div class="food_item_style total_price">
                     <p class="food_name ellipsis">订单 ¥{{checkoutData.cart.total}}</p>
                     <div class="num_price">
-                        <span></span>
                         <span>待支付 ¥{{checkoutData.cart.total}}</span>
                     </div>
                 </div>
@@ -435,7 +434,8 @@
             .num_price{
                 flex: 1;
                 @include fj;
-                span:nth-of-type(2){
+                align-items: center;
+                span:nth-of-type(1){
                     color: #f60;
                 }
             }

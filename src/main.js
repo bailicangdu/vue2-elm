@@ -6,6 +6,12 @@ import {routerMode} from './config/env'
 import './config/rem'
 import FastClick from 'fastclick'
 
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
+
 Vue.use(VueRouter)
 const router = new VueRouter({
 	routes,

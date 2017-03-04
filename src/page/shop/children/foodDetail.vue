@@ -24,7 +24,7 @@
                     <span>好评率 {{satisfy_rate}}%</span>
                 </p>    
             </section>
-            <buy-cart :shopId='shopId'  :foods='foods' @moveInCart="$emit('moveInCart')"></buy-cart>
+            <!-- <buy-cart :shopId='shopId'  :foods='foods' @moveInCart="$emit('moveInCart')"></buy-cart> -->
         </section>
     </div>
 </template>

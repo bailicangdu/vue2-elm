@@ -60,8 +60,8 @@
 <script>
 
 import {mapState} from 'vuex'
-import {shopList} from '../../service/getData'
-import {showBack, animate} from '../../config/mUtils'
+import {shopList} from 'src/service/getData'
+import {showBack, animate} from 'src/config/mUtils'
 import {loadMore, getImgPath} from './mixin'
 import loading from './loading'
 import ratingStar from './ratingStar'
@@ -127,9 +127,11 @@ export default {
 			this.showLoading = true;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
 			if (process.env.NODE_ENV !== 'development') {
-				this.shopListArr = this.shopListArr.reverse();
+				this.shopListArr = [...this.shopListArr.reverse()];
+				this.hideLoading();
+			}else{
+				this.showLoading = false;
 			}
-			this.hideLoading();
 		},
 		hideLoading(){
 			if (process.env.NODE_ENV !== 'development') {
@@ -137,7 +139,7 @@ export default {
 				this.timer = setTimeout(() => {
 					clearTimeout(this.timer);
 					this.showLoading = false;
-				}, 1000)
+				}, 400)
 			}else{
 				this.showLoading = false;
 			}
@@ -162,9 +164,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	@import '../../style/mixin';
+	@import 'src/style/mixin';
 	.shoplist_container{
 		background-color: #fff;
+		padding-bottom: 2rem;
 	}
 	.shop_li{
 		display: flex;

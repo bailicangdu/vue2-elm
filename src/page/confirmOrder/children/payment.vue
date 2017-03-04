@@ -7,7 +7,7 @@
                 <p class="time">{{remaining}}</p>
                 <footer class="order_detail" v-if="payDetail.resultData">
                     <span>详情</span>
-                    <span>¥ {{cartPrice.toFixed(2) || (payDetail.resultData.orderInfo.orderAmount/100).toFixed(2)}}</span>
+                    <span>¥ {{cartPrice&&cartPrice.toFixed(2) || payDetail.resultData.orderInfo.orderAmount&&(payDetail.resultData.orderInfo.orderAmount/100).toFixed(2)}}</span>
                 </footer>   
             </section>
         </section>

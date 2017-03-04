@@ -1,80 +1,82 @@
  <template>
   <div class="order_detail_page">
-        <section v-if="!showLoading">
-            <head-top head-title="订单详情" go-back='true'></head-top>
-            <section class="order_titel">
-                <img :src="orderDetail.restaurant_image_url">
-                <p>{{orderDetail.status_bar.title}}</p>
-                <p>{{orderDetail.timeline_node.description}}</p>
-                <router-link class="order_again" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">再来一单</router-link>
-            </section>
-            <section class="food_list">
-                <router-link class="food_list_header" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">
-                    <div class="shop_name">
-                        <img :src="orderDetail.restaurant_image_url">
-                        <span>{{orderDetail.restaurant_name}}</span>
-                    </div>
-                    <svg fill="#333" class="arrow_right">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
-                    </svg>
-                </router-link>
-                <ul class="food_list_ul">
-                    <li v-for="item in orderDetail.basket.group[0]">
-                        <p class="food_name ellipsis">{{item.name}}</p>
-                        <div class="quantity_price">
-                            <span>X{{item.quantity}}</span>
-                            <span>¥{{item.price}}</span>
+        <head-top head-title="订单详情" go-back='true'></head-top>
+        <section v-if="!showLoading" id="scroll_section" class="scroll_container">
+            <section>
+                <section class="order_titel">
+                    <img :src="orderDetail.restaurant_image_url">
+                    <p>{{orderDetail.status_bar.title}}</p>
+                    <p>{{orderDetail.timeline_node.description}}</p>
+                    <router-link class="order_again" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">再来一单</router-link>
+                </section>
+                <section class="food_list">
+                    <router-link class="food_list_header" :to="{path: '/shop', query: {geohash, id: orderDetail.restaurant_id}}">
+                        <div class="shop_name">
+                            <img :src="orderDetail.restaurant_image_url">
+                            <span>{{orderDetail.restaurant_name}}</span>
                         </div>
-                    </li>
-                </ul>
-                <div class="deliver_fee">
-                    <span>配送费</span>
-                    <span>{{orderDetail.basket.deliver_fee.price}}</span>   
-                </div>
-                <div class="pay_ment">实付{{orderDetail.total_amount.toFixed(2)}}</div>
-            </section>
-            <section class="order_detail_style">
-                <header>配送信息</header>
-                <section class="item_style">
-                    <p class="item_left">送达时间：</p>
-                    <div class="item_right">
-                        <p>{{orderData.deliver_time}}</p>
+                        <svg fill="#333" class="arrow_right">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
+                        </svg>
+                    </router-link>
+                    <ul class="food_list_ul">
+                        <li v-for="item in orderDetail.basket.group[0]">
+                            <p class="food_name ellipsis">{{item.name}}</p>
+                            <div class="quantity_price">
+                                <span>X{{item.quantity}}</span>
+                                <span>¥{{item.price}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="deliver_fee">
+                        <span>配送费</span>
+                        <span>{{orderDetail.basket.deliver_fee.price}}</span>   
                     </div>
+                    <div class="pay_ment">实付{{orderDetail.total_amount.toFixed(2)}}</div>
                 </section>
-                <section class="item_style">
-                    <p class="item_left">送货地址：</p>
-                    <div class="item_right">
-                        <p>{{orderData.consignee}}</p>
-                        <p>{{orderData.phone}}</p>
-                        <p>{{orderData.address}}</p>
-                    </div>
+                <section class="order_detail_style">
+                    <header>配送信息</header>
+                    <section class="item_style">
+                        <p class="item_left">送达时间：</p>
+                        <div class="item_right">
+                            <p>{{orderData.deliver_time}}</p>
+                        </div>
+                    </section>
+                    <section class="item_style">
+                        <p class="item_left">送货地址：</p>
+                        <div class="item_right">
+                            <p>{{orderData.consignee}}</p>
+                            <p>{{orderData.phone}}</p>
+                            <p>{{orderData.address}}</p>
+                        </div>
+                    </section>
+                    <section class="item_style">
+                        <p class="item_left">配送方式：</p>
+                        <div class="item_right">
+                            <p>蜂鸟专送</p>
+                        </div>
+                    </section>
                 </section>
-                <section class="item_style">
-                    <p class="item_left">配送方式：</p>
-                    <div class="item_right">
-                        <p>蜂鸟专送</p>
-                    </div>
-                </section>
-            </section>
-            <section class="order_detail_style">
-                <header>订单信息</header>
-                <section class="item_style">
-                    <p class="item_left">订单号：</p>
-                    <div class="item_right">
-                        <p>{{orderDetail.id}}</p>
-                    </div>
-                </section>
-                <section class="item_style">
-                    <p class="item_left">支付方式：</p>
-                    <div class="item_right">
-                        <p>在线支付</p>
-                    </div>
-                </section>
-                <section class="item_style">
-                    <p class="item_left">下单时间：</p>
-                    <div class="item_right">
-                        <p>{{orderDetail.formatted_created_at}}</p>
-                    </div>
+                <section class="order_detail_style">
+                    <header>订单信息</header>
+                    <section class="item_style">
+                        <p class="item_left">订单号：</p>
+                        <div class="item_right">
+                            <p>{{orderDetail.id}}</p>
+                        </div>
+                    </section>
+                    <section class="item_style">
+                        <p class="item_left">支付方式：</p>
+                        <div class="item_right">
+                            <p>在线支付</p>
+                        </div>
+                    </section>
+                    <section class="item_style">
+                        <p class="item_left">下单时间：</p>
+                        <div class="item_right">
+                            <p>{{orderDetail.formatted_created_at}}</p>
+                        </div>
+                    </section>
                 </section>
             </section>
         </section>
@@ -86,12 +88,15 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import headTop from '../../../components/header/head'
-    import {getImgPath} from '../../../components/common/mixin'
-    import {getOrderDetail} from '../../../service/getData'
-     import loading from '../../../components/common/loading'
+    import headTop from 'src/components/header/head'
+    import {getImgPath} from 'src/components/common/mixin'
+    import {getOrderDetail} from 'src/service/getData'
+    import loading from 'src/components/common/loading'
+    import BScroll from 'better-scroll'
+
 
     export default {
+
       data(){
             return{
                 showLoading: true, //显示加载动画
@@ -116,13 +121,21 @@
                 // this.orderData = await getOrderDetail(this.userInfo.user_id, this.orderDetail.id);
                 this.orderData = await getOrderDetail(1, 1);
                 this.showLoading = false;
+                this.$nextTick(() => {
+                    new BScroll('#scroll_section', {  
+                        deceleration: 0.001,
+                        bounce: true,
+                        swipeTime: 1800,
+                        click: true,
+                    }); 
+                })
             },
         }
     }
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
   
     .order_detail_page{
         position: fixed;
@@ -133,10 +146,17 @@
         background-color: #f1f1f1;
         z-index: 202;
         padding-top: 1.95rem;
-        overflow-y: auto;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
         }
+    }
+    .scroll_container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-top: 1.95rem;
     }
     .order_titel{
         display: flex;
@@ -146,7 +166,7 @@
         background-color: #fff;
         margin-bottom: 0.5rem;
         img{
-            border: 0.4rem solid #f5f5f5;
+            border: 0.4rem solid $blue;
             border-radius: 50%;
             @include wh(3rem, 3rem);
         }

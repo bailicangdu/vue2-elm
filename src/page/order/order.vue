@@ -104,7 +104,7 @@
                     this.timer = setTimeout(() => {
                         clearTimeout(this.timer);
                         this.showLoading = false;
-                    }, 1000)
+                    }, 400)
                 }else{
                     this.showLoading = false;
                 }
