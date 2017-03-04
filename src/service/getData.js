@@ -205,29 +205,11 @@ import * as hongbao from './tempdata/hongbao'
 // });
 
 
-// /**
-//  * 手机号登陆
-//  */
-
-// // export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
-// // 	code,
-// // 	mobile,
-// // 	validate_token
-// // });
 
 
-
-// /**
-//  * 获取用户信息
-//  */
-
-// // export const getUser = () => fetch('GET', '/v1/user', {});
-
-
-
-// /**
+// *
 //  * 获取图片验证码
-//  */
+ 
 
 // export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 
@@ -389,57 +371,17 @@ import * as hongbao from './tempdata/hongbao'
 
 
 
-// /**
-//  * 获取服务中心信息
-//  */
+// // /**
+// //  * 获取服务中心信息
+// //  */
 
 // export const getService = () => fetch('GET', '/m.ele.me@json/profile/explain', {});
 
 
 
-
-
-
-
-
-
 // /**
-//  * 获取订单列表
-//  */
-
-// // export const getOrderList = (user_id, offset) => fetch('GET', '/bos/v2/users/' + user_id + '/orders', {
-// // 	limit: 10,
-// // 	offset,
-// // });
-
-
-// /**
-//  * 获取订单详情
-//  */
-
-// // export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
-
-
-
-
-/**
-*个人中心里编辑地址
-*/
-//export const getAddressList = (user_id) => fetch('GET', '/v1/users/'+user_id+'/addresses')
-
-/**
-*个人中心里搜索地址
-*/
-// export const getSearchAddress=(keyword) => fetch('GET','v1/pois',{
-// 	keyword:keyword,
-// 	type:'nearby'
-// })
-
-
-
-/**
-*兑换会员卡
-*/
+// *兑换会员卡
+// */
 // export const vipCart= (id, number, password) => fetch('POST','/member/v1/users/' + id + '/delivery_card/physical_card/bind',{
 // 	number,
 // 	password
@@ -447,26 +389,98 @@ import * as hongbao from './tempdata/hongbao'
 
 
 
-/**
- * 获取红包数量
-*/
+// /**
+//  * 获取红包数量
+// */
+
 // export const getHongbaoNum= id => fetch('GET','/promotion/v2/users/' + id + '/hongbaos',{});
 
 
 
-/**
- * 获取过期红包
-*/
+// /**
+//  * 获取过期红包
+// */
+
+
 // export const getExpired= id => fetch('GET','/promotion/v2/users/' + id + '/expired_hongbaos?limit=10&offset=0',{});
 
 
-/**
- * 兑换红包
-*/
+// /**
+//  * 兑换红包
+// */
+
 // export const exChangeHongbao= (id, exchange_code, captcha_code) => fetch('POST','/v1/users/' + id + '/hongbao/exchange',{
 // 	exchange_code,
 // 	captcha_code,
 // });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /**
+//  * 以下Api接口不需要或者不能进行反向代理
+//  */
+
+
+// /**
+//  * 获取用户信息
+//  */
+
+// export const getUser = () => fetch('GET', '/v1/user', {});
+
+
+// /**
+//  * 手机号登陆
+//  */
+
+// export const sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
+// 	code,
+// 	mobile,
+// 	validate_token
+// });
+
+
+// /**
+//  * 获取订单列表
+//  */
+
+// export const getOrderList = (user_id, offset) => fetch('GET', '/bos/v2/users/' + user_id + '/orders', {
+// 	limit: 10,
+// 	offset,
+// });
+
+
+// /**
+//  * 获取订单详情
+//  */
+
+// export const getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
+
+
+// /**
+// *个人中心里编辑地址
+// */
+// export const getAddressList = (user_id) => fetch('GET', '/v1/users/'+user_id+'/addresses')
+
+// /**
+// *个人中心里搜索地址
+// */
+// export const getSearchAddress=(keyword) => fetch('GET','v1/pois',{
+// 	keyword:keyword,
+// 	type:'nearby'
+// })
 
 
 
@@ -529,11 +543,13 @@ export const exChangeHongbao= (id, exchange_code, captcha_code) => setpromise(ho
 
 
 
+/**
+ * 以下Api接口不需要或者不能进行反向代理
+ */
 
 export const getUser = () => setpromise(login.userInfo);
 export const sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 export const getOrderList = (user_id, offset) => setpromise(order.orderList);
 export const getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
-
 export const getAddressList = (user_id) => setpromise(addresspart.address);
 export const getSearchAddress=(keyword) => setpromise(addDetail.addData);

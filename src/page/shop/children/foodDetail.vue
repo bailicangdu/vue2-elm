@@ -30,10 +30,10 @@
 </template>
 
 <script>
-	import headTop from '../../../components/header/head'
-    import {getImgPath} from '../../../components/common/mixin'
-    import ratingStar from '../../../components/common/ratingStar'
-    import buyCart from '../../../components/common/buyCart'
+	import headTop from 'src/components/header/head'
+    import {getImgPath} from 'src/components/common/mixin'
+    import ratingStar from 'src/components/common/ratingStar'
+    import buyCart from 'src/components/common/buyCart'
 
 
     export default {
@@ -75,7 +75,7 @@
 </script>
 	
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
 	
 	.rating_page{
 		position: absolute;

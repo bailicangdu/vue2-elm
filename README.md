@@ -66,6 +66,8 @@ npm run build
 
 >  特别感谢辰妹子，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
 
+>  如果您发现问题并有非常好的解决方案，欢迎 PR 👍
+
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
