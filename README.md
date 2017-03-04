@@ -81,7 +81,7 @@ npm run build
 
 ## 效果演示
 
-#### (演示demo是上个月版本，使用的是模拟数据，ios会出现卡顿的现象，且很多已修复的bug未更新，最新效果请clone代码并运行，我会尽快更新demo);
+#### (demo使用的是模拟数据，数据是固定的，要获取真实的数据，请clone代码并运行);
 
 [demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
    

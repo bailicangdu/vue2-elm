@@ -549,6 +549,9 @@
                     this.$refs.cartContainer.addEventListener('animationend', () => {
                         this.receiveInCart = false;
                     })
+                    this.$refs.cartContainer.addEventListener('webkitAnimationEnd', () => {
+                        this.receiveInCart = false;
+                    })
                 }
             },
             async changeTgeIndex(index, name){
@@ -630,6 +633,9 @@
                 this.showMoveDot = this.showMoveDot.map(item => false);
                 //监听运动结束，通知父级进行后续操作
                 el.children[0].addEventListener('transitionend', () => {
+                    this.listenInCart();
+                })
+                el.children[0].addEventListener('webkitAnimationEnd', () => {
                     this.listenInCart();
                 })
             },
@@ -1081,7 +1087,7 @@
                 background-color: #3d3d3f;
                 position: absolute;
                 padding: .4rem;
-                border: 0.25rem solid #444;
+                border: 0.18rem solid #444;
                 border-radius: 50%;
                 left: .5rem;
                 top: -.7rem;

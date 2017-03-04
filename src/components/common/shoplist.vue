@@ -187,6 +187,7 @@ export default {
 			.shop_title{
 				width: 8.5rem;
 				color: #333;
+				padding-top: .01rem;
 				@include font(0.65rem, 0.65rem, 'PingFangSC-Regular');
 				font-weight: 700;
 			}
@@ -194,6 +195,7 @@ export default {
 				content: '品牌';
 				display: inline-block;
 				font-size: 0.5rem;
+				line-height: .6rem;
 				background-color: #ffd930;
 				padding: 0 0.1rem;
 				border-radius: 0.1rem;
