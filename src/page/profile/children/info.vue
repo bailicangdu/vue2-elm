@@ -194,11 +194,9 @@
                         this.alertText = '上传失败';
                         throw new Error(error);
                     }
-                    
                 }
             }
         }
-
     }
 </script>
   

@@ -173,7 +173,7 @@
         }
     }
     .hongbao_container{
-        padding: 0 .5rem;
+        padding: 0 .7rem;
         .hongbao_title{
             @include fj;
             font-size: .5rem;

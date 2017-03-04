@@ -207,10 +207,6 @@ import * as hongbao from './tempdata/hongbao'
 
 
 
-// *
-//  * 获取图片验证码
- 
-
 // export const getcaptchas = () => fetch('POST', '/v1/captchas', {});
 
 

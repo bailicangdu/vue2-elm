@@ -105,20 +105,22 @@ export default {
 				if (this.preventRepeatReuqest) {
 					return 
 				}
+				this.showLoading = true;
 			}
-
 			this.preventRepeatReuqest = true;
+
 			//数据的定位加20位
 			this.offset += 20;
-			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.shopListArr = [...this.shopListArr, ...res];
-			this.hideLoading();
-			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
-			if (res.length < 20) {
-				return
-			}
 			this.preventRepeatReuqest = false;
+			this.shopListArr = [...this.shopListArr, ...res];
+			if (process.env.NODE_ENV == 'development') {
+				this.hideLoading();
+				//当获取数据小于20，说明没有更多数据，不需要再次请求数据
+				if (res.length < 20) {
+					return
+				}
+			}
 		},
 		//返回顶部
 		backTop(){
@@ -137,7 +139,7 @@ export default {
 				this.timer = setTimeout(() => {
 					clearTimeout(this.timer);
 					this.showLoading = false;
-				}, 600)
+				}, 500)
 			}else{
 				this.showLoading = false;
 			}

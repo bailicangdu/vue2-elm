@@ -784,9 +784,10 @@
                         color: #fff;
                     }
                     .tip_icon{
-                        padding: .01rem;
+                        padding: 0 .04rem;
                         border: 0.025rem solid #fff;
                         border-radius: 0.1rem;
+                        font-size: .4rem;
                         display: inline-block;
                     }
                 }
@@ -827,7 +828,8 @@
             li{
                 margin-bottom: .2rem;
                 .activities_icon{
-                    padding: .01rem;
+                    padding: 0 .02rem;
+                    display: inline-block;
                     border: 0.025rem solid #fff;
                     border-radius: 0.1rem;
                 }
