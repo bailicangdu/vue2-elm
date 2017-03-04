@@ -81,7 +81,7 @@ npm run build
 
 ## 效果演示
 
-#### (demo使用的是模拟数据，数据是固定的，要获取真实的数据，请clone代码并运行);
+#### (demo使用的是模拟数据，数据是固定的，只做为样式的演示，要获取真实的数据，请clone代码并运行);
 
 [demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
    
