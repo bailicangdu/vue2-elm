@@ -137,11 +137,11 @@
 </template>
 
 <script>
-import headTop from '../../components/header/head'
-import footGuide from '../../components/footer/footGuide'
+import headTop from 'src/components/header/head'
+import footGuide from 'src/components/footer/footGuide'
 import {mapState, mapMutations} from 'vuex'
-import {imgBaseUrl} from '../../config/env'
-import {getImgPath} from '../../components/common/mixin'
+import {imgBaseUrl} from 'src/config/env'
+import {getImgPath} from 'src/components/common/mixin'
 
 export default {
     data(){
@@ -213,7 +213,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-   @import '../../style/mixin'; 
+   @import 'src/style/mixin'; 
     
     .profile_page{
         p, span{

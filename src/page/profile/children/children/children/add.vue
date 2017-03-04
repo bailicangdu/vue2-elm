@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import headTop from '../../../../../components/header/head'
-    import {getImgPath} from '../../../../../components/common/mixin'
+    import headTop from 'src/components/header/head'
+    import {getImgPath} from 'src/components/common/mixin'
     import {mapState, mapMutations} from 'vuex'
     export default {
       data(){
@@ -142,7 +142,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../../../style/mixin';
+    @import 'src/style/mixin';
   	.router-slid-enter-active, .router-slid-leave-active {
   	    transition: all .4s;
   	}

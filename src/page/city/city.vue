@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/head'
-    import {currentcity, searchplace} from '../../service/getData'
-    import {getStore, setStore} from '../../config/mUtils'
+    import headTop from 'src/components/header/head'
+    import {currentcity, searchplace} from 'src/service/getData'
+    import {getStore, setStore} from 'src/config/mUtils'
 
     export default {
     	data(){
@@ -102,7 +102,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
     .city_container{
         padding-top: 2.35rem;
     }

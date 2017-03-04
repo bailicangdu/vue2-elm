@@ -307,11 +307,11 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {msiteAdress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from '../../service/getData'
-    import loading from '../../components/common/loading'
-    import buyCart from '../../components/common/buyCart'
-    import ratingStar from '../../components/common/ratingStar'
-    import {loadMore, getImgPath} from '../../components/common/mixin'
+    import {msiteAdress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
+    import loading from 'src/components/common/loading'
+    import buyCart from 'src/components/common/buyCart'
+    import ratingStar from 'src/components/common/ratingStar'
+    import {loadMore, getImgPath} from 'src/components/common/mixin'
     import BScroll from 'better-scroll'
 
     export default {
@@ -622,15 +622,17 @@
             },
             beforeEnter(el){
                 el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
-                el.children[0].style.transform = `translate3d(${this.elLeft - 31}px,0,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 30}px,0,0)`;
+                el.children[0].style.opacity = 0;
             },
             afterEnter(el){
                 el.style.transform = `translate3d(0,0,0)`;
                 el.children[0].style.transform = `translate3d(0,0,0)`;
-                el.style.transition = 'all .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
-                el.children[0].style.transition = 'all .55s linear';
+                el.style.transition = 'transform .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+                el.children[0].style.transition = 'transform .55s linear';
                 //圆点到达目标点后移出
                 this.showMoveDot = this.showMoveDot.map(item => false);
+                el.children[0].style.opacity = 1;
                 //监听运动结束，通知父级进行后续操作
                 el.children[0].addEventListener('transitionend', () => {
                     this.listenInCart();
@@ -683,7 +685,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
     @keyframes mymove{
        0%   { transform: scale(1) }
        25%  { transform: scale(.8) }

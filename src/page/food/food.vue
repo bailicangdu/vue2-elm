@@ -173,10 +173,10 @@
 
 <script>
 import {mapState, mapMutations} from 'vuex'
-import headTop from '../../components/header/head'
-import shopList from '../../components/common/shoplist'
-import {getImgPath} from '../../components/common/mixin'
-import {msiteAdress, foodCategory, foodDelivery, foodActivity} from '../../service/getData'
+import headTop from 'src/components/header/head'
+import shopList from 'src/components/common/shoplist'
+import {getImgPath} from 'src/components/common/mixin'
+import {msiteAdress, foodCategory, foodDelivery, foodActivity} from 'src/service/getData'
 
 export default {
 	data(){
@@ -336,7 +336,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
 	.food_container{
 		padding-top: 3.6rem;
 	}
@@ -429,7 +429,6 @@ export default {
 						border-radius: 0.8rem;
 						vertical-align: middle;
 						margin-right: 0.25rem;
-						transform: scale(.8);
 					}
 					.category_arrow{
 						vertical-align: middle;
@@ -512,7 +511,7 @@ export default {
 				.filter_li{
 					display: flex;
 					align-items: center;
-					border: 0.025rem solid #eee;
+					border: 0.025rem solid #ccc;
 					@include wh(4.7rem, 1.4rem);
 					margin-right: 0.25rem;
 					border-radius: 0.125rem;

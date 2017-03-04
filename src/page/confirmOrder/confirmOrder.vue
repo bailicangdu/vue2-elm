@@ -125,11 +125,11 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import headTop from '../../components/header/head'
-    import alertTip from '../../components/common/alertTip'
-    import loading from '../../components/common/loading'
-    import {checkout, getAddress, placeOrders} from '../../service/getData'
-    import {imgBaseUrl} from '../../config/env'
+    import headTop from 'src/components/header/head'
+    import alertTip from 'src/components/common/alertTip'
+    import loading from 'src/components/common/loading'
+    import {checkout, getAddress, placeOrders} from 'src/service/getData'
+    import {imgBaseUrl} from 'src/config/env'
 
     export default {
         data(){
@@ -267,7 +267,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
 
     .confirmOrderContainer{
         padding-top: 1.95rem;

@@ -21,9 +21,9 @@
 </template>
 
 <script>
-    import headTop from '../../../components/header/head'
-    import {getRemark} from '../../../service/getData'
-    import loading from '../../../components/common/loading'
+    import headTop from 'src/components/header/head'
+    import {getRemark} from 'src/service/getData'
+    import loading from 'src/components/common/loading'
     import {mapMutations} from 'vuex'
 
     export default {
@@ -71,7 +71,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
   
     .rating_page{
         position: fixed;

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import headTop from '../../../components/header/head'
+    import headTop from 'src/components/header/head'
     import {mapMutations} from 'vuex'
 
     export default {
@@ -41,7 +41,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
   
     .rating_page{
         position: fixed;

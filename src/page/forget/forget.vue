@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/head'
-    import alertTip from '../../components/common/alertTip'
-    import {mobileCode, checkExsis, sendMobile} from '../../service/getData'
+    import headTop from 'src/components/header/head'
+    import alertTip from 'src/components/common/alertTip'
+    import {mobileCode, checkExsis, sendMobile} from 'src/service/getData'
 
     export default {
         data(){
@@ -123,7 +123,7 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
 
     .restContainer{
         padding-top: 1.95rem;

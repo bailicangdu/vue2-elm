@@ -97,8 +97,8 @@
 
 <script>
     import {mapState} from 'vuex'
-    import headTop from '../../../../components/header/head'
-    import {getImgPath} from '../../../../components/common/mixin'
+    import headTop from 'src/components/header/head'
+    import {getImgPath} from 'src/components/common/mixin'
 
     export default {
     	data(){
@@ -128,7 +128,7 @@
 </script>
 	
 <style lang="scss" scoped>
-    @import '../../../../style/mixin';
+    @import 'src/style/mixin';
 	
 	.safe_shop{
 		position: fixed;

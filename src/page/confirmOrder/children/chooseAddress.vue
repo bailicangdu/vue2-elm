@@ -52,10 +52,10 @@
 </template>
 
 <script>
-    import headTop from '../../../components/header/head'
+    import headTop from 'src/components/header/head'
     import {mapState, mapMutations} from 'vuex'
-    import {getAddress} from '../../../service/getData'
-    import alertTip from '../../../components/common/alertTip'
+    import {getAddress} from 'src/service/getData'
+    import alertTip from 'src/components/common/alertTip'
 
     export default {
       data(){
@@ -126,7 +126,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
   
     .rating_page{
         position: fixed;

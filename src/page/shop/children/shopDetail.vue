@@ -77,9 +77,9 @@
 </template>
 
 <script>
-	import headTop from '../../../components/header/head'
+	import headTop from 'src/components/header/head'
     import {mapState} from 'vuex'
-    import {getImgPath} from '../../../components/common/mixin'
+    import {getImgPath} from 'src/components/common/mixin'
 
     export default {
     	data(){
@@ -110,7 +110,7 @@
 </script>
 	
 <style lang="scss" scoped>
-    @import '../../../style/mixin';
+    @import 'src/style/mixin';
 	
 	.rating_page{
 		position: absolute;

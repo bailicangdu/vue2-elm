@@ -22,8 +22,8 @@
 </template>
 
 <script>
-    import headTop from '../../../../../components/header/head'
-    import {searchNearby} from '../../../../../service/getData'
+    import headTop from 'src/components/header/head'
+    import {searchNearby} from 'src/service/getData'
     import {mapMutations} from 'vuex'
 
     export default {
@@ -56,7 +56,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../../../style/mixin';
+    @import 'src/style/mixin';
   
     .search_address_page{
         position: fixed;

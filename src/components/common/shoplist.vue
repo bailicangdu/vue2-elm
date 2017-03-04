@@ -99,9 +99,12 @@ export default {
 	methods: {
 		//到达底部加载更多数据
 		async loaderMore(){
-			//防止重复请求
-			if (this.preventRepeatReuqest) {
-				return 
+			//demo因为是获取模拟数据，同步过程不需要进行判断
+			if (process.env.NODE_ENV == 'development') {
+				//防止重复请求
+				if (this.preventRepeatReuqest) {
+					return 
+				}
 			}
 
 			this.preventRepeatReuqest = true;
@@ -110,7 +113,7 @@ export default {
 			this.showLoading = true;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = [...this.shopListArr, ...res];
-			this.showLoading = false;
+			this.hideLoading();
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
@@ -126,12 +129,7 @@ export default {
 			this.offset = 0;
 			this.showLoading = true;
 			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
-			if (process.env.NODE_ENV !== 'development') {
-				this.shopListArr = [...this.shopListArr.reverse()];
-				this.hideLoading();
-			}else{
-				this.showLoading = false;
-			}
+			this.hideLoading();
 		},
 		hideLoading(){
 			if (process.env.NODE_ENV !== 'development') {
@@ -139,7 +137,7 @@ export default {
 				this.timer = setTimeout(() => {
 					clearTimeout(this.timer);
 					this.showLoading = false;
-				}, 400)
+				}, 600)
 			}else{
 				this.showLoading = false;
 			}
