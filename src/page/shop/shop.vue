@@ -121,7 +121,7 @@
                                                 <span>{{foods.specfoods[0].price}}</span>
                                                 <span v-if="foods.specifications.length">起</span>
                                             </section>
-                                            <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart" @showChooseList="showChooseList" @showReduceTip="showReduceTip"></buy-cart>
+                                            <buy-cart :shopId='shopId' :foods='foods' @moveInCart="listenInCart" @showChooseList="showChooseList" @showReduceTip="showReduceTip" @showMoveDot="showMoveDotFun"></buy-cart>
                                         </footer>
                                     </section>
                                 </li>
@@ -286,6 +286,18 @@
         <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
         </transition>
+        <transition 
+        appear
+        @after-appear = 'afterEnter'
+        @before-appear="beforeEnter"
+        v-for="(item,index) in showMoveDot"
+        >
+            <span class="move_dot" v-if="item">
+                <svg class="move_liner">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
+                </svg>
+            </span>
+        </transition>
        <loading v-show="showLoading || loadRatings"></loading>
        <transition name="router-slid">
             <router-view></router-view>
@@ -329,11 +341,16 @@
                 preventRepeatRequest: false,// 防止多次触发数据请求
                 ratingTagName: '',//评论的类型
                 loadRatings: false, //加载更多评论是显示加载组件
-                foodScroll: null,
+                foodScroll: null,  //食品列表scroll
                 showSpecs: false,//控制显示食品规格
                 specsIndex: 0, //当前选中的规格索引值
-                choosedFoods: null,
+                choosedFoods: null, //当前选中视频数据
                 showDeleteTip: false, //多规格商品点击减按钮，弹出提示框
+                showMoveDot: [], //控制下落的小圆点显示隐藏
+                windowHeight: null, //屏幕的高度
+                elLeft: 0, //当前点击加按钮在网页中的绝对top值
+                elBottom: 0, //当前点击加按钮在网页中的绝对left值
+                ratingScroll: null, //评论页Scroll
             }
         },
         created(){
@@ -345,6 +362,7 @@
         mounted(){
             //初始化数据
             this.initData();
+            this.windowHeight = window.innerHeight;
         },
         mixins: [loadMore, getImgPath],
         components: {
@@ -429,13 +447,16 @@
                 let requestFram;
                 this.foodScroll = new BScroll(element, {  
                     probeType: 3,
-                    click: true,
                     deceleration: 0.001,
-                    probeType: 1,
+                    bounce: false,
+                    swipeTime: 2000,
+                    click: true,
                 }); 
            
                 
-                new BScroll('#wrapper_menu');
+                new BScroll('#wrapper_menu', {
+                    click: true,
+                });
 
                 //判断scrollTop的值，则满足条件，改变对应列表标题样式
                 this.foodScroll.on('scroll', (pos) => {
@@ -534,10 +555,9 @@
                 this.ratingTageIndex = index;
                 this.ratingOffset = 0;
                 this.ratingTagName = name;
-                this.ratingList = await getRatingList(this.ratingOffset, name);
-                if (process.env.NODE_ENV !== 'development') {
-                    this.ratingList = this.ratingList.reverse();
-                }
+                let res = await getRatingList(this.ratingOffset, name);
+                this.ratingList = [...res];
+                this.ratingScroll.refresh();
             },
             async loaderMoreRating(){
                 if (this.preventRepeatRequest) {
@@ -559,7 +579,7 @@
                     this.timer = setTimeout(() => {
                         clearTimeout(this.timer);
                         this.showLoading = false;
-                    }, 1000)
+                    }, 600)
                 }else{
                     this.showLoading = false;
                 }
@@ -590,6 +610,27 @@
                     this.showDeleteTip = false;
                 }, 3000);
             },
+            showMoveDotFun(showMoveDot, elLeft, elBottom){
+                this.showMoveDot = [...this.showMoveDot, ...showMoveDot];
+                this.elLeft = elLeft;
+                this.elBottom = elBottom;
+            },
+            beforeEnter(el){
+                el.style.transform = `translate3d(0,${37 + this.elBottom - this.windowHeight}px,0)`;
+                el.children[0].style.transform = `translate3d(${this.elLeft - 32}px,0,0)`;
+            },
+            afterEnter(el){
+                el.style.transform = `translate3d(0,0,0)`;
+                el.children[0].style.transform = `translate3d(0,0,0)`;
+                el.style.transition = 'all .55s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+                el.children[0].style.transition = 'all .55s linear';
+                //圆点到达目标点后移出
+                this.showMoveDot = this.showMoveDot.map(item => false);
+                //监听运动结束，通知父级进行后续操作
+                el.children[0].addEventListener('transitionend', () => {
+                    this.listenInCart();
+                })
+            },
         },
         watch: {
             //showLoading变化时说明组件已经获取初始化数据，在下一帧nextTick进行后续操作
@@ -612,7 +653,20 @@
             changeShowType: function (value){
                 if (value === 'rating') {
                     this.$nextTick(() => {
-                        new BScroll('#ratingContainer');
+                        this.ratingScroll = new BScroll('#ratingContainer', {
+                            probeType: 3,
+                            deceleration: 0.003,
+                            bounce: false,
+                            swipeTime: 2000,
+                            click: true,
+                        });
+                        this.ratingScroll.on('scroll', (pos) => {
+                            if (Math.abs(Math.round(pos.y)) >=  Math.abs(Math.round(this.ratingScroll.maxScrollY))) {
+                                this.loaderMoreRating();
+                                this.ratingScroll.refresh();
+                            }
+                            
+                        })
                     })
                 }
             }
@@ -1405,6 +1459,16 @@
         border: 1px;
         border-radius: 0.25rem;
     }
+    .move_dot{
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+    
+        svg{
+            @include wh(.8rem, .8rem);
+            fill: #3190e8;
+        }
+    }
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
@@ -1432,4 +1496,5 @@
     .toggle-cart-enter, .toggle-cart-leave-active {
         transform: translateY(100%);
     }
+
 </style>

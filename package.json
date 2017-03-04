@@ -12,6 +12,7 @@
   "dependencies": {
     "better-scroll": "^0.1.15",
     "fastclick": "^1.0.6",
+    "iscroll": "^5.2.0",
     "showdown": "^1.6.4",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",

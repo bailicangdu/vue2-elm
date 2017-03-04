@@ -9,21 +9,9 @@
             <transition name="fade">
                 <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
             </transition>
-            <svg @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
+            <svg class="add_icon" @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
             </svg>
-            <transition 
-            appear
-            @after-appear = 'afterEnter'
-            @before-appear="beforeEnter"
-            v-for="(item,index) in showMoveDot"
-            >
-                <span class="move_dot" v-if="item">
-                    <svg class="move_liner">
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
-                    </svg>
-                </span>
-            </transition>
         </section>
         <section v-else class="choose_specification">
             <section class="choose_icon_container">
@@ -46,16 +34,11 @@
     export default {
     	data(){
             return{
-               showSpecs: false,//控制显示食品规格
-               
                showMoveDot: [], //控制下落的小圆点显示隐藏
-               elLeft: 0, //当前点击加按钮在网页中的绝对top值
-               elBottom: 0, //当前点击加按钮在网页中的绝对left值
-               windowHeight: null, //屏幕的高度
             }
         },
         mounted(){
-            this.windowHeight = window.innerHeight;
+            
         },
         computed: {
             ...mapState([
@@ -96,36 +79,21 @@
             //加入购物车，计算按钮位置。
             addToCart(category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock, event){
                 this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
-                this.elLeft = event.target.getBoundingClientRect().left;
-                this.elBottom = event.target.getBoundingClientRect().bottom;
+                let elLeft = event.target.getBoundingClientRect().left;
+                let elBottom = event.target.getBoundingClientRect().bottom;
                 this.showMoveDot.push(true);
+                this.$emit('showMoveDot', this.showMoveDot, elLeft, elBottom);
 
             },
             //显示规格列表
             showChooseList(foodScroll){
-                this.showSpecs = !this.showSpecs;
                 this.$emit('showChooseList', foodScroll)
             },
             //点击多规格商品的减按钮，弹出提示
             showReduceTip(){
                 this.$emit('showReduceTip')
             },
-            beforeEnter(el){
-                el.style.transform = `translate3d(0,${39 + this.elBottom - this.windowHeight}px,0)`;
-                el.children[0].style.transform = `translate3d(${this.elLeft - 40}px,0,0)`;
-            },
-            afterEnter(el){
-                el.style.transform = `translate3d(0,0,0)`;
-                el.children[0].style.transform = `translate3d(0,0,0)`;
-                el.style.transition = 'all .55s cubic-bezier(0.3, -0.19, 0.65, -0.15)';
-                el.children[0].style.transition = 'all .55s linear';
-                //圆点到达目标点后移出
-                this.showMoveDot = this.showMoveDot.map(item => false);
-                //监听运动结束，通知父级进行后续操作
-                el.children[0].addEventListener('transitionend', () => {
-                    this.$emit('moveInCart')
-                })
-            }
+            
         },
     }
 </script>
@@ -133,15 +101,13 @@
 <style lang="scss" scoped>
     @import '../../style/mixin';
 	.cart_module{
+        .add_icon{
+            position: relative;
+            z-index: 999;
+        }
         .cart_button{
             display: flex;
             align-items: center;
-            .move_dot{
-                position: fixed;
-                bottom: 40px;
-                left: 40px;
-                z-index: 99999999999999999;
-            }
         }
         svg{
             @include wh(.8rem, .8rem);
@@ -163,9 +129,9 @@
                 .show_chooselist{
                     display: block;
                     @include sc(.55rem, #fff);
-                    padding: .2rem .3rem;
+                    padding: .1rem .2rem;
                     background-color: $blue;
-                    border-radius: 0.5rem;
+                    border-radius: 0.2rem;
                     border: 1px solid $blue;
                 }
             }
