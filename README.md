@@ -83,7 +83,7 @@ npm run build
 
 #### (demo使用的是模拟数据，数据是固定的，只做为样式的演示，要获取真实的数据，请clone代码并运行);
 
-[demo地址](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+[查看demo请戳这里](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
    
 ### 移动端扫描下方二维码
 
