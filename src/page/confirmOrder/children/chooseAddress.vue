@@ -121,6 +121,13 @@
                 this.CHOOSE_ADDRESS({address, index});
                 this.$router.go(-1);
             },
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id) {
+                    this.initData();
+                }
+            }
         }
     }
 </script>

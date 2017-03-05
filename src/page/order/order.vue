@@ -25,9 +25,10 @@
                             <p class="order_amount">¥{{item.total_amount.toFixed(2)}}</p>
                         </section>
                     </section>
-                    <router-link :to="{path: '/shop', query: {geohash, id: item.restaurant_id}}" tag="div" class="order_again">
-                        <span>再来一单</span>
-                    </router-link>
+                    <div class="order_again">
+                        <compute-time v-if="item.status_bar.title == '等待支付'" :time="item.formatted_created_at"></compute-time>
+                        <router-link :to="{path: '/shop', query: {geohash, id: item.restaurant_id}}" tag="span" class="buy_again" v-else>再来一单</router-link>
+                    </div>
                 </section>
             </li>
         </ul>
@@ -37,18 +38,21 @@
         </transition>
         <transition name="router-slid">
             <router-view></router-view>
-        </transition>   
+        </transition>
+ 
     </div>
 </template>
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import headTop from '../../components/header/head'
-    import loading from '../../components/common/loading'
-    import {getImgPath} from '../../components/common/mixin'
-    import footGuide from '../../components/footer/footGuide'
-    import {getOrderList} from '../../service/getData'
-    import {loadMore} from '../../components/common/mixin'
+    import headTop from 'src/components/header/head'
+    import computeTime from 'src/components/common/computeTime'
+    import loading from 'src/components/common/loading'
+    import {getImgPath} from 'src/components/common/mixin'
+    import footGuide from 'src/components/footer/footGuide'
+    import {getOrderList} from 'src/service/getData'
+    import {loadMore} from 'src/components/common/mixin'
+
 
     export default {
       data(){
@@ -67,6 +71,7 @@
             headTop,
             footGuide,
             loading,
+            computeTime,
         },
         computed: {
             ...mapState([
@@ -127,7 +132,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../style/mixin';
+    @import 'src/style/mixin';
     
     .order_page{
         background-color: #f1f1f1;
@@ -194,7 +199,7 @@
                 .order_again{
                     text-align: right;
                     line-height: 1.6rem;
-                    span{
+                    .buy_again{
                         @include sc(.55rem, #3190e8);
                         border: 0.025rem solid #3190e8;
                         padding: .1rem .2rem;

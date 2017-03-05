@@ -2,7 +2,7 @@
   <div class="order_detail_page">
         <head-top head-title="订单详情" go-back='true'></head-top>
         <section v-if="!showLoading" id="scroll_section" class="scroll_container">
-            <section>
+            <section class="scroll_insert">
                 <section class="order_titel">
                     <img :src="orderDetail.restaurant_image_url">
                     <p>{{orderDetail.status_bar.title}}</p>
@@ -165,6 +165,9 @@
         right: 0;
         bottom: 0;
         padding-top: 1.95rem;
+    }
+    .scroll_insert{
+        padding-bottom: 3rem;
     }
     .order_titel{
         display: flex;

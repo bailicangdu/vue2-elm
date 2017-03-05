@@ -31,7 +31,7 @@
       data(){
             return{
                	validate: null, //验证码
-                countDown: 30, //倒计时
+                countDown: 60, //倒计时
                 sig: null,
                 reCallVerify: null,
                 showAlert: false,
@@ -65,7 +65,7 @@
                 'CHANGE_ORDER_PARAM', 'ORDER_SUCCESS'
             ]),
             count(){
-                this.countDown = 30;
+                this.countDown = 60;
                 clearInterval(this.timer);
                 this.timer = setInterval(() => {
                     this.countDown -- ;
