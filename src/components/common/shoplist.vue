@@ -106,20 +106,22 @@ export default {
 					return 
 				}
 				this.showLoading = true;
-			}
-			this.preventRepeatReuqest = true;
+				this.preventRepeatReuqest = true;
 
-			//数据的定位加20位
-			this.offset += 20;
-			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.preventRepeatReuqest = false;
-			this.shopListArr = [...this.shopListArr, ...res];
-			if (process.env.NODE_ENV == 'development') {
+				//数据的定位加20位
+				this.offset += 20;
+				let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
+				this.preventRepeatReuqest = false;
+				this.shopListArr = [...this.shopListArr, ...res];
 				this.hideLoading();
 				//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 				if (res.length < 20) {
 					return
 				}
+			}else{
+				this.showLoading = true;
+				this.shopListArr = [...this.shopListArr, ...this.shopListArr.splice(0,20)];
+				this.hideLoading();
 			}
 		},
 		//返回顶部
@@ -128,9 +130,13 @@ export default {
 		},
 		//监听父级传来的数据发生变化时，触发此函数重新根据属性值获取数据
 		async listenPropChange(){
-			this.offset = 0;
 			this.showLoading = true;
-			this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
+			if (process.env.NODE_ENV == 'development') {
+				this.offset = 0;
+				this.shopListArr = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
+			}else{
+				this.shopListArr = this.shopListArr.reverse();
+			}
 			this.hideLoading();
 		},
 		hideLoading(){
