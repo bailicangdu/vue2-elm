@@ -46,10 +46,8 @@
     			adressList:[],
             }
         },
-        created(){
- 			//console.log(this.userInfo.user_id)
-        	this.saveAddress()
-
+        mounted(){
+            this.initData();
         },
         mixins: [getImgPath],
         mounted(){
@@ -57,7 +55,6 @@
         },
         components: {
             headTop,
-
         },
         computed:{
              ...mapState([
@@ -70,7 +67,11 @@
         	...mapActions([
                 'saveAddress'
             ]),
-
+            initData(){
+                if (this.userInfo && this.userInfo.user_id) {
+                   this.saveAddress();
+                }
+            },
             editThing(){
             	if(this.editText == '编辑'){
             		this.editText='完成';
@@ -82,6 +83,13 @@
             },
             deleteSite(index){
             	this.removeAddress.splice(index, 1);
+            }
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id) {
+                    this.initData();
+                }
             }
         }
     }

@@ -39,6 +39,7 @@
     import headTop from 'src/components/header/head'
     import {getImgPath} from 'src/components/common/mixin'
     import {mapState, mapMutations} from 'vuex'
+    import {postAddAddress} from 'src/service/getData'
     export default {
       data(){
             return{
@@ -69,7 +70,7 @@
         },
         computed:{
              ...mapState([
-                'addAddress','removeAddress','newAddress',
+                'userInfo', 'addAddress','removeAddress','newAddress', 'geohash'
             ]),
             
         },
@@ -122,7 +123,8 @@
             		this.butpart=false;
             	}
             },
-            submitThing(){
+            async submitThing(){
+                let res = await postAddAddress(this.userInfo.user_id, this.mesthree, this.addAddress, this.geohash, this.message, this.telenum, this.standbytelenum, 0, 1, '公司', 4);
             	if(this.butpart){
             		this.ADD_ADDRESS({
                         name: this.message,

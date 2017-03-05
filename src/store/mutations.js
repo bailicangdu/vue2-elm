@@ -206,6 +206,7 @@ export default {
 	//保存geohash
 	[SAVE_GEOHASH](state, geohash) {
 		state.geohash = geohash;
+		if (true) {}
 	},
 	//选择的地址
 	[CHOOSE_ADDRESS](state, {

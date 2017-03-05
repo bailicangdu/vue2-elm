@@ -61,7 +61,6 @@
         },
         mounted(){
             this.initData();
-
         },
         mixins: [loadMore],
         components: {
@@ -79,8 +78,11 @@
                'SAVE_ORDER'
             ]),
             async initData(){
-                this.orderList = await getOrderList(111, this.offset);
-                this.hideLoading();
+                if (this.userInfo && this.userInfo.user_id) {
+                    let res = await getOrderList(this.userInfo.user_id, this.offset);
+                    this.orderList = [...res];
+                    this.hideLoading();
+                }
             },
             async loaderMore(){
                 if (this.preventRepeat) {
@@ -89,13 +91,17 @@
                 this.preventRepeat = true;
                 this.showLoading = true;
                 this.offset += 10;
-                let res = await getOrderList(111, this.offset);
-                this.orderList = this.orderList.concat(this.orderList, res);
-                this.preventRepeat = false;
+                let res = await getOrderList(this.userInfo.user_id, this.offset);
+                this.orderList = [...this.orderList, ...res];
                 this.hideLoading();
+                if (res.length < 10) {
+                    return
+                }
+                this.preventRepeat = false;
             },
             showDetail(item){
                 this.SAVE_ORDER(item);
+                this.preventRepeat = false;
                 this.$router.push('/order/orderDetail');
             },
             hideLoading(){
@@ -109,6 +115,13 @@
                     this.showLoading = false;
                 }
             },
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id && !this.orderList) {
+                    this.initData();
+                }
+            }
         }
     }
 </script>

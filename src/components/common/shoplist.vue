@@ -113,13 +113,13 @@ export default {
 			//数据的定位加20位
 			this.offset += 20;
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
-			this.preventRepeatReuqest = false;
 			this.hideLoading();
 			this.shopListArr = [...this.shopListArr, ...res];
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
 				return
 			}
+			this.preventRepeatReuqest = false;
 		},
 		//返回顶部
 		backTop(){

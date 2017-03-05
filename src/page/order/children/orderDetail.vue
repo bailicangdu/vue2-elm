@@ -30,7 +30,7 @@
                     </ul>
                     <div class="deliver_fee">
                         <span>配送费</span>
-                        <span>{{orderDetail.basket.deliver_fee.price}}</span>   
+                        <span>{{orderDetail.basket.deliver_fee&&orderDetail.basket.deliver_fee.price || 0}}</span>   
                     </div>
                     <div class="pay_ment">实付{{orderDetail.total_amount.toFixed(2)}}</div>
                 </section>
@@ -118,18 +118,26 @@
         },
         methods: {
             async initData(){
-                // this.orderData = await getOrderDetail(this.userInfo.user_id, this.orderDetail.id);
-                this.orderData = await getOrderDetail(1, 1);
-                this.showLoading = false;
-                this.$nextTick(() => {
-                    new BScroll('#scroll_section', {  
-                        deceleration: 0.001,
-                        bounce: true,
-                        swipeTime: 1800,
-                        click: true,
-                    }); 
-                })
+                if (this.userInfo && this.userInfo.user_id) {
+                    this.orderData = await getOrderDetail(this.userInfo.user_id, this.orderDetail.unique_id);
+                    this.showLoading = false;
+                    this.$nextTick(() => {
+                        new BScroll('#scroll_section', {  
+                            deceleration: 0.001,
+                            bounce: true,
+                            swipeTime: 1800,
+                            click: true,
+                        }); 
+                    })
+                }
             },
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id) {
+                    this.initData();
+                }
+            }
         }
     }
 </script>
