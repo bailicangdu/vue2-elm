@@ -171,9 +171,11 @@
                                             <span>{{item.price}}</span>
                                         </div>
                                         <section class="cart_list_control">
-                                            <svg @click="removeOutCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
-                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
-                                            </svg>
+                                            <span @click="removeOutCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
+                                                <svg>
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-minus"></use>
+                                                </svg>
+                                            </span>
                                             <span class="cart_num">{{item.num}}</span>
                                             <svg class="cart_add" @click="addToCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs)">
                                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
@@ -1202,15 +1204,20 @@
                 .cart_list_control{
                     display: flex;
                     align-items: center;
+                    span{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
                     svg{
-                        @include wh(.8rem, .8rem);
+                        @include wh(.9rem, .9rem);
                         fill: #3190e8;
                     }
                     .specs_reduce_icon{
                         fill: #999;
                     }
                     .cart_num{
-                        @include sc(.6rem, #666);
+                        @include sc(.65rem, #666);
                         min-width: 1rem;
                         text-align: center;
                         font-family: Helvetica Neue,Tahoma;
@@ -1490,7 +1497,7 @@
         left: 30px;
     
         svg{
-            @include wh(.8rem, .8rem);
+            @include wh(.9rem, .9rem);
             fill: #3190e8;
         }
     }
