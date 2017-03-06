@@ -65,7 +65,7 @@
                 </section>
             </router-link>
         </section>
-        <transition name="router-slid">
+        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
     </div>
@@ -204,6 +204,7 @@
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
-        transform: translateX(100%);
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
     }
 </style>

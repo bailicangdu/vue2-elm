@@ -16,6 +16,7 @@ const state = {
 	remarkText: null,//可选备注内容
 	inputText: '',//输入备注内容
 	invoice: false,//开发票
+	newAddress: [], //确认订单页新的地址
 	searchAddress: null,//搜索并选择的地址
 	geohash: 'wtw3sm0q087',//地址geohash值
 	choosedAddress: null,//选择地址

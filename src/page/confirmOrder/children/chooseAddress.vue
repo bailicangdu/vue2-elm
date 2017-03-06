@@ -45,7 +45,7 @@
             </ul>
         </section>
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
-        <transition name="router-slid">
+        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>  
     </div>
@@ -81,7 +81,7 @@
         props:[],
         computed: {
             ...mapState([
-                'userInfo', 'addressIndex'
+                'userInfo', 'addressIndex', 'newAddress'
             ]),
             defaultIndex: function (){
                 if (this.addressIndex) {
@@ -96,20 +96,20 @@
                 'CHOOSE_ADDRESS'
             ]),
             async initData(){
-                if (!(this.userInfo && this.userInfo.user_id)) {
-                    this.showAlert = true;
-                    this.alertText = '请登陆'
-                    return
+                this.addressList = [];
+                this.deliverable = [];
+                this.deliverdisable = [];
+                if (this.userInfo && this.userInfo.user_id) {
+                    this.addressList = await getAddress(this.id, this.sig);
+                    this.addressList.forEach(item => {
+                        if (item.is_deliverable) {
+                            this.deliverable.push(item);
+                        }else{
+                            this.deliverdisable.push(item);
+                        }
+                        
+                    })
                 }
-                this.addressList = await getAddress(this.id, this.sig);
-                this.addressList.forEach(item => {
-                    if (item.is_deliverable) {
-                        this.deliverable.push(item);
-                    }else{
-                        this.deliverdisable.push(item);
-                    }
-                    
-                })
             },
             iconColor(name){
                 switch(name){
@@ -127,7 +127,11 @@
                 if (value && value.user_id) {
                     this.initData();
                 }
-            }
+            },
+            newAddress: function (value) {
+                this.initData();
+                console.log(11111)
+            },
         }
     }
 </script>
@@ -221,6 +225,7 @@
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
-        transform: translateX(100%);
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
     }
 </style>

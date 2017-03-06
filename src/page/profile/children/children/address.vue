@@ -11,7 +11,7 @@
         				<p><span>{{item.phone}}</span><span v-if="item.phonepk">、{{item.phonepk}}</span></p>
         			</div>
         			<div class="deletesite" v-if="deletesite">
-        				<span @click="deleteSite(index)">x</span>
+        				<span @click="deleteSite(index, item)">x</span>
         			</div>
         		</li>
         	</ul>
@@ -26,7 +26,7 @@
 				</div>
 			</router-link>
         </section>
-         <transition name="router-slid">
+        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
     </div>
@@ -36,7 +36,7 @@
     import headTop from 'src/components/header/head'
     import {getImgPath} from 'src/components/common/mixin'
     import {mapState,mapActions,} from 'vuex'
-    import {getAddressList} from 'src/service/getData'
+    import {getAddressList, deleteAddress} from 'src/service/getData'
 
     export default {
       data(){
@@ -81,8 +81,11 @@
             		this.deletesite=false;
             	}
             },
-            deleteSite(index){
-            	this.removeAddress.splice(index, 1);
+            async deleteSite(index, item){
+                if (this.userInfo && this.userInfo.user_id) {
+                    let res = await deleteAddress(this.userInfo.user_id, item.id);
+            	    this.removeAddress.splice(index, 1);
+                }
             }
         },
         watch: {
@@ -171,6 +174,7 @@
     transition: all .4s;
 }
 .router-slid-enter, .router-slid-leave-active {
-    transform: translateX(100%);
+    transform: translate3d(2rem, 0, 0);
+    opacity: 0;
 }
 </style>

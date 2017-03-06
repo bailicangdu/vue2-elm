@@ -2,7 +2,7 @@
   <div class="rating_page">
         <head-top head-title="新增地址" go-back='true'></head-top>
         <section class="adddetail">
-        	<form action="">
+        	<form action="" v-on:submit.prevent>
         		<section class="ui-padding-block">
         			<div class="input-new">
         				<input type="text" placeholder="请填写你的姓名" :class="{verifies:verify}" v-model="message" @input="inputThing">
@@ -27,11 +27,14 @@
         			</div>
         		</section>
         		<section class="addbutton">
-        			<button :class="{butopacity:butpart}" @click="submitThing">新增地址</button>
+        			<button :class="{butopacity:butpart}" @click.prevent="submitThing">新增地址</button>
         		</section>
         	</form>
         </section>
-        <router-view></router-view>
+        <transition name="router-slid" mode="out-in">
+            <router-view></router-view>
+        </transition>
+        <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
     </div>
 </template>
 
@@ -40,6 +43,9 @@
     import {getImgPath} from 'src/components/common/mixin'
     import {mapState, mapMutations} from 'vuex'
     import {postAddAddress} from 'src/service/getData'
+    import alertTip from 'src/components/common/alertTip'
+
+
     export default {
       data(){
             return{
@@ -58,6 +64,8 @@
     			standbytelenum:'',
     			addSearch:false,
     			newAddress:{},			//增加数组的元素
+                showAlert: false,
+                alertText: null,
             }
         },
         created(){
@@ -66,7 +74,7 @@
         mixins: [getImgPath],
         components: {
             headTop,
-
+            alertTip,
         },
         computed:{
              ...mapState([
@@ -114,7 +122,7 @@
             	}else{
             		this.standbytele="请输入正确的手机号"
             	}
-            	this.bindThing()
+            	this.bindThing();
             },
             bindThing(){
             	if(this.message && this.mesthree && !this.verifyfour){
@@ -125,7 +133,10 @@
             },
             async submitThing(){
                 let res = await postAddAddress(this.userInfo.user_id, this.mesthree, this.addAddress, this.geohash, this.message, this.telenum, this.standbytelenum, 0, 1, '公司', 4);
-            	if(this.butpart){
+                if (res.message) {
+                    this.showAlert = true;
+                    this.alertText = res.message;
+                }else if(this.butpart){
             		this.ADD_ADDRESS({
                         name: this.message,
                         address: this.mesthree,
@@ -137,7 +148,7 @@
                         poi_type: 0,
                     });
             		this.$router.go(-1);
-            	}
+                }
             }
         }
     }
@@ -149,7 +160,8 @@
   	    transition: all .4s;
   	}
   	.router-slid-enter, .router-slid-leave-active {
-  	    transform: translateX(100%);
+  	    transform: translate3d(2rem, 0, 0);
+        opacity: 0;
   	}
     .rating_page{
         position: absolute;

@@ -80,7 +80,6 @@
             				this.warning=true;
             			}
             		}
-            		
             	});
             },
             listClick(index){

@@ -11,6 +11,7 @@ import {
 	CONFIRM_INVOICE,
 	CHOOSE_SEARCH_ADDRESS,
 	SAVE_GEOHASH,
+	CONFIRM_ADDRESS,
 	CHOOSE_ADDRESS,
 	NEED_VALIDATION,
 	SAVE_CART_ID_SIG,
@@ -208,6 +209,10 @@ export default {
 		state.geohash = geohash;
 		if (true) {}
 	},
+	//确认订单页添加新的的地址
+	[CONFIRM_ADDRESS](state, newAddress) {
+		state.newAddress.push(newAddress);
+	},
 	//选择的地址
 	[CHOOSE_ADDRESS](state, {
 		address,
@@ -273,5 +278,6 @@ export default {
 	//会员卡价格纪录
 	[BUY_CART](state, price) {
 		state.cartPrice = price;
-	}
+	},
+
 }

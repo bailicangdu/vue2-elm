@@ -48,8 +48,8 @@
             </section>
         </section>
         <div class="determine" @click="addAddress">确定</div>
-         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
-        <transition name="router-slid">
+        <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
+        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>  
     </div>
@@ -91,7 +91,7 @@
         },
         methods: {
             ...mapMutations([
-                
+                'CONFIRM_ADDRESS'
             ]),
             chooseSex(sex){
                 this.sex = sex;
@@ -121,6 +121,7 @@
                     this.tag_type = 4;
                 }
                 let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
+                this.CONFIRM_ADDRESS(1);
                 this.$router.go(-1);
             },
         }
@@ -208,6 +209,7 @@
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
-        transform: translateX(100%);
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
     }
 </style>

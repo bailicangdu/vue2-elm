@@ -130,7 +130,7 @@
             </section>
         </section>
         <foot-guide></foot-guide>
-        <transition name="router-slid">
+        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
     </div>
@@ -198,14 +198,16 @@ export default {
         ]),
     },
     watch: {
-        userInfo: function (){
-            this.getUserinfo = this.userInfo;
-            this.avatar = this.getUserinfo&&this.getUserinfo.avatar || '';
-            this.username = this.getUserinfo&&this.getUserinfo.username ||'登陆/注册';
-            this.mobile = this.getUserinfo&&this.getUserinfo.mobile ||'登陆后享受更多特权';
-            this.balance = this.getUserinfo&&this.getUserinfo.balance || '0';
-            this.count = this.getUserinfo&&this.getUserinfo.gift_amount || '0';
-            this.pointNumber = this.getUserinfo&&this.getUserinfo.point || '0';
+        userInfo: function (value){
+            if (value && value.user_id) {
+                this.getUserinfo = this.userInfo;
+                this.avatar = this.getUserinfo&&this.getUserinfo.avatar || '';
+                this.username = this.getUserinfo&&this.getUserinfo.username ||'登陆/注册';
+                this.mobile = this.getUserinfo&&this.getUserinfo.mobile ||'登陆后享受更多特权';
+                this.balance = this.getUserinfo&&this.getUserinfo.balance || '0';
+                this.count = this.getUserinfo&&this.getUserinfo.gift_amount || '0';
+                this.pointNumber = this.getUserinfo&&this.getUserinfo.point || '0';
+            }
         }
     }
 }
@@ -370,6 +372,7 @@ export default {
         transition: all .4s;
     }
     .router-slid-enter, .router-slid-leave-active {
-        transform: translateX(100%);
+        transform: translate3d(2rem, 0, 0);
+        opacity: 0;
     }
 </style>

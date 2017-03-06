@@ -475,6 +475,11 @@ if (process.env.NODE_ENV == 'development') {
 		type:'nearby'
 	})
 
+	/**
+	* 删除地址
+	*/
+
+	var deleteAddress=(userid, addressid) => fetch('DELETE','/v1/users/' + userid + '/addresses/' + addressid,{})
 
 }else{
 	var cityGuess = () => setpromise(home.guesscity);
@@ -528,6 +533,7 @@ if (process.env.NODE_ENV == 'development') {
 	var getOrderDetail = (user_id, orderid) => setpromise(order.orderDetail);
 	var getAddressList = (user_id) => setpromise(addresspart.address);
 	var getSearchAddress=(keyword) => setpromise(addDetail.addData);
+	var deleteAddress=(userid, addressid) =>  setpromise(vip.vipcart);
 }
 
 
@@ -537,4 +543,4 @@ if (process.env.NODE_ENV == 'development') {
 
 var sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
 
-export {cityGuess, hotcity, groupcity, currentcity, searchplace, msiteAdress, msiteFoodTypes,shopList, searchRestaurant, foodCategory, foodDelivery, foodActivity, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags, mobileCode, accountLogin, checkExsis, sendMobile, checkout, getRemark, getAddress, getcaptchas, searchNearby, postAddAddress, placeOrders, rePostVerify, validateOrders, payRequest, getService, vipCart, getHongbaoNum, getExpired, exChangeHongbao, getUser, sendLogin, getOrderList, getOrderDetail, getAddressList, getSearchAddress, }
+export {cityGuess, hotcity, groupcity, currentcity, searchplace, msiteAdress, msiteFoodTypes,shopList, searchRestaurant, foodCategory, foodDelivery, foodActivity, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags, mobileCode, accountLogin, checkExsis, sendMobile, checkout, getRemark, getAddress, getcaptchas, searchNearby, postAddAddress, placeOrders, rePostVerify, validateOrders, payRequest, getService, vipCart, getHongbaoNum, getExpired, exChangeHongbao, getUser, sendLogin, getOrderList, getOrderDetail, getAddressList, getSearchAddress, deleteAddress}
