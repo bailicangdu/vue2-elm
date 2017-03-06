@@ -6,7 +6,7 @@
                 <input type="file" class="profileinfopanel-upload" @change="uploadAvatar">
                 <h2>头像</h2>
                 <div class="headportrait-div">
-                    <img :src="imgPath" class="headportrait-div-top" v-if="this.avatar">
+                    <img :src="imgPath" class="headportrait-div-top" v-if="avatar">
                     <span class="headportrait-div-top" v-else>
                         <svg>
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
@@ -114,7 +114,6 @@
                 username:'',    //用户名
                 resetname:'', //重置用户名
                 infotel:'',     //用户手机
-                getUsermes:{},  //用户信息
                 avatar:'',      //用户头像
                 show:false,     //显示提示框
                 isEnter:true, 
@@ -191,9 +190,9 @@
         watch: {
             userInfo: function (value) {
                 if (value && value.user_id) {
-                    this.username=this.getUsermes.username;
-                    this.infotel=this.getUsermes.mobile;
-                    this.avatar=this.getUsermes.avatar;
+                    this.username = value.username;
+                    this.infotel = value.mobile;
+                    this.avatar = value.avatar;
                 }
             }
         }
