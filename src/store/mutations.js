@@ -169,7 +169,7 @@ export default {
 			return
 		}
 		if (!info.message) {
-			state.userInfo = info;
+			state.userInfo = {...info};
 			let validity = 30;
 			let now = new Date();
 			now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
