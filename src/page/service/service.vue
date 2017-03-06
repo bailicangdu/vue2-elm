@@ -40,9 +40,9 @@
     export default {
       data(){
             return{
-                serviceData: null,
-                questionTitle: [],
-                questionDetail: [],
+                serviceData: null, //服务信息
+                questionTitle: [], //问题标题
+                questionDetail: [], //问题详情
             }
         },
 
@@ -58,15 +58,18 @@
             ...mapMutations([
                 'SAVE_QUESTION'
             ]),
+            //获取信息
             async initData(){
                 this.serviceData = await getService();
                 Object.keys(this.serviceData).forEach(item => {
                     let avoidRepeat = false;
                     this.questionTitle.forEach((insertItem) => {
+                        //防止重复的数据，后台返回的数据有些是重复的
                         if (insertItem == this.serviceData[item]) {
                             avoidRepeat = true;
                         }
                     })
+                    //将标题和内容分别放进数组中
                     if (item.indexOf('Caption') !== -1 && !avoidRepeat) {
                             this.questionTitle.push(this.serviceData[item]);
                     }else if(!avoidRepeat){
@@ -74,6 +77,7 @@
                     }
                 })
             },
+            //保存问题详情
             toQuestionDetail(title, index){
                 this.SAVE_QUESTION({title, detail: this.questionDetail[index]});
                 this.$router.push('/service/questionDetail');

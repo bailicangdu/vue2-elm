@@ -32,11 +32,11 @@
             return{
                	validate: null, //验证码
                 countDown: 60, //倒计时
-                sig: null,
-                reCallVerify: null,
-                showAlert: false,
+                sig: null, //sig值
+                reCallVerify: null, //重发验证信息
+                showAlert: false, 
                 alertText: null,
-                showVoiceTip: false,
+                showVoiceTip: false, //显示语音验证
                 type: 'sms',
             }
         },
@@ -64,6 +64,7 @@
             ...mapMutations([
                 'CHANGE_ORDER_PARAM', 'ORDER_SUCCESS'
             ]),
+            //到计时
             count(){
                 this.countDown = 60;
                 clearInterval(this.timer);
@@ -74,16 +75,19 @@
                     }
                 }, 1000);
             },
+            //重新发送
             recall(){
                 this.count();
                 this.type = 'sms';
                 this.getData();
             },
+            //发送语音验证
             sendVoice(){
                 this.showVoiceTip = true;
                 this.type = 'voice';
                 this.getData();
             },
+            //获取验证信息
             async getData(){
                 this.reCallVerify = await rePostVerify(this.cart_id, this.sig, this.type);
                 if (this.reCallVerify.message) {
@@ -91,9 +95,11 @@
                     this.alertText = this.reCallVerify.message;
                 }
             },
+            //确认订单
             async confrimOrder(){
                 this.CHANGE_ORDER_PARAM({validation_code: this.validate, validation_token: this.reCallVerify.validate_token})
                 let orderRes = await validateOrders(this.orderParam);
+                //如果信息错误则提示，否则进入付款页面
                 if (orderRes.message) {
                     this.showAlert = true;
                     this.alertText = orderRes.message;

@@ -95,11 +95,11 @@
     export default {
       data(){
             return{
-                showAlert: false,
-                alertText: null,
-                showLoading: true,
-                hongbaoList: null,
-                categoryType: 1,
+                showAlert: false, //弹出框
+                alertText: null, //弹出框文字
+                showLoading: true, //加载动画
+                hongbaoList: null, //红包列表
+                categoryType: 1, //红包与商家代金券切换
 
             }
         },

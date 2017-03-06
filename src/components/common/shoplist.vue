@@ -131,11 +131,13 @@ export default {
 			this.offset = 0;
 			let res = await shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds);
 			this.hideLoading();
+			//考虑到本地模拟数据是引用类型，所以返回一个新的数组
 			this.shopListArr = [...res];
 			if (process.env.NODE_ENV !== 'development') {
 				this.shopListArr = this.shopListArr.reverse();
 			}
 		},
+		//开发环境与编译环境loading隐藏方式不同
 		hideLoading(){
 			if (process.env.NODE_ENV !== 'development') {
 				clearTimeout(this.timer);

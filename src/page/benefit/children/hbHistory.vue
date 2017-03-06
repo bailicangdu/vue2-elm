@@ -48,7 +48,7 @@
                 showAlert: false,
                 alertText: null,
                 showLoading: true,
-                expiredList: null,
+                expiredList: null, //历史红包列表
             }
         },
         mounted(){
@@ -68,6 +68,7 @@
                 'CLEAR_CART'
             ]),
             async initData(){
+                //获取历史红包
                 if (this.userInfo) {
                     this.expiredList = await getExpired(this.userInfo.user_id);
                     this.showLoading = false;

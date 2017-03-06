@@ -41,9 +41,9 @@
     export default {
       data(){
             return{
-    			deletesite:false,
+    			deletesite:false, //是否编辑状态
     			editText:'编辑',
-    			adressList:[],
+    			adressList:[], //地址列表
             }
         },
         mounted(){
@@ -67,11 +67,13 @@
         	...mapActions([
                 'saveAddress'
             ]),
+            //初始化信息
             initData(){
                 if (this.userInfo && this.userInfo.user_id) {
                    this.saveAddress();
                 }
             },
+            //编辑
             editThing(){
             	if(this.editText == '编辑'){
             		this.editText='完成';
@@ -81,6 +83,7 @@
             		this.deletesite=false;
             	}
             },
+            //删除地址
             async deleteSite(index, item){
                 if (this.userInfo && this.userInfo.user_id) {
                     let res = await deleteAddress(this.userInfo.user_id, item.id);

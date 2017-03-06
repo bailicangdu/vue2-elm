@@ -112,12 +112,12 @@
         data(){
             return{
                 username:'',    //用户名
-                resetname:'',
+                resetname:'', //重置用户名
                 infotel:'',     //用户手机
                 getUsermes:{},  //用户信息
                 avatar:'',      //用户头像
-                show:false,
-                isEnter:true,
+                show:false,     //显示提示框
+                isEnter:true, 
                 isLeave:false,
                 showAlert: false,
                 alertText: null,
@@ -140,12 +140,14 @@
             ...mapMutations([
                 'OUT_LOGIN', 'SAVE_AVANDER'
             ]),
+
             exitlogin(){
                 this.show=true;
                 this.isEnter=true;
                 this.isLeave=false;
             },
             waitingThing(){
+                //取消推出
                 clearTimeout(this.timer)
                 this.isEnter=false;
                 this.isLeave=true;
@@ -154,6 +156,7 @@
                     this.show=false;
                 },200)
             },
+            //退出登陆
             outLogin(){
                 this.OUT_LOGIN();
                 this.waitingThing();
@@ -164,6 +167,7 @@
                 this.alertText = '请在手机APP中设置';
             },
             async uploadAvatar(){
+                //上传头像
                 if (this.userInfo) {
                     let input = document.querySelector('.profileinfopanel-upload')
                     let data = new FormData();

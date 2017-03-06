@@ -42,6 +42,7 @@
         	
         },
         mounted(){
+
         	getSearchAddress(this.inputAdress).then(res => {
         			this.adressList=res;
         			this.warning=true;
@@ -69,6 +70,7 @@
         	...mapMutations([
         		'SAVE_ADDDETAIL'
         	]),
+            //搜索地址
             inputThing(){
             	getSearchAddress(this.inputAdress).then(res => {
             			this.adressList=res;
@@ -82,6 +84,7 @@
             		}
             	});
             },
+            //选择地址
             listClick(index){
             	this.SAVE_ADDDETAIL(this.adressList[index].name);
             	this.$router.go(-1);

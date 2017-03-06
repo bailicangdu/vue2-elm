@@ -49,23 +49,23 @@
     export default {
       data(){
             return{
-    			verify:false,			//第一个输入框
-    			verifytwo:false,		//第二个输入框
-    			verifythree:false,		//第三个输入框
-    			verifyfour:false,		//第四个输入框
-    			verifyfive:false,		//第五个输入框
+    			verify:false,			//姓名
+    			verifytwo:false,		//备注
+    			verifythree:false,		//地址
+    			verifyfour:false,		//电话
+    			verifyfive:false,		//备用电话
     			butpart:false,			//新增地址按钮的透明度
-    			sendaddress:'',
-    			message:'',
-    			mesthree:'',
-    			telenum:'',
-    			telephone:'',
-    			standbytele:'',
-    			standbytelenum:'',
-    			addSearch:false,
+    			sendaddress:'',  //地址
+    			message:'', //信息
+    			mesthree:'', //送餐地址
+    			telenum:'', //手机号
+    			telephone:'', //手机号提示
+    			standbytele:'', //备用手机号提示 
+    			standbytelenum:'', //备用手机号
+    			addSearch:false, //添加搜索地址
     			newAddress:{},			//增加数组的元素
-                showAlert: false,
-                alertText: null,
+                showAlert: false, //弹出框
+                alertText: null, //弹出信息
             }
         },
         created(){
@@ -91,6 +91,7 @@
             	(!this.message) ? this.verify=true : this.verify=false;
             	this.bindThing()
             },
+            //输入地址
             inputThingthree(){
             	this.verifythree=true;
             	if(this.mesthree.length == 0){
@@ -104,6 +105,7 @@
             	}
             	this.bindThing()	
             },
+            //输入手机号
             inputThingfour(){
             	this.verifyfour=true;
             	if((/^[1][358][0-9]{9}$/).test(this.telenum)){
@@ -115,6 +117,7 @@
             	}
             	this.bindThing()
             },
+            //输入备注手机号
             inputThingfive(){
             	this.verifyfive=true;
             	if((/^[1][358][0-9]{9}$/).test(this.standbytelenum) || this.standbytelenum == ''){
@@ -131,12 +134,14 @@
             		this.butpart=false;
             	}
             },
+            //保存地址
             async submitThing(){
                 let res = await postAddAddress(this.userInfo.user_id, this.mesthree, this.addAddress, this.geohash, this.message, this.telenum, this.standbytelenum, 0, 1, '公司', 4);
                 if (res.message) {
                     this.showAlert = true;
                     this.alertText = res.message;
                 }else if(this.butpart){
+                    //保存的地址存入vuex
             		this.ADD_ADDRESS({
                         name: this.message,
                         address: this.mesthree,

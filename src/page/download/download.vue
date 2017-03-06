@@ -23,6 +23,7 @@
             }
         },
         created(){
+            //判断系统
             let u = navigator.userAgent;
             let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
             let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -42,6 +43,7 @@
         props:[],
         methods: {
             download(){
+                //如果是ios用户则提示，否则直接下载
                 if( this.system == 'IOS'){
                     this.showAlert = true;
                     this.alertText = 'IOS用户请前往AppStore下载'

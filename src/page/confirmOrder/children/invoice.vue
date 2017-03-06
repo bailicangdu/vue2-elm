@@ -29,9 +29,11 @@
             ...mapMutations([
                 'CONFIRM_INVOICE'
             ]),
+            //是否选择发票
             chooseInvoice(){
             	this.invoice = !this.invoice;
             },
+            //保存发票信息
             confrimInvoice(){
             	this.CONFIRM_INVOICE(this.invoice);
             	this.$router.go(-1);

@@ -378,6 +378,7 @@
             promotionInfo: function (){ 
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
+            //配送费
             deliveryFee: function () { 
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
@@ -422,8 +423,11 @@
                 this.shopDetailData = await shopDetails(this.shopId, this.latitude, this.longitude);
                 //获取商铺食品列表
                 this.menuList = await foodMenu(this.shopId);
+                //评论列表
                 this.ratingList = await getRatingList(this.ratingOffset);
+                //商铺评论详情
                 this.ratingScoresData = await ratingScores(this.shopId);
+                //评论Tag列表
                 this.ratingTagsList = await ratingTags(this.shopId);
                 this.RECORD_SHOPDETAIL(this.shopDetailData)
                 //隐藏加载动画
@@ -535,10 +539,12 @@
             toggleCartList(){
                 this.showCartList = !this.showCartList;
             },
+            //清除购物车
             clearCart(){
                 this.toggleCartList();
                 this.CLEAR_CART(this.shopId);
             },
+            //监听圆点是否进入购物车
             listenInCart(){
                 if (!this.receiveInCart) {
                     this.receiveInCart = true;
@@ -550,6 +556,7 @@
                     })
                 }
             },
+            //获取不同类型的评论列表
             async changeTgeIndex(index, name){
                 this.ratingTageIndex = index;
                 this.ratingOffset = 0;
@@ -560,6 +567,7 @@
                     this.ratingScroll.refresh();
                 })
             },
+            //加载更多评论
             async loaderMoreRating(){
                 if (this.preventRepeatRequest) {
                     return
@@ -574,6 +582,7 @@
                     this.preventRepeatRequest = false;
                 }
             },
+            //隐藏动画
             hideLoading(){
                 if (process.env.NODE_ENV !== 'development') {
                     clearTimeout(this.timer);
@@ -602,6 +611,7 @@
                 this.ADD_CART({shopid: this.shopId, category_id, item_id, food_id, name, price, specs, packing_fee, sku_id, stock});
                 this.showChooseList();
             },
+            //显示提示，无法减去商品
             showReduceTip(){
                 this.showDeleteTip = true;
                 clearTimeout(this.timer);
@@ -610,6 +620,7 @@
                     this.showDeleteTip = false;
                 }, 3000);
             },
+            //显示下落圆球
             showMoveDotFun(showMoveDot, elLeft, elBottom){
                 this.showMoveDot = [...this.showMoveDot, ...showMoveDot];
                 this.elLeft = elLeft;
@@ -648,11 +659,13 @@
             shopCart: function (value){
                 this.initCategoryNum();
             },
+            //购物车列表发生变化，没有商铺时，隐藏
             cartFoodList: function (value){
                 if(!value.length){
                     this.showCartList = false;
                 }
             },
+            //商品、评论切换状态
             changeShowType: function (value){
                 if (value === 'rating') {
                     this.$nextTick(() => {
@@ -668,7 +681,6 @@
                                 this.loaderMoreRating();
                                 this.ratingScroll.refresh();
                             }
-                            
                         })
                     })
                 }
@@ -905,6 +917,7 @@
         }
         .menu_right{
             flex: 4;
+            overflow-y: auto;
             .menu_detail_header{
                 width: 100%;
                 padding: .4rem;

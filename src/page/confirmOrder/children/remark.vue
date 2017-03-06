@@ -54,14 +54,17 @@
             ...mapMutations([
                 'CONFIRM_REMARK'
             ]),
+            //初始化信息
             async initData(){
                 this.remarkList = await getRemark(this.id, this.sig);
                 this.showLoading = false;
             },
+            //选择备注
             chooseRemark(index, remarkIndex, text){
                 this.remarkText[index] = [remarkIndex, text];
                 this.remarkText = Object.assign({}, this.remarkText);
             },
+            //确认选择
             confirmRemark(){
                 this.CONFIRM_REMARK({remarkText: this.remarkText, inputText: this.inputText});
                 this.$router.go(-1);

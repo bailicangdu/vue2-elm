@@ -29,8 +29,8 @@
     export default {
       data(){
             return{
-               	searchValue: null,
-                searchData: null,
+               	searchValue: null, //输入的搜索内容
+                searchData: null, //搜索的结果
             }
         },
         components: {
@@ -41,11 +41,13 @@
             ...mapMutations([
                 'CHOOSE_SEARCH_ADDRESS'
             ]),
+            //搜索
             async searchPlace(){
                 if (this.searchValue) {
                     this.searchData = await searchNearby(this.searchValue);
                 }
             },
+            //选择搜素结果
             choooedAddress(item){
                 this.CHOOSE_SEARCH_ADDRESS(item);
                 this.$router.go(-1);

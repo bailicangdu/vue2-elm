@@ -64,17 +64,17 @@
     export default {
       data(){
             return{
-                name: null,
-                sex: 1,
-                phone: null,
-                address_detail: null,
-                tag: '',
-                tag_type: 1,
-                phone_bk: false,
-                anntherPhoneNumber: '',
-                showAlert: false,
-                alertText: null,
-                poi_type: 0,
+                name: null, //姓名
+                sex: 1, //性别
+                phone: null, //电话
+                address_detail: null, //详细地址
+                tag: '', //备注
+                tag_type: 1, //备注类型
+                phone_bk: false, //是否选择备注电话
+                anntherPhoneNumber: '', //备注电话
+                showAlert: false, //弹出框
+                alertText: null, //弹出框信息
+                poi_type: 0, //地址类型
             }
         },
         created(){
@@ -93,9 +93,11 @@
             ...mapMutations([
                 'CONFIRM_ADDRESS'
             ]),
+            //选择性别
             chooseSex(sex){
                 this.sex = sex;
             },
+            //保存地址信息
             async addAddress(){
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
@@ -121,6 +123,7 @@
                     this.tag_type = 4;
                 }
                 let res = await postAddAddress(this.userInfo.user_id, this.searchAddress.name, this.address_detail, this.geohash, this.name, this.phone, this.anntherPhoneNumber, 0, this.sex, this.tag, this.tag_type);
+                //保存成功返沪上一页，否则弹出提示框
                 if (res.message) {
                     this.showAlert = true;
                     this.alertText = res.message;

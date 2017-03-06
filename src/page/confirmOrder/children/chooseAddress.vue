@@ -60,10 +60,10 @@
     export default {
       data(){
             return{
-               	addressList: [],
-                deliverable: [],
-                deliverdisable: [],
-                id: null,
+               	addressList: [], //地址列表
+                deliverable: [], //有效地址列表
+                deliverdisable: [], //无效地址列表
+                id: null, //ID
                 sig: null,
                 showAlert: false,
                 alertText: null,
@@ -83,6 +83,7 @@
             ...mapState([
                 'userInfo', 'addressIndex', 'newAddress'
             ]),
+            //选择地址
             defaultIndex: function (){
                 if (this.addressIndex) {
                     return this.addressIndex;
@@ -95,12 +96,14 @@
             ...mapMutations([
                 'CHOOSE_ADDRESS'
             ]),
+            //初始化信息
             async initData(){
                 this.addressList = [];
                 this.deliverable = [];
                 this.deliverdisable = [];
                 if (this.userInfo && this.userInfo.user_id) {
                     this.addressList = await getAddress(this.id, this.sig);
+                    //将当前所有地址访问有效无效两种
                     this.addressList.forEach(item => {
                         if (item.is_deliverable) {
                             this.deliverable.push(item);
@@ -117,6 +120,7 @@
                     case '学校': return '#3190e8';
                 }
             },
+            //选择地址
             chooseAddress(address, index){
                 this.CHOOSE_ADDRESS({address, index});
                 this.$router.go(-1);

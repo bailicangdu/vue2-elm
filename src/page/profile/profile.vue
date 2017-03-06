@@ -1,9 +1,9 @@
 <template>
     <div class="profile_page">
         <head-top go-back='true' :head-title="profiletitle"></head-top>
-        <section v-if="userInfo">
+        <section>
             <section class="profile-number">
-                <router-link :to="getUserinfo? '/profile/info' : '/login'" class="profile-link">
+                <router-link :to="userInfo? '/profile/info' : '/login'" class="profile-link">
                     <img :src="imgpath" class="privateImage" v-if="this.avatar">
                     <span class="privateImage" v-else>
                         <svg class="privateImage-svg">
@@ -158,17 +158,8 @@ export default {
             imgBaseUrl,
         }
     },
-
     mounted(){
-        this.getUserinfo = this.userInfo;
-        if (this.userInfo) {
-            this.avatar = this.getUserinfo.avatar;
-            this.username =this.getUserinfo.username;
-            this.mobile = this.getUserinfo.mobile;
-            this.balance = this.getUserinfo.balance;
-            this.count = this.getUserinfo.gift_amount;
-            this.pointNumber = this.getUserinfo.point;
-        }
+    
     },
     mixins: [getImgPath],
     components:{
@@ -180,6 +171,7 @@ export default {
         ...mapState([
             'userInfo',
         ]),
+        //后台会返回两种头像地址格式，分别处理
         imgpath:function () {
             let path;
             if(this.avatar.indexOf('/') !==-1){
@@ -199,15 +191,13 @@ export default {
     },
     watch: {
         userInfo: function (value){
-            if (value && value.user_id) {
-                this.getUserinfo = this.userInfo;
-                this.avatar = this.getUserinfo&&this.getUserinfo.avatar || '';
-                this.username = this.getUserinfo&&this.getUserinfo.username ||'登陆/注册';
-                this.mobile = this.getUserinfo&&this.getUserinfo.mobile ||'登陆后享受更多特权';
-                this.balance = this.getUserinfo&&this.getUserinfo.balance || '0';
-                this.count = this.getUserinfo&&this.getUserinfo.gift_amount || '0';
-                this.pointNumber = this.getUserinfo&&this.getUserinfo.point || '0';
-            }
+            this.getUserinfo = value || {};
+            this.avatar = this.getUserinfo&&this.getUserinfo.avatar || '';
+            this.username = this.getUserinfo&&this.getUserinfo.username ||'登陆/注册';
+            this.mobile = this.getUserinfo&&this.getUserinfo.mobile ||'登陆后享受更多特权';
+            this.balance = this.getUserinfo&&this.getUserinfo.balance || '0';
+            this.count = this.getUserinfo&&this.getUserinfo.gift_amount || '0';
+            this.pointNumber = this.getUserinfo&&this.getUserinfo.point || '0';
         }
     }
 }

@@ -47,6 +47,7 @@
             alertTip,
         },
         methods: {
+            //判断输入的电话号码
             inputPhone(){
                 if(/^1\d{10}$/gi.test(this.phoneNumber)){
                     this.rightPhoneNumber = true;
@@ -54,16 +55,20 @@
                     this.rightPhoneNumber = false;
                 }
             },
+            //获取验证吗
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
                     this.computedTime = 30;
+                    //倒计时
                     this.timer = setInterval(() => {
                         this.computedTime --;
                         if (this.computedTime == 0) {
                             clearInterval(this.timer)
                         }
                     }, 1000)
+                    //判断用户是否存在
                     let res = await checkExsis(this.phoneNumber, this.accountType);
+                    //判断返回的信息是否正确，用户是否注册
                     if (res.message) {
                         this.showAlert = true;
                         this.alertText = res.message;
@@ -73,6 +78,7 @@
                         this.alertText = '您输入的手机号尚未绑定';
                         return
                     }
+                    //获取验证信息
                     let getCode = await mobileCode(this.phoneNumber);
                     if (getCode.message) {
                         this.showAlert = true;
@@ -82,6 +88,7 @@
                     this.validate_token = getCode.validate_token;
                 }
             },
+            //重置密码
             async resetButton(){
                 if (!this.rightPhoneNumber) {
                     this.showAlert = true;
@@ -104,6 +111,7 @@
                     this.alertText = '请输验证码';
                     return
                 }
+                // 发送重置信息
                 let res = await sendMobile(this.phoneNumber, this.mobileCode, this.accountType, this.newPassWord);
                 if (res.message) {
                     this.showAlert = true;

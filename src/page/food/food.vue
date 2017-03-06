@@ -511,7 +511,7 @@ export default {
 				.filter_li{
 					display: flex;
 					align-items: center;
-					border: 0.025rem solid #ccc;
+					border: 0.025rem solid #eee;
 					@include wh(4.7rem, 1.4rem);
 					margin-right: 0.25rem;
 					border-radius: 0.125rem;

@@ -141,9 +141,9 @@
                 shopCart: null,//购物车数据
                 imgBaseUrl, //图片域名
                 showPayWay: false,//显示付款方式
-                payWayId: 1,
-                showAlert: false,
-                alertText: null,
+                payWayId: 1, //付款方式
+                showAlert: false, //弹出框
+                alertText: null, //弹出框内容
             }
         },
         created(){
@@ -153,6 +153,7 @@
             this.shopId = this.$route.query.shopId;
             this.INIT_BUYCART();
             this.SAVE_SHOPID(this.shopId);
+            //获取当前商铺购物车信息
             this.shopCart = this.cartList[this.shopId];
         },
         mounted(){
@@ -170,6 +171,7 @@
             ...mapState([
                 'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
             ]),
+            //备注页返回的信息进行处理
             remarklist: function (){
                 let str = new String;
                 if (this.remarkText) {
@@ -177,6 +179,7 @@
                         str += item[1] + '，';
                     })
                 }
+                //是否有自定义备注，分开处理
                 if (this.inputText) {
                     return str + this.inputText;
                 }else{
@@ -188,6 +191,7 @@
             ...mapMutations([
                 'INIT_BUYCART', 'SAVE_GEOHASH', 'CHOOSE_ADDRESS', 'NEED_VALIDATION', 'SAVE_CART_ID_SIG', 'SAVE_ORDER_PARAM', 'ORDER_SUCCESS', 'SAVE_SHOPID'
             ]),
+            //初始化数据
             async initData(){
                 let newArr = new Array;
                 Object.values(this.shopCart).forEach(categoryItem => {
@@ -208,41 +212,53 @@
                         })
                     })
                 })
+                //检验订单是否满足条件
                 this.checkoutData = await checkout(this.geohash, [newArr]);
                 this.SAVE_CART_ID_SIG({cart_id: this.checkoutData.cart.id, sig:  this.checkoutData.sig})
+                this.initAddress();
+                this.showLoading = false;
+            },
+            //获取地址信息，第一个地址为默认选择地址
+            async initAddress(){
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     let addressRes = await getAddress(this.checkoutData.cart.id, this.checkoutData.sig);
                     if (addressRes instanceof Array) {
                         this.CHOOSE_ADDRESS({address: addressRes[0], index: 0});
                     }
                 }
-                this.showLoading = false;
             },
+            //显示付款方式
             showPayWayFun(){
                 this.showPayWay = !this.showPayWay;
             },
+            //选择付款方式
             choosePayWay(is_online_payment, id){
                 if (is_online_payment) {
                     this.showPayWay = !this.showPayWay;
                     this.payWayId = id;
                 }
             },
+            //地址备注颜色
             iconColor(name){
                 switch(name){
                     case '公司': return '#4cd964';
                     case '学校': return '#3190e8';
                 }
             },
+            //确认订单
             async confrimOrder(){
+                //用户未登录时弹出提示框
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
                     this.alertText = '请登陆';
                     return
+                    //未选择地址则提示
                 }else if(!this.choosedAddress){
                     this.showAlert = true;
                     this.alertText = '请添加一个收获地址';
                     return
                 }
+                //保存订单
                 this.SAVE_ORDER_PARAM({
                     user_id: this.userInfo.user_id,
                     cart_id: this.checkoutData.cart.id,
@@ -252,13 +268,22 @@
                     geohash: this.geohash,
                     sig: this.checkoutData.sig,
                 });
+                //发送订单信息
                 let orderRes = await placeOrders(this.userInfo.user_id, this.checkoutData.cart.id, this.choosedAddress.id, this.remarklist, this.checkoutData.cart.groups, this.geohash, this.checkoutData.sig);
+                //第一次下单的手机号需要进行验证，否则直接下单成功
                 if (orderRes.need_validation) {
                     this.NEED_VALIDATION(orderRes);
                     this.$router.push('/confirmOrder/userValidation');
                 }else{
                     this.ORDER_SUCCESS(orderRes);
                     this.$router.push('/confirmOrder/payment');
+                }
+            },
+        },
+        watch: {
+            userInfo: function (value) {
+                if (value && value.user_id) {
+                    this.initAddress();
                 }
             },
         }

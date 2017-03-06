@@ -57,9 +57,9 @@
     export default {
       data(){
             return{
-                orderList: null,
-                offset: 0,
-                preventRepeat: false, 
+                orderList: null, //订单列表
+                offset: 0, 
+                preventRepeat: false,  //防止重复获取
                 showLoading: true, //显示加载动画
             }
         },
@@ -82,6 +82,7 @@
              ...mapMutations([
                'SAVE_ORDER'
             ]),
+            //初始化获取信息
             async initData(){
                 if (this.userInfo && this.userInfo.user_id) {
                     let res = await getOrderList(this.userInfo.user_id, this.offset);
@@ -89,6 +90,7 @@
                     this.hideLoading();
                 }
             },
+            //加载更多
             async loaderMore(){
                 if (this.preventRepeat) {
                     return
@@ -96,6 +98,7 @@
                 this.preventRepeat = true;
                 this.showLoading = true;
                 this.offset += 10;
+                //获取信息
                 let res = await getOrderList(this.userInfo.user_id, this.offset);
                 this.orderList = [...this.orderList, ...res];
                 this.hideLoading();
@@ -104,11 +107,13 @@
                 }
                 this.preventRepeat = false;
             },
+            //显示详情页
             showDetail(item){
                 this.SAVE_ORDER(item);
                 this.preventRepeat = false;
                 this.$router.push('/order/orderDetail');
             },
+            //生产环境与发布环境隐藏loading方式不同
             hideLoading(){
                 if (process.env.NODE_ENV !== 'development') {
                     clearTimeout(this.timer);

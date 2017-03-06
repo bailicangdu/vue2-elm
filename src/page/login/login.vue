@@ -5,7 +5,7 @@
         </head-top>
         <form class="loginForm" v-if="loginWay">
             <section class="input_container phone_number">
-                <input type="text" placeholder="手机号" name="phone" maxlength="11" v-model="phoneNumber" @input="inputPhone">
+                <input type="text" placeholder="手机号" name="phone" maxlength="11" v-model="phoneNumber">
                 <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
                 <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button>
             </section>
@@ -60,7 +60,6 @@
                 showPassword: false, // 是否显示密码
                 phoneNumber: null, //电话号码
                 mobileCode: null, //短信验证码
-                rightPhoneNumber: false, //输入的手机号码是否符合要求
                 validate_token: null, //获取短信时返回的验证值，登陆时需要
                 computedTime: 0, //倒数记时
                 userInfo: null, //获取到的用户信息
@@ -79,32 +78,34 @@
             headTop,
             alertTip,
         },
+        computed: {
+            //判断手机号码
+            rightPhoneNumber: function (){
+                return /^1\d{10}$/gi.test(this.phoneNumber)
+            }
+        },
         methods: {
             ...mapMutations([
                 'RECORD_USERINFO',
             ]),
+            //改变登陆方式
             changeLoginWay(){
                 this.loginWay = !this.loginWay;
             },
+            //是否显示密码
             changePassWordType(){
                 this.showPassword = !this.showPassword;
             },
-            inputPhone(){
-                if(/^1\d{10}$/gi.test(this.phoneNumber)){
-                    this.rightPhoneNumber = true;
-                }else{
-                    this.rightPhoneNumber = false;
-                }
-            },
+            //获取验证吗，线上环境使用固定的图片，生产环境使用真实的验证码
             async getCaptchaCode(){
                 if (process.env.NODE_ENV !== 'development'){
                     this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
                 }else{
-                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
-                    // let res = await getcaptchas();
-                    // this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
+                    let res = await getcaptchas();
+                    this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
                 }
             },
+            //获取短信验证码
             async getVerifyCode(){
                 if (this.rightPhoneNumber) {
                     this.computedTime = 30;
@@ -114,6 +115,7 @@
                             clearInterval(this.timer)
                         }
                     }, 1000)
+                    //判读用户是否存在
                     let exsis = await checkExsis(this.phoneNumber, 'mobile');
                     if (exsis.message) {
                         this.showAlert = true;
@@ -124,6 +126,7 @@
                         this.alertText = '您输入的手机号尚未绑定';
                         return
                     }
+                    //发送短信验证码
                     let res = await mobileCode(this.phoneNumber);
                     if (res.message) {
                         this.showAlert = true;
@@ -133,6 +136,7 @@
                     this.validate_token = res.validate_token;
                 }
             },
+            //发送登陆信息
             async mobileLogin(){
                 if (this.loginWay) {
                     if (!this.rightPhoneNumber) {
@@ -144,6 +148,7 @@
                         this.alertText = '短信验证码不正确';
                         return
                     }
+                    //手机号登录
                     this.userInfo = await sendLogin(this.mobileCode, this.phoneNumber, this.validate_token);
                 }else{
                     if (!this.userAccount) {
@@ -159,9 +164,10 @@
                         this.alertText = '请输入验证码';
                         return
                     }
-
+                    //用户名登陆
                     this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }
+                //如果返回的值不正确，则弹出提示框，返回的值正确则返回上一页
                 if (!this.userInfo.user_id) {
                     this.showAlert = true;
                     this.alertText = this.userInfo.message;
