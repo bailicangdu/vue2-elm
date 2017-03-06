@@ -76,6 +76,7 @@
     	font-size: .65rem;
     	padding: 0 .7rem;
         color: #666;
+        padding-bottom: 2rem;
     }
 
 </style>
