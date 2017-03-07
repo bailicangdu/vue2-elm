@@ -104,7 +104,7 @@
 
 <script>
     import {mapMutations, mapState} from 'vuex'
-    import headTop from '../../../components/header/head'
+    import headTop from 'src/components/header/head'
     import alertTip from 'src/components/common/alertTip'
     import {getImgPath} from 'src/components/common/mixin'
 
@@ -116,8 +116,8 @@
                 infotel:'',     //用户手机
                 avatar:'',      //用户头像
                 show:false,     //显示提示框
-                isEnter:true, 
-                isLeave:false,
+                isEnter:true,  //是否登陆
+                isLeave:false, //是否退出
                 showAlert: false,
                 alertText: null,
             }
@@ -200,7 +200,7 @@
 </script>
   
 <style lang="scss" scoped>
-    @import '../../../style/mixin.scss';
+    @import 'src/style/mixin.scss';
   
     .rating_page{
         position: absolute;
