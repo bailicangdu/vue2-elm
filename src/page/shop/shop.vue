@@ -537,7 +537,7 @@
                 this.categoryNum = [...newArr];
             },
             toggleCartList(){
-                this.showCartList = !this.showCartList;
+                this.cartFoodList.length ? this.showCartList = !this.showCartList : true;
             },
             //清除购物车
             clearCart(){
