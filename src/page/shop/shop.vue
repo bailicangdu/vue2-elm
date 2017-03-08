@@ -536,6 +536,7 @@
                 this.totalPrice = this.totalPrice.toFixed(2);
                 this.categoryNum = [...newArr];
             },
+            //控制购物列表是否显示
             toggleCartList(){
                 this.cartFoodList.length ? this.showCartList = !this.showCartList : true;
             },
