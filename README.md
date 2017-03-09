@@ -156,17 +156,6 @@ npm run build
 
 # 部分截图
 
-### 城市列表页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/home.gif" width="365" height="619"/>
-
-
-### 搜索地址页
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.png" width="365" height="619"/>
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/city.gif" width="365" height="619"/>
-
 
 ### 商铺列表页
 
