@@ -1,7 +1,7 @@
 <template>
     <div class="loginContainer">
         <head-top :head-title="loginWay? '登录':'密码登录'" goBack="true">
-            <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登陆":"短信登陆"}}</div>
+            <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登录":"短信登录"}}</div>
         </head-top>
         <form class="loginForm" v-if="loginWay">
             <section class="input_container phone_number">
@@ -38,10 +38,10 @@
             </section>
         </form>
         <p class="login_tips">
-            温馨提示：未注册饿了么账号的手机号，登陆时将自动注册，且代表您已同意
+            温馨提示：未注册饿了么账号的手机号，登录时将自动注册，且代表您已同意
             <a href="https://h5.ele.me/service/agreement/">《用户服务协议》</a>
         </p>
-        <div class="login_container" @click="mobileLogin">登陆</div>
+        <div class="login_container" @click="mobileLogin">登录</div>
         <router-link to="/forget" class="to_forget" v-if="!loginWay">忘记密码？</router-link>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
     </div>
@@ -56,11 +56,11 @@
     export default {
         data(){
             return {
-                loginWay: true, //登陆方式，默认短信登陆
+                loginWay: true, //登录方式，默认短信登录
                 showPassword: false, // 是否显示密码
                 phoneNumber: null, //电话号码
                 mobileCode: null, //短信验证码
-                validate_token: null, //获取短信时返回的验证值，登陆时需要
+                validate_token: null, //获取短信时返回的验证值，登录时需要
                 computedTime: 0, //倒数记时
                 userInfo: null, //获取到的用户信息
                 userAccount: null, //用户名
@@ -88,7 +88,7 @@
             ...mapMutations([
                 'RECORD_USERINFO',
             ]),
-            //改变登陆方式
+            //改变登录方式
             changeLoginWay(){
                 this.loginWay = !this.loginWay;
             },
@@ -136,7 +136,7 @@
                     this.validate_token = res.validate_token;
                 }
             },
-            //发送登陆信息
+            //发送登录信息
             async mobileLogin(){
                 if (this.loginWay) {
                     if (!this.rightPhoneNumber) {
@@ -164,7 +164,7 @@
                         this.alertText = '请输入验证码';
                         return
                     }
-                    //用户名登陆
+                    //用户名登录
                     this.userInfo = await accountLogin(this.userAccount, this.passWord, this.codeNumber);
                 }
                 //如果返回的值不正确，则弹出提示框，返回的值正确则返回上一页
@@ -175,12 +175,12 @@
                 }else{
                     this.RECORD_USERINFO(this.userInfo);
                     this.$router.go(-1);
-                    
+
                 }
             },
             closeTip(){
                 this.showAlert = false;
-            }   
+            }
         }
     }
 

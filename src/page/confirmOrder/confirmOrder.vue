@@ -119,7 +119,7 @@
         <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
         <transition name="router-slid" mode="out-in">
             <router-view></router-view>
-        </transition>    
+        </transition>
     </div>
 </template>
 
@@ -250,7 +250,7 @@
                 //用户未登录时弹出提示框
                 if (!(this.userInfo && this.userInfo.user_id)) {
                     this.showAlert = true;
-                    this.alertText = '请登陆';
+                    this.alertText = '请登录';
                     return
                     //未选择地址则提示
                 }else if(!this.choosedAddress){
@@ -434,7 +434,7 @@
         margin-top: .4rem;
         header{
             padding: .7rem;
-            border-bottom: 0.025rem solid #f5f5f5; 
+            border-bottom: 0.025rem solid #f5f5f5;
             img{
                 @include wh(1.2rem, 1.2rem);
                 vertical-align: middle;
@@ -466,7 +466,7 @@
             }
         }
         .total_price{
-            border-top: 0.025rem solid #f5f5f5; 
+            border-top: 0.025rem solid #f5f5f5;
         }
     }
     .confrim_order{

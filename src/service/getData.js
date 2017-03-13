@@ -224,7 +224,7 @@ if (process.env.NODE_ENV == 'development') {
 
 
 	/**
-	 * 账号密码登陆
+	 * 账号密码登录
 	 */
 
 	var accountLogin = (username, password, captcha_code) => fetch('POST', '/v2/login', {username, password, captcha_code});
@@ -433,7 +433,7 @@ if (process.env.NODE_ENV == 'development') {
 
 
 	// /**
-	//  * 手机号登陆
+	//  * 手机号登录
 	//  */
 
 	// var sendLogin = (code, mobile, validate_token) => fetch('POST', '/v1/login/app_mobile', {
