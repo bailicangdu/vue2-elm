@@ -27,7 +27,7 @@ const state = {
 	orderParam: null,//订单的参数
 	orderMessage: null, //订单返回的信息
 	orderDetail: null, //订单详情
-	login: true,//是否登陆
+	login: true,//是否登录
 	imgPath:null,//头像地址
 	removeAddress:[],//移除地址
 	addAddress:'',		//新增地址

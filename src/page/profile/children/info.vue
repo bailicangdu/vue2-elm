@@ -116,7 +116,7 @@
                 infotel:'',     //用户手机
                 avatar:'',      //用户头像
                 show:false,     //显示提示框
-                isEnter:true,  //是否登陆
+                isEnter:true,  //是否登录
                 isLeave:false, //是否退出
                 showAlert: false,
                 alertText: null,
@@ -126,7 +126,7 @@
             clearTimeout(this.timer)
         },
         components: {
-            headTop, 
+            headTop,
             alertTip,
         },
         mixins: [getImgPath],
@@ -155,7 +155,7 @@
                     this.show=false;
                 },200)
             },
-            //退出登陆
+            //退出登录
             outLogin(){
                 this.OUT_LOGIN();
                 this.waitingThing();
@@ -198,10 +198,10 @@
         }
     }
 </script>
-  
+
 <style lang="scss" scoped>
     @import 'src/style/mixin.scss';
-  
+
     .rating_page{
         position: absolute;
         top: 0;
@@ -242,7 +242,7 @@
             .headportrait-div{
                 span{
                     display:inline-block;
-                    
+
                     svg{
                         @include wh(100%,100%);
                     }
@@ -263,7 +263,7 @@
             margin-top:0;
             padding:.3rem .4rem;
             .headportrait-div{
-                @include fj(left) 
+                @include fj(left)
                 p{
                     text-align:left;
                     line-height:1.39rem;

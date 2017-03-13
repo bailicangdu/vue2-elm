@@ -8,7 +8,7 @@
                 <input type="search" name="city" placeholder="输入学校、商务楼、地址" class="city_input input_style" required v-model='inputVaule'>
             </div>
             <div>
-                <input type="submit" name="submit" class="city_submit input_style" @click='postpois'>
+                <input type="submit" name="submit" class="city_submit input_style" @click='postpois' value="提交">
             </div>
         </form>
         <header v-if="historytitle" class="pois_search_history">搜索历史</header>
@@ -16,7 +16,7 @@
             <li v-for="(item, index) in placelist" @click='nextpage(index, item.geohash)' :key="index">
                 <h4 class="pois_name ellipsis">{{item.name}}</h4>
                 <p class="pois_address ellipsis">{{item.address}}</p>
-            </li>  
+            </li>
         </ul>
         <div class="search_none_place" v-if="placeNone">很抱歉！无搜索结果</div>
     </div>
@@ -31,7 +31,7 @@
     	data(){
             return{
                 inputVaule:'', // 搜索地址
-                cityid:'', // 当前城市id 
+                cityid:'', // 当前城市id
                 cityname:'', // 当前城市名字
                 placelist:[], // 搜索城市列表
                 placeHistory:[], // 历史搜索记录
@@ -79,7 +79,7 @@
             nextpage(index, geohash){
                 let history = getStore('placeHistory');
                 let choosePlace = this.placelist[index];
-                if (history) { 
+                if (history) {
                     let checkrepeat = false;
                     this.placeHistory = JSON.parse(history);
                     this.placeHistory.forEach(item => {
