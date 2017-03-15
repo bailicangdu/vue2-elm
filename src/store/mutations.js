@@ -64,52 +64,20 @@ export default {
 		let cart = state.cartList;
 		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
 			cart[shopid][category_id][item_id][food_id]['num']++;
-		} else if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id]) {
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
-		} else if (cart[shopid] && cart[shopid][category_id]) {
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
-		} else if (cart[shopid]) {
-			cart[shopid][category_id] = {};
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
 		} else {
-			cart[shopid] = {};
-			cart[shopid][category_id] = {};
-			cart[shopid][category_id][item_id] = {};
-			cart[shopid][category_id][item_id][food_id] = {};
-			cart[shopid][category_id][item_id][food_id]['num'] = 1;
-			cart[shopid][category_id][item_id][food_id]['id'] = food_id;
-			cart[shopid][category_id][item_id][food_id]['name'] = name;
-			cart[shopid][category_id][item_id][food_id]['price'] = price;
-			cart[shopid][category_id][item_id][food_id]['specs'] = specs;
-			cart[shopid][category_id][item_id][food_id]['packing_fee'] = packing_fee;
-			cart[shopid][category_id][item_id][food_id]['sku_id'] = sku_id;
-			cart[shopid][category_id][item_id][food_id]['stock'] = stock;
+			cart[shopid] = (cart[shopid] || {});
+			cart[shopid][category_id] = (cart[shopid][category_id] || {});
+			cart[shopid][category_id][item_id] = (cart[shopid][category_id][item_id] || {});
+			cart[shopid][category_id][item_id][food_id] = {
+					"num" : 1,
+					"id" : food_id,
+					"name" : name,
+					"price" : price,
+					"specs" : specs,
+					"packing_fee" : packing_fee,
+					"sku_id" : sku_id,
+					"stock" : stock
+			};
 		}
 		state.cartList = {...cart};
 		//存入localStorage
