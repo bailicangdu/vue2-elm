@@ -62,13 +62,13 @@ export default {
 		stock
 	}) {
 		let cart = state.cartList;
-		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
-			cart[shopid][category_id][item_id][food_id]['num']++;
+		let shop = cart[shopid] = (cart[shopid] || {});
+		let category = shop[category_id] = (shop[category_id] || {});
+		let item = category[item_id] = (category[item_id] || {});
+		if (item[food_id]) {
+			item[food_id]['num']++;
 		} else {
-			cart[shopid] = (cart[shopid] || {});
-			cart[shopid][category_id] = (cart[shopid][category_id] || {});
-			cart[shopid][category_id][item_id] = (cart[shopid][category_id][item_id] || {});
-			cart[shopid][category_id][item_id][food_id] = {
+			item[food_id] = {
 					"num" : 1,
 					"id" : food_id,
 					"name" : name,
@@ -94,15 +94,18 @@ export default {
 		specs,
 	}) {
 		let cart = state.cartList;
-		if (cart[shopid] && cart[shopid][category_id] && cart[shopid][category_id][item_id] && cart[shopid][category_id][item_id][food_id]) {
-			if (cart[shopid][category_id][item_id][food_id]['num'] > 0) {
-				cart[shopid][category_id][item_id][food_id]['num']--;
+		let shop = cart[shopid] = (cart[shopid] || {});
+		let category = shop[category_id] = (shop[category_id] || {});
+		let item = category[item_id] = (category[item_id] || {});
+		if (item) {
+			if (item[food_id]['num'] > 0) {
+				item[food_id]['num']--;
 				state.cartList = {...cart};
 				//存入localStorage
 				setStore('buyCart', state.cartList);
 			} else {
 				//商品数量为0，则清空当前商品的信息
-				cart[shopid][category_id][item_id][food_id] = null;
+				item[food_id] = null;
 			}
 		}
 	},
