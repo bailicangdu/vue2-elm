@@ -97,7 +97,7 @@ export default {
 		let shop = cart[shopid] = (cart[shopid] || {});
 		let category = shop[category_id] = (shop[category_id] || {});
 		let item = category[item_id] = (category[item_id] || {});
-		if (item) {
+		if (item && item[food_id]) {
 			if (item[food_id]['num'] > 0) {
 				item[food_id]['num']--;
 				state.cartList = {...cart};
