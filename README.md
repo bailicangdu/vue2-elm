@@ -204,27 +204,25 @@ npm run build
 ├── elm                                         // 上线项目文件，放在服务器即可正常访问
 ├── screenshots                                 // 项目截图
 ├── src                                         // 源码目录
-│   ├── App.vue
-│   ├── components
-│   │   ├── common
-│   │   │   ├── alertTip.vue
-│   │   │   ├── buyCart.vue
-│   │   │   ├── computeTime.vue
-│   │   │   ├── loading.vue
-│   │   │   ├── mixin.js
-│   │   │   ├── ratingStar.vue
-│   │   │   └── shoplist.vue
+│   ├── components                              // 组件
+│   │   ├── common                              // 公共组件
+│   │   │   ├── alertTip.vue                    // 弹出框组件
+│   │   │   ├── buyCart.vue                     // 购物车组件
+│   │   │   ├── computeTime.vue                 // 倒计时组件
+│   │   │   ├── loading.vue                     // 页面初始化加载数据的动画组件
+│   │   │   ├── mixin.js                        // 组件混合(包括：指令-下拉加载更多，处理图片地址)
+│   │   │   ├── ratingStar.vue                  // 评论的五颗星组件
+│   │   │   └── shoplist.vue                    // msite和shop页面的餐馆列表公共组件
 │   │   ├── footer
-│   │   │   └── footGuide.vue
+│   │   │   └── footGuide.vue                   // 底部公共组件
 │   │   └── header
-│   │       └── head.vue
+│   │       └── head.vue                        // 头部公共组件
 │   ├── config
 │   │   ├── env.js
 │   │   ├── fetch.js
 │   │   ├── mUtils.js
 │   │   └── rem.js
 │   ├── images
-│   ├── main.js
 │   ├── page
 │   │   ├── balance
 │   │   │   ├── balance.vue
@@ -322,8 +320,11 @@ npm run build
 │       ├── common.scss
 │       ├── mixin.scss
 │       └── swiper.min.css
+│   ├── App.vue
+│   ├── main.js
 ├── favicon.ico
 ├── index.html
+.
 
 56 directories, 203 files
 ```
