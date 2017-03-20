@@ -196,7 +196,7 @@ npm run build
 
 
 # 项目布局
-```
+
 |-- build                            		// webpack配置文件
 |-- config                           		// 项目打包路径
 |-- elm                                     // 上线项目文件，放在服务器即可正常访问
@@ -313,5 +313,139 @@ npm run build
 |-- index.html                       // 入口html文件
 |-- package.json                     // 项目及工具的依赖配置文件
 |-- README.md                        // 说明
-```
 
+
+
+
+.
+├── README.md
+├── build
+├── config
+│   └── index.js
+├── elm
+├── favicon.ico
+├── index.html
+├── package.json
+├── screenshots
+├── src
+│   ├── App.vue
+│   ├── components
+│   │   ├── common
+│   │   │   ├── alertTip.vue
+│   │   │   ├── buyCart.vue
+│   │   │   ├── computeTime.vue
+│   │   │   ├── loading.vue
+│   │   │   ├── mixin.js
+│   │   │   ├── ratingStar.vue
+│   │   │   └── shoplist.vue
+│   │   ├── footer
+│   │   │   └── footGuide.vue
+│   │   └── header
+│   │       └── head.vue
+│   ├── config
+│   │   ├── env.js
+│   │   ├── fetch.js
+│   │   ├── mUtils.js
+│   │   └── rem.js
+│   ├── images
+│   ├── main.js
+│   ├── page
+│   │   ├── balance
+│   │   │   ├── balance.vue
+│   │   │   └── children
+│   │   │       └── detail.vue
+│   │   ├── benefit
+│   │   │   ├── benefit.vue
+│   │   │   └── children
+│   │   │       ├── commend.vue
+│   │   │       ├── coupon.vue
+│   │   │       ├── exchange.vue
+│   │   │       ├── hbDescription.vue
+│   │   │       └── hbHistory.vue
+│   │   ├── city
+│   │   │   └── city.vue
+│   │   ├── confirmOrder
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   ├── addAddress.vue
+│   │   │   │   │   └── children
+│   │   │   │   │       └── searchAddress.vue
+│   │   │   │   ├── chooseAddress.vue
+│   │   │   │   ├── invoice.vue
+│   │   │   │   ├── payment.vue
+│   │   │   │   ├── remark.vue
+│   │   │   │   └── userValidation.vue
+│   │   │   └── confirmOrder.vue
+│   │   ├── download
+│   │   │   └── download.vue
+│   │   ├── find
+│   │   │   └── find.vue
+│   │   ├── food
+│   │   │   └── food.vue
+│   │   ├── forget
+│   │   │   └── forget.vue
+│   │   ├── home
+│   │   │   └── home.vue
+│   │   ├── login
+│   │   │   └── login.vue
+│   │   ├── msite
+│   │   │   └── msite.vue
+│   │   ├── order
+│   │   │   ├── children
+│   │   │   │   └── orderDetail.vue
+│   │   │   └── order.vue
+│   │   ├── points
+│   │   │   ├── children
+│   │   │   │   └── detail.vue
+│   │   │   └── points.vue
+│   │   ├── profile
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   ├── address.vue
+│   │   │   │   │   └── children
+│   │   │   │   │       ├── add.vue
+│   │   │   │   │       └── children
+│   │   │   │   │           └── addDetail.vue
+│   │   │   │   ├── info.vue
+│   │   │   │   └── setusername.vue
+│   │   │   └── profile.vue
+│   │   ├── search
+│   │   │   └── search.vue
+│   │   ├── service
+│   │   │   ├── children
+│   │   │   │   └── questionDetail.vue
+│   │   │   └── service.vue
+│   │   ├── shop
+│   │   │   ├── children
+│   │   │   │   ├── children
+│   │   │   │   │   └── shopSafe.vue
+│   │   │   │   ├── foodDetail.vue
+│   │   │   │   └── shopDetail.vue
+│   │   │   └── shop.vue
+│   │   └── vipcard
+│   │       ├── children
+│   │       │   ├── invoiceRecord.vue
+│   │       │   ├── useCart.vue
+│   │       │   └── vipDescription.vue
+│   │       └── vipcard.vue
+│   ├── plugins
+│   │   └── swiper.min.js
+│   ├── router
+│   │   └── router.js
+│   ├── service
+│   │   ├── getData.js
+│   │   └── tempdata
+│   ├── store
+│   │   ├── action.js
+│   │   ├── getters.js
+│   │   ├── index.js
+│   │   ├── modules
+│   │   ├── mutation-types.js
+│   │   └── mutations.js
+│   └── style
+│       ├── common.scss
+│       ├── mixin.scss
+│       └── swiper.min.css
+└── tree.md
+
+56 directories, 203 files
