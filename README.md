@@ -308,21 +308,21 @@ npm run build
 │   ├── service                                 // 数据交互统一调配
 │   │   ├── getData.js                          // 获取数据的统一调配文件，对接口进行统一管理
 │   │   └── tempdata                            // 开发阶段的临时数据
-│   ├── store
-│   │   ├── action.js
-│   │   ├── getters.js
-│   │   ├── index.js
-│   │   ├── modules
-│   │   ├── mutation-types.js
-│   │   └── mutations.js
+│   ├── store                                   // vuex的状态管理
+│   │   ├── action.js                           // 配置actions
+│   │   ├── getters.js                          // 配置getters
+│   │   ├── index.js                            // 引用vuex，创建store
+│   │   ├── modules                             // store模块
+│   │   ├── mutation-types.js                   // 定义常量muations名
+│   │   └── mutations.js                        // 配置mutations
 │   └── style
-│       ├── common.scss
-│       ├── mixin.scss
+│       ├── common.scss                         // 公共样式文件
+│       ├── mixin.scss                          // 样式配置文件
 │       └── swiper.min.css
-│   ├── App.vue
-│   ├── main.js
-├── favicon.ico
-├── index.html
+│   ├── App.vue                                 // 页面入口文件
+│   ├── main.js                                 // 程序入口文件，加载各种公共组件
+├── favicon.ico                                 // 图标
+├── index.html                                  // 入口html文件
 .
 
 56 directories, 203 files
