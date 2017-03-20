@@ -196,7 +196,7 @@ npm run build
 
 
 # 项目布局
-
+```
 |-- build                            		    // webpack配置文件
 |-- config                           		    // 项目打包路径
 |-- elm                                     // 上线项目文件，放在服务器即可正常访问
@@ -313,10 +313,10 @@ npm run build
 |-- index.html                       // 入口html文件
 |-- package.json                     // 项目及工具的依赖配置文件
 |-- README.md                        // 说明
+```
 
 
-
-
+```
 .
 ├── README.md
 ├── build
@@ -449,3 +449,4 @@ npm run build
 └── tree.md
 
 56 directories, 203 files
+```
