@@ -217,39 +217,39 @@ npm run build
 │   │   │   └── footGuide.vue                   // 底部公共组件
 │   │   └── header
 │   │       └── head.vue                        // 头部公共组件
-│   ├── config
-│   │   ├── env.js
-│   │   ├── fetch.js
-│   │   ├── mUtils.js
-│   │   └── rem.js
-│   ├── images
+│   ├── config                                  // 基本配置
+│   │   ├── env.js                              // 环境切换配置
+│   │   ├── fetch.js                            // 获取数据
+│   │   ├── mUtils.js                           // 常用的js方法
+│   │   └── rem.js                              // px转换rem
+│   ├── images                                  // 公共图片
 │   ├── page
 │   │   ├── balance
-│   │   │   ├── balance.vue
+│   │   │   ├── balance.vue                     // 余额页
 │   │   │   └── children
-│   │   │       └── detail.vue
+│   │   │       └── detail.vue                  // 余额说明
 │   │   ├── benefit
-│   │   │   ├── benefit.vue
+│   │   │   ├── benefit.vue                     // 红包页
 │   │   │   └── children
-│   │   │       ├── commend.vue
-│   │   │       ├── coupon.vue
-│   │   │       ├── exchange.vue
-│   │   │       ├── hbDescription.vue
-│   │   │       └── hbHistory.vue
-│   │   ├── city
-│   │   │   └── city.vue
+│   │   │       ├── commend.vue                 // 推荐有奖
+│   │   │       ├── coupon.vue                  // 代金券说明
+│   │   │       ├── exchange.vue                // 兑换红包
+│   │   │       ├── hbDescription.vue           // 红包说明
+│   │   │       └── hbHistory.vue               // 历史红包
+│   │   ├── city                 
+│   │   │   └── city.vue                        // 当前城市页
 │   │   ├── confirmOrder
 │   │   │   ├── children
 │   │   │   │   ├── children
-│   │   │   │   │   ├── addAddress.vue
+│   │   │   │   │   ├── addAddress.vue          // 添加地址页
 │   │   │   │   │   └── children
-│   │   │   │   │       └── searchAddress.vue
-│   │   │   │   ├── chooseAddress.vue
-│   │   │   │   ├── invoice.vue
-│   │   │   │   ├── payment.vue
-│   │   │   │   ├── remark.vue
-│   │   │   │   └── userValidation.vue
-│   │   │   └── confirmOrder.vue
+│   │   │   │   │       └── searchAddress.vue   // 搜索地址页
+│   │   │   │   ├── chooseAddress.vue           // 选择地址页
+│   │   │   │   ├── invoice.vue                 // 选择发票页
+│   │   │   │   ├── payment.vue                 // 付款页
+│   │   │   │   ├── remark.vue                  // 订单备注页 
+│   │   │   │   └── userValidation.vue          // 用户验证页
+│   │   │   └── confirmOrder.vue                // 确认订单页
 │   │   ├── download
 │   │   │   └── download.vue
 │   │   ├── find
