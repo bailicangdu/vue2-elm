@@ -204,11 +204,11 @@ npm run build
 |-- src                              		// 源码目录
 |   |-- components                   		// 组件
 |       |-- common                   		// 公共组件
-|			|-- buyCart.js           		// 购物车组件
-|				|-- loading.js            	// 页面初始化加载数据的动画组件
-|				|-- mixin.js              	// 组件混合(包括：指令-下拉加载更多，处理图片地址)
-|				|-- ratingStar.js         	// 评论的五颗星组件
-|				|-- shoplist.js           	// msite和shop页面的餐馆列表公共组件
+|           |-- buyCart.js           		// 购物车组件
+|               |-- loading.js            	// 页面初始化加载数据的动画组件
+|               |-- mixin.js              	// 组件混合(包括：指令-下拉加载更多，处理图片地址)
+|               |-- ratingStar.js         	// 评论的五颗星组件
+|               |-- shoplist.js           	// msite和shop页面的餐馆列表公共组件
 |       |-- footer                   		// 底部公共组件
 |       |-- header                 	 		// 头部公共组件
 |   |-- config                       		// 基本配置
