@@ -479,7 +479,7 @@ if (process.env.NODE_ENV == 'development') {
 	* 删除地址
 	*/
 
-	var deleteAddress=(userid, addressid) => fetch('DELETE','/v1/users/' + userid + '/addresses/' + addressid,{})
+	var deleteAddress=(userid, addressid) => fetch('OPTIONS','/v1/users/' + userid + '/addresses/' + addressid,{})
 
 }else{
 	var cityGuess = () => setpromise(home.guesscity);

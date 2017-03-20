@@ -86,7 +86,7 @@
             //删除地址
             async deleteSite(index, item){
                 if (this.userInfo && this.userInfo.user_id) {
-                    let res = await deleteAddress(this.userInfo.user_id, item.id);
+                    await deleteAddress(this.userInfo.user_id, item.id);
             	    this.removeAddress.splice(index, 1);
                 }
             }

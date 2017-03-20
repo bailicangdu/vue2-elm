@@ -8,7 +8,7 @@
         <section id="scroll_section" class="scroll_container">
             <section class="list_cotainer">
                 <ul class="deliverable_address">
-                    <li v-for="(item,index) in deliverable" @click="chooseAddress(item, index)">
+                    <li v-for="(item,index) in deliverable" @click.prevent.stop="chooseAddress(item, index)">
                         <svg class="choosed_address" :class="{default_address: defaultIndex == index}">
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
                         </svg>
@@ -39,7 +39,7 @@
                                     <span>{{item.phone}}</span>   
                                 </header>
                                 <div class="address_detail ellipsis">
-                                    <span v-if="item.tag" :style="{backgroundColor: '#ccc'}">{{item.tag}}</span>
+                                    <span v-if="item.tag" :style="{backgroundColor: '#ccc', color: '#fff'}">{{item.tag}}</span>
                                     <p>{{item.address_detail}}</p>   
                                 </div>
                             </div>
@@ -77,7 +77,6 @@
         created(){
             this.id = this.$route.query.id;
             this.sig = this.$route.query.sig;
-            this.initData();
         },
         components: {
             headTop,
@@ -106,6 +105,7 @@
                 this.addressList = [];
                 this.deliverable = [];
                 this.deliverdisable = [];
+
                 if (this.userInfo && this.userInfo.user_id) {
                     this.addressList = await getAddress(this.id, this.sig);
                     //将当前所有地址访问有效无效两种
@@ -116,14 +116,13 @@
                             this.deliverdisable.push(item);
                         }
                     })
-                    this.$nextTick(() => {
-                        new BScroll('#scroll_section', {  
-                            deceleration: 0.001,
-                            bounce: true,
-                            swipeTime: 1800,
-                            click: true,
-                        }); 
-                    })
+                    // this.$nextTick(() => {
+                    //     new BScroll('#scroll_section', {  
+                    //         deceleration: 0.003,
+                    //         bounce: true,
+                    //         swipeTime: 1800,
+                    //     }); 
+                    // })
                 }
             },
             iconColor(name){
@@ -135,7 +134,7 @@
             //选择地址
             chooseAddress(address, index){
                 this.CHOOSE_ADDRESS({address, index});
-                
+                this.$router.go(-1);
             },
         },
         watch: {
