@@ -196,138 +196,14 @@ npm run build
 
 
 # 项目布局
-```
-|-- build                            		    // webpack配置文件
-|-- config                           		    // 项目打包路径
-|-- elm                                     // 上线项目文件，放在服务器即可正常访问
-|-- screenshots                      		    // 项目截图
-|-- src                              		    // 源码目录
-|   |-- components                   		    // 组件
-|       |-- common                   		    // 公共组件
-|           |-- buyCart.js           		    // 购物车组件
-|               |-- loading.js              // 页面初始化加载数据的动画组件
-|               |-- mixin.js                // 组件混合(包括：指令-下拉加载更多，处理图片地址)
-|               |-- ratingStar.js           // 评论的五颗星组件
-|               |-- shoplist.js             // msite和shop页面的餐馆列表公共组件
-|       |-- footer                          // 底部公共组件
-|       |-- header                          // 头部公共组件
-|   |-- config                              // 基本配置
-|       |-- env.js                          // 环境切换配置
-|       |-- fetch.js                        // 获取数据
-|       |-- mUtils.js                       // 常用的js方法
-|       |-- rem.js                          // px转换rem
-|   |-- images                              // 公共图片
-|   |-- pages
-|   	|-- balance                           // 余额页
-|           |--children
-|              |--detail			              // 余额说明
-|       |-- benefit                         // 红包页
-|           |--children
-|              |--commend                   // 推荐有奖
-|              |--coupon                    // 代金券说明
-|              |--exchange                  // 兑换红包
-|              |--hbDescription             // 红包说明
-|              |--hbHistory                 // 历史红包
-|       |-- city                            // 当前城市页
-|		|-- food                                // 食品筛选排序页
-|		|-- confirmOrder                        // 确认订单页
-|		    |--children
-|			      |--invoice			         //	选择发票页
-|			      |--remark			           //	订单备注页
-|			      |--payment			         //	付款页
-|			      |--userValidation		     //	用户验证页
-|			      |--chooseAddress         //	选择地址页
-|		            |--children
-|				            |--addAddress        //	添加地址页
-|				            |--children
-|					              |--searchAddress // 搜索地址页
-|       |-- download                 // 下载App
-|       |-- find                     // 发现页
-|       |-- forget                   // 忘记密码，修改密码页
-|       |-- home                     // 首页
-|       |-- login                    // 登录注册页
-|       |-- msite                    // 商铺列表页
-|       |-- order                    // 订单列表页
-|			      |--children
-|				        |--orderDetail		 // 订单详情页
-|       |-- points                   // 积分页
-|		  	|--children
-|				|--detail			 //	积分说明
-|       |-- profile                  // 个人中心
-|			|--children
-|				|--balance			 // 我的余额
-|				|--benefit			 // 我的优惠
-|				|--info				 // 帐户信息
-|		          |--children
-|				    |--address       // 添加地址
-|		              |--children
-|				        |--add       // 新增地址
-|		                  |--children
-|				            |--addDetail// 搜索地址
-|				|--points			 // 我的积分
-|				|--setusername	     // 重置用户名
-|       |-- search                   // 搜索页
-|		|--service			         // 服务中心
-|			|--children
-|				|--questionDetail    // 问题详情
-|       |-- shop                     // 商铺筛选页
-|			|-- children
-|			  	|-- foodDetail       // 商铺信息页
-|			  	|-- shopDetail       // 单个商铺信息页
-|					|-- children
-|				  		|-- shopSafe // 商铺认证信息页
-|       |-- vipcard                  // 会员卡办理页
-|			|-- children
-|			  	|-- invoiceRecord    // 购买记录
-|			  	|-- useCart          // 使用卡号购买
-|			  	|-- vipDescription   // 会员说明
-|
-|   |-- plugins                      // 引用的插件
-|
-|   |-- router                       // 路由配置
-|
-|   |-- service                      // 数据交互统一调配
-|		|-- template                 // 开发阶段的临时数据
-|		|-- getData.js               // 获取数据的统一调配文件，对接口进行统一管理
-|
-|   |-- store                        // vuex的状态管理
-|       |-- modules                  // store模块
-|       |-- action.js                // 配置actions
-|       |-- getters.js               // 配置getters
-|       |-- index.js                 // 引用vuex，创建store
-|       |-- mutation-types.js        // 定义常量muations名
-|       |-- mutations.js             // 配置mutations
-|
-|   |-- style                        // 各种样式文件
-|       |-- common.scss              // 公共样式文件
-|       |-- mixin.scss               // 样式配置文件
-|
-|   |-- App.vue                      // 页面入口文件
-|
-|   |-- main.js                      // 程序入口文件，加载各种公共组件
-|
-|-- .babelrc                         // ES6语法编译配置
-|-- .editorconfig                    // 代码编写规格
-|-- .gitignore                       // 忽略的文件
-|-- favicon.ico                      // 页面左上角小图标
-|-- index.html                       // 入口html文件
-|-- package.json                     // 项目及工具的依赖配置文件
-|-- README.md                        // 说明
-```
-
 
 ```
 .
-├── README.md
-├── build
-├── config
-│   └── index.js
-├── elm
-├── favicon.ico
-├── index.html
-├── package.json
-├── screenshots
-├── src
+├── build										// webpack配置文件
+├── config										// 项目打包路径
+├── elm											// 上线项目文件，放在服务器即可正常访问
+├── screenshots									// 项目截图
+├── src											// 源码目录
 │   ├── App.vue
 │   ├── components
 │   │   ├── common
@@ -446,7 +322,8 @@ npm run build
 │       ├── common.scss
 │       ├── mixin.scss
 │       └── swiper.min.css
-└── tree.md
+├── favicon.ico
+├── index.html
 
 56 directories, 203 files
 ```
