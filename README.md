@@ -251,64 +251,63 @@ npm run build
 │   │   │   │   └── userValidation.vue          // 用户验证页
 │   │   │   └── confirmOrder.vue                // 确认订单页
 │   │   ├── download
-│   │   │   └── download.vue
+│   │   │   └── download.vue                    // 下载App
 │   │   ├── find
-│   │   │   └── find.vue
+│   │   │   └── find.vue                        // 发现页
 │   │   ├── food
-│   │   │   └── food.vue
+│   │   │   └── food.vue                        // 食品筛选排序页
 │   │   ├── forget
-│   │   │   └── forget.vue
+│   │   │   └── forget.vue                      // 忘记密码，修改密码页
 │   │   ├── home
-│   │   │   └── home.vue
+│   │   │   └── home.vue                        // 首页
 │   │   ├── login
-│   │   │   └── login.vue
+│   │   │   └── login.vue                       // 登录注册页
 │   │   ├── msite
-│   │   │   └── msite.vue
+│   │   │   └── msite.vue                       // 商铺列表页
 │   │   ├── order
 │   │   │   ├── children
-│   │   │   │   └── orderDetail.vue
-│   │   │   └── order.vue
+│   │   │   │   └── orderDetail.vue             // 订单详情页
+│   │   │   └── order.vue                       // 订单列表页
 │   │   ├── points
 │   │   │   ├── children
-│   │   │   │   └── detail.vue
-│   │   │   └── points.vue
+│   │   │   │   └── detail.vue                  // 积分说明
+│   │   │   └── points.vue                      // 积分页
 │   │   ├── profile
 │   │   │   ├── children
 │   │   │   │   ├── children
-│   │   │   │   │   ├── address.vue
+│   │   │   │   │   ├── address.vue             // 添加地址
 │   │   │   │   │   └── children
-│   │   │   │   │       ├── add.vue
+│   │   │   │   │       ├── add.vue             // 新增地址
 │   │   │   │   │       └── children
-│   │   │   │   │           └── addDetail.vue
-│   │   │   │   ├── info.vue
-│   │   │   │   └── setusername.vue
-│   │   │   └── profile.vue
+│   │   │   │   │           └── addDetail.vue   // 搜索地址
+│   │   │   │   ├── info.vue                    // 帐户信息
+│   │   │   │   └── setusername.vue             // 重置用户名
+│   │   │   └── profile.vue                     // 个人中心
 │   │   ├── search
-│   │   │   └── search.vue
+│   │   │   └── search.vue                      // 搜索页
 │   │   ├── service
 │   │   │   ├── children
-│   │   │   │   └── questionDetail.vue
-│   │   │   └── service.vue
+│   │   │   │   └── questionDetail.vue          // 问题详情
+│   │   │   └── service.vue                     // 服务中心
 │   │   ├── shop
 │   │   │   ├── children
 │   │   │   │   ├── children
-│   │   │   │   │   └── shopSafe.vue
-│   │   │   │   ├── foodDetail.vue
-│   │   │   │   └── shopDetail.vue
-│   │   │   └── shop.vue
+│   │   │   │   │   └── shopSafe.vue            // 商铺认证信息页
+│   │   │   │   ├── foodDetail.vue              // 商铺信息页
+│   │   │   │   └── shopDetail.vue              // 单个商铺信息页
+│   │   │   └── shop.vue                        // 商铺筛选页
 │   │   └── vipcard
 │   │       ├── children
-│   │       │   ├── invoiceRecord.vue
-│   │       │   ├── useCart.vue
-│   │       │   └── vipDescription.vue
-│   │       └── vipcard.vue
-│   ├── plugins
-│   │   └── swiper.min.js
+│   │       │   ├── invoiceRecord.vue           // 购买记录
+│   │       │   ├── useCart.vue                 // 使用卡号购买
+│   │       │   └── vipDescription.vue          // 会员说明
+│   │       └── vipcard.vue                     // 会员卡办理页
+│   ├── plugins                                 // 引用的插件
 │   ├── router
-│   │   └── router.js
-│   ├── service
-│   │   ├── getData.js
-│   │   └── tempdata
+│   │   └── router.js                           // 路由配置
+│   ├── service                                 // 数据交互统一调配
+│   │   ├── getData.js                          // 获取数据的统一调配文件，对接口进行统一管理
+│   │   └── tempdata                            // 开发阶段的临时数据
 │   ├── store
 │   │   ├── action.js
 │   │   ├── getters.js
