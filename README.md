@@ -197,40 +197,40 @@ npm run build
 
 # 项目布局
 ```
-|-- build                            		// webpack配置文件
-|-- config                           		// 项目打包路径
+|-- build                            		    // webpack配置文件
+|-- config                           		    // 项目打包路径
 |-- elm                                     // 上线项目文件，放在服务器即可正常访问
-|-- screenshots                      		// 项目截图
-|-- src                              		// 源码目录
-|   |-- components                   		// 组件
-|       |-- common                   		// 公共组件
-|           |-- buyCart.js           		// 购物车组件
-|               |-- loading.js            	// 页面初始化加载数据的动画组件
-|               |-- mixin.js              	// 组件混合(包括：指令-下拉加载更多，处理图片地址)
-|               |-- ratingStar.js         	// 评论的五颗星组件
-|               |-- shoplist.js           	// msite和shop页面的餐馆列表公共组件
-|       |-- footer                   		// 底部公共组件
+|-- screenshots                      		    // 项目截图
+|-- src                              		    // 源码目录
+|   |-- components                   		    // 组件
+|       |-- common                   		    // 公共组件
+|           |-- buyCart.js           		    // 购物车组件
+|               |-- loading.js              // 页面初始化加载数据的动画组件
+|               |-- mixin.js                // 组件混合(包括：指令-下拉加载更多，处理图片地址)
+|               |-- ratingStar.js           // 评论的五颗星组件
+|               |-- shoplist.js             // msite和shop页面的餐馆列表公共组件
+|       |-- footer                          // 底部公共组件
 |       |-- header                          // 头部公共组件
-|   |-- config                       		// 基本配置
-|       |-- env.js                   		// 环境切换配置
-|       |-- fetch.js                 		// 获取数据
-|       |-- mUtils.js                		// 常用的js方法
-|       |-- rem.js                   		// px转换rem
-|   |-- images                       		// 公共图片
+|   |-- config                              // 基本配置
+|       |-- env.js                          // 环境切换配置
+|       |-- fetch.js                        // 获取数据
+|       |-- mUtils.js                       // 常用的js方法
+|       |-- rem.js                          // px转换rem
+|   |-- images                              // 公共图片
 |   |-- pages
-|   	|-- balance                  		// 余额页
+|   	|-- balance                           // 余额页
 |           |--children
-|              |--detail			       	// 余额说明
-|       |-- benefit                  		// 红包页
+|              |--detail			              // 余额说明
+|       |-- benefit                         // 红包页
 |           |--children
 |              |--commend                   // 推荐有奖
-|              |--coupon			        // 代金券说明
-|              |--exchange		            // 兑换红包
-|              |--hbDescription	            // 红包说明
-|              |--hbHistory			 // 历史红包
-|       |-- city                     		// 当前城市页
-|		|-- food                 	       	// 食品筛选排序页
-|		|-- confirmOrder                 	// 确认订单页
+|              |--coupon                    // 代金券说明
+|              |--exchange                  // 兑换红包
+|              |--hbDescription             // 红包说明
+|              |--hbHistory                 // 历史红包
+|       |-- city                            // 当前城市页
+|		|-- food                                // 食品筛选排序页
+|		|-- confirmOrder                        // 确认订单页
 |		    |--children
 |			      |--invoice			         //	选择发票页
 |			      |--remark			           //	订单备注页
