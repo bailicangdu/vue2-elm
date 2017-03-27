@@ -140,9 +140,9 @@ npm run build
 
 # 最终目标
 
-1、用node.js构建一个模拟外卖平台的后台系统。(已经开始制作)
+1、用node.js构建一个模拟外卖平台的后台系统。[代码地址在这里](https://github.com/bailicangdu/node-elm)
 
-2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
+2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。[代码地址在这里](https://github.com/bailicangdu/React-Native-elm)
 
 3、如果时间来的及，会出一个pc端的网页版。
 
