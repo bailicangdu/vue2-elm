@@ -27,7 +27,7 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-left"></use>
                         </svg>
                     </footer>
-                    
+
                 </section>
             </header>
             <transition name="fade">
@@ -55,19 +55,19 @@
                         <line x1="22" y1="22" x2="38" y2="38" style="stroke:#999;stroke-width:2"/>
                     </svg>
                 </section>
-            </transition>  
+            </transition>
             <section class="change_show_type" ref="chooseType">
                 <div>
                     <span :class='{activity_show: changeShowType =="food"}' @click="changeShowType='food'">商品</span>
                 </div>
                 <div>
-                    <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>   
+                    <span :class='{activity_show: changeShowType =="rating"}' @click="changeShowType='rating'">评价</span>
                 </div>
             </section>
             <transition name="fade-choose">
                 <section v-show="changeShowType =='food'" class="food_container">
                     <section class="menu_container">
-                        <section class="menu_left" id="wrapper_menu">
+                        <section class="menu_left" id="wrapper_menu" ref="wrapperMenu">
                             <ul>
                                 <li v-for="(item,index) in menuList" :key="index" class="menu_left_li" :class="{activity_menu: index == menuIndex}" @click="chooseMenu(index)">
                                     <img :src="getImgPath(item.icon_url)" v-if="item.icon_url">
@@ -103,7 +103,7 @@
                                                         <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                                         </li>
                                                     </ul>
-                                                    
+
                                                 </h3>
                                                 <p class="food_description_content">{{foods.description}}</p>
                                                 <p class="food_description_sale_rating">
@@ -195,7 +195,7 @@
                 <section class="rating_container" id="ratingContainer" v-show="changeShowType =='rating'">
                     <section v-load-more="loaderMoreRating" type="2">
                         <section>
-                            
+
                             <header class="rating_header">
                                 <section class="rating_header_left">
                                     <p>{{shopDetailData.rating}}</p>
@@ -215,7 +215,7 @@
                                     </p>
                                     <p>
                                         <span>送达时间</span>
-                                        <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>   
+                                        <span class="delivery_time">{{shopDetailData.order_lead_time}}分钟</span>
                                     </p>
                                 </section>
                             </header>
@@ -248,7 +248,7 @@
                                         </ul>
                                     </section>
                                 </li>
-                            </ul>            
+                            </ul>
                         </section>
                     </section>
                 </section>
@@ -288,7 +288,7 @@
         <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
         </transition>
-        <transition 
+        <transition
         appear
         @after-appear = 'afterEnter'
         @before-appear="beforeEnter"
@@ -375,11 +375,11 @@
             ...mapState([
                 'latitude','longitude','cartList'
             ]),
-            promotionInfo: function (){ 
+            promotionInfo: function (){
                 return this.shopDetailData.promotion_info || '欢迎光临，用餐高峰期请提前下单，谢谢。'
             },
             //配送费
-            deliveryFee: function () { 
+            deliveryFee: function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_delivery_fee;
                 }else{
@@ -387,7 +387,7 @@
                 }
             },
             //还差多少元起送，为负数时显示去结算按钮
-            minimumOrderAmount: function () { 
+            minimumOrderAmount: function () {
                 if (this.shopDetailData) {
                     return this.shopDetailData.float_minimum_order_amount - this.totalPrice;
                 }else{
@@ -448,24 +448,28 @@
             listenScroll(element){
                 let oldScrollTop;
                 let requestFram;
-                this.foodScroll = new BScroll(element, {  
+                this.foodScroll = new BScroll(element, {
                     probeType: 3,
                     deceleration: 0.001,
                     bounce: false,
                     swipeTime: 2000,
                     click: true,
-                }); 
-           
+                });
+
                 this.wrapperMenu = new BScroll('#wrapper_menu', {
                     click: true,
                 });
 
                 this.foodScroll.on('scroll', (pos) => {
-                    this.shopListTop.forEach((item, index) => {
+                        this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
                             this.menuIndex = index;
                         }
                     })
+                    let wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
+                    let menuList=this.$refs.wrapperMenu.querySelectorAll('.activity_menu');
+                    let el = menuList[0];
+                    this.wrapperMenu.scrollToElement(el, 800);
                 })
             },
             //控制活动详情页的显示隐藏
@@ -503,7 +507,7 @@
             initCategoryNum(){
                 let newArr = [];
                 let cartFoodNum = 0;
-                this.totalPrice = 0; 
+                this.totalPrice = 0;
                 this.cartFoodList = [];
                 this.menuList.forEach((item, index) => {
                     if (this.shopCart&&this.shopCart[item.foods[0].category_id]) {
@@ -728,7 +732,7 @@
         left: 0;
         height: 100%;
     }
-    
+
     .shop_detail_header{
         overflow: hidden;
         position: relative;
@@ -868,7 +872,7 @@
             @include cl;
         }
     }
-            
+
     .food_container{
         display: flex;
         flex: 1;
@@ -878,6 +882,7 @@
         display: flex;
         flex: 1;
         overflow-y: hidden;
+        position: relative;
         .menu_left{
             background-color: #f8f8f8;
             width: 3.8rem;
@@ -979,7 +984,7 @@
                 padding: .6rem .4rem;
                 border-bottom: 1px solid #f8f8f8;
                 position: relative;
-                overflow: hidden;            
+                overflow: hidden;
                 .menu_detail_link{
                     display:flex;
                     .menu_food_img{
@@ -1139,7 +1144,7 @@
                     margin-bottom: .1rem;
                 }
                 div:nth-of-type(2){
-                    font-size: .4rem;   
+                    font-size: .4rem;
                 }
             }
         }
@@ -1509,7 +1514,7 @@
         position: fixed;
         bottom: 30px;
         left: 30px;
-    
+
         svg{
             @include wh(.9rem, .9rem);
             fill: #3190e8;
