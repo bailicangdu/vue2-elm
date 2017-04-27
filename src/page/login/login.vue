@@ -58,8 +58,8 @@
             return {
                 loginWay: true, //登录方式，默认短信登录
                 showPassword: false, // 是否显示密码
-                phoneNumber: null, //电话号码
-                mobileCode: null, //短信验证码
+                phoneNumber: 12345678900, //电话号码
+                mobileCode: 123456, //短信验证码
                 validate_token: null, //获取短信时返回的验证值，登录时需要
                 computedTime: 0, //倒数记时
                 userInfo: null, //获取到的用户信息

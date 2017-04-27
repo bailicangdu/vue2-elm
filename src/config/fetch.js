@@ -44,34 +44,36 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 		}
 		return responseJson
 	} else {
-		let requestObj;
-		if (window.XMLHttpRequest) {
-			requestObj = new XMLHttpRequest();
-		} else {
-			requestObj = new ActiveXObject;
-		}
+		return new Promise((resolve, reject) => {
+			let requestObj;
+			if (window.XMLHttpRequest) {
+				requestObj = new XMLHttpRequest();
+			} else {
+				requestObj = new ActiveXObject;
+			}
 
-		let sendData = '';
-		if (type == 'POST') {
-			sendData = JSON.stringify(data);
-		}
+			let sendData = '';
+			if (type == 'POST') {
+				sendData = JSON.stringify(data);
+			}
 
-		requestObj.open(type, url, true);
-		requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		requestObj.send(sendData);
+			requestObj.open(type, url, true);
+			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			requestObj.send(sendData);
 
-		requestObj.onreadystatechange = () => {
-			if (requestObj.readyState == 4) {
-				if (requestObj.status == 200) {
-					let obj = requestObj.response
-					if (typeof obj !== 'object') {
-						obj = JSON.parse(obj);
+			requestObj.onreadystatechange = () => {
+				if (requestObj.readyState == 4) {
+					if (requestObj.status == 200) {
+						let obj = requestObj.response
+						if (typeof obj !== 'object') {
+							obj = JSON.parse(obj);
+						}
+						resolve(obj)
+					} else {
+						reject(requestObj)
 					}
-					return obj
-				} else {
-					throw new Error(requestObj)
 				}
 			}
-		}
+		})
 	}
 }
