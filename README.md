@@ -61,7 +61,7 @@ npm run build
 
 >  或者您可以 "follow" 一下，我会不断开源更多的有趣的项目
 
->  开发环境 macOS 10.12.3  Chrome 55
+>  开发环境 macOS 10.12.3  Chrome 56  nodejs 6.10.0
 
 >  特别感谢辰妹子，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
 
@@ -140,9 +140,9 @@ npm run build
 
 # 最终目标
 
-1、用node.js构建一个模拟外卖平台的后台系统。(已经开始制作)
+1、用node.js构建一个模拟外卖平台的后台系统。[地址在这里](https://github.com/bailicangdu/node-elm)
 
-2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。
+2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。[地址在这里](https://github.com/bailicangdu/React-Native-elm)
 
 3、如果时间来的及，会出一个pc端的网页版。
 
