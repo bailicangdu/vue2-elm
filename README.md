@@ -88,7 +88,7 @@ npm run build
 
 ### 移动端扫描下方二维码
 
-![](http://cangdu.org/files/images/elm_ewm.png)
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
 
 
 
@@ -158,37 +158,37 @@ npm run build
 
 ### 商铺列表页
 
-<img src="http://cangdu.org/files/images/msite.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/msite.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/msite.gif" width="365" height="619"/>
 
 
 ### 商铺筛选页
 
-<img src="http://cangdu.org/files/images/food.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/food.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/food.gif" width="365" height="619"/>
 
 
 
 ### 餐馆食品列表与购物车
 
-<img src="http://cangdu.org/files/images/shop_cart.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/shop_cart.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/shop_cart.gif" width="365" height="619"/>
 
 ### 确认订单页
 
-<img src="http://cangdu.org/files/images/confirm1.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/confirmOrder.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirm1.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/confirmOrder.gif" width="365" height="619"/>
 
 
 ### 搜索页
 
-<img src="http://cangdu.org/files/images/search.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/search.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/search.gif" width="365" height="619"/>
 
 
 ### 登录页
 
-<img src="http://cangdu.org/files/images/login1.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/login.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login1.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/login.gif" width="365" height="619"/>
 
 
 ### 个人中心
 
-<img src="http://cangdu.org/files/images/profile.png" width="365" height="619"/> <img src="http://cangdu.org/files/images/profile.gif" width="365" height="619"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.png" width="365" height="619"/> <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/profile.gif" width="365" height="619"/>
 
 
 
