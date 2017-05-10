@@ -82,7 +82,7 @@ export default {
         //获取导航食品类型列表
        	msiteFoodTypes(this.geohash).then(res => {
        		let resLength = res.length;
-       		let resArr = res.concat([]); // 返回一个新的数组
+       		let resArr = [...res]; // 返回一个新的数组
        		let foodArr = [];
     		for (let i = 0, j = 0; i < resLength; i += 8, j++) {
     			foodArr[j] = resArr.splice(0, 8);

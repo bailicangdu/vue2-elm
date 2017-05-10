@@ -327,3 +327,8 @@ npm run build
 
 56 directories, 203 files
 ```
+
+
+### License
+
+[MIT](https://github.com/bailicangdu/vue2-elm/blob/master/LICENSE)
