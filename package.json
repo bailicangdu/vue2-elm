@@ -4,7 +4,7 @@
   "description": "vue2-elm",
   "author": "cangdu <1264889788@qq.com>",
   "private": true,
-  "license": "Apache",
+  "license": "MIT",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
