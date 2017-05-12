@@ -209,10 +209,12 @@ export default {
 			}
 			.shop_detail_ul{
 				display: flex;
+				transform: scale(.8);
+				margin-right: -0.3rem;
 				.supports{
 					@include sc(0.5rem, #999);
 					border: 0.025rem solid #f1f1f1;
-					padding: 0.04rem;
+					padding: 0 0.04rem;
 					border-radius: 0.08rem;
 					margin-left: 0.05rem;
 				}
@@ -232,12 +234,16 @@ export default {
 					}
 				}
 				.order_section{
-						@include sc(0.4rem, #666);
+					transform: scale(.8);
+					margin-left: -0.2rem;
+					@include sc(0.4rem, #666);
 				}
 			}
 			.rating_order_num_right{
 				display: flex;
 				align-items: center;
+				transform: scale(.7);
+				margin-right: -0.77rem;
 				.delivery_style{
 					font-size: 0.4rem;
 					padding: 0.04rem 0.08rem 0;
@@ -261,9 +267,11 @@ export default {
 			@include fj;
 			@include sc(0.5rem, #666);
 			.fee{
-				@include sc(0.5rem, #666);
+				transform: scale(.9);
+				@include sc(0.5rem, #999);
 			}
 			.distance_time{
+				transform: scale(.9);
 				span{
 					color: #999;
 				}

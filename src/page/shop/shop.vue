@@ -1016,6 +1016,8 @@
                                     p{
                                         white-space: nowrap;
                                         line-height: .4rem;
+                                        transform: scale(.7);
+                                        margin-right: -0.2rem;
                                     }
                                 }
                                 .attribute_new{
