@@ -57,9 +57,9 @@
     }
 	.load_ellipse{
 		position: absolute;
-		@include wh(2.4rem, 2rem);
+		@include wh(2.6rem, 2rem);
 		top: 2.2rem;
-		left: 0.11rem;
+        left: 0.2rem;
 		z-index: 10;
 		animation: ellipse .6s infinite ease-in-out;
 	}

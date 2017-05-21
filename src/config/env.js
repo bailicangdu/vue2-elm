@@ -1,25 +1,38 @@
 /**
  * 配置编译环境和线上环境之间的切换
  * 
+ * localapi: 是否使用本地API接口
+ * proapi: 是否使用线上API接口
  * baseUrl: 域名地址
  * routerMode: 路由模式
  * imgBaseUrl: 图片所在域名地址
  * 
  */
-let baseUrl; 
-let routerMode;
-const imgBaseUrl = 'https://fuss10.elemecdn.com';
+const localapi = false;
+const proapi = false;
+let baseUrl = ''; 
+let routerMode = 'hash';
+let imgBaseUrl = 'https://fuss10.elemecdn.com';
+let ApiUrl = '';
 
+if (localapi) {
+	ApiUrl = 'http://localhost:8001';
+	imgBaseUrl = 'http://localhost:8001';
+}else if(proapi){
+	ApiUrl = 'http://cangdu.org:8001';
+	imgBaseUrl = 'http://cangdu.org:8001';
+}
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = '';
-	routerMode = 'hash'
-}else{
+	
+}else if(process.env.NODE_ENV == 'production'){
 	baseUrl = 'https://mainsite-restapi.ele.me';
-	routerMode = 'hash'
 }
 
 export {
 	baseUrl,
 	routerMode,
-	imgBaseUrl
+	imgBaseUrl,
+	ApiUrl,
+	localapi,
+	proapi,
 }

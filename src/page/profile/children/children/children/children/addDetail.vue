@@ -3,7 +3,7 @@
         <head-top head-title="搜索地址" go-back='true'></head-top>
         <section>
         	<div class="add-detail">
-        		<input type="text" placeholder="请输入小区/写字楼/学校等" v-model="inputAdress" @input="inputThing">
+        		<input type="text" placeholder="请输入小区/写字楼/学校等" v-model="inputAdress">
         		<button @click="inputThing">确认</button>
         	</div>
         	<div class="warnpart">为了满足商家的送餐要求，建议您从列表中选择地址</div>
@@ -27,7 +27,7 @@
 <script>
     import headTop from 'src/components/header/head'
     import {getImgPath} from 'src/components/common/mixin'
-    import {getSearchAddress} from 'src/service/getData'
+    import {searchNearby} from 'src/service/getData'
     import {mapMutations, mapState} from 'vuex'
     export default {
       data(){
@@ -43,17 +43,17 @@
         },
         mounted(){
 
-        	getSearchAddress(this.inputAdress).then(res => {
-        			this.adressList=res;
-        			this.warning=true;
-        		if(this.adressList.length > 0){
-        			this.warning=false;
-        			if(this.inputAdress == ''){
-        				this.adressList=[];
-        				this.warning=true;
-        			}
-        		}
-        	});
+        	// getSearchAddress(this.inputAdress).then(res => {
+        	// 		this.adressList=res;
+        	// 		this.warning=true;
+        	// 	if(this.adressList.length > 0){
+        	// 		this.warning=false;
+        	// 		if(this.inputAdress == ''){
+        	// 			this.adressList=[];
+        	// 			this.warning=true;
+        	// 		}
+        	// 	}
+        	// });
         	
         },
         mixins: [getImgPath],
@@ -72,7 +72,7 @@
         	]),
             //搜索地址
             inputThing(){
-            	getSearchAddress(this.inputAdress).then(res => {
+            	searchNearby(this.inputAdress).then(res => {
             			this.adressList=res;
             			this.warning=true;
             		if(this.adressList.length > 0){

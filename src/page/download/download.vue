@@ -50,7 +50,7 @@
                 }else{
                     try {
                         let elemIF = document.createElement("iframe");
-                        elemIF.src = 'http://static10.elemecdn.com/uploads/androidapp/eleme6_4_1476672934695.apk';
+                        elemIF.src = 'http://cangdu.org/files/elm.apk';
                         elemIF.style.display = "none";
                         document.body.appendChild(elemIF);
                     } catch (e) {

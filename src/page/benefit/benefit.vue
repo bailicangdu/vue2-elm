@@ -26,20 +26,17 @@
                                         <span>{{String(item.amount).split('.')[0]}}</span>
                                         <span>.</span>
                                         <span>{{String(item.amount).split('.')[1]||0}}</span>
+                                        <p>{{item.description_map.sum_condition}}</p>
                                     </div>
                                     <div class="list_item_right">
                                         <h4>{{item.name}}</h4>
-                                        <ul>
-                                            <li v-for="(descriptions, index) in item.descriptions" :key="index">{{descriptions}}</li>
-                                        </ul>
+                                        <p>{{item.description_map.validity_periods}}</p>
+                                        <p>{{item.description_map.phone}}</p>
                                     </div>
+                                    <div class="time_left">{{item.description_map.validity_delta}}</div>
                                 </section>
-                                <footer class="list_item_footer" v-if="item.extra_limit">
-                                    <ul>
-                                        <li v-for="(limit, index) in item.extra_limit" :key="index">
-                                            {{limit}}
-                                        </li>
-                                    </ul>
+                                <footer class="list_item_footer" v-if="item.limit_map">
+                                    <p>{{item.limit_map.restaurant_flavor_ids}}</p>
                                 </footer>
                             </li>
                         </ul>
@@ -203,11 +200,14 @@
                             font-weight: bold;
                         }
                         span:nth-of-type(2){
-                            @include sc(2rem, #ff5340);
+                            @include sc(1.5rem, #ff5340);
                         }
                         span:nth-of-type(3), span:nth-of-type(4){
-                            @include sc(1rem, #ff5340);
+                            @include sc(0.8rem, #ff5340);
                             font-weight: bold;
+                        }
+                        p{
+                            @include sc(0.4rem, #999);
                         }
                     }
                     .list_item_right{
@@ -217,12 +217,14 @@
                             @include sc(.7rem, #666);
                             margin-left: -.7rem;
                         }
-                        ul{
-                            li{
-                                list-style-type: disc;
-                                @include sc(.4rem, #999);
-                            }
+                        p{
+                            list-style-type: disc;
+                            margin-left: -.7rem;
+                            @include sc(.4rem, #999);   
                         }
+                    }
+                    .time_left{
+                        @include sc(.75rem, #ff5340);
                     }
                 }
                 .list_item_footer{
@@ -230,12 +232,10 @@
                     padding: .4rem .4rem;
                     border-bottom-left-radius: 0.25rem;
                     border-bottom-right-radius: 0.25rem;
-                    ul{
-                        li{
-                            list-style-type: disc;
-                            @include sc(.4rem, #999);
-                            margin-left: .4rem;
-                        }
+                    p{
+                        list-style-type: disc;
+                        @include sc(.4rem, #999);
+                        margin-left: .4rem;
                     }
                 }
             }

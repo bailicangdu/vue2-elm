@@ -3,7 +3,7 @@
         <head-top head-title="订单列表" go-back='true'></head-top>
         <ul class="order_list_ul" v-load-more="loaderMore">
             <li class="order_list_li" v-for="item in orderList" :key="item.id">
-                <img :src="item.restaurant_image_url" class="restaurant_image">
+                <img :src="localapi || proapi ? imgBaseUrl + item.restaurant_image_url : item.restaurant_image_url" class="restaurant_image">
                 <section class="order_item_right">
                     <section @click="showDetail(item)">
                         <header class="order_item_right_header">
@@ -26,7 +26,7 @@
                         </section>
                     </section>
                     <div class="order_again">
-                        <compute-time v-if="item.status_bar.title == '等待支付'" :time="item.formatted_created_at"></compute-time>
+                        <compute-time v-if="item.status_bar.title == '等待支付'" :time="localapi || proapi ?  item.time_pass :item.formatted_created_at"></compute-time>
                         <router-link :to="{path: '/shop', query: {geohash, id: item.restaurant_id}}" tag="span" class="buy_again" v-else>再来一单</router-link>
                     </div>
                 </section>
@@ -52,6 +52,7 @@
     import footGuide from 'src/components/footer/footGuide'
     import {getOrderList} from 'src/service/getData'
     import {loadMore} from 'src/components/common/mixin'
+    import {localapi, proapi, imgBaseUrl} from 'src/config/env'
 
 
     export default {
@@ -61,6 +62,9 @@
                 offset: 0, 
                 preventRepeat: false,  //防止重复获取
                 showLoading: true, //显示加载动画
+                localapi,
+                proapi,
+                imgBaseUrl
             }
         },
         mounted(){

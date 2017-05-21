@@ -62,7 +62,7 @@
             },
             //订单返回时间秒分分别处理
             numTime: function (){
-                if (this.time.indexOf('分钟') !== -1) {
+                if (this.time.toString().indexOf('分钟') !== -1) {
                     return parseInt(this.time)*60;
                 }else{
                     return parseInt(this.time);

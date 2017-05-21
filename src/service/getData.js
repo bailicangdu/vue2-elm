@@ -1,4 +1,5 @@
 import fetch from '../config/fetch'
+import { ApiUrl, localapi, proapi } from 'src/config/env'
 import * as home from './tempdata/home'
 import * as city from './tempdata/city'
 import * as msite from './tempdata/msite'
@@ -31,7 +32,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取首页默认地址
 	 */
 
-	var cityGuess = () => fetch('GET', '/v1/cities', {
+	var cityGuess = () => fetch('GET', ApiUrl + '/v1/cities', {
 		type: 'guess'
 	});
 
@@ -40,7 +41,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取首页热门城市
 	 */
 
-	var hotcity = () => fetch('GET', '/v1/cities', {
+	var hotcity = () => fetch('GET', ApiUrl + '/v1/cities', {
 		type: 'hot'
 	});
 
@@ -49,7 +50,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取首页所有城市
 	 */
 
-	var groupcity = () => fetch('GET', '/v1/cities', {
+	var groupcity = () => fetch('GET', ApiUrl + '/v1/cities', {
 		type: 'group'
 	});
 
@@ -58,14 +59,14 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取当前所在城市
 	 */
 
-	var currentcity = number => fetch('GET', '/v1/cities/' + number, {});
+	var currentcity = number => fetch('GET', ApiUrl + '/v1/cities/' + number, {});
 
 
 	/**
 	 * 获取搜索地址
 	 */
 
-	var searchplace = (cityid, value) => fetch('GET', '/v1/pois', {
+	var searchplace = (cityid, value) => fetch('GET', ApiUrl + '/v1/pois', {
 		type: 'search',
 		city_id: cityid,
 		keyword: value
@@ -76,14 +77,14 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取msite页面地址信息
 	 */
 
-	var msiteAdress = geohash => fetch('GET', '/v2/pois/' + geohash, {});
+	var msiteAdress = geohash => fetch('GET', ApiUrl + '/v2/pois/' + geohash, {});
 
 
 	/**
 	 * 获取msite页面食品分类列表
 	 */
 
-	var msiteFoodTypes = geohash => fetch('GET', '/v2/index_entry', {
+	var msiteFoodTypes = geohash => fetch('GET', ApiUrl + '/v2/index_entry', {
 		geohash,
 		group_type: '1',
 		'flags[]': 'F'
@@ -113,7 +114,7 @@ if (process.env.NODE_ENV == 'development') {
 			order_by,
 			'delivery_mode[]': delivery_mode + supportStr
 		};
-		return fetch('GET', '/shopping/restaurants', data);
+		return fetch('GET', ApiUrl + '/shopping/restaurants', data);
 	};
 
 
@@ -121,7 +122,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取search页面搜索结果
 	 */
 
-	var searchRestaurant = (geohash, keyword) => fetch('GET', '/v4/restaurants', {
+	var searchRestaurant = (geohash, keyword) => fetch('GET', ApiUrl + '/v4/restaurants', {
 		'extras[]': 'restaurant_activity',
 		geohash,
 		keyword,
@@ -133,7 +134,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取food页面的 category 种类列表
 	 */
 
-	var foodCategory = (latitude, longitude) => fetch('GET', '/shopping/v2/restaurant/category', {
+	var foodCategory = (latitude, longitude) => fetch('GET', ApiUrl + '/shopping/v2/restaurant/category', {
 		latitude,
 		longitude
 	});
@@ -143,7 +144,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取food页面的配送方式
 	 */
 
-	var foodDelivery = (latitude, longitude) => fetch('GET', '/shopping/v1/restaurants/delivery_modes', {
+	var foodDelivery = (latitude, longitude) => fetch('GET', ApiUrl + '/shopping/v1/restaurants/delivery_modes', {
 		latitude,
 		longitude,
 		kw: ''
@@ -154,7 +155,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取food页面的商家属性活动列表
 	 */
 
-	var foodActivity = (latitude, longitude) => fetch('GET', '/shopping/v1/restaurants/activity_attributes', {
+	var foodActivity = (latitude, longitude) => fetch('GET', ApiUrl + '/shopping/v1/restaurants/activity_attributes', {
 		latitude,
 		longitude,
 		kw: ''
@@ -165,7 +166,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取shop页面商铺详情
 	 */
 
-	var shopDetails = (shopid, latitude, longitude) => fetch('GET', '/shopping/restaurant/' + shopid, {
+	var shopDetails = (shopid, latitude, longitude) => fetch('GET', ApiUrl + '/shopping/restaurant/' + shopid, {
 		latitude,
 		longitude: longitude + '&extras[]=activities&extras[]=album&extras[]=license&extras[]=identification&extras[]=statistics'
 	});
@@ -173,10 +174,10 @@ if (process.env.NODE_ENV == 'development') {
 
 
 	/**
-	 * 获取food页面的商家属性活动列表
+	 * 获取shop页面菜单列表
 	 */
 
-	var foodMenu = restaurant_id => fetch('GET', '/shopping/v2/menu', {
+	var foodMenu = restaurant_id => fetch('GET', ApiUrl + '/shopping/v2/menu', {
 		restaurant_id
 	});
 
@@ -185,7 +186,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取商铺评价列表
 	 */
 
-	var getRatingList = (offset, tag_name = '') => fetch('GET', '/ugc/v2/restaurants/834828/ratings', {
+	var getRatingList = (shopid, offset, tag_name = '') => fetch('GET', ApiUrl + '/ugc/v2/restaurants/' + shopid + '/ratings', {
 		has_content: true,
 		offset,
 		limit: 10,
@@ -197,14 +198,14 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取商铺评价分数
 	 */
 
-	var ratingScores = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid + '/ratings/scores', {});
+	var ratingScores = shopid => fetch('GET', ApiUrl + '/ugc/v2/restaurants/' + shopid + '/ratings/scores', {});
 
 
 	/**
 	 * 获取商铺评价分类
 	 */
 
-	var ratingTags = shopid => fetch('GET', '/ugc/v2/restaurants/' + shopid + '/ratings/tags', {});
+	var ratingTags = shopid => fetch('GET', ApiUrl + '/ugc/v2/restaurants/' + shopid + '/ratings/tags', {});
 
 
 	/**
@@ -218,16 +219,11 @@ if (process.env.NODE_ENV == 'development') {
 	});
 
 
-
-
-	var getcaptchas = () => fetch('POST', '/v1/captchas', {});
-
-
 	/**
-	 * 账号密码登录
+	 * 获取图片验证码
 	 */
 
-	var accountLogin = (username, password, captcha_code) => fetch('POST', '/v2/login', {username, password, captcha_code});
+	var getcaptchas = () => fetch('POST', ApiUrl + '/v1/captchas', {});
 
 
 	/**
@@ -258,10 +254,11 @@ if (process.env.NODE_ENV == 'development') {
 	 * 确认订单
 	 */
 
-	var checkout = (geohash, entities) => fetch('POST', '/v1/carts/checkout', {
+	var checkout = (geohash, entities, shopid) => fetch('POST', ApiUrl + '/v1/carts/checkout', {
 		come_from: "web",
 		geohash,
 		entities,
+		restaurant_id: shopid,
 	});
 
 
@@ -269,7 +266,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取快速备注列表
 	 */
 
-	var getRemark = (id, sig) => fetch('GET', '/v1/carts/' + id + '/remarks', {
+	var getRemark = (id, sig) => fetch('GET', ApiUrl + '/v1/carts/' + id + '/remarks', {
 		sig
 	});
 
@@ -278,7 +275,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取地址列表
 	 */
 
-	var getAddress = (id, sig) => fetch('GET', '/v1/carts/' + id + '/addresses', {
+	var getAddress = (id, sig) => fetch('GET', ApiUrl + '/v1/carts/' + id + '/addresses', {
 		sig
 	});
 
@@ -287,7 +284,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 搜索地址
 	 */
 
-	var searchNearby = keyword => fetch('GET', '/v1/pois', {
+	var searchNearby = keyword => fetch('GET', ApiUrl + '/v1/pois', {
 		type: 'nearby',
 		keyword
 	});
@@ -297,7 +294,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 添加地址
 	 */
 
-	var postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => fetch('POST', '/v1/users/' + userId + '/addresses', {
+	var postAddAddress = (userId, address, address_detail, geohash, name, phone, phone_bk, poi_type, sex, tag, tag_type) => fetch('POST', ApiUrl + '/v1/users/' + userId + '/addresses', {
 		address,
 		address_detail,
 		geohash,
@@ -315,7 +312,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 下订单
 	 */
 
-	var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => fetch('POST', '/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
+	var placeOrders = (user_id, cart_id, address_id, description, entities, geohash, sig) => fetch('POST', ApiUrl + '/v1/users/' + user_id + '/carts/' + cart_id + '/orders', {
 		address_id,
 		come_from: "mobile_web",
 		deliver_time: "",
@@ -383,8 +380,11 @@ if (process.env.NODE_ENV == 'development') {
 	// /**
 	//  * 获取服务中心信息
 	//  */
-
-	var getService = () => fetch('GET', '/m.ele.me@json/profile/explain', {});
+	if(ApiUrl){
+		var getService = () => fetch('GET', ApiUrl + '/v3/profile/explain', {});
+	}else{
+		var getService = () => fetch('GET', '/m.ele.me@json/profile/explain', {});
+	}
 
 
 
@@ -392,7 +392,7 @@ if (process.env.NODE_ENV == 'development') {
 	*兑换会员卡
 	*/
 
-	var vipCart= (id, number, password) => fetch('POST','/member/v1/users/' + id + '/delivery_card/physical_card/bind',{
+	var vipCart = (id, number, password) => fetch('POST', ApiUrl + '/member/v1/users/' + id + '/delivery_card/physical_card/bind',{
 		number,
 		password
 	})
@@ -400,10 +400,10 @@ if (process.env.NODE_ENV == 'development') {
 
 
 	/**
-	 * 获取红包数量
+	 * 获取红包
 	*/
 
-	var getHongbaoNum= id => fetch('GET','/promotion/v2/users/' + id + '/hongbaos',{});
+	var getHongbaoNum = id => fetch('GET', ApiUrl + '/promotion/v2/users/' + id + '/hongbaos?limit=20&offset=0',{});
 
 
 
@@ -412,14 +412,14 @@ if (process.env.NODE_ENV == 'development') {
 	*/
 
 
-	var getExpired= id => fetch('GET','/promotion/v2/users/' + id + '/expired_hongbaos?limit=10&offset=0',{});
+	var getExpired = id => fetch('GET', ApiUrl + '/promotion/v2/users/' + id + '/expired_hongbaos?limit=20&offset=0',{});
 
 
 	/**
 	 * 兑换红包
 	*/
 
-	var exChangeHongbao= (id, exchange_code, captcha_code) => fetch('POST','/v1/users/' + id + '/hongbao/exchange',{
+	var exChangeHongbao = (id, exchange_code, captcha_code) => fetch('POST', ApiUrl + '/v1/users/' + id + '/hongbao/exchange',{
 		exchange_code,
 		captcha_code,
 	});
@@ -429,7 +429,7 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取用户信息
 	 */
 
-	var getUser = () => fetch('GET', '/v1/user', {});
+	var getUser = () => fetch('GET', ApiUrl + '/v1/user', {});
 
 
 	// /**
@@ -447,7 +447,7 @@ if (process.env.NODE_ENV == 'development') {
 	//  * 获取订单列表
 	//  */
 
-	var getOrderList = (user_id, offset) => fetch('GET', '/bos/v2/users/' + user_id + '/orders', {
+	var getOrderList = (user_id, offset) => fetch('GET', ApiUrl + '/bos/v2/users/' + user_id + '/orders', {
 		limit: 10,
 		offset,
 	});
@@ -457,20 +457,20 @@ if (process.env.NODE_ENV == 'development') {
 	 * 获取订单详情
 	 */
 
-	var getOrderDetail = (user_id, orderid) => fetch('GET', '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
+	var getOrderDetail = (user_id, orderid) => fetch('GET', ApiUrl + '/bos/v1/users/' + user_id + '/orders/' + orderid + '/snapshot', {});
 
 
 	/**
 	*个人中心里编辑地址
 	*/
 
-	var getAddressList = (user_id) => fetch('GET', '/v1/users/'+user_id+'/addresses')
+	var getAddressList = (user_id) => fetch('GET', ApiUrl + '/v1/users/'+user_id+'/addresses')
 
 	/**
 	*个人中心里搜索地址
 	*/
 
-	var getSearchAddress=(keyword) => fetch('GET','v1/pois',{
+	var getSearchAddress=(keyword) => fetch('GET', ApiUrl + 'v1/pois',{
 		keyword:keyword,
 		type:'nearby'
 	})
@@ -479,7 +479,7 @@ if (process.env.NODE_ENV == 'development') {
 	* 删除地址
 	*/
 
-	var deleteAddress=(userid, addressid) => fetch('OPTIONS','/v1/users/' + userid + '/addresses/' + addressid,{})
+	var deleteAddress=(userid, addressid) => fetch('DELETE', ApiUrl + '/v1/users/' + userid + '/addresses/' + addressid,{})
 
 }else{
 	var cityGuess = () => setpromise(home.guesscity);
@@ -523,7 +523,7 @@ if (process.env.NODE_ENV == 'development') {
 		validation_token
 	}) => setpromise(confirm.orderSuccess);
 	var payRequest = (merchantOrderNo, userId) => setpromise(confirm.payDetail);
-	getService = () => setpromise(service.serviceData);
+	var getService = () => setpromise(service.serviceData);
 	var vipCart= (id, number, password) => setpromise(vip.vipcart);
 	var getHongbaoNum= id => setpromise(hongbao.dataList);
 	var getExpired= id => setpromise(hongbao.expired);
@@ -541,6 +541,26 @@ if (process.env.NODE_ENV == 'development') {
  * 以下Api接口不需要进行反向代理
  */
 
-var sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
+if(localapi || proapi){
+	/**
+	 * 账号密码登录
+	 */
+	var accountLogin = (username, password, captcha_code) => fetch('POST', ApiUrl + '/v2/login', {username, password, captcha_code});
+	/**
+	 * 退出登录
+	 */
+	var signout = () => fetch('GET', ApiUrl + '/v2/signout');
+	/**
+	 * 改密码
+	 */
+	var changePassword = (username, oldpassWord, newpassword, confirmpassword, captcha_code) => fetch('POST', ApiUrl + '/v2/changepassword', {username, oldpassWord, newpassword, confirmpassword, captcha_code});
+}else{
+	var sendLogin = (code, mobile, validate_token) => setpromise(login.userInfo);
+	var accountLogin = (username, password, captcha_code) => setpromise(login.userInfo);
+	var signout = () => Promise.resolve();
+	var changePassword = (username, password, captcha_code) => setpromise(login.userInfo);
+}
 
-export {cityGuess, hotcity, groupcity, currentcity, searchplace, msiteAdress, msiteFoodTypes,shopList, searchRestaurant, foodCategory, foodDelivery, foodActivity, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags, mobileCode, accountLogin, checkExsis, sendMobile, checkout, getRemark, getAddress, getcaptchas, searchNearby, postAddAddress, placeOrders, rePostVerify, validateOrders, payRequest, getService, vipCart, getHongbaoNum, getExpired, exChangeHongbao, getUser, sendLogin, getOrderList, getOrderDetail, getAddressList, getSearchAddress, deleteAddress}
+
+
+export {cityGuess, hotcity, groupcity, currentcity, searchplace, msiteAdress, msiteFoodTypes,shopList, searchRestaurant, foodCategory, foodDelivery, foodActivity, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags, mobileCode, accountLogin, checkExsis, sendMobile, checkout, getRemark, getAddress, getcaptchas, searchNearby, postAddAddress, placeOrders, rePostVerify, validateOrders, payRequest, getService, vipCart, getHongbaoNum, getExpired, exChangeHongbao, getUser, sendLogin, getOrderList, getOrderDetail, getAddressList, getSearchAddress, deleteAddress, signout, changePassword}

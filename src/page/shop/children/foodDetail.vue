@@ -2,7 +2,7 @@
 	<div class="rating_page">
         <head-top :head-title="name" go-back='true'></head-top>
         <section class="header_img">
-            <img :src="getImgPath(image_path)" class="food_img">
+            <img :src="localapi || proapi ? imgBaseUrl + image_path: getImgPath(image_path)" class="food_img">
             <div class="cover"></div>
             <p class="description">{{description}}</p>
         </section>
@@ -34,7 +34,7 @@
     import {getImgPath} from 'src/components/common/mixin'
     import ratingStar from 'src/components/common/ratingStar'
     import buyCart from 'src/components/common/buyCart'
-
+    import { localapi, proapi, imgBaseUrl} from 'src/config/env'
 
     export default {
     	data(){
@@ -48,6 +48,9 @@
                 satisfy_rate: null,
                 foods: null,
                 shopId: null,
+                localapi, 
+                proapi, 
+                imgBaseUrl
             }
         },
         created(){
@@ -97,7 +100,7 @@
             display: block;
         }
         .cover{
-            box-shadow: 0px -74px 100px #ddd inset;
+            box-shadow: 0px -20px 100px #eee inset;
             position: absolute;
             @include wh(100%, 100%);
             top: 0;

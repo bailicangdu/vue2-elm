@@ -3,7 +3,7 @@
 		<ul v-load-more="loaderMore" v-if="shopListArr.length" type="1">
 			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
-					<img :src="getImgPath(item.image_path)" class="shop_img">
+					<img :src="localapi || proapi? imgBaseUrl + item.image_path: getImgPath(item.image_path)" class="shop_img">
 				</section>
 				<hgroup class="shop_right">
 					<header class="shop_detail_header">
@@ -22,34 +22,35 @@
 								月售{{item.recent_order_num}}单
 							</section>
 						</section>
-						<section class="rating_order_num_right" v-if="item.delivery_mode">
-							<span class="delivery_style delivery_left">{{item.delivery_mode.text}}</span>
-							<span class="delivery_style delivery_right">准时达</span>
+						<section class="rating_order_num_right">
+							<span class="delivery_style delivery_left" v-if="item.delivery_mode">{{item.delivery_mode.text}}</span>
+							<span class="delivery_style delivery_right" v-if="zhunshi(item.supports)">准时达</span>
 						</section>
 					</h5>
 					<h5 class="fee_distance">
-						<section class="fee">
+						<p class="fee">
 							¥{{item.float_minimum_order_amount}}起送 
 							<span class="segmentation">/</span>
 							{{item.piecewise_agent_fee.tips}}
-						</section>
-						<section class="distance_time">
-							<span>{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
+						</p>
+						<p class="distance_time">
+							<span v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
 								<span class="segmentation">/</span>
 							</span>
-							<span class="order_time">{{item.order_lead_time}}分钟</span>
-						</section>
+							<span v-else>{{item.distance}}</span>
+							<span class="segmentation">/</span>
+							<span class="order_time">{{item.order_lead_time}}</span>
+						</p>
 					</h5>
 				</hgroup>
 			</router-link>
 		</ul>
-		<p v-else class="empty_data">没有更多了</p>
+		<p v-if="touchend" class="empty_data">没有更多了</p>
 		<aside class="return_top" @click="backTop" v-if="showBackStatus">
 			<svg class="back_top_svg">
 				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#backtop"></use>
 			</svg>
 		</aside>
-		<footer class="loader_more" v-show="preventRepeatReuqest">正在加载更多商家...</footer>
 		<div ref="abc" style="background-color: red;"></div>
 		<transition name="loading">
 			<loading v-show="showLoading"></loading>
@@ -61,6 +62,7 @@
 
 import {mapState} from 'vuex'
 import {shopList} from 'src/service/getData'
+import {imgBaseUrl, localapi, proapi} from 'src/config/env'
 import {showBack, animate} from 'src/config/mUtils'
 import {loadMore, getImgPath} from './mixin'
 import loading from './loading'
@@ -74,6 +76,10 @@ export default {
 			preventRepeatReuqest: false, //到达底部加载数据，防止重复加载
 			showBackStatus: false, //显示返回顶部按钮
 			showLoading: true, //显示加载动画
+			touchend: false, //没有更多数据
+			imgBaseUrl,
+			localapi,
+			proapi
 		}
 	},
 	mounted(){
@@ -88,13 +94,19 @@ export default {
 	computed: {
 		...mapState([
 			'latitude','longitude'
-		])
+		]),
+	},
+	updated(){
+		// console.log(this.supportIds, this.sortByType)
 	},
 	methods: {
 		async initData(){
 			//获取数据
 			let res = await shopList(this.latitude, this.longitude, this.offset, this.restaurantCategoryId);
 			this.shopListArr = [...res];
+			if (res.length < 20) {
+				this.touchend = true;
+			}
 			this.hideLoading();
 			//开始监听scrollTop的值，达到一定程度后显示返回顶部按钮
 			showBack(status => {
@@ -103,6 +115,9 @@ export default {
 		},
 		//到达底部加载更多数据
 		async loaderMore(){
+			if (this.touchend) {
+				return
+			}
 			//防止重复请求
 			if (this.preventRepeatReuqest) {
 				return 
@@ -117,6 +132,7 @@ export default {
 			this.shopListArr = [...this.shopListArr, ...res];
 			//当获取数据小于20，说明没有更多数据，不需要再次请求数据
 			if (res.length < 20) {
+				this.touchend = true;
 				return
 			}
 			this.preventRepeatReuqest = false;
@@ -149,6 +165,19 @@ export default {
 				this.showLoading = false;
 			}
 		},
+		zhunshi(supports){
+			let zhunStatus;
+			if ((supports instanceof Array) && supports.length) {
+ 				supports.forEach(item => {
+ 					if (item.icon_name === '准') {
+ 						zhunStatus = true;
+ 					}
+ 				})
+			}else{
+				zhunStatus = false;
+			}
+			return zhunStatus
+		},
 	},
 	watch: {
 		//监听父级传来的restaurantCategoryIds，当值发生变化的时候重新获取餐馆数据，作用于排序和筛选
@@ -172,7 +201,7 @@ export default {
 	@import 'src/style/mixin';
 	.shoplist_container{
 		background-color: #fff;
-		padding-bottom: 2rem;
+		margin-bottom: 2rem;
 	}
 	.shop_li{
 		display: flex;
@@ -201,11 +230,11 @@ export default {
 				display: inline-block;
 				font-size: 0.5rem;
 				line-height: .6rem;
+				color: #333;
 				background-color: #ffd930;
 				padding: 0 0.1rem;
 				border-radius: 0.1rem;
 				margin-right: 0.2rem;
-				vertical-align: top;
 			}
 			.shop_detail_ul{
 				display: flex;
@@ -243,7 +272,9 @@ export default {
 				display: flex;
 				align-items: center;
 				transform: scale(.7);
-				margin-right: -0.77rem;
+				min-width: 5rem;
+				justify-content: flex-end;
+				margin-right: -0.8rem;
 				.delivery_style{
 					font-size: 0.4rem;
 					padding: 0.04rem 0.08rem 0;
@@ -265,10 +296,10 @@ export default {
 		.fee_distance{
 			margin-top: 0.52rem;
 			@include fj;
-			@include sc(0.5rem, #666);
+			@include sc(0.5rem, #333);
 			.fee{
 				transform: scale(.9);
-				@include sc(0.5rem, #999);
+				@include sc(0.5rem, #666);
 			}
 			.distance_time{
 				transform: scale(.9);

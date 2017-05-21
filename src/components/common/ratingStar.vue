@@ -33,6 +33,7 @@
     @import '../../style/mixin';
 	.rating_container{
         position: relative;
+        top: .2rem;
         @include wh(2rem, .4rem);
         .star_overflow{
             overflow: hidden;

@@ -31,7 +31,7 @@
 	    				</section>
 	    				<section class="category_right">
 	    					<ul>
-	    						<li v-for="(item, index) in categoryDetail" :key="item.id" class="category_right_li" @click="getCategoryIds(item.id, item.name)" :class="{category_right_choosed: restaurant_category_ids == item.id || (!restaurant_category_ids)&&index == 0}">
+	    						<li v-for="(item, index) in categoryDetail" v-if="index" :key="item.id" class="category_right_li" @click="getCategoryIds(item.id, item.name)" :class="{category_right_choosed: restaurant_category_ids == item.id || (!restaurant_category_ids)&&index == 0}">
 	    							<span>{{item.name}}</span>
 	    							<span>{{item.count}}</span>
 	    						</li>
@@ -155,7 +155,7 @@
 	    					</ul>
 	    				</section>
 	    				<footer class="confirm_filter">
-	    					<div class="clear_all filter_button_style" @click="clearAll">清空</div>
+	    					<div class="clear_all filter_button_style" @click="clearSelect">清空</div>
 	    					<div class="confirm_select filter_button_style" @click="confirmSelectFun">确定<span v-show="filterNum">({{filterNum}})</span></div>
 	    				</footer>
 	    			</section>
@@ -288,6 +288,7 @@ export default {
 		},
 		//点击某个排序方式，获取事件对象的data值，并根据获取的值重新获取数据渲染
 		sortList(event){
+			console.log(this.filterNum)
 			this.sortByType = event.target.getAttribute('data');
 			this.sortBy = '';
 		},
@@ -307,9 +308,9 @@ export default {
 			}
 		},
 		//点击商家活动，状态取反
-		selectSupportIds(index,id){
+		selectSupportIds(index, id){
 			//数组替换新的值
-			this.support_ids.splice(index, 1, {status: !this.support_ids[index].status, id: id});
+			this.support_ids.splice(index, 1, {status: !this.support_ids[index].status, id});
 			//重新计算filterNum的个数
 			this.filterNum = this.delivery_mode == null? 0 : 1;
 			this.support_ids.forEach(item => {
@@ -321,6 +322,11 @@ export default {
 		//点击取消或者确认时，需要清空当前已选的状态值
 		clearAll(){
 			this.delivery_mode = null;
+			// this.support_ids.map(item => item.status = false);
+   //          this.filterNum = 0;
+		},
+		//只有点击清空按钮才清空数据，否则一直保持原有状态
+		clearSelect(){
             this.support_ids.map(item => item.status = false);
             this.filterNum = 0;
 		},
