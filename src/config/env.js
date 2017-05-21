@@ -8,8 +8,8 @@
  * imgBaseUrl: 图片所在域名地址
  * 
  */
-const localapi = false;
-const proapi = false;
+let localapi = false;
+let proapi = false;
 let baseUrl = ''; 
 let routerMode = 'hash';
 let imgBaseUrl = 'https://fuss10.elemecdn.com';
@@ -25,7 +25,9 @@ if (localapi) {
 if (process.env.NODE_ENV == 'development') {
 	
 }else if(process.env.NODE_ENV == 'production'){
-	baseUrl = 'https://mainsite-restapi.ele.me';
+	proapi = true;
+	ApiUrl = 'http://localhost:8001';
+	imgBaseUrl = 'http://localhost:8001';
 }
 
 export {
