@@ -15,12 +15,6 @@
 __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户端。__
 
 
-
-
-## 技术栈
-vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
-
-
 ## 后台系统地址：
 
 ### [node-elm](https://github.com/bailicangdu/node-elm)
