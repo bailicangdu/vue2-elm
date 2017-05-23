@@ -17,17 +17,17 @@ let ApiUrl = '';
 
 if (localapi) {
 	ApiUrl = 'http://localhost:8001';
-	imgBaseUrl = 'http://localhost:8001';
+	imgBaseUrl = 'http://images.cangdu.org/';
 }else if(proapi){
 	ApiUrl = 'http://cangdu.org:8001';
-	imgBaseUrl = 'http://cangdu.org:8001';
+	imgBaseUrl = 'http://images.cangdu.org/';
 }
 if (process.env.NODE_ENV == 'development') {
 	
 }else if(process.env.NODE_ENV == 'production'){
 	proapi = true;
-	ApiUrl = 'http://localhost:8001';
-	imgBaseUrl = 'http://localhost:8001';
+	ApiUrl = 'http://cangdu.org:8001';
+	imgBaseUrl = 'http://images.cangdu.org/';
 }
 
 export {
