@@ -10,20 +10,16 @@
                             <span>{{String(item.amount).split('.')[0]}}</span>
                             <span>.</span>
                             <span>{{String(item.amount).split('.')[1]||0}}</span>
+                            <p>{{item.description_map.sum_condition}}</p>
                         </div>
                         <div class="list_item_right">
                             <h4>{{item.name}}</h4>
-                            <ul>
-                                <li v-for="(descriptions, index) in item.descriptions" :key="index">{{descriptions}}</li>
-                            </ul>
+                            <p>{{item.description_map.validity_periods}}</p>
+                            <p>{{item.description_map.phone}}</p>
                         </div>
                     </section>
-                    <footer class="list_item_footer" v-if="item.extra_limit">
-                        <ul>
-                            <li v-for="(limit, index) in item.extra_limit" :key="index">
-                                {{limit}}
-                            </li>
-                        </ul>
+                    <footer class="list_item_footer" v-if="item.limit_map">
+                        <p>{{item.limit_map.restaurant_flavor_ids}}</p>
                     </footer>
                     <svg class="expired">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expired"></use>
@@ -141,19 +137,21 @@
                         @include sc(1rem, #ccc);
                         font-weight: bold;
                     }
+                    p{
+                        @include sc(0.4rem, #999);
+                    }
                 }
                 .list_item_right{
                     flex: 2;
                     margin-left: 1.5rem;
                     h4{
-                        @include sc(.7rem, #ccc);
+                        @include sc(.7rem, #666);
                         margin-left: -.7rem;
                     }
-                    ul{
-                        li{
-                            list-style-type: disc;
-                            @include sc(.4rem, #ccc);
-                        }
+                    p{
+                        list-style-type: disc;
+                        margin-left: -.7rem;
+                        @include sc(.4rem, #999);   
                     }
                 }
             }
@@ -162,12 +160,10 @@
                 padding: .4rem .4rem;
                 border-bottom-left-radius: 0.25rem;
                 border-bottom-right-radius: 0.25rem;
-                ul{
-                    li{
-                        list-style-type: disc;
-                        @include sc(.4rem, #ccc);
-                        margin-left: .4rem;
-                    }
+                p{
+                    list-style-type: disc;
+                    @include sc(.4rem, #999);
+                    margin-left: .4rem;
                 }
             }
             .expired{

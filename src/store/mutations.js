@@ -35,6 +35,8 @@ import {
 	getStore,
 } from '../config/mUtils'
 
+import {localapi, proapi} from 'src/config/env'
+
 export default {
 	// 记录当前经度纬度
 	[RECORD_ADDRESS](state, {
@@ -126,11 +128,13 @@ export default {
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
 		state.login = true;
-		let validity = 30;
-		let now = new Date();
-		now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-		document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-		document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
+		if (!localapi && !proapi) {
+			let validity = 30;
+			let now = new Date();
+			now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
+			document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
+			document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
+		}
 	},
 	//获取用户信息存入vuex
 	[GET_USERINFO](state, info) {
@@ -142,11 +146,13 @@ export default {
 		}
 		if (!info.message) {
 			state.userInfo = {...info};
-			let validity = 30;
-			let now = new Date();
-			now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-			document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-			document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
+			if (!localapi && !proapi) {
+				let validity = 30;
+				let now = new Date();
+				now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
+				document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
+				document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
+			}
 		} else {
 			state.userInfo = null;
 		}
@@ -178,7 +184,7 @@ export default {
 	//保存geohash
 	[SAVE_GEOHASH](state, geohash) {
 		state.geohash = geohash;
-		if (true) {}
+		
 	},
 	//确认订单页添加新的的地址
 	[CONFIRM_ADDRESS](state, newAddress) {
@@ -225,6 +231,7 @@ export default {
 	[OUT_LOGIN](state) {
 		state.userInfo = null;
 		state.login = false;
+		console.log("<%=session.getAttribute('SID')%>")
 	},
 	//保存图片
 	[SAVE_AVANDER](state, imgPath) {

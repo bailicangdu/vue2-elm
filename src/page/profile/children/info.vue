@@ -105,6 +105,7 @@
 <script>
     import {mapMutations, mapState} from 'vuex'
     import headTop from 'src/components/header/head'
+    import {signout} from 'src/service/getData'
     import alertTip from 'src/components/common/alertTip'
     import {getImgPath} from 'src/components/common/mixin'
 
@@ -156,10 +157,11 @@
                 },200)
             },
             //退出登录
-            outLogin(){
+            async outLogin(){
                 this.OUT_LOGIN();
                 this.waitingThing();
                 this.$router.go(-1);
+                await signout();
             },
             changePhone(){
                 this.showAlert = true;

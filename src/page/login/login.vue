@@ -1,11 +1,11 @@
 <template>
     <div class="loginContainer">
         <head-top :head-title="loginWay? '登录':'密码登录'" goBack="true">
-            <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登录":"短信登录"}}</div>
+            <!-- <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登录":"短信登录"}}</div> -->
         </head-top>
         <form class="loginForm" v-if="loginWay">
             <section class="input_container phone_number">
-                <input type="text" placeholder="手机号" name="phone" maxlength="11" v-model="phoneNumber">
+                <input type="text" placeholder="账号密码随便输入" name="phone" maxlength="11" v-model="phoneNumber">
                 <button @click.prevent="getVerifyCode" :class="{right_phone_number:rightPhoneNumber}" v-show="!computedTime">获取验证码</button>
                 <button  @click.prevent v-show="computedTime">已发送({{computedTime}}s)</button>
             </section>
@@ -15,7 +15,7 @@
         </form>
         <form class="loginForm" v-else>
             <section class="input_container">
-                <input type="text" placeholder="手机号/邮箱/用户名" v-model.lazy="userAccount">
+                <input type="text" placeholder="用户名密码随便填" v-model.lazy="userAccount">
             </section>
             <section class="input_container">
                 <input v-if="!showPassword" type="password" placeholder="密码"  v-model="passWord">
@@ -50,16 +50,17 @@
 <script>
     import headTop from '../../components/header/head'
     import alertTip from '../../components/common/alertTip'
+    import {localapi, proapi, imgBaseUrl} from 'src/config/env'
     import {mapState, mapMutations} from 'vuex'
     import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../service/getData'
 
     export default {
         data(){
             return {
-                loginWay: true, //登录方式，默认短信登录
+                loginWay: false, //登录方式，默认短信登录
                 showPassword: false, // 是否显示密码
-                phoneNumber: 12345678900, //电话号码
-                mobileCode: 123456, //短信验证码
+                phoneNumber: null, //电话号码
+                mobileCode: null, //短信验证码
                 validate_token: null, //获取短信时返回的验证值，登录时需要
                 computedTime: 0, //倒数记时
                 userInfo: null, //获取到的用户信息
@@ -98,12 +99,8 @@
             },
             //获取验证吗，线上环境使用固定的图片，生产环境使用真实的验证码
             async getCaptchaCode(){
-                if (process.env.NODE_ENV !== 'development'){
-                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
-                }else{
-                    let res = await getcaptchas();
-                    this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
-                }
+                let res = await getcaptchas();
+                this.captchaCodeImg = res.code;
             },
             //获取短信验证码
             async getVerifyCode(){

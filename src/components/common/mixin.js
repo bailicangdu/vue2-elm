@@ -1,9 +1,5 @@
-import {
-	getStyle
-} from '../../config/mUtils'
-import {
-	imgBaseUrl
-} from '../../config/env'
+import { getStyle } from '../../config/mUtils'
+import { imgBaseUrl, localapi, proapi } from '../../config/env'
 
 export const loadMore = {
 	directives: {
@@ -84,7 +80,7 @@ export const getImgPath = {
 				suffix = '.png'
 			}
 			let url = '/' + path.substr(0, 1) + '/' + path.substr(1, 2) + '/' + path.substr(3) + suffix;
-			return imgBaseUrl + url
+			return 'https://fuss10.elemecdn.com' + url
 		},
 	}
 

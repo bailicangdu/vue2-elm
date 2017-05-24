@@ -1,12 +1,17 @@
  <template>
     <div>
         <section v-if="!showLoading" class="shop_container">
+            <nav class="goback" @click="goback">
+                <svg width="4rem" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:3"/>
+                </svg>
+            </nav>
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
-                <img :src="getImgPath(shopDetailData.image_path)" class="header_cover_img">
+                <img :src="localapi || proapi ? imgBaseUrl + shopDetailData.image_path: getImgPath(shopDetailData.image_path)" class="header_cover_img">
                 <section class="description_header">
                     <router-link to="/shop/shopDetail" class="description_top">
                         <section class="description_left">
-                            <img :src="getImgPath(shopDetailData.image_path)">
+                            <img :src="localapi || proapi ? imgBaseUrl + shopDetailData.image_path: getImgPath(shopDetailData.image_path)">
                         </section>
                         <section class="description_right">
                             <h4 class="description_title ellipsis">{{shopDetailData.name}}</h4>
@@ -93,7 +98,7 @@
                                     <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
                                         <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
                                             <section class="menu_food_img">
-                                                <img :src="getImgPath(foods.image_path)">
+                                                <img :src="localapi || proapi ? imgBaseUrl + foods.image_path: getImgPath(foods.image_path)">
                                             </section>
                                             <section class="menu_food_description">
                                                 <h3 class="food_description_head">
@@ -314,6 +319,7 @@
     import buyCart from 'src/components/common/buyCart'
     import ratingStar from 'src/components/common/ratingStar'
     import {loadMore, getImgPath} from 'src/components/common/mixin'
+    import { localapi, proapi, imgBaseUrl} from 'src/config/env'
     import BScroll from 'better-scroll'
 
     export default {
@@ -354,6 +360,9 @@
                 elBottom: 0, //当前点击加按钮在网页中的绝对left值
                 ratingScroll: null, //评论页Scroll
                 wrapperMenu: null,
+                localapi, 
+                proapi, 
+                imgBaseUrl,
             }
         },
         created(){
@@ -424,7 +433,7 @@
                 //获取商铺食品列表
                 this.menuList = await foodMenu(this.shopId);
                 //评论列表
-                this.ratingList = await getRatingList(this.ratingOffset);
+                this.ratingList = await getRatingList(this.shopId, this.ratingOffset);
                 //商铺评论详情
                 this.ratingScoresData = await ratingScores(this.shopId);
                 //评论Tag列表
@@ -566,7 +575,7 @@
                 this.ratingTageIndex = index;
                 this.ratingOffset = 0;
                 this.ratingTagName = name;
-                let res = await getRatingList(this.ratingOffset, name);
+                let res = await getRatingList(this.shopId, this.ratingOffset, name);
                 this.ratingList = [...res];
                 this.$nextTick(() => {
                     this.ratingScroll.refresh();
@@ -580,7 +589,7 @@
                 this.loadRatings = true;
                 this.preventRepeatRequest = true;
                 this.ratingOffset += 10;
-                let ratingDate = await getRatingList(this.ratingOffset, this.ratingTagName);
+                let ratingDate = await getRatingList(this.shopId, this.ratingOffset, this.ratingTagName);
                 this.ratingList = [...this.ratingList,...ratingDate];
                 this.loadRatings = false;
                 if (ratingDate.length >= 10) {
@@ -650,6 +659,9 @@
                     this.listenInCart();
                 })
             },
+            goback(){
+                this.$router.go(-1);
+            }
         },
         watch: {
             //showLoading变化时说明组件已经获取初始化数据，在下一帧nextTick进行后续操作
@@ -732,7 +744,16 @@
         left: 0;
         height: 100%;
     }
-
+    .goback{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2rem;
+        z-index: 17;
+        padding-top: 0.2rem;
+        padding-left: 0.2rem;
+    }
     .shop_detail_header{
         overflow: hidden;
         position: relative;
@@ -1015,7 +1036,6 @@
                                     transform: scale(.8);
                                     p{
                                         white-space: nowrap;
-                                        line-height: .4rem;
                                     }
                                 }
                                 .attribute_new{

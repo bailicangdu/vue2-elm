@@ -54,12 +54,8 @@
         methods: {
             //线上环境采用固定的图片，编译环境获取真实的验证码
             async getCaptchaCode(){
-                if (process.env.NODE_ENV !== 'development'){
-                    this.captchaCodeImg = 'http://test.fe.ptdev.cn/elm/yzm.jpg';
-                }else{
-                    let res = await getcaptchas();
-                    this.captchaCodeImg = 'https://mainsite-restapi.ele.me/v1/captchas/' + res.code;
-                }
+                let res = await getcaptchas();
+                this.captchaCodeImg = res.code;
             },
             //兑换红包
             async exchange(){

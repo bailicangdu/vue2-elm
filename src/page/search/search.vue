@@ -1,5 +1,5 @@
 <template>
-  	<div class="paddingTop">
+  	<div class="paddingTop search_page">
         <head-top head-title="搜索" goBack="true"></head-top>
         <form class="search_form">
             <input type="search" name="search" placeholder="请输入商家或美食名称" class="search_input" v-model="searchValue" @input="checkInput">
@@ -22,8 +22,8 @@
                                     <text x="3.5" y="9" style="fill:#FF6000;font-size:9;font-weight:bold;">支付</text>
                                 </svg>
                             </p>
-                            <p>月售 {{item.month_sales}} 单</p>
-                            <p>{{item.delivery_fee}} 元起送 / 距离{{item.distance}}</p>
+                            <p>月售 {{item.month_sales||item.recent_order_num}} 单</p>
+                            <p>{{item.delivery_fee||item.float_minimum_order_amount}} 元起送 / 距离{{item.distance}}</p>
                         </div>
                         <ul class="item_right_detail">
                             <li v-for="activities in item.restaurant_activity" :key="activities.id">
@@ -146,7 +146,10 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../style/mixin';
-
+    
+    .search_page{
+        margin-bottom: 2rem;
+    }
     .search_form{
         background-color: #fff;
         padding: 0.5rem;
