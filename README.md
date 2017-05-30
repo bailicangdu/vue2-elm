@@ -54,20 +54,20 @@ npm run dev
 
 
 
-# 关于 数据 的说明🤔
+# 关于 数据接口 的说明🤔
 
-下载代码运行后，因为开启了反向代理，可以获取真实的官方数据，最终可以进行下单(真实的下单，而不是模拟，下单后可以在官方App中查看并付款，亲自试过，且成功付款点餐)，但是为了安全起见，登录的帐号为固定的帐号，以免泄露个人信息，不过照样可以点餐。
+### 2017-05-30 更新
+
+由于一些权限原因，大量的官网API接口无法接通，导致很多功能不能正常使用。从2017-05-30开始，所有接口采用自己用nodejs构建的后台系统接口，从而解决大量接口无法使用的问题，并且接口保持了和官网的一致性。感兴趣的朋友赶紧去看看。[后台项目地址传送门](https://github.com/bailicangdu/node-elm)
 
 
 ## 效果演示
 
-#### (demo使用的是模拟数据，数据是固定的，只做为样式的演示，要获取真实的数据，请clone代码并运行);
-
-[查看demo请戳这里](http://test.fe.ptdev.cn/elm/)（请用chrome手机模式预览）
+[查看demo请戳这里](http://cangdu.org:8001/)（请用chrome手机模式预览）
 
 ### 移动端扫描下方二维码
 
-![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/elm_ewm.png)
+![](https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png)
 
 
 

@@ -6,7 +6,7 @@
                 <input type="file" class="profileinfopanel-upload" @change="uploadAvatar">
                 <h2>头像</h2>
                 <div class="headportrait-div">
-                    <img :src="imgPath" class="headportrait-div-top" v-if="avatar">
+                    <img  v-if="userInfo" :src="imgBaseUrl + userInfo.avatar" class="headportrait-div-top">
                     <span class="headportrait-div-top" v-else>
                         <svg>
                             <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#avatar-default"></use>
@@ -108,6 +108,7 @@
     import {signout} from 'src/service/getData'
     import alertTip from 'src/components/common/alertTip'
     import {getImgPath} from 'src/components/common/mixin'
+    import {imgBaseUrl} from 'src/config/env'
 
     export default {
         data(){
@@ -121,6 +122,7 @@
                 isLeave:false, //是否退出
                 showAlert: false,
                 alertText: null,
+                imgBaseUrl,
             }
         },
         beforeDestroy(){
@@ -132,7 +134,7 @@
         },
         mixins: [getImgPath],
         computed:{
-             ...mapState([
+            ...mapState([
                 'userInfo', 'imgPath'
             ]),
         },
@@ -180,7 +182,9 @@
                               body: data
                             })
                         let res = await response.json();
-                        this.SAVE_AVANDER(this.getImgPath(res));
+                        if (res.status == 1) {
+                            this.userInfo.avatar = res.image_path;
+                        }
                     }catch (error) {
                         this.showAlert = true;
                         this.alertText = '上传失败';

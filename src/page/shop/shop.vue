@@ -7,11 +7,11 @@
                 </svg>
             </nav>
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
-                <img :src="localapi || proapi ? imgBaseUrl + shopDetailData.image_path: getImgPath(shopDetailData.image_path)" class="header_cover_img">
+                <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
                 <section class="description_header">
                     <router-link to="/shop/shopDetail" class="description_top">
                         <section class="description_left">
-                            <img :src="localapi || proapi ? imgBaseUrl + shopDetailData.image_path: getImgPath(shopDetailData.image_path)">
+                            <img :src="imgBaseUrl + shopDetailData.image_path">
                         </section>
                         <section class="description_right">
                             <h4 class="description_title ellipsis">{{shopDetailData.name}}</h4>
@@ -98,7 +98,7 @@
                                     <section v-for="(foods,foodindex) in item.foods" :key="foodindex" class="menu_detail_list">
                                         <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_path, description: foods.description, month_sales: foods.month_sales, name: foods.name, rating: foods.rating, rating_count: foods.rating_count, satisfy_rate: foods.satisfy_rate, foods, shopId}}" tag="div" class="menu_detail_link">
                                             <section class="menu_food_img">
-                                                <img :src="localapi || proapi ? imgBaseUrl + foods.image_path: getImgPath(foods.image_path)">
+                                                <img :src="imgBaseUrl + foods.image_path">
                                             </section>
                                             <section class="menu_food_description">
                                                 <h3 class="food_description_head">
@@ -319,7 +319,7 @@
     import buyCart from 'src/components/common/buyCart'
     import ratingStar from 'src/components/common/ratingStar'
     import {loadMore, getImgPath} from 'src/components/common/mixin'
-    import { localapi, proapi, imgBaseUrl} from 'src/config/env'
+    import {imgBaseUrl} from 'src/config/env'
     import BScroll from 'better-scroll'
 
     export default {
@@ -360,8 +360,6 @@
                 elBottom: 0, //当前点击加按钮在网页中的绝对left值
                 ratingScroll: null, //评论页Scroll
                 wrapperMenu: null,
-                localapi, 
-                proapi, 
                 imgBaseUrl,
             }
         },
@@ -598,15 +596,7 @@
             },
             //隐藏动画
             hideLoading(){
-                if (process.env.NODE_ENV !== 'development') {
-                    clearTimeout(this.timer);
-                    this.timer = setTimeout(() => {
-                        clearTimeout(this.timer);
-                        this.showLoading = false;
-                    }, 600)
-                }else{
-                    this.showLoading = false;
-                }
+                this.showLoading = false;
             },
             //显示规格列表
             showChooseList(foods){
@@ -750,7 +740,7 @@
         left: 0;
         width: 100%;
         height: 2rem;
-        z-index: 17;
+        z-index: 11;
         padding-top: 0.2rem;
         padding-left: 0.2rem;
     }
@@ -905,7 +895,6 @@
         overflow-y: hidden;
         position: relative;
         .menu_left{
-            background-color: #f8f8f8;
             width: 3.8rem;
             .menu_left_li{
                 padding: .7rem .3rem;
@@ -1477,6 +1466,7 @@
                     border: 0.025rem solid #ddd;
                     border-radius: .2rem;
                     margin-right: .5rem;
+                    margin-bottom: .2rem;
                 }
                 .specs_activity{
                     border-color: #3199e8;

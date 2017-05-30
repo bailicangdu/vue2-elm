@@ -49,17 +49,6 @@ if (context.length) {
     server.use(proxyMiddleware(context, options))
 }
 
-server.use(proxyMiddleware('/payapi', {
-    target: 'https://pay.ele.me',
-    changeOrigin: true,
-}))
-server.use(proxyMiddleware('/m.ele.me@json', {
-    target: 'https://crayfish.elemecdn.com',
-    changeOrigin: true,
-}))
-
-
-
 // handle fallback for HTML5 history API
 server.use(require('connect-history-api-fallback')())
 

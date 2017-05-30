@@ -65,7 +65,7 @@
     }
     .head_goback{
         left: 0.4rem;
-        @include wh(0.6rem, 0.8rem);
+        @include wh(0.6rem, 1rem);
         line-height: 2.2rem;
         margin-left: .4rem;
     }

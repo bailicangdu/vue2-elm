@@ -15,7 +15,7 @@
         </form>
         <form class="loginForm" v-else>
             <section class="input_container">
-                <input type="text" placeholder="用户名密码随便填" v-model.lazy="userAccount">
+                <input type="text" placeholder="账号" v-model.lazy="userAccount">
             </section>
             <section class="input_container">
                 <input v-if="!showPassword" type="password" placeholder="密码"  v-model="passWord">
@@ -38,11 +38,13 @@
             </section>
         </form>
         <p class="login_tips">
-            温馨提示：未注册饿了么账号的手机号，登录时将自动注册，且代表您已同意
-            <a href="https://h5.ele.me/service/agreement/">《用户服务协议》</a>
+            温馨提示：未注册过的账号，登录时将自动注册
+        </p>
+        <p class="login_tips">
+            注册过的用户可凭账号密码登录
         </p>
         <div class="login_container" @click="mobileLogin">登录</div>
-        <router-link to="/forget" class="to_forget" v-if="!loginWay">忘记密码？</router-link>
+        <router-link to="/forget" class="to_forget" v-if="!loginWay">重置密码？</router-link>
         <alert-tip v-if="showAlert" :showHide="showAlert" @closeTip="closeTip" :alertText="alertText"></alert-tip>
     </div>
 </template>
@@ -251,9 +253,9 @@
         }
     }
     .login_tips{
-        @include sc(.5rem, #999);
+        @include sc(.5rem, red);
         padding: .4rem .6rem;
-        line-height: .7rem;
+        line-height: .5rem;
         a{
             color: #3b95e9;
         }
@@ -266,29 +268,26 @@
         border: 1px;
         border-radius: 0.15rem;
         text-align: center;
-
     }
     .button_switch{
         background-color: #ccc;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         @include wh(2rem, .7rem);
         padding: 0 .2rem;
         border: 1px;
         border-radius: 0.5rem;
         position: relative;
-        transition: all .3s;
         .circel_button{
             transition: all .3s;
             position: absolute;
+            top: -0.2rem;
             z-index: 1;
+            left: -0.3rem;
             @include wh(1.2rem, 1.2rem);
-            left: -.1rem;
             box-shadow: 0 0.026667rem 0.053333rem 0 rgba(0,0,0,.1);
             background-color: #f1f1f1;
             border-radius: 50%;
-
         }
         .trans_to_right{
             transform: translateX(1.3rem);

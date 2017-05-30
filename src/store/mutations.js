@@ -231,7 +231,7 @@ export default {
 	[OUT_LOGIN](state) {
 		state.userInfo = null;
 		state.login = false;
-		console.log("<%=session.getAttribute('SID')%>")
+		//console.log("<%=session.getAttribute('SID')%>")
 	},
 	//保存图片
 	[SAVE_AVANDER](state, imgPath) {

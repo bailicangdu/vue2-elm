@@ -60,7 +60,6 @@
     import {mapState, mapMutations} from 'vuex'
     import {getAddress, getAddressList} from 'src/service/getData'
     import alertTip from 'src/components/common/alertTip'
-    import {localapi, proapi, imgBaseUrl} from 'src/config/env'
     import BScroll from 'better-scroll'
 
     export default {
@@ -108,11 +107,7 @@
                 this.deliverdisable = [];
 
                 if (this.userInfo && this.userInfo.user_id) {
-                    if (localapi || proapi) {
-                        this.addressList = await getAddressList(this.userInfo.user_id);
-                    }else{
-                        this.addressList = await getAddress(this.id, this.sig);
-                    }
+                    this.addressList = await getAddressList(this.userInfo.user_id);
                     //将当前所有地址访问有效无效两种
                     this.addressList.forEach(item => {
                         if (item.is_deliverable) {

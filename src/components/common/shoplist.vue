@@ -3,7 +3,7 @@
 		<ul v-load-more="loaderMore" v-if="shopListArr.length" type="1">
 			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
-					<img :src="localapi || proapi? imgBaseUrl + item.image_path: getImgPath(item.image_path)" class="shop_img">
+					<img :src="imgBaseUrl + item.image_path" class="shop_img">
 				</section>
 				<hgroup class="shop_right">
 					<header class="shop_detail_header">
@@ -62,7 +62,7 @@
 
 import {mapState} from 'vuex'
 import {shopList} from 'src/service/getData'
-import {imgBaseUrl, localapi, proapi} from 'src/config/env'
+import {imgBaseUrl} from 'src/config/env'
 import {showBack, animate} from 'src/config/mUtils'
 import {loadMore, getImgPath} from './mixin'
 import loading from './loading'
@@ -78,8 +78,6 @@ export default {
 			showLoading: true, //显示加载动画
 			touchend: false, //没有更多数据
 			imgBaseUrl,
-			localapi,
-			proapi
 		}
 	},
 	mounted(){
@@ -149,21 +147,10 @@ export default {
 			this.hideLoading();
 			//考虑到本地模拟数据是引用类型，所以返回一个新的数组
 			this.shopListArr = [...res];
-			if (process.env.NODE_ENV !== 'development') {
-				this.shopListArr = this.shopListArr.reverse();
-			}
 		},
 		//开发环境与编译环境loading隐藏方式不同
 		hideLoading(){
-			if (process.env.NODE_ENV !== 'development') {
-				clearTimeout(this.timer);
-				this.timer = setTimeout(() => {
-					clearTimeout(this.timer);
-					this.showLoading = false;
-				}, 500)
-			}else{
-				this.showLoading = false;
-			}
+			this.showLoading = false;
 		},
 		zhunshi(supports){
 			let zhunStatus;

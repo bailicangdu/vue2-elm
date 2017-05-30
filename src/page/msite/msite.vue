@@ -45,7 +45,7 @@ import {mapMutations} from 'vuex'
 import headTop from 'src/components/header/head'
 import footGuide from 'src/components/footer/footGuide'
 import shopList from 'src/components/common/shoplist'
-import {msiteAdress, msiteFoodTypes} from 'src/service/getData'
+import {msiteAdress, msiteFoodTypes, cityGuess} from 'src/service/getData'
 import 'src/plugins/swiper.min.js'
 import 'src/style/swiper.min.css'
 
@@ -60,7 +60,12 @@ export default {
         }
     },
     async beforeMount(){
-		this.geohash = this.$route.query.geohash || 'wtw3sm0q087';
+		if (!this.$route.query.geohash) {
+			const address = await cityGuess();
+			this.geohash = address.latitude + ',' + address.longitude;
+		}else{
+			this.geohash = this.$route.query.geohash
+		}
 		//保存geohash 到vuex
 		this.SAVE_GEOHASH(this.geohash);
     	//获取位置信息

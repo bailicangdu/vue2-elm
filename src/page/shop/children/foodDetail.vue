@@ -2,10 +2,10 @@
 	<div class="rating_page">
         <head-top :head-title="name" go-back='true'></head-top>
         <section class="header_img">
-            <img :src="localapi || proapi ? imgBaseUrl + image_path: getImgPath(image_path)" class="food_img">
+            <img :src="imgBaseUrl + image_path" class="food_img">
             <div class="cover"></div>
-            <p class="description">{{description}}</p>
         </section>
+        <p class="description">{{description}}</p>
         <section class="detail_container">
             <section class="detail_left">
                 <p>{{name}}</p>
@@ -34,7 +34,7 @@
     import {getImgPath} from 'src/components/common/mixin'
     import ratingStar from 'src/components/common/ratingStar'
     import buyCart from 'src/components/common/buyCart'
-    import { localapi, proapi, imgBaseUrl} from 'src/config/env'
+    import {imgBaseUrl} from 'src/config/env'
 
     export default {
     	data(){
@@ -48,9 +48,7 @@
                 satisfy_rate: null,
                 foods: null,
                 shopId: null,
-                localapi, 
-                proapi, 
-                imgBaseUrl
+                imgBaseUrl,
             }
         },
         created(){
@@ -87,7 +85,7 @@
 		right: 0;
 		bottom: 0;
 		background-color: #fff;
-		z-index: 10;
+		z-index: 12;
         padding-top: 1.95rem;
         p, span{
             font-family: Helvetica Neue,Tahoma,Arial;
@@ -100,19 +98,18 @@
             display: block;
         }
         .cover{
-            box-shadow: 0px -20px 100px #eee inset;
             position: absolute;
             @include wh(100%, 100%);
             top: 0;
             left: 0;
         }
-        .description{
-            position: absolute;
-            @include sc(.6rem, #666);
-            line-height: .8rem;
-            bottom: .2rem;
-            padding: 0 .4rem;
-        }
+    }
+    .description{
+        @include sc(.6rem, #666);
+        margin-top: .5rem;
+        line-height: .8rem;
+        bottom: .2rem;
+        padding: 0 .4rem;
     }
     .detail_container{
         padding: .5rem;

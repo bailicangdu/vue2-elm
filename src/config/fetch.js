@@ -2,7 +2,7 @@ import {
 	baseUrl
 } from './env'
 
-export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
+export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
 
@@ -37,12 +37,12 @@ export default async(type = 'GET', url = '', data = {}, method = 'fetch') => {
 		}
 		
 		try {
-			var response = await fetch(url, requestConfig);
-			var responseJson = await response.json();
+			const response = await fetch(url, requestConfig);
+			const responseJson = await response.json();
+			return responseJson
 		} catch (error) {
 			throw new Error(error)
 		}
-		return responseJson
 	} else {
 		return new Promise((resolve, reject) => {
 			let requestObj;

@@ -67,7 +67,7 @@
         </section>
         <transition name="fade">
             <section class="license_container" v-if="showlicenseImg" @click="showlicenseImg = false">
-                <img :src="localapi || proapi ? imgBaseUrl + licenseImg: getImgPath(licenseImg)">
+                <img :src="imgBaseUrl + licenseImg">
             </section>
         </transition>
         <transition name="router-slid" mode="out-in">
@@ -80,15 +80,13 @@
 	import headTop from 'src/components/header/head'
     import {mapState} from 'vuex'
     import {getImgPath} from 'src/components/common/mixin'
-    import { localapi, proapi, imgBaseUrl} from 'src/config/env'
+    import {imgBaseUrl} from 'src/config/env'
 
     export default {
     	data(){
             return{
                licenseImg: null,
                showlicenseImg: false,
-               localapi,
-               proapi,
                imgBaseUrl
             }
         },
