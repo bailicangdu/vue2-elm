@@ -306,6 +306,9 @@
             </span>
         </transition>
        <loading v-show="showLoading || loadRatings"></loading>
+       <section class="animation_opactiy shop_back_svg_container" v-if="showLoading">
+           <img src="../../images/shop_back_svg.svg">
+       </section>
        <transition name="router-slid" mode="out-in">
             <router-view></router-view>
         </transition>
@@ -725,6 +728,13 @@
        50%  { transform: scale(1.1) }
        75%  { transform: scale(.9) }
        100% { transform: scale(1) }
+    }
+    .shop_back_svg_container{
+        position: fixed;
+        @include wh(100%, 100%);
+        img{
+            @include wh(100%, 100%);
+        }
     }
     .shop_container{
         display: flex;
