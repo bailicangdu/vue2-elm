@@ -1,6 +1,6 @@
 <template>
 	<div class="shoplist_container">
-		<ul v-load-more="loaderMore" v-if="shopListArr.length" type="1">
+		<ul v-load-more="loaderMore" v-if="!shopListArr.length" type="1">
 			<router-link :to="{path: 'shop', query:{geohash, id: item.id}}" v-for="item in shopListArr" tag='li' :key="item.id" class="shop_li">
 				<section>
 					<img :src="imgBaseUrl + item.image_path" class="shop_img">
@@ -44,6 +44,11 @@
 					</h5>
 				</hgroup>
 			</router-link>
+		</ul>
+		<ul v-else>
+			<li class="list_back_li" v-for="item in 10" :key="item">
+				<img src="../../images/shopback.svg" class="list_back_svg">
+			</li>
 		</ul>
 		<p v-if="touchend" class="empty_data">没有更多了</p>
 		<aside class="return_top" @click="backTop" v-if="showBackStatus">
@@ -199,6 +204,12 @@ export default {
 		@include wh(2.7rem, 2.7rem);
 		display: block;
 		margin-right: 0.4rem;
+	}
+	.list_back_li{
+		height: 5.85rem;
+		.list_back_svg{
+			@include wh(100%, 100%)
+		}
 	}
 	.shop_right{
 		flex: auto;
