@@ -25,7 +25,7 @@
 		        </div>
 		        <div class="swiper-pagination"></div>
 		    </div>
-		    <img src="../../images/fl.svg" class="fl_back" v-else>
+		    <img src="../../images/fl.svg" class="fl_back animation_opactiy" v-else>
     	</nav>
     	<div class="shop_list_container">
 	    	<header class="shop_header">
