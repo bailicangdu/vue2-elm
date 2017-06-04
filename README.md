@@ -123,7 +123,7 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 
 2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。[地址在这里](https://github.com/bailicangdu/React-Native-elm)
 
-3、如果时间来的及，会出一个pc端的网页版。
+3、如果时间来的及，会出一卖家版本。
 
 所以我的目的是构建一个横跨前后端，移动IOS、Android的完整生态圈。
 
