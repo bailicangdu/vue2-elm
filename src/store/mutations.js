@@ -30,10 +30,7 @@ import {
 	BUY_CART,
 } from './mutation-types.js'
 
-import {
-	setStore,
-	getStore,
-} from '../config/mUtils'
+import {setStore, getStore} from '../config/mUtils'
 
 import {localapi, proapi} from 'src/config/env'
 
@@ -128,13 +125,7 @@ export default {
 	[RECORD_USERINFO](state, info) {
 		state.userInfo = info;
 		state.login = true;
-		if (!localapi && !proapi) {
-			let validity = 30;
-			let now = new Date();
-			now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-			document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-			document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
-		}
+		setStore('user_id', info.user_id);
 	},
 	//获取用户信息存入vuex
 	[GET_USERINFO](state, info) {
@@ -146,13 +137,6 @@ export default {
 		}
 		if (!info.message) {
 			state.userInfo = {...info};
-			if (!localapi && !proapi) {
-				let validity = 30;
-				let now = new Date();
-				now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000);
-				document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString();
-				document.cookie = "SID=CeRxBZalHSiKuGI49DL2DhXMrOakCzQNcJFg" + ";expires=" + now.toGMTString();
-			}
 		} else {
 			state.userInfo = null;
 		}
@@ -229,9 +213,8 @@ export default {
 	},
 	//退出登录
 	[OUT_LOGIN](state) {
-		state.userInfo = null;
+		state.userInfo = {};
 		state.login = false;
-		//console.log("<%=session.getAttribute('SID')%>")
 	},
 	//保存图片
 	[SAVE_AVANDER](state, imgPath) {

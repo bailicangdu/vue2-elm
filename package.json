@@ -4,7 +4,7 @@
   "description": "vue2-elm",
   "author": "cangdu <1264889788@qq.com>",
   "private": true,
-  "license": "MIT",
+  "license": "GPL",
   "scripts": {
     "dev": "cross-env NODE_ENV=online node build/dev-server.js",
     "local": "cross-env NODE_ENV=local node build/dev-server.js",

@@ -109,6 +109,7 @@
     import alertTip from 'src/components/common/alertTip'
     import {getImgPath} from 'src/components/common/mixin'
     import {imgBaseUrl} from 'src/config/env'
+    import {removeStore} from 'src/config/mUtils'
 
     export default {
         data(){
@@ -163,6 +164,7 @@
                 this.OUT_LOGIN();
                 this.waitingThing();
                 this.$router.go(-1);
+                removeStore('user_id')
                 await signout();
             },
             changePhone(){

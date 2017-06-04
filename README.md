@@ -310,4 +310,4 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 
 ### License
 
-[MIT](https://github.com/bailicangdu/vue2-elm/blob/master/LICENSE)
+[GPL](https://github.com/bailicangdu/vue2-elm/blob/master/COPYING)

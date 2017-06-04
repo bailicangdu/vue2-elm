@@ -195,6 +195,9 @@ export default {
                 this.balance = this.userInfo.balance;
                 this.count = this.userInfo.gift_amount;
                 this.pointNumber = this.userInfo.point;
+            }else{
+                this.username = '登录/注册';
+                this.mobile = '暂无绑定手机号';
             }
         },
     },
