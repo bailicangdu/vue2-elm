@@ -17,6 +17,7 @@
     "showdown": "^1.6.4",
     "vue": "^2.1.0",
     "vue-router": "^2.1.1",
+    "babel-runtime": "^6.0.0",
     "vuex": "^2.0.0"
   },
   "devDependencies": {
