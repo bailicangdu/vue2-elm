@@ -72,6 +72,7 @@ export default [{
         {
             path: '/msite',
             component: msite,
+            meta: { keepAlive: true },
         },
         //特色商铺列表页
         {
