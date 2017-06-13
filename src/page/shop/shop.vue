@@ -375,6 +375,9 @@
             this.initData();
             this.windowHeight = window.innerHeight;
         },
+        beforeDestroy(){
+            // this.foodScroll.removeEventListener('scroll', )
+        },
         mixins: [loadMore, getImgPath],
         components: {
             loading,
@@ -471,7 +474,10 @@
                 });
 
                 this.foodScroll.on('scroll', (pos) => {
-                        this.shopListTop.forEach((item, index) => {
+                    if (!this.$refs.wrapperMenu) {
+                        return 
+                    }
+                    this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
                             this.menuIndex = index;
                         }
