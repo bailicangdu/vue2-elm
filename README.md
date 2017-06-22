@@ -69,9 +69,8 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 
 ### 移动端扫描下方二维码
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="300" height="300"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="250" height="250"/>
 
-![]()
 
 
 
