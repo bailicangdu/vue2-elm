@@ -362,7 +362,6 @@
                 elLeft: 0, //当前点击加按钮在网页中的绝对top值
                 elBottom: 0, //当前点击加按钮在网页中的绝对left值
                 ratingScroll: null, //评论页Scroll
-                wrapperMenu: null,
                 imgBaseUrl,
             }
         },
@@ -448,19 +447,15 @@
             },
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
-                const baseHeight = this.$refs.shopheader.clientHeight;
-                const chooseTypeHeight = this.$refs.chooseType.clientHeight;
                 const listContainer = this.$refs.menuFoodList;
                 const listArr = Array.from(listContainer.children[0].children);
                 listArr.forEach((item, index) => {
-                    this.shopListTop[index] = item.offsetTop - baseHeight - chooseTypeHeight;
+                    this.shopListTop[index] = item.offsetTop;
                 });
                 this.listenScroll(listContainer)
             },
             //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
-                let oldScrollTop;
-                let requestFram;
                 this.foodScroll = new BScroll(element, {
                     probeType: 3,
                     deceleration: 0.001,
@@ -469,10 +464,11 @@
                     click: true,
                 });
 
-                this.wrapperMenu = new BScroll('#wrapper_menu', {
+                const wrapperMenu = new BScroll('#wrapper_menu', {
                     click: true,
                 });
 
+                const wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
                 this.foodScroll.on('scroll', (pos) => {
                     if (!this.$refs.wrapperMenu) {
                         return 
@@ -480,12 +476,11 @@
                     this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
                             this.menuIndex = index;
+                            const menuList=this.$refs.wrapperMenu.querySelectorAll('.activity_menu');
+                            const el = menuList[0];
+                            wrapperMenu.scrollToElement(el, 800, 0, -(wrapMenuHeight/2 - 50));
                         }
                     })
-                    let wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
-                    let menuList=this.$refs.wrapperMenu.querySelectorAll('.activity_menu');
-                    let el = menuList[0];
-                    this.wrapperMenu.scrollToElement(el, 800);
                 })
             },
             //控制活动详情页的显示隐藏
