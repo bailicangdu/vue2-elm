@@ -1,6 +1,6 @@
 <template>
     <div class="loginContainer">
-        <head-top :head-title="loginWay? '登录':'密码登录'" goBack="true">
+        <head-top :head-title="loginWay? '登录':'密码登录'" :goBack="true">
             <!-- <div slot="changeLogin" class="change_login" @click="changeLoginWay">{{loginWay? "密码登录":"短信登录"}}</div> -->
         </head-top>
         <form class="loginForm" v-if="loginWay">
