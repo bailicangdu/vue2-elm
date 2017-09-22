@@ -20,14 +20,6 @@ __注：此项目纯属个人瞎搞，正常下单请选择饿了么官方客户
 vue2 + vuex + vue-router + webpack + ES6/7 + fetch + sass + flex + svg
 
 
-## 关于 数据接口 的说明🤔
-
-### 2017-05-30
-
-由于一些原因，以前的数据接口无法使用，导致项目无法正常运行。以后改用nodejs构建的[后台系统](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
-
-
-
 ## 项目运行
 
 #### 注意：由于涉及大量的 ES6/7 等新属性，node 需要 6.0 以上版本 
@@ -41,11 +33,10 @@ npm install
 
 npm run dev
 
-npm run local (访问本地后台系统，需运行node-elm后台系统)
-
 ```
-### 另外
+## 另外
 因为此项目有配套的后台系统，如果想前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
+此时启动项目使用：npm run local 而不是 npm run dev。
 
 
 # 说明
@@ -67,6 +58,14 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
 
 
+## 关于 数据接口 的说明🤔
+
+### 2017-05-30
+
+由于一些原因，以前的数据接口无法使用，导致项目无法正常运行。以后改用nodejs构建的[后台系统](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
+
+
+
 # 效果演示
 
 [查看demo请戳这里](http://cangdu.org:8001/)（请用chrome手机模式预览）
@@ -74,7 +73,6 @@ npm run local (访问本地后台系统，需运行node-elm后台系统)
 ### 移动端扫描下方二维码
 
 <img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="250" height="250"/>
-
 
 
 
