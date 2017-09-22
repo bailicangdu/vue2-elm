@@ -39,11 +39,13 @@ cd vue2-elm
 
 npm install
 
-npm run dev (访问线上后台系统)
+npm run dev
 
 npm run local (访问本地后台系统，需运行node-elm后台系统)
 
 ```
+### 另外
+因为此项目有配套的后台系统，如果想前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
 
 
 # 说明
