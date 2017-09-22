@@ -35,8 +35,11 @@ npm run dev
 
 ```
 ## 另外
-因为此项目有配套的后台系统，如果想前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
+此项目有配套的后台系统，如果想前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
+
 此时启动项目使用：npm run local 而不是 npm run dev。
+
+如果只做前端开发，请忽略这句话。
 
 
 # 说明
