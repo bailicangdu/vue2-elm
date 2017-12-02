@@ -36,6 +36,7 @@ module.exports = {
             '/promotion',
             '/eus',
             '/payapi',
+            '/img',
         ],
         proxypath: 'http://cangdu.org:8001',
         // CSS Sourcemaps off by default because relative paths are "buggy"
