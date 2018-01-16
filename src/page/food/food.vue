@@ -176,7 +176,7 @@ import {mapState, mapMutations} from 'vuex'
 import headTop from 'src/components/header/head'
 import shopList from 'src/components/common/shoplist'
 import {getImgPath} from 'src/components/common/mixin'
-import {msiteAdress, foodCategory, foodDelivery, foodActivity} from 'src/service/getData'
+import {msiteAddress, foodCategory, foodDelivery, foodActivity} from 'src/service/getData'
 
 export default {
 	data(){
@@ -225,7 +225,7 @@ export default {
 			//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex	
 			if (!this.latitude) {
 		    	//获取位置信息
-		    	let res = await msiteAdress(this.geohash);
+		    	let res = await msiteAddress(this.geohash);
 		    	// 记录当前经度纬度进入vuex
 			    this.RECORD_ADDRESS(res);
 			}
