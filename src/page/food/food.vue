@@ -38,7 +38,7 @@
 	    					</ul>
 	    				</section>
 	    			</section>
-	    		</transition>	
+	    		</transition>
     		</div>
     		<div class="sort_item" :class="{choose_type:sortBy == 'sort'}">
     			<div class="sort_item_container" @click="chooseType('sort')">
@@ -120,7 +120,7 @@
 	    					</li>
 	    				</ul>
 	    			</section>
-	    		</transition>	
+	    		</transition>
     		</div>
     		<div class="sort_item" :class="{choose_type:sortBy == 'activity'}">
     			<div class="sort_item_container" @click="chooseType('activity')">
@@ -168,7 +168,7 @@
     	<section class="shop_list_container">
 	    	<shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude" @DidConfrim="clearAll"></shop-list>
     	</section>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -222,7 +222,7 @@ export default {
 			this.headTitle = this.$route.query.title;
 			this.foodTitle = this.headTitle;
 			this.restaurant_category_id = this.$route.query.restaurant_category_id;
-			//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex	
+			//防止刷新页面时，vuex状态丢失，经度纬度需要重新获取，并存入vuex
 			if (!this.latitude) {
 		    	//获取位置信息
 		    	let res = await msiteAddress(this.geohash);
@@ -288,8 +288,14 @@ export default {
 		},
 		//点击某个排序方式，获取事件对象的data值，并根据获取的值重新获取数据渲染
 		sortList(event){
-			console.log(this.filterNum)
-			this.sortByType = event.target.getAttribute('data');
+      let node;
+      // 如果点击的是 span 中的文字，则需要获取到 span 的父标签 p
+      if (event.target.nodeName.toUpperCase() !== 'P') {
+        node = event.target.parentNode;
+      } else {
+        node = event.target;
+      }
+      this.sortByType = node.getAttribute('data');
 			this.sortBy = '';
 		},
 		//筛选选项中的配送方式选择
@@ -327,8 +333,9 @@ export default {
 		},
 		//只有点击清空按钮才清空数据，否则一直保持原有状态
 		clearSelect(){
-            this.support_ids.map(item => item.status = false);
-            this.filterNum = 0;
+      this.support_ids.map(item => item.status = false);
+      this.filterNum = 0;
+      this.delivery_mode = null;
 		},
 		//点击确认时，将需要筛选的id值传递给子组件，并且收回列表
 		confirmSelectFun(){
@@ -378,7 +385,7 @@ export default {
 				transition: all .3s;
 				fill:#666;
 			}
-			
+
 		}
 		.choose_type{
 			.sort_item_container{
