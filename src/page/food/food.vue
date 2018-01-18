@@ -166,7 +166,7 @@
     		<div class="back_cover" v-show="sortBy"></div>
     	</transition>
     	<section class="shop_list_container">
-	    	<shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude" @DidConfrim="clearAll"></shop-list>
+	    	<shop-list :geohash="geohash" :restaurantCategoryId="restaurant_category_id" :restaurantCategoryIds="restaurant_category_ids" :sortByType='sortByType' :deliveryMode="delivery_mode" :confirmSelect="confirmStatus" :supportIds="support_ids" v-if="latitude"></shop-list>
     	</section>
     </div>
 </template>
@@ -324,12 +324,6 @@ export default {
 					this.filterNum ++ ;
 				}
 			})
-		},
-		//点击取消或者确认时，需要清空当前已选的状态值
-		clearAll(){
-			this.delivery_mode = null;
-			// this.support_ids.map(item => item.status = false);
-   //          this.filterNum = 0;
 		},
 		//只有点击清空按钮才清空数据，否则一直保持原有状态
 		clearSelect(){
