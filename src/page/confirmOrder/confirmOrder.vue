@@ -7,7 +7,7 @@
                     <svg class="location_icon">
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#location"></use>
                     </svg>
-                    <div class="add_address" v-if="!choosedAddress">请添加一个收获地址</div>
+                    <div class="add_address" v-if="!choosedAddress">请添加一个收货地址</div>
                     <div v-else class="address_detail_container">
                         <header>
                             <span>{{choosedAddress.name}}</span>
@@ -266,7 +266,7 @@
                     //未选择地址则提示
                 }else if(!this.choosedAddress){
                     this.showAlert = true;
-                    this.alertText = '请添加一个收获地址';
+                    this.alertText = '请添加一个收货地址';
                     return
                 }
                 //保存订单
