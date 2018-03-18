@@ -148,7 +148,7 @@
             },
             closeTip(){
                 this.showAlert = false;
-            }   
+            }
         }
     }
 

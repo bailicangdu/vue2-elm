@@ -37,7 +37,7 @@
 	    	<shop-list v-if="hasGetData" :geohash="geohash"></shop-list>
     	</div>
     	<foot-guide></foot-guide>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -69,8 +69,9 @@ export default {
 		}
 		//保存geohash 到vuex
 		this.SAVE_GEOHASH(this.geohash);
-    	//获取位置信息
-    	let res = await msiteAddress(this.geohash);
+    	//获取位置信息 api：http://cangdu.org:8001/v2/pois/30.26537,120.17519
+    	let res = await msiteAddress(this.geohash);//https://www.cnblogs.com/YMaster/p/6920441.html await用法
+
     	this.msiteTitle = res.name;
     	// 记录当前经度纬度
     	this.RECORD_ADDRESS(res);
@@ -78,7 +79,7 @@ export default {
     	this.hasGetData = true;
     },
     mounted(){
-        //获取导航食品类型列表
+        //获取导航食品类型列表 api:http://cangdu.org:8001/v2/index_entry?30.26537,120.17519&group_type=1&flags[]=F
        	msiteFoodTypes(this.geohash).then(res => {
        		let resLength = res.length;
        		let resArr = [...res]; // 返回一个新的数组
