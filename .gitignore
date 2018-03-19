@@ -7,5 +7,5 @@ package-lock.json
 # 忽略使用VSCode开发时，生成的缓存文件夹
 .vscode
 tree.md
-*.idea
 elm/
+*.idea
