@@ -13,18 +13,31 @@
                 <svg class="arrow_right">
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
                 </svg>
-            </router-link>  
+            </router-link>
         </nav>
         <section id="hot_city_container">
             <h4 class="city_title">热门城市</h4>
             <ul class="citylistul clear">
                 <router-link  tag="li" v-for="item in hotcity" :to="'/city/' + item.id" :key="item.id">
                     {{item.name}}
-                </router-link>  
+                </router-link>
             </ul>
         </section>
         <section class="group_city_container">
             <ul class="letter_classify">
+             <!--
+             https://vuefe.cn/v2/guide/list.html
+             data: {
+              object: {
+              firstName: 'John',
+              lastName: 'Doe',
+              age: 30
+              }
+              }
+              <div v-for="(value, key, index) in object">
+                    {{ index }}. {{ key }}: {{ value }}
+            </div>
+            output:0.firstName.John-->
                 <li v-for="(value, key, index) in sortgroupcity" :key="key"  class="letter_classify_li">
                     <h4 class="city_title">{{key}}
                         <span v-if="index == 0">（按字母排序）</span>
@@ -33,7 +46,7 @@
                         <router-link  tag="li" v-for="item in value" :to="'/city/' + item.id" :key="item.id" class="ellipsis">
                             {{item.name}}
 
-                        </router-link>  
+                        </router-link>
                     </ul>
                 </li>
             </ul>
@@ -81,7 +94,7 @@ export default {
         //将获取的数据按照A-Z字母开头排序
         sortgroupcity(){
             let sortobj = {};
-            for (let i = 65; i <= 90; i++) {
+            for (let i = 65; i <= 90; i++) {//http://www.w3school.com.cn/jsref/jsref_fromCharCode.asp
                 if (this.groupcity[String.fromCharCode(i)]) {
                     sortobj[String.fromCharCode(i)] = this.groupcity[String.fromCharCode(i)];
                 }
@@ -173,7 +186,7 @@ export default {
             @include sc(0.475rem, #999);
         }
     }
-    
+
     .letter_classify_li{
         margin-bottom: 0.4rem;
         background-color: #fff;

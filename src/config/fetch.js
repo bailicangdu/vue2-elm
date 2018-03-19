@@ -8,7 +8,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
-		Object.keys(data).forEach(key => {
+		Object.keys(data).forEach(key => {//https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 			dataStr += key + '=' + data[key] + '&';
 		})
 
@@ -30,12 +30,12 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			cache: "force-cache"
 		}
 
-		if (type == 'POST') {
+		if (type == 'POST') {//https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 			Object.defineProperty(requestConfig, 'body', {
 				value: JSON.stringify(data)
 			})
 		}
-		
+
 		try {
 			const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
@@ -43,7 +43,8 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		} catch (error) {
 			throw new Error(error)
 		}
-	} else {
+	}
+	else {//兼容ie等旧版浏览器，因为没有支持fetch方法
 		return new Promise((resolve, reject) => {
 			let requestObj;
 			if (window.XMLHttpRequest) {

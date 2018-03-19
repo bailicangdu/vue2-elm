@@ -74,10 +74,13 @@ export default {
         }
     },
     created(){
-       
+     /* console.log("created this.geohash:"+this.geohash);
+      console.log("this.$route.query.geohash:"+this.$route.query.geohash);*/
+
+
     },
     mounted(){
-        this.geohash = this.$route.params.geohash;
+      this.geohash = this.$route.query.geohash;
         //获取搜索历史记录
         if (getStore('searchHistory')) {
             this.searchHistory = JSON.parse(getStore('searchHistory'));
@@ -90,13 +93,16 @@ export default {
     methods:{
         //点击提交按钮，搜索结果并显示，同时将搜索内容存入历史记录
         async searchTarget(historyValue){
-            if (historyValue) {
+          console.log("historyValue:"+historyValue);
+
+          if (historyValue) {
                 this.searchValue = historyValue;
             }else if (!this.searchValue) {
-                return 
+                return
             }
             //隐藏历史记录
             this.showHistory = false;
+            console.log("this.geohash:"+this.geohash);
             //获取搜索结果
             this.restaurantList = await searchRestaurant(this.geohash, this.searchValue);
             this.emptyResult = !this.restaurantList.length;
@@ -105,7 +111,7 @@ export default {
              * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
              */
             let history = getStore('searchHistory');
-            if (history) { 
+            if (history) {
                 let checkrepeat = false;
                 this.searchHistory = JSON.parse(history);
                 this.searchHistory.forEach(item => {
@@ -127,7 +133,7 @@ export default {
                 this.showHistory = true; //显示历史记录
                 this.restaurantList = []; //清空搜索结果
                 this.emptyResult = false; //隐藏搜索为空提示
-            } 
+            }
         },
         //点击删除按钮，删除当前历史记录
         deleteHistory(index){
@@ -146,7 +152,7 @@ export default {
 
 <style lang="scss" scoped>
     @import '../../style/mixin';
-    
+
     .search_page{
         margin-bottom: 2rem;
     }

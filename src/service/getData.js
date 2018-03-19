@@ -7,7 +7,7 @@ import {getStore} from '../config/mUtils'
 
 export const cityGuess = () => fetch('/v1/cities', {
 	type: 'guess'
-});
+});//http://cangdu.org:8001/v1/cities?type=guess
 
 
 /**
