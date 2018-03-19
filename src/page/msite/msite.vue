@@ -111,6 +111,13 @@ export default {
     	// 解码url地址，求去restaurant_category_id值
     	getCategoryId(url){
     		let urlData = decodeURIComponent(url.split('=')[1].replace('&target_name',''));
+        /*获取数组：
+        "restaurant_category_id": {
+           "id": 239,
+             "name": "甜品饮品",
+             "sub_categories": [],
+             "image_url": ""
+         },*/
     		if (/restaurant_category_id/gi.test(urlData)) {
     			return JSON.parse(urlData).restaurant_category_id.id
     		}else{
