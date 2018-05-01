@@ -16,8 +16,8 @@ if (process.env.NODE_ENV == 'development') {
     imgBaseUrl = '/img/';
 
 }else if(process.env.NODE_ENV == 'production'){
-	baseUrl = 'http://elm.cangdu.org';
-    imgBaseUrl = 'http://elm.cangdu.org/img/';
+	baseUrl = '//elm.cangdu.org';
+    imgBaseUrl = '//elm.cangdu.org/img/';
 }
 
 export {

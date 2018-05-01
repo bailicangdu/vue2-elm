@@ -75,7 +75,7 @@ For some reason，previous interfaces could not be used, it made the project fai
 
 # Demo
 
-[click it](http://cangdu.org:8001/)（Preview with chroe phone mode please）
+[click it](http://cangdu.org/elm/)（Preview with chroe phone mode please）
 
 ### The mobile can scan the qr code in the below
 
