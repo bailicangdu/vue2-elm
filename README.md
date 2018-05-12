@@ -31,7 +31,7 @@ git clone https://github.com/bailicangdu/vue2-elm.git  
 
 cd vue2-elm
 
-npm install
+npm install  或 yarn(推荐)
 
 npm run dev
 
