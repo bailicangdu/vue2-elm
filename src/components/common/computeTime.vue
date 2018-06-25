@@ -78,7 +78,7 @@
 	.page{
         display: inline-block;
         .rem_time{
-            @include sc(.55rem, #orange);
+            @include sc(.55rem, orange);
             padding: .1rem .2rem;
             border-radius: .15rem;
         }

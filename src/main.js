@@ -24,11 +24,10 @@ const router = new VueRouter({
 			if (from.meta.keepAlive) {
 				from.meta.savedPosition = document.body.scrollTop;
 			}
-		    return { x: 0, y: to.meta.savedPosition ||0}
+		    return { x: 0, y: to.meta.savedPosition || 0 }
 		}
 	}
 })
-
 
 new Vue({
 	router,
