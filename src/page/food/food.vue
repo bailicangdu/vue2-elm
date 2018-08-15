@@ -2,6 +2,7 @@
     <div class="food_container">
     	<head-top :head-title="headTitle" goBack="true"></head-top>
     	<section class="sort_container">
+			<!-- 分类 -->
     		<div class="sort_item" :class="{choose_type:sortBy == 'food'}" >
     			<div class="sort_item_container" @click="chooseType('food')">
     				<div class="sort_item_border">
@@ -40,6 +41,7 @@
 	    			</section>
 	    		</transition>
     		</div>
+			<!-- 排序 -->
     		<div class="sort_item" :class="{choose_type:sortBy == 'sort'}">
     			<div class="sort_item_container" @click="chooseType('sort')">
     				<div class="sort_item_border">
@@ -122,6 +124,7 @@
 	    			</section>
 	    		</transition>
     		</div>
+			<!-- 筛选 -->
     		<div class="sort_item" :class="{choose_type:sortBy == 'activity'}">
     			<div class="sort_item_container" @click="chooseType('activity')">
 	    			<span :class="{category_title: sortBy == 'activity'}">筛选</span>
