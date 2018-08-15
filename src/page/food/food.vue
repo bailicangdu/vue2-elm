@@ -32,7 +32,7 @@
 	    				</section>
 	    				<section class="category_right">
 	    					<ul>
-	    						<li v-for="(item, index) in categoryDetail" v-if="index" :key="item.id" class="category_right_li" @click="getCategoryIds(item.id, item.name)" :class="{category_right_choosed: restaurant_category_ids == item.id || (!restaurant_category_ids)&&index == 0}">
+	    						<li v-for="(item, index) in categoryDetail" v-if="index" :key="index" class="category_right_li" @click="getCategoryIds(item.id, item.name)" :class="{category_right_choosed: restaurant_category_ids == item.id || (!restaurant_category_ids)&&index == 0}">
 	    							<span>{{item.name}}</span>
 	    							<span>{{item.count}}</span>
 	    						</li>
@@ -137,7 +137,7 @@
 	    				<section style="width: 100%;">
 	    					<header class="filter_header_style">配送方式</header>
 	    					<ul class="filter_ul">
-	    						<li v-for="item in Delivery" :key="item.id" class="filter_li" @click="selectDeliveryMode(item.id)">
+	    						<li v-for="(item, index) in Delivery" :key="index" class="filter_li" @click="selectDeliveryMode(item.id)">
 	    							<svg :style="{opacity: (item.id == 0)&&(delivery_mode !== 0)? 0: 1}">
 										<use xmlns:xlink="http://www.w3.org/1999/xlink" :xlink:href="delivery_mode == item.id? '#selected':'#fengniao'"></use>
 									</svg>
@@ -148,7 +148,7 @@
 	    				<section style="width: 100%;">
 	    					<header class="filter_header_style">商家属性（可以多选）</header>
 	    					<ul class="filter_ul" style="paddingBottom: .5rem;">
-	    						<li v-for="(item,index) in Activity" :key="item.id" class="filter_li" @click="selectSupportIds(index, item.id)">
+	    						<li v-for="(item,index) in Activity" :key="index" class="filter_li" @click="selectSupportIds(index, item.id)">
 	    							<svg v-show="support_ids[index].status" class="activity_svg">
 										<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#selected"></use>
 									</svg>
@@ -284,6 +284,7 @@ export default {
     },
     //选中Category右侧列表的某个选项时，进行筛选，重新获取数据并渲染
     getCategoryIds(id, name) {
+	  console.log(id, name)
       this.restaurant_category_ids = id;
       this.sortBy = "";
       this.foodTitle = this.headTitle = name;
