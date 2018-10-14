@@ -2,7 +2,7 @@
 
 [README in Chinese](README.md)
 
-When I began to learn to vue, search of some practical source code about vue, but most of them are simple demo and didn't help to explore the vue. The most of demo are front-end page, such as music player interaction not as complicated as expected.But in actual work, we often meet some project involving money, such as shopping cart page. This kind of project is complex, accompany by login, register ,user information and so on. It's difficult, no one has ever written a project like this in vue and commit to github. So I write it, hope I can hope you. 
+When I began to learn to vue, search of some practical source code about vue, but most of them are simple demo and didn't help to explore the vue. The most of demo are front-end page, such as music player interaction not as complicated as expected.But in actual work, we often meet some project involving money, such as shopping cart page. This kind of project is complex, accompany by login, register ,user information and so on. It's difficult, no one has ever written a project like this in vue and commit to github. So I write it, hope I can help you. 
 
 This functional project is practical but often boring, with no music player so gorgeous. For a long time, I think that Elm APP is a good material. First, it is complex that the open delivery platform is more complicated than the typical project. Second, you won't get bored seeing so much beautiful food.
 
