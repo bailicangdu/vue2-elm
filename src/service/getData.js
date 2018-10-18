@@ -50,7 +50,7 @@ export const searchplace = (cityid, value) => fetch('/v1/pois', {
  * 获取msite页面地址信息
  */
 
-export const msiteAdress = geohash => fetch('/v2/pois/' + geohash);
+export const msiteAddress = geohash => fetch('/v2/pois/' + geohash);
 
 
 /**

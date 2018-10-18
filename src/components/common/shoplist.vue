@@ -29,7 +29,7 @@
 					</h5>
 					<h5 class="fee_distance">
 						<p class="fee">
-							¥{{item.float_minimum_order_amount}}起送 
+							¥{{item.float_minimum_order_amount}}起送
 							<span class="segmentation">/</span>
 							{{item.piecewise_agent_fee.tips}}
 						</p>
@@ -123,7 +123,7 @@ export default {
 			}
 			//防止重复请求
 			if (this.preventRepeatReuqest) {
-				return 
+				return
 			}
 			this.showLoading = true;
 			this.preventRepeatReuqest = true;
@@ -183,7 +183,6 @@ export default {
 		//监听父级的确认按钮是否被点击，并且返回一个自定义事件通知父级，已经接收到数据，此时父级才可以清除已选状态
 		confirmSelect: function (value){
 			this.listenPropChange();
-			this.$emit('DidConfrim');
 		}
 	}
 }

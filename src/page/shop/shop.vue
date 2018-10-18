@@ -317,7 +317,7 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {msiteAdress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
+    import {msiteAddress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
     import loading from 'src/components/common/loading'
     import buyCart from 'src/components/common/buyCart'
     import ratingStar from 'src/components/common/ratingStar'
@@ -427,7 +427,7 @@
             async initData(){
                 if (!this.latitude) {
                     //获取位置信息
-                    let res = await msiteAdress(this.geohash);
+                    let res = await msiteAddress(this.geohash);
                     // 记录当前经度纬度进入vuex
                     this.RECORD_ADDRESS(res);
                 }
