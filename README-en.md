@@ -70,7 +70,7 @@ If you only do the front-end development, ignore this note.
 
 ### 2017-05-30
 
-For some reason，previous interfaces could not be used, it made the project failed to run.The new backend system is built by nodejs.[backend system address](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
+For some reason，previous interfaces could not be used, it made the project failed to run.The new backend system is built by nodejs.[backend system address](https://github.com/bailicangdu/node-elm). It can kept consisent with the offical website. And provide corresponding [background management system](https://github.com/bailicangdu/vue2-manage)
 
 
 # Demo
