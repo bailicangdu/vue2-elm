@@ -52,7 +52,7 @@ npm run dev
 
 >  开发环境 macOS 10.12.3  Chrome 56  nodejs 6.10.0
 
->  特别感谢辰妹子[@bailichen](https://github.com/bailichen)，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
+>  特别感谢辰妹子[@bailichen](https://github.com/bailichen), [@iceRao](https://github.com/raoenhui)，在百忙之中抽出时间和我一起完成了这个项目，辛苦了🌹
 
 >  如有问题请直接在 Issues 中提，或者您发现问题并有非常好的解决方案，欢迎 PR 👍
 
