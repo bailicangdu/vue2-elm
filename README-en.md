@@ -2,7 +2,7 @@
 
 [README in Chinese](README.md)
 
-When I began to learn to vue, search of some practical source code about vue, but most of them are simple demo and didn't help to explore the vue. The most of demo are front-end page, such as music player interaction not as complicated as expected.But in actual work, we often meet some project involving money, such as shopping cart page. This kind of project is complex, accompany by login, register ,user information and so on. It's difficult, no one has ever written a project like this in vue and commit to github. So I write it, hope I can hope you. 
+When I began to learn to vue, search of some practical source code about vue, but most of them are simple demo and didn't help to explore the vue. The most of demo are front-end page, such as music player interaction not as complicated as expected.But in actual work, we often meet some project involving money, such as shopping cart page. This kind of project is complex, accompany by login, register ,user information and so on. It's difficult, no one has ever written a project like this in vue and commit to github. So I write it, hope I can help you. 
 
 This functional project is practical but often boring, with no music player so gorgeous. For a long time, I think that Elm APP is a good material. First, it is complex that the open delivery platform is more complicated than the typical project. Second, you won't get bored seeing so much beautiful food.
 
@@ -55,11 +55,11 @@ If you only do the front-end development, ignore this note.
 
 >  Development environment: macOS 10.12.3  Chrome 56  nodejs 6.10.0
 
->  Thanks for 辰妹子[@bailichen](https://github.com/bailichen)，to help complete the project，thank you🌹
+>  Thanks for 辰妹子[@bailichen](https://github.com/bailichen), [@iceRao](https://github.com/raoenhui)，to help complete the project，thank you🌹
 
 >  If you hava some question,you can post the question in Issues, and if you find some solution or some improvement，please pull request. 👍
 
->  The project communication group：528447162(QQ)
+>  [communication group](https://gitter.im/vue2-elm/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 >  Recommend a open source project about react and redux。[address](https://github.com/bailicangdu/react-pxq)
 
@@ -70,7 +70,7 @@ If you only do the front-end development, ignore this note.
 
 ### 2017-05-30
 
-For some reason，previous interfaces could not be used, it made the project failed to run.The new backend system is built by nodejs.[backend system address](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
+For some reason，previous interfaces could not be used, it made the project failed to run.The new backend system is built by nodejs.[backend system address](https://github.com/bailicangdu/node-elm). It can kept consisent with the offical website. And provide corresponding [background management system](https://github.com/bailicangdu/vue2-manage)
 
 
 # Demo
