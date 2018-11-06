@@ -104,8 +104,8 @@
                                                 <h3 class="food_description_head">
                                                     <strong class="description_foodname">{{foods.name}}</strong>
                                                     <ul v-if="foods.attributes.length" class="attributes_ul">
-                                                        <li v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
-                                                        <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
+                                                        <li v-if="attribute" v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' + attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
+                                                          <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                                         </li>
                                                     </ul>
 
@@ -448,11 +448,13 @@
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
                 const listContainer = this.$refs.menuFoodList;
-                const listArr = Array.from(listContainer.children[0].children);
-                listArr.forEach((item, index) => {
-                    this.shopListTop[index] = item.offsetTop;
-                });
-                this.listenScroll(listContainer)
+                if (listContainer) {
+                  const listArr = Array.from(listContainer.children[0].children);
+                  listArr.forEach((item, index) => {
+                      this.shopListTop[index] = item.offsetTop;
+                  });
+                  this.listenScroll(listContainer)
+                }
             },
             //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
@@ -471,7 +473,7 @@
                 const wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
                 this.foodScroll.on('scroll', (pos) => {
                     if (!this.$refs.wrapperMenu) {
-                        return 
+                        return
                     }
                     this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
@@ -1053,6 +1055,7 @@
                                         @include sc(.4rem, #fff);
                                         text-align: center;
                                         flex: 1;
+                                        transform: scale(0.8) translate(0.1rem, -.1rem);
                                     }
                                 }
                             }
