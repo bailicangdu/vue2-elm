@@ -11,7 +11,7 @@
             <transition name="fade">
                 <span class="cart_num" v-if="foodNum">{{foodNum}}</span>
             </transition>
-            <svg class="add_icon" @touchstart="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
+            <svg class="add_icon" @click="addToCart(foods.category_id, foods.item_id, foods.specfoods[0].food_id, foods.specfoods[0].name, foods.specfoods[0].price, '', foods.specfoods[0].packing_fee, foods.specfoods[0].sku_id, foods.specfoods[0].stock, $event)">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#cart-add"></use>
             </svg>
         </section>
@@ -40,7 +40,7 @@
             }
         },
         mounted(){
-            
+
         },
         computed: {
             ...mapState([
@@ -95,7 +95,7 @@
             showReduceTip(){
                 this.$emit('showReduceTip')
             },
-            
+
         },
     }
 </script>
@@ -159,6 +159,6 @@
         opacity: 0;
         transform: scale(.7);
     }
-    
+
 </style>
 
