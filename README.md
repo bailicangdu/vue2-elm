@@ -315,11 +315,10 @@ npm run dev
 56 directories, 203 files
 ```
 
+## Donate
+
+[donate](https://github.com/bailicangdu/vue2-elm/blob/master/donate.md)
+
 # License
 
 [GPL](https://github.com/bailicangdu/vue2-elm/blob/master/COPYING)
-
-## Donate
-如果觉得这个项目对您有帮助，可以资助一下作者，您的资助将会用做维持服务器的运行。(因为服务器是一个不小的开销☹️)
-
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/pay.png" width="440" height="250"/>
