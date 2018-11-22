@@ -31,17 +31,22 @@ git clone https://github.com/bailicangdu/vue2-elm.git  
 
 cd vue2-elm
 
-npm install  或 yarn(推荐)
+npm install 或 yarn(推荐)
 
 npm run dev
 
 ```
-## 另外
-此项目有配套的后台系统，如果想体验前后台同时开发，可以下载对应的后台系统：[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
+## 关于接口数据
 
-此时启动项目使用：npm run local 而不是 npm run dev。
+此项目的所有接口数据都来源于配套的后台系统，[后台项目传送地址](https://github.com/bailicangdu/node-elm)。
 
-如果只做前端开发，请忽略这句话。
+如果想体验前后台同时开发，可以下载后台系统。
+
+此时启动本项目的命令为：npm run local 而不是 npm run dev。
+
+同时我们也提供了基于`element-ui`搭建的[后台管理页面](https://github.com/bailicangdu/vue2-manage)
+
+如果只做前端开发，请忽略上面这几句话。
 
 
 # 说明
@@ -61,14 +66,6 @@ npm run dev
 >  推荐一个 react + redux 开源项目，对react感兴趣的朋友赶紧去看看。[地址在这里](https://github.com/bailicangdu/react-pxq)
 
 >  另外一个 vue2 + vuex 的入门项目，比当前的项目简单很多，非常适合入门练习。[地址在这里](https://github.com/bailicangdu/vue2-happyfri)
-
-
-## 关于 数据接口 的说明🤔
-
-### 2017-05-30
-
-由于一些原因，以前的数据接口无法使用，导致项目无法正常运行。以后改用nodejs构建的[后台系统](https://github.com/bailicangdu/node-elm)接口，数据接口的格式保持了和官网的一致。并提供对应的[后台管理系统](https://github.com/bailicangdu/vue2-manage)
-
 
 
 # 效果演示
