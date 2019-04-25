@@ -46,7 +46,7 @@ npm run dev
 
 同时我们也提供了基于`element-ui`搭建的[后台管理页面](https://github.com/bailicangdu/vue2-manage)
 
-如果只做前端开发，请忽略上面这几句话。
+如果只做前端开发，请忽略上面这几句话哟～
 
 
 # 说明
@@ -126,7 +126,7 @@ npm run dev
 
 1、用node.js构建一个模拟外卖平台的后台系统。[地址在这里](https://github.com/bailicangdu/node-elm)
 
-2、利用 react-native 写出跨 Android 和 IOS 的原生APP版本。[地址在这里](https://github.com/bailicangdu/React-Native-elm)
+2、写出跨 Android 和 IOS 的原生APP版本。[地址在这里](https://github.com/bailicangdu/native-xdm)
 
 3、如果时间来的及，会出一卖家版本。
 
