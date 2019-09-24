@@ -7,7 +7,9 @@
                 </svg>
             </nav>
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
-                <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
+                <div class="header_cover_img_con">
+                  <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
+                </div>
                 <section class="description_header">
                     <router-link to="/shop/shopDetail" class="description_top">
                         <section class="description_left">
@@ -758,15 +760,21 @@
         padding-left: 0.2rem;
     }
     .shop_detail_header{
-        overflow: hidden;
+        // overflow: hidden;
         position: relative;
-        .header_cover_img{
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 9;
-            filter: blur(10px);
+        .header_cover_img_con {
+          height: 100%;
+          overflow: hidden;
+          position: absolute;
+          width: 100%;
+          .header_cover_img{
+              width: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 9;
+              filter: blur(10px);
+          }
         }
         .description_header{
             position: relative;
@@ -901,6 +909,7 @@
         display: flex;
         flex: 1;
         padding-bottom: 2rem;
+        overflow: hidden;
     }
     .menu_container{
         display: flex;

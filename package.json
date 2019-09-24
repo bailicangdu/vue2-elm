@@ -11,7 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "better-scroll": "^0.1.15",
+    "better-scroll": "1.15.2",
     "fastclick": "^1.0.6",
     "iscroll": "^5.2.0",
     "showdown": "^1.6.4",
