@@ -105,7 +105,7 @@
 	.cart_module{
         .add_icon{
             position: relative;
-            z-index: 999;
+            z-index: 9;
         }
         .cart_button{
             display: flex;
