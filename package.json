@@ -6,7 +6,8 @@
   "private": true,
   "license": "GPL",
   "scripts": {
-    "dev": "cross-env NODE_ENV=online node build/dev-server.js",
+    "dev": "cross-env NODE_ENV=local node build/dev-server.js",
+    "online": "cross-env NODE_ENV=online node build/dev-server.js",
     "local": "cross-env NODE_ENV=local node build/dev-server.js",
     "build": "node build/build.js"
   },
