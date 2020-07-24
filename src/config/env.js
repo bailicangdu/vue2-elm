@@ -7,7 +7,7 @@
  * 
  */
 
-let baseUrl = ''; 
+let baseUrl = 'https://elm.cangdu.org'; 
 let routerMode = 'hash';
 let imgBaseUrl = '';
 
@@ -24,4 +24,4 @@ export {
 	baseUrl,
 	routerMode,
 	imgBaseUrl,
-}
+};
