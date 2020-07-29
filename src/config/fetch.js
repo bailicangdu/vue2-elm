@@ -1,5 +1,8 @@
 import { baseUrl } from './env';
 
+// 匿名函数
+//   关于fetch axios
+// https://zhuanlan.zhihu.com/p/58062212
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
