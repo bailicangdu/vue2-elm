@@ -1,6 +1,9 @@
 <template>
   <div>
     <!-- 调用head-top时，只能传递参数给slot，不支持添加元素 -->
+    <!-- signin-up 传参数 dash转驼峰 -->
+    <!-- HTML 中的 attribute 名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。
+    camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名： -->
     <head-top signin-up="home">
       <!-- 匿名插槽 -->
       <!-- 如果没有定义插槽名 则匿名slot都会插入元素且使用 即如果没有指定插哪个插座 则电器把每个匿名的插座都插上 -->
@@ -134,6 +137,7 @@ export default {
   @include sc(0.7rem, #fff);
   @include wh(2.3rem, 0.7rem);
   @include ct;
+//   height: 50px;  // 后定义覆盖先定义
 }
 .city_nav {
   padding-top: 2.35rem;

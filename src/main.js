@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { routerMode } from './config/env'
+import './config/rem' // 设置base-font-size，移动设备适配
 import routes from './router/router'
 import store from './store/'
-import {routerMode} from './config/env'
-import './config/rem'
 
 Vue.use(VueRouter)
 const router = new VueRouter({

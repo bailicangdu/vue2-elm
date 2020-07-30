@@ -2,6 +2,7 @@ $blue: #3190e8;
 $bc: #e4e4e4;
 $fc:#fff;
 
+// mixin学习 https://www.w3cplus.com/preprocessor/sass-the-mixin-directive.html
 // 背景图片地址和大小
 @mixin bis($url) { 
 	background-image: url($url);
