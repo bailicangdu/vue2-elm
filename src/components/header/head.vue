@@ -49,7 +49,8 @@ export default {
     };
   },
   mounted() {
-    //获取用户信息
+    // 获取用户信息
+    // 登陆相关 https://zhuanlan.zhihu.com/p/62336927
     this.getUserInfo();
   },
   props: ["signinUp", "headTitle", "goBack"],
@@ -72,7 +73,7 @@ export default {
   left: 0;
   top: 0;
   @include wh(100%, 1.95rem);
-  overflow: hidden;
+  overflow: scroll;
 }
 .head_goback {
   left: 0.4rem;

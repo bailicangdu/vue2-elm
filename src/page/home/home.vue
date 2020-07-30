@@ -97,6 +97,7 @@ export default {
 
     //获取所有城市
     groupcity().then((res) => {
+      console.log('groupcity', res)
       this.groupcity = res;
     });
   },
@@ -110,6 +111,7 @@ export default {
     sortgroupcity() {
       let sortobj = {};
       for (let i = 65; i <= 90; i++) {
+        // 返回由指定的 UTF-16 代码单元序列创建的字符串 A-Z
         if (this.groupcity[String.fromCharCode(i)]) {
           sortobj[String.fromCharCode(i)] = this.groupcity[
             String.fromCharCode(i)
@@ -151,6 +153,8 @@ export default {
     @include fj;
     line-height: 1.45rem;
     padding: 0 0.45rem;
+    // :nth-of-type(n)这个css伪类是针对具有一组兄弟节点的标签，
+    // 用n来筛选出一组兄弟节点的位置
     span:nth-of-type(1) {
       @include sc(0.55rem, #666);
     }
