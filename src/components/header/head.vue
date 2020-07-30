@@ -72,6 +72,7 @@ export default {
   left: 0;
   top: 0;
   @include wh(100%, 1.95rem);
+  overflow: hidden;
 }
 .head_goback {
   left: 0.4rem;
