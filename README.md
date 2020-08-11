@@ -76,7 +76,7 @@ npm run dev
 
 ### 移动端扫描下方二维码
 
-<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="250" height="250"/>
+<img src="https://github.com/bailicangdu/vue2-elm/blob/master/screenshots/ewm.png" width="200" height="200"/>
 
 
 
