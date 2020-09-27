@@ -760,7 +760,6 @@
         padding-left: 0.2rem;
     }
     .shop_detail_header{
-        // overflow: hidden;
         position: relative;
         .header_cover_img_con {
           height: 100%;
@@ -1405,7 +1404,7 @@
                                 display: flex;
                                 align-items: center;
                                 .time_spent_desc{
-                                    @include sc(.55rem, #666)
+                                    @include sc(.55rem, #666);
                                     margin-left: .15rem;
                                 }
                             }
