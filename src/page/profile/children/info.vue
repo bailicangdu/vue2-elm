@@ -19,7 +19,7 @@
                     </span>
                 </div>
             </section>
-            <router-link to="/profile/setusername" class="info-router">
+            <router-link to="/profile/info/setusername" class="info-router">
                 <section class="headportrait headportraitwo">
                     <h2>用户名</h2>
                     <div class="headportrait-div">

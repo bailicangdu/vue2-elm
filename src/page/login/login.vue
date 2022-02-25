@@ -21,7 +21,7 @@
                 <input v-if="!showPassword" type="password" placeholder="密码"  v-model="passWord">
                 <input v-else type="text" placeholder="密码"  v-model="passWord">
                 <div class="button_switch" :class="{change_to_text: showPassword}">
-                    <div class="circel_button" :class="{trans_to_right: showPassword}" @click="changePassWordType"></div>
+                    <div class="circle_button" :class="{trans_to_right: showPassword}" @click="changePassWordType"></div>
                     <span>abc</span>
                     <span>...</span>
                 </div>
@@ -278,7 +278,7 @@
         border: 1px;
         border-radius: 0.5rem;
         position: relative;
-        .circel_button{
+        .circle_button{
             transition: all .3s;
             position: absolute;
             top: -0.2rem;

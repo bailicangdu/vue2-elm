@@ -27,7 +27,7 @@ const foodDetail = r => require.ensure([], () => r(require('../page/shop/childre
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
 const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
-const setusername = r => require.ensure([], () => r(require('../page/profile/children/setusername')), 'setusername')
+const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
 const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
 const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
 const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
@@ -142,6 +142,9 @@ export default [{
                 path: 'info', //个人信息详情页
                 component: info,
                 children: [{
+                    path: 'setusername',
+                    component: setusername,
+                },{
                     path: 'address',
                     component: address,     //编辑地址
                     children:[{
@@ -153,10 +156,6 @@ export default [{
                         }]
                     }]
                 }]
-            },
-            {
-                path: 'setusername',
-                component: setusername,
             },
             {
                 path: 'service', //服务中心

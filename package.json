@@ -11,7 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "better-scroll": "^0.1.15",
+    "better-scroll": "1.15.2",
     "fastclick": "^1.0.6",
     "iscroll": "^5.2.0",
     "showdown": "^1.6.4",
@@ -44,7 +44,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "node-gyp": "^3.4.0",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.9.2",
     "opn": "^4.0.2",
     "ora": "^0.3.0",
     "sass": "^0.5.0",

@@ -8,16 +8,16 @@
  */
 
 let baseUrl = ''; 
-let routerMode = 'history';
-let imgBaseUrl;
+let routerMode = 'hash';
+let imgBaseUrl = '';
 
 
 if (process.env.NODE_ENV == 'development') {
-    imgBaseUrl = 'http://cangdu.org:8001/img/';
+    imgBaseUrl = '/img/';
 
 }else if(process.env.NODE_ENV == 'production'){
-	// baseUrl = 'http://cangdu.org:8001';
-    imgBaseUrl = 'http://cangdu.org:8001/img/';
+	baseUrl = '//elm.cangdu.org';
+    imgBaseUrl = '//elm.cangdu.org/img/';
 }
 
 export {

@@ -1,0 +1,19 @@
+name: Close Inactive Issue
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: close inactive issue
+        uses: actions-cool/issues-helper@v2.2.1
+        with:
+          actions: 'close-issues'
+          labels: 'inactive'
+          inactive-day: 30
+          body: |
+            Since the issue was labeled with `inactive`, but no response in 30 days. This issue will be close. If you have any questions, you can comment and reply.
+            由于该 issue 被标记为不活跃，且 30 天未收到回应。现关闭 issue，若有任何问题，可评论回复。

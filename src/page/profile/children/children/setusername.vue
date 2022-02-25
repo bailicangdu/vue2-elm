@@ -39,7 +39,7 @@
 
         },
         mounted(){
-            
+
         },
         computed:{
             ...mapState([
@@ -56,23 +56,29 @@
                     this.earn=false;
                     this.bordercolor=true;
                     this.opacityall=false;
+                    return false;
                 }else{
                     this.earn=true;
                     this.bordercolor=false;
                     this.opacityall=true;
+                    return true;
                 }
             },
             resetName(){
+                let checkResult = this.inputThing();
+                if (!checkResult) {
+                  return;
+                }
                 this.RETSET_NAME(this.inputValue);
                 this.$router.go(-1);
             }
         }
     }
 </script>
-  
+
 <style lang="scss" scoped>
     @import 'src/style/mixin';
-  
+
     .rating_page{
         position: absolute;
         top: 0;

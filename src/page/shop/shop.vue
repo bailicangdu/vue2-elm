@@ -7,7 +7,9 @@
                 </svg>
             </nav>
             <header class="shop_detail_header" ref="shopheader" :style="{zIndex: showActivities? '14':'10'}">
-                <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
+                <div class="header_cover_img_con">
+                  <img :src="imgBaseUrl + shopDetailData.image_path" class="header_cover_img">
+                </div>
                 <section class="description_header">
                     <router-link to="/shop/shopDetail" class="description_top">
                         <section class="description_left">
@@ -104,8 +106,8 @@
                                                 <h3 class="food_description_head">
                                                     <strong class="description_foodname">{{foods.name}}</strong>
                                                     <ul v-if="foods.attributes.length" class="attributes_ul">
-                                                        <li v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' +attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
-                                                        <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
+                                                        <li v-if="attribute" v-for="(attribute, foodindex) in foods.attributes" :key="foodindex" :style="{color: '#' + attribute.icon_color,borderColor:'#' + attribute.icon_color}" :class="{attribute_new: attribute.icon_name == '新'}">
+                                                          <p :style="{color: attribute.icon_name == '新'? '#fff' : '#' + attribute.icon_color}">{{attribute.icon_name == '新'? '新品':attribute.icon_name}}</p>
                                                         </li>
                                                     </ul>
 
@@ -317,7 +319,7 @@
 
 <script>
     import {mapState, mapMutations} from 'vuex'
-    import {msiteAdress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
+    import {msiteAddress, shopDetails, foodMenu, getRatingList, ratingScores, ratingTags} from 'src/service/getData'
     import loading from 'src/components/common/loading'
     import buyCart from 'src/components/common/buyCart'
     import ratingStar from 'src/components/common/ratingStar'
@@ -427,7 +429,7 @@
             async initData(){
                 if (!this.latitude) {
                     //获取位置信息
-                    let res = await msiteAdress(this.geohash);
+                    let res = await msiteAddress(this.geohash);
                     // 记录当前经度纬度进入vuex
                     this.RECORD_ADDRESS(res);
                 }
@@ -448,11 +450,13 @@
             //获取食品列表的高度，存入shopListTop
             getFoodListHeight(){
                 const listContainer = this.$refs.menuFoodList;
-                const listArr = Array.from(listContainer.children[0].children);
-                listArr.forEach((item, index) => {
-                    this.shopListTop[index] = item.offsetTop;
-                });
-                this.listenScroll(listContainer)
+                if (listContainer) {
+                  const listArr = Array.from(listContainer.children[0].children);
+                  listArr.forEach((item, index) => {
+                      this.shopListTop[index] = item.offsetTop;
+                  });
+                  this.listenScroll(listContainer)
+                }
             },
             //当滑动食品列表时，监听其scrollTop值来设置对应的食品列表标题的样式
             listenScroll(element){
@@ -471,7 +475,7 @@
                 const wrapMenuHeight = this.$refs.wrapperMenu.clientHeight;
                 this.foodScroll.on('scroll', (pos) => {
                     if (!this.$refs.wrapperMenu) {
-                        return 
+                        return
                     }
                     this.shopListTop.forEach((item, index) => {
                         if (this.menuIndexChange && Math.abs(Math.round(pos.y)) >= item) {
@@ -756,15 +760,21 @@
         padding-left: 0.2rem;
     }
     .shop_detail_header{
-        overflow: hidden;
+        // overflow: hidden;
         position: relative;
-        .header_cover_img{
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 9;
-            filter: blur(10px);
+        .header_cover_img_con {
+          height: 100%;
+          overflow: hidden;
+          position: absolute;
+          width: 100%;
+          .header_cover_img{
+              width: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 9;
+              filter: blur(10px);
+          }
         }
         .description_header{
             position: relative;
@@ -899,6 +909,7 @@
         display: flex;
         flex: 1;
         padding-bottom: 2rem;
+        overflow: hidden;
     }
     .menu_container{
         display: flex;
@@ -1053,6 +1064,7 @@
                                         @include sc(.4rem, #fff);
                                         text-align: center;
                                         flex: 1;
+                                        transform: scale(0.8) translate(0.1rem, -.1rem);
                                     }
                                 }
                             }
