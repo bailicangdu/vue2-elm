@@ -55,46 +55,46 @@ export default {
     },
 
 	mounted(){
-        // 获取当前城市
-        cityGuess().then(res => {
-            this.guessCity = res.name;
-            this.guessCityid = res.id;
-        })
-
-        //获取热门城市
-        hotcity().then(res => {
-            this.hotcity = res;
-        })
-
-        //获取所有城市
-        groupcity().then(res => {
-            this.groupcity = res;
-        })
-    },
-
-    components:{
-        headTop
-    },
-
-    computed:{
-        //将获取的数据按照A-Z字母开头排序
-        sortgroupcity(){
-            let sortobj = {};
-            for (let i = 65; i <= 90; i++) {
-                if (this.groupcity[String.fromCharCode(i)]) {
-                    sortobj[String.fromCharCode(i)] = this.groupcity[String.fromCharCode(i)];
-                }
-            }
-            return sortobj
-        }
-    },
-
-    methods:{
-        //点击图标刷新页面
-        reload(){
-            window.location.reload();
-        }
-    },
+	    // 获取当前城市
+	    cityGuess().then(res => {
+	        this.guessCity = res.name;
+	        this.guessCityid = res.id;
+	    })
+	
+	    //获取热门城市
+	    hotcity().then(res => {
+	        this.hotcity = res;
+	    })
+	
+	    //获取所有城市
+	    groupcity().then(res => {
+	        this.groupcity = res;
+	    })
+	},
+	
+	components:{
+	    headTop
+	},
+	
+	computed:{
+	    //将获取的数据按照A-Z字母开头排序
+	    sortgroupcity(){
+	        let sortobj = {};
+	        for (let i = 65; i <= 90; i++) {
+	            if (this.groupcity[String.fromCharCode(i)]) {
+	                sortobj[String.fromCharCode(i)] = this.groupcity[String.fromCharCode(i)];
+	            }
+	        }
+	        return sortobj
+	    }
+	},
+	
+	methods:{
+	    //点击图标刷新页面
+	    reload(){
+	        window.location.reload();
+	    }
+	},
 }
 
 </script>
@@ -171,8 +171,11 @@ export default {
         span{
             @include sc(0.475rem, #999);
         }
+        position: sticky;
+        top: 1.95rem;
+        background-color: #fff;
     }
-
+    
     .letter_classify_li{
         margin-bottom: 0.4rem;
         background-color: #fff;
