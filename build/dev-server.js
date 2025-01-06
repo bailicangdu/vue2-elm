@@ -1,78 +1,73 @@
-var config = require('../config')
-if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
-var path = require('path')
-var express = require('express')
-var webpack = require('webpack')
-var opn = require('opn')
-var proxyMiddleware = require('http-proxy-middleware')
-var webpackConfig = require('./webpack.dev.conf')
+import config from '../config';
+import path from 'path';
+import express from 'express';
+import webpack from 'webpack';
+import open from 'open';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import history from 'connect-history-api-fallback';
+import webpackConfig from './webpack.dev.conf';
 
-// default port where dev server listens for incoming traffic
-var port = process.env.PORT || config.dev.port
-    // Define HTTP proxies to your custom API backend
-    // https://github.com/chimurai/http-proxy-middleware
+if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 
-var server = express()
-var compiler = webpack(webpackConfig)
+const port = process.env.PORT || config.dev.port;
+const server = express();
+const compiler = webpack(webpackConfig);
 
-var devMiddleware = require('webpack-dev-middleware')(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-        colors: true,
-        chunks: false
-    }
-})
+const devMiddleware = webpackDevMiddleware(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true,
+    chunks: false,
+  },
+});
 
-var hotMiddleware = require('webpack-hot-middleware')(compiler)
-    // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', function(compilation) {
-    compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
-        hotMiddleware.publish({
-            action: 'reload'
-        })
-        cb()
-    })
-})
+const hotMiddleware = webpackHotMiddleware(compiler);
 
-var context = config.dev.context
+compiler.hooks.compilation.tap('HtmlWebpackPluginReload', (compilation) => {
+  compilation.hooks.htmlWebpackPluginAfterEmit.tapAsync('HtmlWebpackPluginReload', (data, cb) => {
+    hotMiddleware.publish({ action: 'reload' });
+    cb();
+  });
+});
 
-switch(process.env.NODE_ENV){
-    case 'local': var proxypath = 'http://localhost:8001'; break;
-    case 'online': var proxypath = 'https://elm.cangdu.org'; break;
-    default:  var proxypath = config.dev.proxypath;
+const context = config.dev.context;
+let proxypath;
+switch (process.env.NODE_ENV) {
+  case 'local':
+    proxypath = 'http://localhost:8001';
+    break;
+  case 'online':
+    proxypath = 'https://elm.cangdu.org';
+    break;
+  default:
+    proxypath = config.dev.proxypath;
 }
-var options = {
+
+if (context.length) {
+  server.use(createProxyMiddleware(context, {
     target: proxypath,
     changeOrigin: true,
-}
-if (context.length) {
-    server.use(proxyMiddleware(context, options))
+  }));
 }
 
-// handle fallback for HTML5 history API
-server.use(require('connect-history-api-fallback')())
+server.use(history());
+server.use(devMiddleware);
+server.use(hotMiddleware);
 
-// serve webpack bundle output
-server.use(devMiddleware)
+const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
+server.use(staticPath, express.static('./static'));
 
-// enable hot-reload and state-preserving
-// compilation error display
-server.use(hotMiddleware)
+server.listen(port, (err) => {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  const uri = `http://localhost:${port}`;
+  console.log(`Listening at ${uri}\n`);
 
-// serve pure static assets
-var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-server.use(staticPath, express.static('./static'))
-
-module.exports = server.listen(port, function(err) {
-    if (err) {
-        console.log(err)
-        return
-    }
-    var uri = 'http://localhost:' + port
-    console.log('Listening at ' + uri + '\n')
-
-    // when env is testing, don't need open it
-    if (process.env.NODE_ENV !== 'testing') {
-        opn(uri)
-    }
-})
+  if (process.env.NODE_ENV !== 'testing') {
+    open(uri);
+  }
+});
